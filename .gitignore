@@ -5,3 +5,13 @@ build/*
 # FVM Version Cache
 .fvm/
 .fvmrc
+.dart_tool
+ios/.symlinks
+ios/Pods
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/package_config.json
+.dart_tool/package_config_subset
+android/local.properties
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
