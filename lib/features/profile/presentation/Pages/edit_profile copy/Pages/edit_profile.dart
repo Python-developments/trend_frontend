@@ -11,6 +11,7 @@ import 'package:trend/features/profile/presentation/Manager/bloc/profile_state.d
 import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Pages/EditPage.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/AnimatedAvatarWidget.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/custom_Backdrop_Filter.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({
@@ -56,16 +57,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) async {
-        print(
-            "${state}+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        print("${state}+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         if (state is Updatesuccess) {
-          SharedPreferences sharedPreferences =
-              await SharedPreferences.getInstance();
+          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
           await sharedPreferences.setString("avatar", state.avatar);
           // // await sharedPreferences.setString("bio", state.bio);
           // await sharedPreferences.setString("fullName", state.full_name);
-          BlocProvider.of<ProfileBloc>(context)
-              .add(getPostForUserevent(id: widget.user.id));
+          BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: widget.user.id));
           Navigator.pop(context);
         }
       },
@@ -88,9 +86,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 });
               },
             ),
-            AnimatedAvatarWidget(
-                isVisible: is_visible,
-                avatarUrl: 'http://167.71.92.176${widget.user.avatar}')
+            AnimatedAvatarWidget(isVisible: is_visible, avatarUrl: '${ApiEndpoints.baseUrl}${widget.user.avatar}')
           ],
         );
       },

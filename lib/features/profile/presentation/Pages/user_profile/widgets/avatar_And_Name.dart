@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class AvatarAndName extends StatelessWidget {
-  const AvatarAndName(
-      {super.key, required this.onLongPress, required this.user});
+  const AvatarAndName({super.key, required this.onLongPress, required this.user});
   final void Function() onLongPress;
   final ProfileModel user;
   @override
@@ -16,23 +16,18 @@ class AvatarAndName extends StatelessWidget {
           onLongPress: onLongPress,
           child: Networkimages(
             imageUrl: user.avatar.startsWith('http')
-                ? user
-                    .avatar // If the avatar already has the full URL, use it directly
-                : 'http://167.71.92.176${user.avatar}',
+                ? user.avatar // If the avatar already has the full URL, use it directly
+                : '${ApiEndpoints.baseUrl}${user.avatar}',
             size: 50.r,
           ),
         ),
         SizedBox(height: 12.h),
         Row(
-          mainAxisAlignment:
-              MainAxisAlignment.center, // Center the text horizontally
+          mainAxisAlignment: MainAxisAlignment.center, // Center the text horizontally
           children: [
             Text(
               user.user,
-              style: TextStyle(
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 13.5.sp,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 13.5.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(width: 3.w),
             Icon(

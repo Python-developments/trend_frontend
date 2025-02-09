@@ -12,6 +12,7 @@ import 'package:trend/features/posts/presentation/widgets/CommentSheet_Header.da
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 import 'package:trend/features/posts/presentation/widgets/comment_widget.dart';
 import 'package:trend/features/posts/presentation/widgets/customTextFiled.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 
@@ -59,9 +60,7 @@ class _CommentSheetState extends State<CommentSheet> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height - 50.sp,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
       child: Stack(
         children: [
           Column(
@@ -75,47 +74,34 @@ class _CommentSheetState extends State<CommentSheet> {
                     if (widget.post.comments != null)
                       ListView(
                         reverse: true,
-                        shrinkWrap:
-                            true, // يسمح بـ ListView أن يكون بحجم التعليقات فقط
-                        physics:
-                            NeverScrollableScrollPhysics(), // لمنع التمرير داخل ListView الداخلية
+                        shrinkWrap: true, // يسمح بـ ListView أن يكون بحجم التعليقات فقط
+                        physics: NeverScrollableScrollPhysics(), // لمنع التمرير داخل ListView الداخلية
                         children: widget.post.comments!.map((comment) {
                           return CommentWidget(comment, replyFunction);
                         }).toList(),
                       ),
-                    SizedBox(
-                        height: MediaQuery.of(context).viewInsets.bottom > 0
-                            ? MediaQuery.of(context).size.height * 0.5
-                            : 100),
+                    SizedBox(height: MediaQuery.of(context).viewInsets.bottom > 0 ? MediaQuery.of(context).size.height * 0.5 : 100),
                   ],
                 ),
               )
             ],
           ),
           Positioned(
-            bottom: MediaQuery.of(context).viewInsets.bottom > 0
-                ? MediaQuery.of(context).viewInsets.bottom
-                : 0,
+            bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? MediaQuery.of(context).viewInsets.bottom : 0,
             left: 0,
             right: 0,
             child: Container(
               color: Colors.white,
               child: Padding(
-                padding: EdgeInsets.only(
-                    left: 16.w,
-                    right: 1.w,
-                    top: 8.h,
-                    bottom:
-                        MediaQuery.of(context).viewInsets.bottom > 0 ? 5 : 8.h),
+                padding: EdgeInsets.only(left: 16.w, right: 1.w, top: 8.h, bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 5 : 8.h),
                 child: Row(
                   children: [
                     GestureDetector(
                       onTap: () {
-                        BlocProvider.of<BottomNavBloc>(context)
-                            .add(BottomNavItemSelected(4));
+                        BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
                       },
                       child: Networkimages(
-                        imageUrl: 'http://167.71.92.176$avatar',
+                        imageUrl: '${ApiEndpoints.baseUrl}$avatar',
                         size: 20,
                       ),
                     ),
@@ -131,14 +117,9 @@ class _CommentSheetState extends State<CommentSheet> {
                         onTap: () {
                           if (_controller.text.isNotEmpty) {
                             if (isReply) {
-                              context.read<PostBloc>().add(AddCommentOnComment(
-                                  postId: widget.post.id ?? 0,
-                                  commentId: commentId,
-                                  content: _controller.text));
+                              context.read<PostBloc>().add(AddCommentOnComment(postId: widget.post.id ?? 0, commentId: commentId, content: _controller.text));
                             } else {
-                              context.read<PostBloc>().add(AddComment(
-                                  postId: widget.post.id!,
-                                  content: _controller.text));
+                              context.read<PostBloc>().add(AddComment(postId: widget.post.id!, content: _controller.text));
                             }
                             _controller.text = "";
                             commentId = 0;

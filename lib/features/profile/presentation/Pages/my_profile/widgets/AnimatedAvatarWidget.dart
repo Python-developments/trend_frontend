@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class AnimatedAvatarWidget extends StatelessWidget {
   final bool isVisible;
@@ -29,9 +30,7 @@ class AnimatedAvatarWidget extends StatelessWidget {
                   duration: Duration(milliseconds: 70),
                   builder: (context, size, child) {
                     return Networkimages(
-                      imageUrl: avatarUrl.startsWith('http')
-                          ? avatarUrl
-                          : 'http://167.71.92.176$avatarUrl',
+                      imageUrl: avatarUrl.startsWith('http') ? avatarUrl : '${ApiEndpoints.baseUrl}$avatarUrl',
                       size: size,
                     );
                   },

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:path/path.dart' as path;
 import 'package:trend/features/explore/data/models/remote/get_all_post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
+import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
 class updateProfileRemoteDataSource {
@@ -19,7 +20,7 @@ class updateProfileRemoteDataSource {
       "bio": bio,
     };
     final response = await dio.put(
-      "http://167.71.92.176/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -29,15 +30,14 @@ class updateProfileRemoteDataSource {
     return response;
   }
 
-  Future<Response<dynamic>> updatefullname(
-      String userId, String fullname) async {
+  Future<Response<dynamic>> updatefullname(String userId, String fullname) async {
     String? tok = await token.getToken();
 
     final data = {
       "full_name": fullname,
     };
     final response = await dio.put(
-      "http://167.71.92.176/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -53,11 +53,9 @@ class updateProfileRemoteDataSource {
     String fileName;
     fileName = path.basename(image.path);
 
-    final data = {
-      "avatar": await MultipartFile.fromFile(image.path, filename: fileName)
-    };
+    final data = {"avatar": await MultipartFile.fromFile(image.path, filename: fileName)};
     final response = await dio.put(
-      "http://167.71.92.176/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -69,7 +67,7 @@ class updateProfileRemoteDataSource {
   Future<Response<dynamic>> delete() async {
     String? tok = await token.getToken();
     final response = await dio.delete(
-      "http://167.71.92.176/auth/account/delete/",
+      "${ApiEndpoints.baseUrl}/auth/account/delete/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -81,7 +79,7 @@ class updateProfileRemoteDataSource {
   Future<List<ProfileModel>> getBlockedUser() async {
     String? tok = await token.getToken();
     final response = await dio.get(
-      "http://167.71.92.176/profile/blocked/",
+      "${ApiEndpoints.baseUrl}/profile/blocked/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -98,7 +96,7 @@ class updateProfileRemoteDataSource {
   Future<List<PostModel>> getPostForUserMethod(int id) async {
     String? tok = await token.getToken();
     final response = await dio.get(
-      "http://167.71.92.176/posts/${id}/posts/",
+      "${ApiEndpoints.baseUrl}/posts/${id}/posts/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -123,7 +121,7 @@ class updateProfileRemoteDataSource {
       emit(getPostForspecificUserLoading());
       String? tok = await token.getToken();
       final response = await dio.get(
-        "http://167.71.92.176/posts/${event.id}/posts/",
+        "${ApiEndpoints.baseUrl}/posts/${event.id}/posts/",
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),
@@ -159,7 +157,7 @@ class updateProfileRemoteDataSource {
         "full_name": event.full_name.isEmpty ?? true ? null : event.full_name,
       };
       final response = await dio.put(
-        "http://167.71.92.176/profile/${event.id}/",
+        "${ApiEndpoints.baseUrl}/profile/${event.id}/",
         data: FormData.fromMap(data),
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},

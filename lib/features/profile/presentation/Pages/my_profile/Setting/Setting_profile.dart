@@ -216,12 +216,12 @@
 //                                       image: widget.user.avatar
 //                                               .startsWith('http')
 //                                           ? widget.user.avatar
-//                                           : 'http://167.71.92.176${widget.user.avatar}')));
+//                                           : '${ApiEndpoints.baseUrl}${widget.user.avatar}')));
 //                         },
 //                         child: Hero(
 //                           tag: widget.user.avatar.startsWith('http')
 //                               ? widget.user.avatar
-//                               : 'http://167.71.92.176${widget.user.avatar}',
+//                               : '${ApiEndpoints.baseUrl}${widget.user.avatar}',
 //                           child: CircleAvatar(
 //                             radius: 45.r,
 //                             backgroundImage: _selectedImage == null
@@ -229,7 +229,7 @@
 //                                     widget.user.avatar.startsWith('http')
 //                                         ? widget.user
 //                                             .avatar // If the avatar already has the full URL, use it directly
-//                                         : 'http://167.71.92.176${widget.user.avatar}', // Prepend the base URL
+//                                         : '${ApiEndpoints.baseUrl}${widget.user.avatar}', // Prepend the base URL
 //                                   )
 //                                 : FileImage(
 //                                     _selectedImage!), // Use FileImage for a local file image

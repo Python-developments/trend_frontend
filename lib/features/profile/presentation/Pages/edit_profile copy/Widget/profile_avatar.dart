@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class ProfileAvatar extends StatefulWidget {
   final String avatarUrl;
@@ -39,11 +40,8 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               child: widget.selectedImage == null
                   ? ClipOval(
                       child: Image.network(
-                        widget.avatarUrl.startsWith('http')
-                            ? widget.avatarUrl
-                            : 'http://167.71.92.176${widget.avatarUrl}',
-                        fit: BoxFit
-                            .cover, // Ensure the image fits the circle properly
+                        widget.avatarUrl.startsWith('http') ? widget.avatarUrl : '${ApiEndpoints.baseUrl}${widget.avatarUrl}',
+                        fit: BoxFit.cover, // Ensure the image fits the circle properly
                         width: 100, // Adjust the width if needed
                         height: 100, // Adjust the height if needed
                       ),
@@ -115,8 +113,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                           width: 134,
                           decoration: BoxDecoration(
                             color: Colors.black,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
+                            borderRadius: BorderRadius.all(Radius.circular(100)),
                           ),
                         ),
                       ],

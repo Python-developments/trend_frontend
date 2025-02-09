@@ -5,6 +5,7 @@ import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/states.getU.dart';
+import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -20,9 +21,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     try {
       String? tok = await token.getToken();
-      final response = await dio.get(
-          'http://167.71.92.176/profile/${event.userId}/',
-          options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      final response = await dio.get('${ApiEndpoints.baseUrl}/profile/${event.userId}/', options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if (response.statusCode == 200) {
         final user = ProfileModel.fromJson(response.data);
@@ -43,9 +42,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(UserLoadingState());
     try {
       String? tok = await token.getToken();
-      final response = await dio.get(
-          'http://167.71.92.176/profile/${event.userId}/',
-          options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      final response = await dio.get('${ApiEndpoints.baseUrl}/profile/${event.userId}/', options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if (response.statusCode == 200) {
         print("object1");
@@ -67,7 +64,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(getPostLOading());
       String tok = await token.getToken() ?? "";
       final response = await dio.get(
-        "http://167.71.92.176/posts/${event.userId}/posts/",
+        "${ApiEndpoints.baseUrl}/posts/${event.userId}/posts/",
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),

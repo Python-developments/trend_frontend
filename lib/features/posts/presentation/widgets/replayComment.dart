@@ -6,6 +6,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 // ignore: must_be_immutable
 class Replaycomment extends StatefulWidget {
@@ -22,12 +23,9 @@ class _ReplaycommentState extends State<Replaycomment> {
     _loadUserReplayAvatar();
   }
 
-  String replayavatar =
-      "http://167.71.92.176/media/profile_images/default_image.jpg";
+  String replayavatar = "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
   Future<void> _loadUserReplayAvatar() async {
-    String Newavatar1 = await BlocProvider.of<PostBloc>(context)
-        .repository
-        .getUserAvatar(widget.reply.authorId!);
+    String Newavatar1 = await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(widget.reply.authorId!);
     print(replayavatar);
     setState(() {
       replayavatar = Newavatar1;
@@ -67,10 +65,7 @@ class _ReplaycommentState extends State<Replaycomment> {
             children: [
               Text(
                 widget.reply.author ?? '',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff1F2232)),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff1F2232)),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
@@ -85,18 +80,11 @@ class _ReplaycommentState extends State<Replaycomment> {
                     children: [
                       TextSpan(
                         text: getMentionedNamae(widget.reply.content ?? ''),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 11.sp,
-                            color: Colors.blue),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11.sp, color: Colors.blue),
                       ),
                       TextSpan(
-                        text: getWithoutMentionedNamae(
-                            widget.reply.content ?? ''),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 11.sp,
-                            color: Color(0xff9E9E9E)),
+                        text: getWithoutMentionedNamae(widget.reply.content ?? ''),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11.sp, color: Color(0xff9E9E9E)),
                       ),
                     ],
                   ),
@@ -110,10 +98,7 @@ class _ReplaycommentState extends State<Replaycomment> {
         ),
         GestureDetector(
           onTap: () {
-            context.read<PostBloc>().add(LikeComment(
-                commentId: widget.comment.id!,
-                postId: widget.comment.post!,
-                subCommentId: widget.reply.id));
+            context.read<PostBloc>().add(LikeComment(commentId: widget.comment.id!, postId: widget.comment.post!, subCommentId: widget.reply.id));
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,10 +121,7 @@ class _ReplaycommentState extends State<Replaycomment> {
                     ),
               Text(
                 "${widget.reply.likesCount == 0 ? '' : widget.reply.likesCount}",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: Colors.grey, fontSize: 10.sp, fontWeight: FontWeight.w600),
               ),
             ],
           ),

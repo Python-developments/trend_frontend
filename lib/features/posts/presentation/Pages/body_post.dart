@@ -5,6 +5,7 @@ import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/ZoomingImage.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class BodyPost extends StatefulWidget {
   final PostModel post;
@@ -15,8 +16,7 @@ class BodyPost extends StatefulWidget {
   State<BodyPost> createState() => _BodyPostState();
 }
 
-class _BodyPostState extends State<BodyPost>
-    with SingleTickerProviderStateMixin {
+class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -97,8 +97,7 @@ class _BodyPostState extends State<BodyPost>
                   child: FittedBox(
                     fit: BoxFit.cover,
                     child: ZoomingImage(
-                      image: widget.post.image ??
-                          "http://167.71.92.176/media/profile_images/default_image.jpg",
+                      image: widget.post.image ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg",
                     ),
                   ),
                 ),

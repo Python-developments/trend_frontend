@@ -6,6 +6,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/custom_comment_body.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class CommentWidget extends StatefulWidget {
   Comment comment;
@@ -18,9 +19,8 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   bool showMore = false;
 
-  String avatar = "http://167.71.92.176/media/profile_images/default_image.jpg";
-  String replayavatar =
-      "http://167.71.92.176/media/profile_images/default_image.jpg";
+  String avatar = "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
+  String replayavatar = "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
   @override
   void initState() {
     // TODO: implement initState
@@ -29,10 +29,8 @@ class _CommentWidgetState extends State<CommentWidget> {
   }
 
   Future<void> _loadUserAvatar() async {
-    int id =
-        BlocProvider.of<PostBloc>(context).id = widget.comment.authorId ?? 0;
-    String Newavatar =
-        await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(id);
+    int id = BlocProvider.of<PostBloc>(context).id = widget.comment.authorId ?? 0;
+    String Newavatar = await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(id);
 
     setState(() {
       avatar = Newavatar;
@@ -69,9 +67,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      context.read<PostBloc>().add(LikeComment(
-                          commentId: widget.comment.id ?? 0,
-                          postId: widget.comment.post ?? 0));
+                      context.read<PostBloc>().add(LikeComment(commentId: widget.comment.id ?? 0, postId: widget.comment.post ?? 0));
                     },
                     child: (widget.comment.isLiked ?? false)
                         ? SvgPicture.asset(

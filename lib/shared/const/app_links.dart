@@ -1,6 +1,5 @@
 class ApiEndpoints {
-  static const String baseUrl = 'http://167.71.92.176:8000';
-
+  static const String baseUrl = "http://127.0.0.1";
   // Authentication Endpoints URL
   static const String login = '$baseUrl/auth/login/';
   static const String register = '$baseUrl/auth/register/';
@@ -10,17 +9,13 @@ class ApiEndpoints {
 // // Explore Endpoints URL
   static const String getAllPosts = '$baseUrl/explore/posts/?page_size=28';
 
-  static String getSearchPostsByUserName(String query) =>
-      '$baseUrl/explore/search/user-posts/?page_size=40&q=$query';
+  static String getSearchPostsByUserName(String query) => '$baseUrl/explore/search/user-posts/?page_size=40&q=$query';
 
   //static String forYouPostSearch(String query) => '$baseUrl/explore/search/user-posts/?q=$query';
 
-  static String getTrendingHashtags(String query) =>
-      '$baseUrl/explore/search/hashtag/?q=$query';
-  static String getLocationSearch(String query) =>
-      '$baseUrl/explore/search/location/?q=$query';
-  static String getUserSearch(String query) =>
-      '$baseUrl/explore/search/user/?q=$query';
+  static String getTrendingHashtags(String query) => '$baseUrl/explore/search/hashtag/?q=$query';
+  static String getLocationSearch(String query) => '$baseUrl/explore/search/location/?q=$query';
+  static String getUserSearch(String query) => '$baseUrl/explore/search/user/?q=$query';
 
   // Profile Endpoints URL
   static const String allProfiles = '$baseUrl/profile/';

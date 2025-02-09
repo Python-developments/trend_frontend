@@ -4,6 +4,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class PostRepositoryImpl implements PostRepository {
   final DataRemoteSource dataRemoteSource;
@@ -25,13 +26,9 @@ class PostRepositoryImpl implements PostRepository {
   }
 
   @override
-  Future<Either<Failure, Comment?>> commentComment(
-      {required int postId,
-      required int commentId,
-      required String comment}) async {
+  Future<Either<Failure, Comment?>> commentComment({required int postId, required int commentId, required String comment}) async {
     try {
-      Comment? newComment = await dataRemoteSource.commentComment(
-          postId: postId, commentId: commentId, comment: comment);
+      Comment? newComment = await dataRemoteSource.commentComment(postId: postId, commentId: commentId, comment: comment);
       return Right(newComment);
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -108,14 +105,13 @@ class PostRepositoryImpl implements PostRepository {
 
       return result;
     } catch (e) {
-      return "http://167.71.92.176/media/profile_images/default_image.jpg";
+      return "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
     }
   }
 
   @override
   Future<List<PostModel>> getPostForspecificUser(int id) async {
-    List<PostModel> posts =
-        await dataRemoteSource.getPostForspecificUserMethod(id);
+    List<PostModel> posts = await dataRemoteSource.getPostForspecificUserMethod(id);
     return posts;
   }
 }

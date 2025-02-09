@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:trend/features/profile/data/models/FolloersModel.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
+import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
 class ProfileRemoteDatasource {
@@ -30,7 +31,7 @@ class ProfileRemoteDatasource {
     try {
       final String? tok = await token.getToken();
       final response = await dio.post(
-        'http://167.71.92.176/profile/follow/$id/',
+        '${ApiEndpoints.baseUrl}/profile/follow/$id/',
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
       );
     } catch (e) {
@@ -41,11 +42,10 @@ class ProfileRemoteDatasource {
   Future<void> unfollowUser(int id) async {
     try {
       String? tok = await token.getToken();
-      final response =
-          await dio.post('http://167.71.92.176/profile/unfollow/$id/',
-              options: Options(
-                headers: {'Authorization': 'Bearer $tok'},
-              ));
+      final response = await dio.post('${ApiEndpoints.baseUrl}/profile/unfollow/$id/',
+          options: Options(
+            headers: {'Authorization': 'Bearer $tok'},
+          ));
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -53,7 +53,7 @@ class ProfileRemoteDatasource {
 
   Future<ProfileModel> fetchUserById(int id) async {
     try {
-      final response = await dio.get('http://167.71.92.176/profile/$id/',
+      final response = await dio.get('${ApiEndpoints.baseUrl}/profile/$id/',
           options: Options(
             headers: {'Authorization': 'Bearer ${token.getToken()}'},
           ));
@@ -69,15 +69,12 @@ class ProfileRemoteDatasource {
 
   Future<List<FollowerModel>> fetchFollowers({required int id}) async {
     try {
-      final response =
-          await dio.get("http://167.71.92.176/profile/$id/followers/",
-              options: Options(
-                headers: {'Authorization': 'Bearer ${token.getToken()}'},
-              ));
+      final response = await dio.get("${ApiEndpoints.baseUrl}/profile/$id/followers/",
+          options: Options(
+            headers: {'Authorization': 'Bearer ${token.getToken()}'},
+          ));
       if (response.statusCode == 200) {
-        List<FollowerModel> followers = (response.data['results'] as List)
-            .map((json) => FollowerModel.fromJson(json))
-            .toList();
+        List<FollowerModel> followers = (response.data['results'] as List).map((json) => FollowerModel.fromJson(json)).toList();
         return followers;
       } else {
         throw Exception('Failed to load followers');
@@ -89,15 +86,12 @@ class ProfileRemoteDatasource {
 
   Future<List<FollowerModel>> fetchFollowing({required int id}) async {
     try {
-      final response =
-          await dio.get("http://167.71.92.176/profile/$id/following/",
-              options: Options(
-                headers: {'Authorization': 'Bearer ${token.getToken()}'},
-              ));
+      final response = await dio.get("${ApiEndpoints.baseUrl}/profile/$id/following/",
+          options: Options(
+            headers: {'Authorization': 'Bearer ${token.getToken()}'},
+          ));
       if (response.statusCode == 200) {
-        List<FollowerModel> followers = (response.data['results'] as List)
-            .map((json) => FollowerModel.fromJson(json))
-            .toList();
+        List<FollowerModel> followers = (response.data['results'] as List).map((json) => FollowerModel.fromJson(json)).toList();
         return followers;
       } else {
         throw Exception('Failed to load followers');
@@ -110,7 +104,7 @@ class ProfileRemoteDatasource {
   Future<bool> unblockUser(String userId) async {
     try {
       String? tok = await token.getToken();
-      final url = 'http://167.71.92.176/profile/$userId/unblock/';
+      final url = '${ApiEndpoints.baseUrl}/profile/$userId/unblock/';
       final response = await dio.post(
         url,
         options: Options(headers: {'Authorization': 'Bearer $tok'}),

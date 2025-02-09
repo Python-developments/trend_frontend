@@ -11,6 +11,7 @@ import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_g
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../../../shared/utiles/routes.dart';
@@ -43,8 +44,7 @@ class HeaderPost extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
         child: Column(
           children: [
             Row(
@@ -56,42 +56,35 @@ class HeaderPost extends StatelessWidget {
                       onTap: () async {
                         int id = await SharedPreferencesDemo.getID();
                         if (id != post.authorId) {
-                          BlocProvider.of<UserBloc>(context)
-                              .add(FetchUserEvent2(
+                          BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(
                             post.authorId ?? 0,
                           ));
                           Navigator.pushNamed(context, AppRoutes.userProfile);
                         } else {
                           int c = await SharedPreferencesDemo.getID();
 
-                          BlocProvider.of<ProfileBloc>(context)
-                              .add(getPostForUserevent(id: c));
+                          BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
 
-                          BlocProvider.of<BottomNavBloc>(context)
-                              .add(BottomNavItemSelected(4));
+                          BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
                         }
                       },
                       child: CircleAvatar(
                         radius: 16,
                         backgroundColor: Colors.transparent,
                         child: CachedNetworkImage(
-                          imageUrl: post.avatar ??
-                              "http://167.71.92.176/media/profile_images/default_image.jpg", // رابط الصورة
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
+                          imageUrl: post.avatar ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg", // رابط الصورة
+                          imageBuilder: (context, imageProvider) => CircleAvatar(
                             radius: 16,
                             backgroundColor: Colors.white,
                             backgroundImage: imageProvider, // الصورة المحمّلة
                           ),
                           placeholder: (context, url) => CircleAvatar(
                             radius: 16,
-                            backgroundImage: AssetImage(
-                                'assets/images/avatar.jpg'), // صورة أثناء التحميل
+                            backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة أثناء التحميل
                           ),
                           errorWidget: (context, url, error) => CircleAvatar(
                             radius: 16,
-                            backgroundImage: AssetImage(
-                                'assets/images/avatar.jpg'), // صورة في حال الخطأ
+                            backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة في حال الخطأ
                           ),
                         ),
                       ),
@@ -101,32 +94,23 @@ class HeaderPost extends StatelessWidget {
                       onTap: () async {
                         int id = await SharedPreferencesDemo.getID();
                         if (id != post.authorId) {
-                          BlocProvider.of<UserBloc>(context)
-                              .add(FetchUserEvent2(post.authorId ?? 0));
+                          BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(post.authorId ?? 0));
                           Navigator.pushNamed(context, AppRoutes.userProfile);
                         } else {
-                          SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          int c = await int.parse(
-                              sharedPreferences.getString('id')!);
+                          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                          int c = await int.parse(sharedPreferences.getString('id')!);
 
-                          BlocProvider.of<ProfileBloc>(context)
-                              .add(getPostForUserevent(id: c));
+                          BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
 
-                          BlocProvider.of<BottomNavBloc>(context)
-                              .add(BottomNavItemSelected(4));
+                          BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
                         }
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            post.author ??
-                                'Unknown Author', // Fallback if author is null
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14),
+                            post.author ?? 'Unknown Author', // Fallback if author is null
+                            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
                           ),
                         ],
                       ),
@@ -148,10 +132,7 @@ class HeaderPost extends StatelessWidget {
                   children: [
                     Text(
                       timeAgo,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(width: 5.w),
                     GestureDetector(
