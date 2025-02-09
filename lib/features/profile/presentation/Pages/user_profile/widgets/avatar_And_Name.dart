@@ -18,7 +18,7 @@ class AvatarAndName extends StatelessWidget {
             imageUrl: user.avatar.startsWith('http')
                 ? user
                     .avatar // If the avatar already has the full URL, use it directly
-                : 'http://167.71.92.176${user.avatar}',
+                : 'http://167.71.92.176:8000${user.avatar}',
             size: 50.r,
           ),
         ),

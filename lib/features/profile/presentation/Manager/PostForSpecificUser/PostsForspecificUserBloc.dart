@@ -19,7 +19,7 @@ class PostsForuserBloc extends Bloc<PostEvent, PostforuserState> {
 
       String? tok = await token.getToken();
       final response = await dio.get(
-        "http://167.71.92.176/posts/${event.userId}/posts/",
+        "http://167.71.92.176:8000/posts/${event.userId}/posts/",
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
       );
 

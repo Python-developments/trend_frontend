@@ -30,7 +30,7 @@ class ProfileRemoteDatasource {
     try {
       final String? tok = await token.getToken();
       final response = await dio.post(
-        'http://167.71.92.176/profile/follow/$id/',
+        'http://167.71.92.176:8000/profile/follow/$id/',
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
       );
     } catch (e) {
@@ -42,7 +42,7 @@ class ProfileRemoteDatasource {
     try {
       String? tok = await token.getToken();
       final response =
-          await dio.post('http://167.71.92.176/profile/unfollow/$id/',
+          await dio.post('http://167.71.92.176:8000/profile/unfollow/$id/',
               options: Options(
                 headers: {'Authorization': 'Bearer $tok'},
               ));
@@ -53,7 +53,7 @@ class ProfileRemoteDatasource {
 
   Future<ProfileModel> fetchUserById(int id) async {
     try {
-      final response = await dio.get('http://167.71.92.176/profile/$id/',
+      final response = await dio.get('http://167.71.92.176:8000/profile/$id/',
           options: Options(
             headers: {'Authorization': 'Bearer ${token.getToken()}'},
           ));
@@ -67,13 +67,16 @@ class ProfileRemoteDatasource {
     }
   }
 
-  Future<List<FollowerModel>> fetchFollowers({required int id}) async {
+  Future<List<FollowerModel>> fetchFollowers({required int}) async {
     try {
+      print(token.getToken());
+
       final response =
-          await dio.get("http://167.71.92.176/profile/$id/followers/",
+          await dio.get("http://167.71.92.176:8000/profile/$id/followers/",
               options: Options(
                 headers: {'Authorization': 'Bearer ${token.getToken()}'},
               ));
+      print("${response.data}");
       if (response.statusCode == 200) {
         List<FollowerModel> followers = (response.data['results'] as List)
             .map((json) => FollowerModel.fromJson(json))
@@ -83,6 +86,7 @@ class ProfileRemoteDatasource {
         throw Exception('Failed to load followers');
       }
     } catch (e) {
+      print("Error$e");
       throw Exception('Error fetching followers: $e');
     }
   }
@@ -90,7 +94,7 @@ class ProfileRemoteDatasource {
   Future<List<FollowerModel>> fetchFollowing({required int id}) async {
     try {
       final response =
-          await dio.get("http://167.71.92.176/profile/$id/following/",
+          await dio.get("http://167.71.92.176:8000/profile/$id/following/",
               options: Options(
                 headers: {'Authorization': 'Bearer ${token.getToken()}'},
               ));
@@ -110,7 +114,7 @@ class ProfileRemoteDatasource {
   Future<bool> unblockUser(String userId) async {
     try {
       String? tok = await token.getToken();
-      final url = 'http://167.71.92.176/profile/$userId/unblock/';
+      final url = 'http://167.71.92.176:8000/profile/$userId/unblock/';
       final response = await dio.post(
         url,
         options: Options(headers: {'Authorization': 'Bearer $tok'}),

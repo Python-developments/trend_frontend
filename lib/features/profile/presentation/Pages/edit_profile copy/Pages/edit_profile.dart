@@ -56,8 +56,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) async {
-        print(
-            "${state}+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         if (state is Updatesuccess) {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();

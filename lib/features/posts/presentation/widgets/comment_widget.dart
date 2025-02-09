@@ -18,9 +18,10 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   bool showMore = false;
 
-  String avatar = "http://167.71.92.176/media/profile_images/default_image.jpg";
+  String avatar =
+      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
   String replayavatar =
-      "http://167.71.92.176/media/profile_images/default_image.jpg";
+      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
   @override
   void initState() {
     // TODO: implement initState
@@ -88,7 +89,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           ),
                   ),
                   Text(
-                    "${c != 0 ? c : ''}",
+                    "${c > 0 ? c : ''}",
                     style: TextStyle(
                       fontSize: 9.sp,
                       fontWeight: FontWeight.bold,

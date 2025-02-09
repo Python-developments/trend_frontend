@@ -13,19 +13,19 @@ class updateProfileRemoteDataSource {
 
   Future<Response<dynamic>> updateBio(String userId, String bio) async {
     String? tok = await token.getToken();
-    ;
 
     final data = {
       "bio": bio,
     };
+
     final response = await dio.put(
-      "http://167.71.92.176/profile/${userId}/",
+      "http://167.71.92.176:8000/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
     );
-
+    print("${response.data}");
     return response;
   }
 
@@ -37,7 +37,7 @@ class updateProfileRemoteDataSource {
       "full_name": fullname,
     };
     final response = await dio.put(
-      "http://167.71.92.176/profile/${userId}/",
+      "http://167.71.92.176:8000/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -57,7 +57,7 @@ class updateProfileRemoteDataSource {
       "avatar": await MultipartFile.fromFile(image.path, filename: fileName)
     };
     final response = await dio.put(
-      "http://167.71.92.176/profile/${userId}/",
+      "http://167.71.92.176:8000/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -69,7 +69,7 @@ class updateProfileRemoteDataSource {
   Future<Response<dynamic>> delete() async {
     String? tok = await token.getToken();
     final response = await dio.delete(
-      "http://167.71.92.176/auth/account/delete/",
+      "http://167.71.92.176:8000/auth/account/delete/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -81,7 +81,7 @@ class updateProfileRemoteDataSource {
   Future<List<ProfileModel>> getBlockedUser() async {
     String? tok = await token.getToken();
     final response = await dio.get(
-      "http://167.71.92.176/profile/blocked/",
+      "http://167.71.92.176:8000/profile/blocked/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -98,7 +98,7 @@ class updateProfileRemoteDataSource {
   Future<List<PostModel>> getPostForUserMethod(int id) async {
     String? tok = await token.getToken();
     final response = await dio.get(
-      "http://167.71.92.176/posts/${id}/posts/",
+      "http://167.71.92.176:8000/posts/${id}/posts/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),

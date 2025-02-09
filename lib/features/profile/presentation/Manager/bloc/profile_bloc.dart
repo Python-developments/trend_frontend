@@ -58,7 +58,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(getPostForspecificUserLoading());
       String? tok = await token.getToken();
       final response = await dio.get(
-        "http://167.71.92.176/posts/${event.id}/posts/",
+        "http://167.71.92.176:8000/posts/${event.id}/posts/",
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),
@@ -241,7 +241,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         "is_private": event.private,
       };
       final response = await dio.put(
-        "http://167.71.92.176/profile/${event.id}/",
+        "http://167.71.92.176:8000/profile/${event.id}/",
         data: FormData.fromMap(data),
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},

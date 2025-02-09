@@ -14,7 +14,7 @@ class DataRemoteSource {
     try {
       String? tok = await token.getToken();
       final response = await dio.get(
-        "http://167.71.92.176/posts/${id}/posts/",
+        "http://167.71.92.176:8000/posts/${id}/posts/",
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),
@@ -36,12 +36,8 @@ class DataRemoteSource {
     try {
       String url = ApiEndpoints.Nextpage ?? "";
       if (url.length == 0) {
-        url = 'http://167.71.92.176/posts/all-posts/';
+        url = 'http://167.71.92.176:8000/posts/all-posts/';
       }
-      print("================================================");
-      print(url);
-
-      print("================================================");
       String? tok = await token.getToken();
       print(url);
       final response = await dio.get(
@@ -70,7 +66,7 @@ class DataRemoteSource {
     try {
       String? tok = await token.getToken();
       Response response = await dio.post(
-          "http://167.71.92.176/posts/comments/$commentId/reply/",
+          "http://167.71.92.176:8000/posts/comments/$commentId/reply/",
           data: {"post": postId, "content": comment},
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
@@ -87,7 +83,7 @@ class DataRemoteSource {
     try {
       String? tok = await token.getToken();
       Response response = await dio.post(
-          "http://167.71.92.176/posts/$id/comments/",
+          "http://167.71.92.176:8000/posts/$id/comments/",
           data: {"post": id, "content": comment},
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
@@ -104,7 +100,7 @@ class DataRemoteSource {
     try {
       String? tok = await token.getToken();
       Response response = await dio.delete(
-          "http://167.71.92.176/posts/$id/comments/$commentId/",
+          "http://167.71.92.176:8000/posts/$id/comments/$commentId/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if ((response.statusCode ?? 400) < 300) {
@@ -121,7 +117,7 @@ class DataRemoteSource {
     try {
       String? tok = await token.getToken();
       Response response = await dio.post(
-          "http://167.71.92.176/posts/comments/$id/like/",
+          "http://167.71.92.176:8000/posts/comments/$id/like/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
         return true;
@@ -136,7 +132,8 @@ class DataRemoteSource {
   Future<bool?> likePost(int id) async {
     try {
       String? tok = await token.getToken();
-      Response response = await dio.post("http://167.71.92.176/posts/$id/like/",
+      Response response = await dio.post(
+          "http://167.71.92.176:8000/posts/$id/like/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
         return true;
@@ -152,7 +149,7 @@ class DataRemoteSource {
     try {
       String? tok = await token.getToken();
       Response response = await dio.post(
-          "http://167.71.92.176/profile/$id/block/",
+          "http://167.71.92.176:8000/profile/$id/block/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if ((response.statusCode ?? 400) < 300) {
@@ -168,7 +165,8 @@ class DataRemoteSource {
   Future<bool> deletePost(int id) async {
     try {
       String? tok = await token.getToken();
-      Response response = await dio.delete("http://167.71.92.176/posts/$id/",
+      Response response = await dio.delete(
+          "http://167.71.92.176:8000/posts/$id/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
         return true;
@@ -183,7 +181,8 @@ class DataRemoteSource {
   Future<String> GetUserinfoAvatar(int id) async {
     try {
       String? tok = await token.getToken();
-      Response response = await dio.get("http://167.71.92.176/profile/$id/",
+      Response response = await dio.get(
+          "http://167.71.92.176:8000/profile/$id/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
         print(response.data["avatar"]);

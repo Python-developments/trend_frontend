@@ -60,7 +60,7 @@ class _PostsInUserBodyState extends State<PostsInUserBody> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(state.posts[index].image ??
-                            "http://167.71.92.176/media/posts/images/image_cropper_1738583991667.jpg"),
+                            "http://167.71.92.176:8000/media/posts/images/image_cropper_1738583991667.jpg"),
                         fit: BoxFit.cover,
                       ),
                     ),

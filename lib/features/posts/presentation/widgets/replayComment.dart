@@ -23,7 +23,7 @@ class _ReplaycommentState extends State<Replaycomment> {
   }
 
   String replayavatar =
-      "http://167.71.92.176/media/profile_images/default_image.jpg";
+      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
   Future<void> _loadUserReplayAvatar() async {
     String Newavatar1 = await BlocProvider.of<PostBloc>(context)
         .repository

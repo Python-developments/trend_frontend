@@ -31,7 +31,7 @@ class AnimatedAvatarWidget extends StatelessWidget {
                     return Networkimages(
                       imageUrl: avatarUrl.startsWith('http')
                           ? avatarUrl
-                          : 'http://167.71.92.176$avatarUrl',
+                          : 'http://167.71.92.176:8000$avatarUrl',
                       size: size,
                     );
                   },

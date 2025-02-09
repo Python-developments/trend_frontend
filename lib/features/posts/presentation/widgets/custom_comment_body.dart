@@ -27,9 +27,10 @@ class CustomCommentBody extends StatefulWidget {
 class _CustomCommentBodyState extends State<CustomCommentBody> {
   bool showMore = false;
 
-  String avatar = "http://167.71.92.176/media/profile_images/default_image.jpg";
+  String avatar =
+      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
   String replayavatar =
-      "http://167.71.92.176/media/profile_images/default_image.jpg";
+      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
   @override
   void initState() {
     // TODO: implement initState
@@ -88,11 +89,7 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
               Row(
                 children: [
                   Text(
-                    "${
-                        ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())) == "-1"?
-                            "0": ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString()))
-
-                    }  ",
+                    "${ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())) == "-1" ? "0" : ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString()))}  ",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 10.sp,

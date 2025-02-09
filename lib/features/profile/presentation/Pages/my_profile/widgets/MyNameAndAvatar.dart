@@ -19,7 +19,7 @@ class Mynameandavatar extends StatelessWidget {
             backgroundImage: NetworkImage(
               user.avatar.startsWith('http')
                   ? user.avatar // إذا كانت الصورة تحتوي بالفعل على URL كامل
-                  : 'http://167.71.92.176${user.avatar}',
+                  : 'http://167.71.92.176:8000${user.avatar ?? "/media/profile_images/default_image.jpg"}',
             ),
           ),
         ),

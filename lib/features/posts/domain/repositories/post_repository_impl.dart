@@ -108,7 +108,7 @@ class PostRepositoryImpl implements PostRepository {
 
       return result;
     } catch (e) {
-      return "http://167.71.92.176/media/profile_images/default_image.jpg";
+      return "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
     }
   }
 

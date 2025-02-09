@@ -56,7 +56,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       String url = ApiEndpoints.Nextpage ?? "";
       if (url.length == 0) {
         allPosts.clear();
-        url = 'http://167.71.92.176/posts/all-posts/';
+        url = 'http://167.71.92.176:8000/posts/all-posts/';
       }
 
       String? tok = await token.getToken();

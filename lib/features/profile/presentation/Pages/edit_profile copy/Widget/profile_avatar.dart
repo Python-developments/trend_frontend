@@ -41,7 +41,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                       child: Image.network(
                         widget.avatarUrl.startsWith('http')
                             ? widget.avatarUrl
-                            : 'http://167.71.92.176${widget.avatarUrl}',
+                            : 'http://167.71.92.176:8000${widget.avatarUrl}',
                         fit: BoxFit
                             .cover, // Ensure the image fits the circle properly
                         width: 100, // Adjust the width if needed

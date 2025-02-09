@@ -3,7 +3,7 @@ class ProfileModel {
   final String user;
   final String fullName;
   final String bio;
-  final String? location;
+  final int location;
   final String birthDate;
   final bool verified;
   final bool isPrivate;
@@ -23,7 +23,7 @@ class ProfileModel {
     required this.user,
     required this.fullName,
     required this.bio,
-    this.location,
+    required this.location,
     required this.birthDate,
     required this.verified,
     required this.isPrivate,
@@ -93,7 +93,7 @@ class ProfileModel {
     String? user,
     String? fullName,
     String? bio,
-    String? location,
+    int? location,
     String? birthDate,
     bool? verified,
     bool? isPrivate,

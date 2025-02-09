@@ -115,7 +115,7 @@ class _CommentSheetState extends State<CommentSheet> {
                             .add(BottomNavItemSelected(4));
                       },
                       child: Networkimages(
-                        imageUrl: 'http://167.71.92.176$avatar',
+                        imageUrl: 'http://167.71.92.176:8000$avatar',
                         size: 20,
                       ),
                     ),

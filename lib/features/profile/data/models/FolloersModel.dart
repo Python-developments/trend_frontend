@@ -3,7 +3,7 @@ class FollowerModel {
   final String username;
   final String fullName;
   final String? bio;
-  final String? location;
+  final int? location;
   final String? birthDate;
   final bool verified;
   final bool isPrivate;

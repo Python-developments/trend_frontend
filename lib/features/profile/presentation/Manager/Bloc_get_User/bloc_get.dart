@@ -21,7 +21,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     try {
       String? tok = await token.getToken();
       final response = await dio.get(
-          'http://167.71.92.176/profile/${event.userId}/',
+          'http://167.71.92.176:8000/profile/${event.userId}/',
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if (response.statusCode == 200) {
@@ -42,19 +42,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     emit(UserLoadingState());
     try {
+      print("object1=======================================");
       String? tok = await token.getToken();
       final response = await dio.get(
-          'http://167.71.92.176/profile/${event.userId}/',
+          'http://167.71.92.176:8000/profile/${event.userId}/',
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
-
+      print("object2=======================================");
       if (response.statusCode == 200) {
-        print("object1");
         final user = ProfileModel.fromJson(response.data);
         emit(UserLoadedState(user));
       } else {
         emit(UserErrorState('Failed to load user'));
       }
     } catch (e) {
+      print("$e");
       emit(UserErrorState('Error: $e'));
     }
   }
@@ -67,7 +68,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(getPostLOading());
       String tok = await token.getToken() ?? "";
       final response = await dio.get(
-        "http://167.71.92.176/posts/${event.userId}/posts/",
+        "http://167.71.92.176:8000/posts/${event.userId}/posts/",
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),

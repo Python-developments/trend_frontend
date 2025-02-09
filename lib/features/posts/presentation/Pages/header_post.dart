@@ -58,7 +58,7 @@ class HeaderPost extends StatelessWidget {
                         if (id != post.authorId) {
                           BlocProvider.of<UserBloc>(context)
                               .add(FetchUserEvent2(
-                            post.authorId ?? 0,
+                            post.authorId ?? 80,
                           ));
                           Navigator.pushNamed(context, AppRoutes.userProfile);
                         } else {
@@ -73,10 +73,10 @@ class HeaderPost extends StatelessWidget {
                       },
                       child: CircleAvatar(
                         radius: 16,
-                        backgroundColor: Colors.transparent,
+                        backgroundColor: Colors.white,
                         child: CachedNetworkImage(
                           imageUrl: post.avatar ??
-                              "http://167.71.92.176/media/profile_images/default_image.jpg", // رابط الصورة
+                              "http://167.71.92.176:8000/media/profile_images/default_image.jpg", // رابط الصورة
                           imageBuilder: (context, imageProvider) =>
                               CircleAvatar(
                             radius: 16,

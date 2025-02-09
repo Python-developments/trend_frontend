@@ -88,7 +88,8 @@ class _EditpageState extends State<Editpage> {
             ),
             ProfileAvatar(
               onTap: widget.onTap,
-              avatarUrl: widget.user.avatar,
+              avatarUrl: widget.user.avatar ??
+                  "/media/profile_images/default_image.jpg",
               selectedImage: _selectedImage,
               pickImageFromCamera: _pickImageFromCamera,
               pickImage: _pickImage,
