@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-
-
+import 'package:trend/features/auth/data/models/local/register_model_local.dart';
+import 'package:trend/features/auth/data/models/local/verify_otp_local.dart';
 
 abstract class AuthEvent extends Equatable {
   @override
@@ -16,24 +16,28 @@ class LoginEvent extends AuthEvent {
   @override
   List<Object?> get props => [username, password];
 }
-
 class RegisterEvent extends AuthEvent {
-  final String username;
-  final String email;
-  final String mobile;
-  final String fullName;
-  final String password;
-  final String passwordConfirm;
+  final RegisterModelLocal registerModel;
 
-  RegisterEvent({
-    required this.username,
-    required this.email,
-    required this.mobile,
-    required this.fullName,
-    required this.password,
-    required this.passwordConfirm,
-  });
+  RegisterEvent({required this.registerModel});
 
   @override
-  List<Object?> get props => [username, email, mobile, fullName, password, passwordConfirm];
+  List<Object?> get props => [registerModel];}
+
+class OptConfirmEvent extends AuthEvent {
+final VerifyOtpLocal verifyOtpModel;
+
+  OptConfirmEvent({required this.verifyOtpModel});
+@override
+List<Object?> get props => [verifyOtpModel];
 }
+
+class OptResendEvent extends AuthEvent {
+  final String email;
+  OptResendEvent({required this.email});
+
+  @override
+  List<Object?> get props => [email];
+}
+
+

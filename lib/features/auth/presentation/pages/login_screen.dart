@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trend/features/auth/presentation/pages/register_screen.dart';
+import 'package:trend/features/auth/presentation/widgets/customer_button.dart';
+import 'package:trend/shared/style/app_styles.dart';
+import '../../../../shared/const/colors.dart';
 import '../../../../shared/core/local/SharedPreferencesDemo.dart';
-import '../../../../shared/utiles/services_local.dart';
-import '../../../authentication/presentation/widgets/custom_button.dart';
-import '../../../authentication/presentation/widgets/custom_textfield.dart';
+import '../../../../shared/utiles/routes.dart';
 import '../../../notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
 import '../../../posts/presentation/Manager/Bloc_Current_user/Current _user_Bloc.dart';
 import '../../../posts/presentation/Manager/Bloc_Current_user/Current _user_event.dart';
 import '../manager/auth_bloc.dart';
 import '../manager/auth_event.dart';
 import '../manager/auth_state.dart';
+import '../widgets/customer_text_form.dart';
+
 
 class LoginScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) =>
-            AuthBloc(loginUseCase: sl(), registerUseCase: sl()),
-        child: LoginComponent(),
-      ),
+        backgroundColor: Colors.white,
+        body: LoginComponent(),
     );
   }
 }
@@ -49,38 +50,35 @@ class LoginComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+    bool isKeyboardOpen =
+        MediaQuery.of(context).viewInsets.bottom > 0;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) async {
-        if (state is AuthLoading) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Loading...')),
-          );
-        } else if (state is AuthAuthenticated) {
+        if (state is AuthAuthenticated) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
                 content: Text(
                     'Welcome, ${state.loginModel.userInfo?.fullName}!')),
           );
-
-          // int c = await SharedPreferencesDemo.getID();
-          // BlocProvider.of<CurrentUserBloc>(context)
-          //     .add(GetPostForCurrentUserEvent(id: c));
-          // BlocProvider.of<NotificationBloc>(context)
-          //     .add(FetchNotificationsEvent());
-
-          // Navigator.pushReplacementNamed(context, AppRoutes.home);
+          int c = await SharedPreferencesDemo.loadUserData().id;
+          BlocProvider.of<CurrentUserBloc>(context)
+              .add(GetPostForCurrentUserEvent(id: c));
+          BlocProvider.of<NotificationBloc>(context)
+              .add(FetchNotificationsEvent());
+          Navigator.pushReplacementNamed(context, AppRoutes.home);
         } else if (state is AuthError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('Login failed: ${state.message}')),
+            SnackBar(content: Text('${state.message}')),
           );
+          if (state.message.contains("verify your email")){
+            Navigator.pushNamed(context, AppRoutes.otpConfirm);
+          }
         }
       },
       builder: (context, state) {
         return Center(
           child: SizedBox(
-            width: 270.w,
+            width: 280.w,
             child: Form(
               key: _formKey,
               child: Column(
@@ -90,50 +88,60 @@ class LoginComponent extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment:
-                        CrossAxisAlignment.stretch,
+                            CrossAxisAlignment.stretch,
                         children: [
-                          SizedBox(height: 200.h),
+                          SizedBox(height: 150.h),
                           Text(
                             'T  R  E  N  D',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30.sp,
+                            style: AppStyles.styleBold30(context)
+                          ),
+                          SizedBox(height: 60.h),
+                          CustomerTextForm(
+                              name: 'Username',
+                              controller: _usernameController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your username';
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: () {
+                                _validateAndLogin(context);
+                              }),
+                          SizedBox(height: 10),
+                          CustomerTextForm(
+                              name: 'Password',
+                              controller: _passwordController,
+                              isPassword: true,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                if (value.length < 6) {
+                                  return 'Password must be at least 6 characters';
+                                }
+                                return null;
+                              },
+                              onFieldSubmitted: () {
+                                _validateAndLogin(context);
+                              }),
+                          SizedBox(height: 30.h),
+                          Visibility(
+                              visible: state is AuthLoading,
+                              child: Center(
+                                  child: CircularProgressIndicator(
+                                color: Color(AppColors.black),
+                              ))),
+                          Visibility(
+                            visible: !(state is AuthLoading),
+                            child: CustomButton(
+                              text: 'Login',
+                              onPressed: () =>
+                                  _validateAndLogin(context),
                             ),
                           ),
-                          SizedBox(height: 10.h),
-                          CustomTextfield(
-                            name: 'Username',
-                            controller: _usernameController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your username';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 10.h),
-                          CustomTextfield(
-                            name: 'Password',
-                            controller: _passwordController,
-                            isPassword: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 30.h),
-                          CustomButton(
-                            text: 'Login',
-                            onPressed: () =>
-                                _validateAndLogin(context),
-                          ),
-                          SizedBox(height: 10.h),
+                          SizedBox(height: 10),
                           Align(
                             alignment: Alignment.centerRight,
                             child: TextButton(
@@ -151,7 +159,7 @@ class LoginComponent extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 5.h),
+                          SizedBox(height: 5),
                           Row(
                             children: [
                               const Expanded(
@@ -179,46 +187,36 @@ class LoginComponent extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20.h),
+                          SizedBox(height: 20),
                           Row(
                             mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                             children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'assets/icons/google.png',
-                                  width: 33.w,
-                                  height: 40.h,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'assets/icons/facebook.png',
-                                  width: 38.w,
-                                  height: 40.h,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'assets/icons/tiktok.png',
-                                  width: 38.w,
-                                  height: 40.h,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'assets/icons/instagram.png',
-                                  width: 42.w,
-                                  height: 40.h,
-                                ),
-                              ),
+                              ...[
+                                'google.png',
+                                'facebook.png',
+                                'tiktok.png',
+                                'instagram.png'
+                              ]
+                                  .map(
+                                    (icon) => Flexible(
+                                      child: GestureDetector(
+                                        onTap: () {},
+                                        child: FittedBox(
+                                          fit: BoxFit.fill,
+                                          child: Image.asset(
+                                            'assets/icons/$icon',
+                                            width: 35.h,
+                                            height: 35.h,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
                             ],
                           ),
-                          SizedBox(height: 20.h),
+                          SizedBox(height: 20),
                         ],
                       ),
                     ),
@@ -230,8 +228,8 @@ class LoginComponent extends StatelessWidget {
                         const Text('Don\'t have an account?'),
                         TextButton(
                           onPressed: () {
-                            // Navigator.pushNamed(
-                            //     context, AppRoutes.signup);
+                            Navigator.pushNamed(
+                                context, AppRoutes.register);
                           },
                           child: const Text(
                             'Sign up',
@@ -243,7 +241,7 @@ class LoginComponent extends StatelessWidget {
                         ),
                       ],
                     ),
-                  if (!isKeyboardOpen) SizedBox(height: 20.h),
+                  if (!isKeyboardOpen) SizedBox(height: 20),
                 ],
               ),
             ),
@@ -253,4 +251,3 @@ class LoginComponent extends StatelessWidget {
     );
   }
 }
-
