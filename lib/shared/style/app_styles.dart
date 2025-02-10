@@ -1,47 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:trend/shared/style/text_scale.dart';
 
 abstract class AppStyles {
-  static const TextStyle styleSemiBold21 = TextStyle(
-    fontSize: 21,
+  static  TextStyle styleSemiBold21 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) * 21,
     fontWeight: FontWeight.w600,
   );
+  
+  static  TextStyle styleSemiBold25 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) * 25,
+    fontWeight: FontWeight.bold,
+  );
 
-  static TextStyle styleNormal16 = const TextStyle(
-    fontSize: 16,
+  static  TextStyle styleBold30 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) * 30,
+    fontWeight: FontWeight.bold,
+  );
+
+
+
+
+  static TextStyle styleNormal16 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  16,
     fontWeight: FontWeight.w500,
   );
 
-  static TextStyle styleBold16 = const TextStyle(
-    fontSize: 15,
+  static TextStyle styleBold16 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  15,
     fontWeight: FontWeight.bold,
     overflow: TextOverflow.ellipsis,
   );
 
-  static TextStyle styleBold18 = const TextStyle(
-    fontSize: 18,
+  static TextStyle styleBold18  (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) * 18,
     fontWeight: FontWeight.w600,
   );
 
-  static TextStyle styleBold12 = const TextStyle(
-    fontSize: 12,
+  static TextStyle styleBold12 (BuildContext context)=> TextStyle(
+    fontSize:AppTextScales.textScaleFactor(context) *  12,
     fontWeight: FontWeight.w700,
   );
 
-  static TextStyle styleBold28 = const TextStyle(
-    fontSize: 28,
+  static TextStyle styleBold28 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  28,
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle styleNormal13 = const TextStyle(
-    fontSize: 13,
+  static TextStyle styleNormal13 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  13,
     fontWeight: FontWeight.w500,
   );
 
-  static TextStyle styleNormal11 = const TextStyle(
-    fontSize: 11,
+  static TextStyle styleNormal17 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  17,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle styleSmall15 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  15,
+    fontWeight: FontWeight.w300,
+  );
+  
+  static TextStyle styleNormal11 (BuildContext context) => TextStyle(
+    fontSize: AppTextScales.textScaleFactor(context) *  11,
     fontWeight: FontWeight.w500,
   );
 }
+
+
 
 // /// Thin, the least thick.
 // static const FontWeight w100 = FontWeight._(0, 100);
