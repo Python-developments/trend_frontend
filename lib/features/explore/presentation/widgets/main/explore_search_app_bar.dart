@@ -81,7 +81,7 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
                         color: Colors.black,
                       ),
                       hintText: 'Search',
-                      hintStyle: AppStyles.styleNormal13.copyWith(
+                      hintStyle: AppStyles.styleNormal13(context).copyWith(
                         color: const Color(AppColors.greyDark),
                       ),
                       fillColor: const Color(AppColors.greyLighter)

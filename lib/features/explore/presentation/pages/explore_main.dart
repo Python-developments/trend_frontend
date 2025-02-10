@@ -34,7 +34,7 @@ class ExploreMainPage extends StatelessWidget {
                     top: 14.0, left: 12.0, right: 12.0, bottom: 10.0),
                 child: Text(
                   explorePost,
-                  style: AppStyles.styleNormal16
+                  style: AppStyles.styleNormal16(context)
                       .copyWith(color: Color(AppColors.black)),
                 ),
               ),

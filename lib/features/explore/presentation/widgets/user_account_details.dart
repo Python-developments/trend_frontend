@@ -25,11 +25,11 @@ class UserAccountDetails extends StatelessWidget {
         ),
         title: Text(
           model.username,
-          style: AppStyles.styleBold16,
+          style: AppStyles.styleBold16(context),
         ),
         subtitle: Text(
           model.full_name,
-          style: AppStyles.styleNormal11.copyWith(
+          style: AppStyles.styleNormal11(context).copyWith(
               color: Color(
             AppColors.greyDark,
           )),

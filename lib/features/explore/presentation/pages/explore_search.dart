@@ -34,7 +34,7 @@ class _ExploreSearchPageState extends State<ExploreSearchPage>
   void initState() {
     super.initState();
     _textController = TextEditingController(text: widget.search);
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
     _initializeSearch();
     _tabController.addListener(_handleTabChange);
   }
@@ -128,7 +128,7 @@ class _ExploreSearchPageState extends State<ExploreSearchPage>
         Tab(text: 'Accounts'),
         Tab(text: 'Hashtags'),
         Tab(text: 'Location'),
-      //  Tab(text: 'Real'),
+        Tab(text: 'Real'),
       ],
     );
   }
@@ -146,7 +146,7 @@ class _ExploreSearchPageState extends State<ExploreSearchPage>
               SearchAccounts(),
               HashtagsSearch(),
               LocationSearch(),
-            //   Center(child: Text('Reals')),
+              Center(child: Text('Reals')),
             ],
           );
         },

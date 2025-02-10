@@ -77,7 +77,7 @@ class UserSearchPostAppBar extends StatelessWidget
     return AppBar(
       centerTitle: true,
       title:
-          Text(title, style: AppStyles.styleSemiBold21.copyWith(fontSize: 18)),
+          Text(title, style: AppStyles.styleSemiBold21(context).copyWith(fontSize: 18)),
       shadowColor: Color(AppColors.black),
       elevation: 0,
       surfaceTintColor: Color(AppColors.white),

@@ -79,7 +79,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                       SizedBox(width: 8),
                       Text(
                         '  Search',
-                        style: AppStyles.styleNormal13.copyWith(
+                        style: AppStyles.styleNormal13(context).copyWith(
                           color: Color(AppColors.greyDark),
                         ),
                       ),

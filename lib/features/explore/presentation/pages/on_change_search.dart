@@ -79,7 +79,7 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
 
   PreferredSizeWidget _buildAppBar() {
     return PreferredSize(
-      preferredSize:  Size.fromHeight(kToolbarHeight.h < 56? 56 : kToolbarHeight.h),
+      preferredSize:  Size.fromHeight(kToolbarHeight.h < 56? 56 : (kToolbarHeight-2).h),
     child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
@@ -112,7 +112,7 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
                       prefixIcon: const Icon(FontAwesomeIcons.search,
                           size: 16, color: Colors.black),
                       hintText: 'Search',
-                      hintStyle: AppStyles.styleNormal13
+                      hintStyle: AppStyles.styleNormal13(context)
                           .copyWith(color: const Color(AppColors.greyDark)),
                       fillColor:
                           const Color(AppColors.greyLighter).withOpacity(0.2),

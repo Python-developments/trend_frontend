@@ -23,11 +23,11 @@ class LocationSearchContainer extends StatelessWidget {
         ),
         title: Text(
           model.location_name,
-          style: AppStyles.styleBold16,
+          style: AppStyles.styleBold16(context),
         ),
         subtitle: Text(
           model.description,
-          style: AppStyles.styleNormal11.copyWith(
+          style: AppStyles.styleNormal11(context).copyWith(
               color: Color(
             AppColors.greyDark,
           )),

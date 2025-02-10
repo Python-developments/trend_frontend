@@ -29,18 +29,18 @@ class HashtagsContainer extends StatelessWidget {
         ),
         title: Text(
           model.author,
-          style: AppStyles.styleBold16,
+          style: AppStyles.styleBold16(context),
         ),
         subtitle: Text(
           model.posts_count,
-          style: AppStyles.styleNormal11.copyWith(
+          style: AppStyles.styleNormal11(context).copyWith(
               color: Color(
             AppColors.greyDark,
           )),
         ),
         trailing: Text(
           formatCreatedAt(model.created_at),
-          style: AppStyles.styleNormal11.copyWith(
+          style: AppStyles.styleNormal11(context).copyWith(
               color: Color(
             AppColors.greyDark,
           )),
