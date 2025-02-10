@@ -3,9 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trend/features/add_post/bloc/Add_Post_cubit.dart';
 import 'package:trend/features/add_post/domain/repositories/AddNewPost_Function.dart';
-import 'package:trend/features/authentication/bloc/authentication_bloc.dart';
-import 'package:trend/features/authentication/bloc/authentication_event.dart';
-import 'package:trend/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
 import 'package:trend/features/notifications/data/repositories/notification_repository.dart';
 import 'package:trend/features/notifications/domain/usecases/fetch_notifications.dart';
@@ -17,7 +14,9 @@ import 'package:trend/features/profile/data/data_sources/Update_profile_remote_d
 import 'package:trend/features/profile/domain/repositories/updateProfile.dart';
 import 'package:trend/features/profile/presentation/Manager/PostForSpecificUser/PostsForspecificUserBloc.dart';
 import 'package:trend/shared/utiles/dependancy_injection.dart';
+import 'package:trend/shared/utiles/services_local.dart';
 
+import '../../features/auth/presentation/manager/auth_bloc.dart';
 import '../../features/explore/presentation/manager/tap_bar/explore_search_tap_bar_bloc.dart';
 import '../../features/notifications/presentation/Manager/FollowBack/FollowBackBloc.dart';
 import '../../features/posts/presentation/Manager/Bloc_Current_user/Current _user_Bloc.dart';
@@ -40,14 +39,16 @@ class AppBlocProviders {
     final dio = Dio();
 
     // Repositories
-    final postRepository = PostRepositoryImpl(DataRemoteSource(getIt.get()));
+    final postRepository =
+        PostRepositoryImpl(DataRemoteSource(getIt.get()));
     final profileDataSource = ProfileRemoteDatasource(dio);
     final profileRepository = ProfileRepository(profileDataSource);
     final notificationRepository = NotificationRepository(dio: dio);
 
     final UpdateProfileRepository updateProfileRepository =
         UpdateProfileRepository(
-            remoteDataSource: updateProfileRemoteDataSource(dio: dio));
+            remoteDataSource:
+                updateProfileRemoteDataSource(dio: dio));
     final fetchNotificationsUseCase =
         FetchNotificationsUseCase(repository: notificationRepository);
 
@@ -59,13 +60,11 @@ class AppBlocProviders {
     return MultiBlocProvider(
       providers: [
         // Authentication Bloc: Handles user authentication, login, logout, and session status.
-        BlocProvider<AuthenticationBloc>(
-          create: (context) {
-            final bloc = AuthenticationBloc(authApi: AuthenticationApi());
-            bloc.add(AuthenticationCheckStatusEvent());
-            return bloc;
-          },
-        ),
+        BlocProvider(
+            create: (context) => AuthBloc(
+                loginUseCase: sl(),
+                registerUseCase: sl(),
+                resendOtpUseCase: sl(), otpConfirmUseCase: sl())),
 
         // Post Bloc: Manages posts, including fetching posts and interacting with them.
         BlocProvider<PostBloc>(
@@ -120,10 +119,12 @@ class AppBlocProviders {
           create: (context) => FollowersBloc(profileRepository),
         ),
         BlocProvider<DisplayFollowingBloc>(
-          create: (context) => DisplayFollowingBloc(profileRepository),
+          create: (context) =>
+              DisplayFollowingBloc(profileRepository),
         ),
         BlocProvider<FollowingbackBloc>(
-          create: (context) => FollowingbackBloc(dio, profileRepository),
+          create: (context) =>
+              FollowingbackBloc(dio, profileRepository),
         ),
 
         BlocProvider<TabBloc>(
@@ -134,7 +135,8 @@ class AppBlocProviders {
           create: (context) => PostsForuserBloc(dio: dio),
         ),
         BlocProvider<PostBloc>(
-          create: (context) => PostBloc(postRepository)..add(FetchPosts()),
+          create: (context) =>
+              PostBloc(postRepository)..add(FetchPosts()),
         ),
       ],
       child: child,
