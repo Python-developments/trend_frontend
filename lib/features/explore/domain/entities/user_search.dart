@@ -57,11 +57,13 @@ class Metadata extends Equatable {
 class User extends Equatable {
   final int? id;
   final String? username;
+  final int? profileid;
   final String? email;
   final String? fullName;
   final String? avatar;
 
   User({
+    required this.profileid,
     required this.id,
     required this.username,
     required this.email,
@@ -73,6 +75,7 @@ class User extends Equatable {
   List<Object?> get props => [
         id,
         username,
+        profileid,
         email,
         fullName,
         avatar,

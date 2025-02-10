@@ -75,10 +75,10 @@ class _FollowersScreenState extends State<FollowersScreen>
         controller: _tabController,
         children: [
           FollowersList(
-            id: widget.user.id,
+            id: int.parse(widget.user.profileid),
           ),
           FollowingsList(
-            id: widget.user.id,
+            id: int.parse(widget.user.profileid),
           )
         ],
       ),

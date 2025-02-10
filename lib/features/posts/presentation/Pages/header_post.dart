@@ -55,6 +55,7 @@ class HeaderPost extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         int id = await SharedPreferencesDemo.getID();
+
                         if (id != post.authorId) {
                           BlocProvider.of<UserBloc>(context)
                               .add(FetchUserEvent2(
@@ -75,8 +76,7 @@ class HeaderPost extends StatelessWidget {
                         radius: 16,
                         backgroundColor: Colors.white,
                         child: CachedNetworkImage(
-                          imageUrl: post.avatar ??
-                              "http://167.71.92.176:8000/media/profile_images/default_image.jpg", // رابط الصورة
+                          imageUrl: post.avatar!, // رابط الصورة
                           imageBuilder: (context, imageProvider) =>
                               CircleAvatar(
                             radius: 16,

@@ -73,8 +73,8 @@ class _EditpageState extends State<Editpage> {
           selectedImage: _selectedImage,
           onPressed: () {
             if (_selectedImage != null) {
-              BlocProvider.of<ProfileBloc>(context)
-                  .add(UpdateAvatar(widget.user.id, _selectedImage!));
+              BlocProvider.of<ProfileBloc>(context).add(UpdateAvatar(
+                  int.parse(widget.user.profileid), _selectedImage!));
             }
             setState(() {
               isLoading = true;
@@ -122,10 +122,10 @@ class _EditpageState extends State<Editpage> {
                         fullname = '';
                       });
                     },
-                    userid: widget.user.id,
+                    userid: int.parse(widget.user.profileid),
                   ),
                   CustomBioTile(
-                    userid: widget.user.id,
+                    userid: int.parse(widget.user.profileid),
                     bio: bio, // Pass the current bio
                     onBioChanged: (newBio) {
                       setState(() {

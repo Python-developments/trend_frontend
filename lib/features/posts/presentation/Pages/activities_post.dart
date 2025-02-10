@@ -283,33 +283,34 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                   ),
                 ),
                 Spacer(),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      showCustomBottomSheetTOshare(context);
-                      //Share.share("'check out my website https://example.com'");
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: SvgPicture.asset(
-                            'assets/icons/share.svg',
-                            height: 15,
-                          ),
+                GestureDetector(
+                  onTap: () {
+                    showCustomBottomSheetTOshare(context);
+                    //Share.share("'check out my website https://example.com'");
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: SvgPicture.asset(
+                          'assets/icons/share.svg',
+                          height: 15,
                         ),
-                        SizedBox(width: 4.w),
-                        Text(
-                          'Share',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        'Share',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
+                SizedBox(
+                  width: 7.h,
                 ),
               ],
             ),

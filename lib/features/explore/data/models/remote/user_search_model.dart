@@ -29,8 +29,7 @@ class ResultsModel extends Results {
           : MetadataModel.fromJson(json["metadata"]),
       users: json["users"] == null
           ? []
-          : List<User>.from(
-              json["users"]!.map((x) => UserModel.fromJson(x))),
+          : List<User>.from(json["users"]!.map((x) => UserModel.fromJson(x))),
     );
   }
 }
@@ -48,7 +47,8 @@ class MetadataModel extends Metadata {
 
 class UserModel extends User {
   UserModel(
-      {required super.id,
+      {required super.profileid,
+      required super.id,
       required super.username,
       required super.email,
       required super.fullName,
@@ -57,6 +57,7 @@ class UserModel extends User {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json["id"],
+      profileid: json["profile_id"],
       username: json["username"],
       email: json["email"],
       fullName: json["full_name"],

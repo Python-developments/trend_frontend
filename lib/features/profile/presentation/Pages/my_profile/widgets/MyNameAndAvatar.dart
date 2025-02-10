@@ -4,14 +4,19 @@ import 'package:trend/features/profile/data/models/currentUser.dart';
 
 class Mynameandavatar extends StatelessWidget {
   const Mynameandavatar(
-      {super.key, required this.onLongPress, required this.user});
+      {super.key,
+      required this.onLongPress,
+      required this.user,
+      required this.onTap});
   final void Function()? onLongPress;
   final currentUser user;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GestureDetector(
+          onTap: onTap,
           onLongPress: onLongPress,
           child: CircleAvatar(
             radius: 50.r, // تحديد الحجم

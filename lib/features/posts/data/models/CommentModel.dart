@@ -10,6 +10,7 @@ class Comment {
   String? createdAt;
   String? updatedAt;
   int? likesCount;
+  String? avatar;
   int? repliesCount;
   List<LikedUsers>? likedUsers;
   int? commentOnComment;
@@ -28,7 +29,8 @@ class Comment {
       this.repliesCount,
       this.likedUsers,
       this.commentOnComment,
-      this.replies});
+      this.replies,
+      this.avatar});
 
   Comment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -40,6 +42,7 @@ class Comment {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     likesCount = json['likes_count'];
+    avatar = json['avatar'];
     repliesCount = json['replies_count'];
     if (json['liked_users'] != null) {
       likedUsers = <LikedUsers>[];
@@ -64,6 +67,7 @@ class Comment {
     data['author_id'] = this.authorId;
     data['content'] = this.content;
     data['is_liked'] = this.isLiked;
+    data['avatar'] = this.avatar;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['likes_count'] = this.likesCount;

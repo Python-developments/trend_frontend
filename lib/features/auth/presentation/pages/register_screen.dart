@@ -15,29 +15,22 @@ import '../manager/auth_bloc.dart';
 import '../manager/auth_event.dart';
 import '../manager/auth_state.dart';
 import '../widgets/customer_text_form.dart';
-import 'otp_confirm.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController =
-      TextEditingController();
-  final TextEditingController _emailController =
-      TextEditingController();
-  final TextEditingController _passwordController =
-      TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
-    bool isKeyboardOpen =
-        MediaQuery.of(context).viewInsets.bottom > 0;
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     void _validateAndSignup(BuildContext context) {
-      
       if (_formKey.currentState!.validate()) {
         context.read<AuthBloc>().add(RegisterEvent(
             registerModel: RegisterModelLocal(
@@ -52,7 +45,6 @@ class RegisterScreen extends StatelessWidget {
         );
       }
     }
-
 
     return Scaffold(
       backgroundColor: Color(AppColors.white),
@@ -70,10 +62,8 @@ class RegisterScreen extends StatelessWidget {
                 .add(GetPostForCurrentUserEvent(id: c));
             BlocProvider.of<NotificationBloc>(context)
                 .add(FetchNotificationsEvent());
-            Navigator.pushReplacementNamed(
-                context, AppRoutes.otpConfirm);
-          } 
-          else if (state is AuthError) {
+            Navigator.pushReplacementNamed(context, AppRoutes.otpConfirm);
+          } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('${state.message}')),
             );
@@ -91,44 +81,39 @@ class RegisterScreen extends StatelessWidget {
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             SizedBox(height: 100.h),
                             Text('Create Account',
                                 textAlign: TextAlign.center,
-                                style: AppStyles.styleSemiBold25(
-                                    context)),
+                                style: AppStyles.styleSemiBold25(context)),
                             SizedBox(height: 30),
                             Text(
-                                'Pick a username for your account. You can always change it later.',
-                                textAlign: TextAlign.center,
-                                style:
-                                    AppStyles.styleNormal13(context)
-                                        .copyWith(
-                                            color: Color(
-                                                AppColors.greyDark))),
+                              'Pick a username for your account. You can always change it later.',
+                              textAlign: TextAlign.center,
+                              style: AppStyles.styleNormal13(context).copyWith(
+                                color: Color(AppColors.greyDark),
+                              ),
+                            ),
                             SizedBox(height: 30),
                             CustomerTextForm(
-                              name: 'Username',
-                              isPassword: false,
-                              controller: _usernameController,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your username';
-                                }
-                                return null;
-                              },
-                              onFieldSubmitted: () {}
-                            ),
+                                name: 'Username',
+                                isPassword: false,
+                                controller: _usernameController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your username';
+                                  }
+                                  return null;
+                                },
+                                onFieldSubmitted: () {}),
                             SizedBox(height: 12),
                             CustomerTextForm(
                                 name: 'Email Address',
                                 isPassword: false,
                                 controller: _emailController,
                                 validator: (value) {
-                                  if (value == null ||
-                                      value.isEmpty) {
+                                  if (value == null || value.isEmpty) {
                                     return 'Please enter your email';
                                   }
                                   if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
@@ -137,16 +122,14 @@ class RegisterScreen extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                onFieldSubmitted: () {}
-                            ),
+                                onFieldSubmitted: () {}),
                             SizedBox(height: 12),
                             CustomerTextForm(
                                 name: 'Password',
                                 isPassword: true,
                                 controller: _passwordController,
                                 validator: (value) {
-                                  if (value == null ||
-                                      value.isEmpty) {
+                                  if (value == null || value.isEmpty) {
                                     return 'Please enter your password';
                                   }
                                   if (value.length < 6) {
@@ -154,21 +137,17 @@ class RegisterScreen extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                onFieldSubmitted: () {}
-                            ),
+                                onFieldSubmitted: () {}),
                             SizedBox(height: 12),
                             CustomerTextForm(
                                 name: 'Confirm Password',
                                 isPassword: true,
-                                controller:
-                                    _confirmPasswordController,
+                                controller: _confirmPasswordController,
                                 validator: (value) {
-                                  if (value == null ||
-                                      value.isEmpty) {
+                                  if (value == null || value.isEmpty) {
                                     return 'Please confirm your password';
                                   }
-                                  if (value !=
-                                      _passwordController.text) {
+                                  if (value != _passwordController.text) {
                                     return 'Passwords do not match';
                                   }
                                   return null;
@@ -180,8 +159,7 @@ class RegisterScreen extends StatelessWidget {
                               visible: state is! AuthLoading,
                               child: CustomButton(
                                 text: 'Sign Up',
-                                onPressed: () =>
-                                    _validateAndSignup(context),
+                                onPressed: () => _validateAndSignup(context),
                               ),
                             ),
                             Visibility(
@@ -206,8 +184,7 @@ class RegisterScreen extends StatelessWidget {
                           },
                           child: Text('Back to Login',
                               style: AppStyles.styleNormal16(context)
-                                  .copyWith(
-                                      color: Color(AppColors.blue))),
+                                  .copyWith(color: Color(AppColors.blue))),
                         ),
                       ),
                     if (!isKeyboardOpen) SizedBox(height: 20.h),

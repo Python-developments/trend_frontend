@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trend/features/explore/data/models/local/user_details_model.dart';
+
 import '../../../../../shared/const/colors.dart';
 import '../../../../../shared/core/enum.dart';
 import '../../manager/for_you/for_you_search_bloc.dart';
@@ -21,7 +22,7 @@ class ExploreListSearch extends StatelessWidget {
           case RequestStates.empty:
             return SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (context, index) => _buildSkeletonItem(),
+                (context, index) => _buildSkeletonItem(),
                 childCount: 4,
               ),
             );
@@ -30,11 +31,11 @@ class ExploreListSearch extends StatelessWidget {
             final itemCount = users.length > 4 ? 4 : users.length;
             return SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (context, index) {
+                (context, index) {
                   final user = users[index];
                   return UserAccountDetails(
                     model: UserDetailsModel(
-                      id: "${user.id}",
+                      id: "${user.profileid}",
                       username: user.username ?? "",
                       full_name: user.fullName ?? "",
                       email: user.email ?? "",

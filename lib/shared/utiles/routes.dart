@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trend/features/auth/presentation/pages/login_screen.dart';
 import 'package:trend/features/auth/presentation/pages/register_screen.dart';
-import 'package:trend/features/authentication/presentation/pages/login.dart';
 import 'package:trend/features/authentication/presentation/pages/reset_password.dart';
-import 'package:trend/features/authentication/presentation/pages/signup.dart';
 import 'package:trend/features/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/presentation/Pages/home_page.dart';
@@ -18,6 +16,7 @@ class AppRoutes {
   static const String resetPassword = '/reset-password';
   static const String userProfile = '/UserProfile';
   static const String otpConfirm = '/otp-confirm';
+  static const String signup = "/signup";
 }
 
 Map<String, WidgetBuilder> routes = {
@@ -27,6 +26,7 @@ Map<String, WidgetBuilder> routes = {
   AppRoutes.home: (context) => MainScreen(),
   AppRoutes.userProfile: (context) => UserProfile(),
   AppRoutes.otpConfirm: (context) => OtpConfirmScreen(),
+  AppRoutes.signup: (context) => RegisterScreen(),
 };
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {

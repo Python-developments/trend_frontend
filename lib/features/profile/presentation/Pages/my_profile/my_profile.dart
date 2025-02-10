@@ -26,7 +26,8 @@ class _MyProfileState extends State<MyProfile> {
       following: '',
       totalPosts: '0', // Default value
       totalLikes: '0',
-      is_private: false // Default value
+      is_private: false,
+      profileid: '1' // Default value
       );
   @override
   void initState() {
@@ -49,6 +50,11 @@ class _MyProfileState extends State<MyProfile> {
     return Stack(
       children: [
         BodyForMyProfile(
+          onTap: () {
+            setState(() {
+              is_visible = !is_visible;
+            });
+          },
           onLongPress: () {
             setState(() {
               is_visible = !is_visible;

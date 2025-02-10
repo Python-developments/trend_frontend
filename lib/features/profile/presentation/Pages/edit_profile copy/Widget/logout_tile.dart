@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trend/features/authentication/presentation/pages/login.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
+import 'package:trend/features/auth/presentation/pages/login_screen.dart';
 
 class LogoutTile extends StatefulWidget {
   const LogoutTile({Key? key}) : super(key: key);
@@ -33,12 +30,14 @@ class _LogoutTileState extends State<LogoutTile> {
           isLoading = true;
         });
 
-        BlocProvider.of<ProfileBloc>(context).add(Logout());
+        // BlocProvider.of<ProfileBloc>(context).add(Logout());
 
         Future.delayed(Duration(seconds: 1), () {
-          Navigator.pushReplacement(
+          Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
+            MaterialPageRoute(
+                builder: (context) => LoginScreen2()), // الصفحة الجديدة
+            (Route<dynamic> route) => false, // هذا يحذف جميع الصفحات السابقة
           );
         });
       },

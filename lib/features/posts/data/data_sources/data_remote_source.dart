@@ -44,7 +44,7 @@ class DataRemoteSource {
         url,
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
       );
-
+      response.data["results"];
       if (response.statusCode == 200) {
         ApiEndpoints.setnext(response.data["next"] ?? "");
         final data = response.data as Map<String, dynamic>;

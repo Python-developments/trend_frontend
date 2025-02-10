@@ -2,6 +2,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 
 class PostModel {
   int? id;
+
   String? author;
   int? authorId;
   String? avatar;

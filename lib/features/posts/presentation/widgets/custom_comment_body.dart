@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_event.dart';
 import 'package:trend/features/posts/data/models/CommentModel.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 import 'package:trend/features/posts/presentation/widgets/commentContent.dart';
 import 'package:trend/features/posts/presentation/widgets/replayComment.dart';
@@ -27,27 +26,28 @@ class CustomCommentBody extends StatefulWidget {
 class _CustomCommentBodyState extends State<CustomCommentBody> {
   bool showMore = false;
 
-  String avatar =
-      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
-  String replayavatar =
-      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
+  // String avatar = "/media/profile_images/default_image.jpg";
+  // String replayavatar =
+  //     "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loadUserAvatar();
+    // _loadUserAvatar();
   }
 
-  Future<void> _loadUserAvatar() async {
-    int id =
-        BlocProvider.of<PostBloc>(context).id = widget.comment.authorId ?? 0;
-    String Newavatar =
-        await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(id);
-
-    setState(() {
-      avatar = Newavatar;
-    });
-  }
+  // Future<void> _loadUserAvatar() async {
+  //   // int id =
+  //   //     BlocProvider.of<PostBloc>(context).id = widget.comment.authorId ?? 0;
+  //   String Newavatar = await BlocProvider.of<PostBloc>(context)
+  //       .repository
+  //       .getUserAvatar(widget.comment.authorId ?? 0);
+  //   print(widget.comment.avatar);
+  //   print("===================+++++++++++");
+  //   setState(() {
+  //     avatar = Newavatar;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,8 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
           },
           child: Networkimages(
             size: 20,
-            imageUrl: avatar,
+            imageUrl: widget.comment.avatar ??
+                "http://167.71.92.176:8000/media/profile_images/default_image.jpg",
           ),
         ),
         SizedBox(width: 10.w),

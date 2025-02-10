@@ -3,16 +3,17 @@ import 'package:trend/features/profile/data/models/currentUser.dart';
 
 import '../../utiles/dependancy_injection.dart';
 
-
 class SharedPreferencesDemo {
   Future<void> saveUserData(
-      {required String id,
+      {required String Profileid,
+      required String id,
       required String username,
       required String email,
       required String fullName,
       required String avatar,
       required String bio,
       required String mobile,
+      required bool verified,
       required String followers,
       required String following,
       required String totalPosts, // Add totalPosts
@@ -21,6 +22,7 @@ class SharedPreferencesDemo {
       }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('id', id);
+    await prefs.setString('Profileid', Profileid);
     await prefs.setString('username', username);
     await prefs.setString('email', email);
     await prefs.setString('fullName', fullName);
@@ -31,7 +33,8 @@ class SharedPreferencesDemo {
     await prefs.setString('following', following); // Store following
     await prefs.setString('totalPosts', totalPosts); // Store totalPosts
     await prefs.setString('totalLikes', totalLikes);
-    await prefs.setBool("is_private", is_private); // Store totalLikes
+    await prefs.setBool("is_private", is_private);
+    await prefs.setBool("verified", verified); // Store totalLikes
   }
 
   static currentUser loadUserData() {
@@ -49,7 +52,8 @@ class SharedPreferencesDemo {
       'following': prefs.getString('following') ?? '0', // Load following
       'totalPosts': prefs.getString('totalPosts') ?? '0', // Load totalPosts
       'totalLikes': prefs.getString('totalLikes') ?? '0', // Load totalLikes
-      'is_private': prefs.getBool('is_private')
+      'is_private': prefs.getBool('is_private'),
+      'Profileid': prefs.getString('Profileid') ?? '0'
     });
   }
 

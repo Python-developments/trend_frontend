@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/features/auth/presentation/pages/register_screen.dart';
 import 'package:trend/features/auth/presentation/widgets/customer_button.dart';
 import 'package:trend/shared/style/app_styles.dart';
+
 import '../../../../shared/const/colors.dart';
 import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../../../shared/utiles/routes.dart';
@@ -15,13 +15,12 @@ import '../manager/auth_event.dart';
 import '../manager/auth_state.dart';
 import '../widgets/customer_text_form.dart';
 
-
 class LoginScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: LoginComponent(),
+      backgroundColor: Colors.white,
+      body: LoginComponent(),
     );
   }
 }
@@ -30,10 +29,8 @@ class LoginComponent extends StatelessWidget {
   LoginComponent({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController =
-      TextEditingController();
-  final TextEditingController _passwordController =
-      TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   void _validateAndLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
@@ -50,15 +47,14 @@ class LoginComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isKeyboardOpen =
-        MediaQuery.of(context).viewInsets.bottom > 0;
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) async {
         if (state is AuthAuthenticated) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: Text(
-                    'Welcome, ${state.loginModel.userInfo?.fullName}!')),
+                content:
+                    Text('Welcome, ${state.loginModel.userInfo?.username}!')),
           );
           int c = await SharedPreferencesDemo.loadUserData().id;
           BlocProvider.of<CurrentUserBloc>(context)
@@ -70,7 +66,7 @@ class LoginComponent extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('${state.message}')),
           );
-          if (state.message.contains("verify your email")){
+          if (state.message.contains("verify your email")) {
             Navigator.pushNamed(context, AppRoutes.otpConfirm);
           }
         }
@@ -87,15 +83,12 @@ class LoginComponent extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.stretch,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(height: 150.h),
-                          Text(
-                            'T  R  E  N  D',
-                            textAlign: TextAlign.center,
-                            style: AppStyles.styleBold30(context)
-                          ),
+                          Text('T  R  E  N  D',
+                              textAlign: TextAlign.center,
+                              style: AppStyles.styleBold30(context)),
                           SizedBox(height: 60.h),
                           CustomerTextForm(
                               name: 'Username',
@@ -137,8 +130,7 @@ class LoginComponent extends StatelessWidget {
                             visible: !(state is AuthLoading),
                             child: CustomButton(
                               text: 'Login',
-                              onPressed: () =>
-                                  _validateAndLogin(context),
+                              onPressed: () => _validateAndLogin(context),
                             ),
                           ),
                           SizedBox(height: 10),
@@ -169,8 +161,7 @@ class LoginComponent extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w),
+                                padding: EdgeInsets.symmetric(horizontal: 10.w),
                                 child: Text(
                                   'OR',
                                   style: TextStyle(
@@ -189,8 +180,7 @@ class LoginComponent extends StatelessWidget {
                           ),
                           SizedBox(height: 20),
                           Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ...[
                                 'google.png',
@@ -228,8 +218,7 @@ class LoginComponent extends StatelessWidget {
                         const Text('Don\'t have an account?'),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.register);
+                            Navigator.pushNamed(context, AppRoutes.register);
                           },
                           child: const Text(
                             'Sign up',

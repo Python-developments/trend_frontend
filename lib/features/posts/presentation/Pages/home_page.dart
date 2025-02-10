@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           },
           builder: (context, state) {
             final posts = BlocProvider.of<PostBloc>(context).allPosts;
-
+            print(posts);
             return ListView.builder(
               physics: BouncingScrollPhysics(),
               controller: _scrollController,

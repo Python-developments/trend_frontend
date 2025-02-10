@@ -60,11 +60,12 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
 
       String? tok = await token.getToken();
-      print(url);
+
       final response = await dio.get(
         url,
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
       );
+      print(response.data);
       isloading = false;
       if (response.statusCode == 200) {
         ApiEndpoints.setnext(response.data["next"] ?? "");

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
 import 'package:trend/features/authentication/domain/entities/user.dart';
 import 'package:trend/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:trend/shared/core/shared_preferences.dart';
 
 import '../../../shared/const/app_links.dart';
 import '../../../shared/core/local/SharedPreferencesDemo.dart';
@@ -49,6 +49,8 @@ class AuthenticationBloc
             is_private: data['is_private'] ?? false);
 
         await sharedPreferencesDemo.saveUserData(
+            verified: false,
+            Profileid: "0",
             id: user.id,
             email: user.email,
             username: user.username,
@@ -109,6 +111,7 @@ class AuthenticationBloc
         );
 
         await sharedPreferencesDemo.saveUserData(
+          Profileid: "0",
           is_private: user.is_private ?? false,
           id: user.id ?? "0",
           email: user.email ?? "null",
@@ -120,7 +123,8 @@ class AuthenticationBloc
           followers: user.followers.toString() ?? "0",
           following: user.following.toString() ?? "0",
           totalPosts: user.totalPosts.toString() ?? "0", // Added totalPosts
-          totalLikes: user.totalLikes.toString() ?? "0", // Added totalLikes
+          totalLikes: user.totalLikes.toString() ?? "0",
+          verified: false, // Added totalLikes
         );
 
         emit(RegistrationSuccess(message: user.username));

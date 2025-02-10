@@ -1,5 +1,6 @@
 class currentUser {
   final int id;
+  final String profileid;
   final String username;
   final String email;
   final String fullName;
@@ -13,6 +14,7 @@ class currentUser {
   final bool is_private; // New field
 
   currentUser({
+    required this.profileid,
     required this.id,
     required this.username,
     required this.is_private,
@@ -44,8 +46,8 @@ class currentUser {
           map['following']?.toString() ?? '0', // Ensure following is a string
       totalPosts:
           map['totalPosts']?.toString() ?? '0', // Ensure totalPosts is a string
-      totalLikes:
-          map['totalLikes']?.toString() ?? '0', // Ensure totalLikes is a string
+      totalLikes: map['totalLikes']?.toString() ?? '0',
+      profileid: map['Profileid'], // Ensure totalLikes is a string
     );
   }
 }

@@ -21,9 +21,10 @@ import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/c
 import '../../../../../../shared/core/local/SharedPreferencesDemo.dart';
 
 class BodyForMyProfile extends StatefulWidget {
-  const BodyForMyProfile({super.key, this.onLongPress});
+  const BodyForMyProfile({super.key, this.onLongPress, required this.onTap});
 
   final void Function()? onLongPress;
+  final void Function() onTap;
   @override
   State<BodyForMyProfile> createState() => _BodyForMyProfileState();
 }
@@ -41,7 +42,8 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
       following: '',
       totalPosts: '0', // Default value
       totalLikes: '0',
-      is_private: false // Default value
+      is_private: false,
+      profileid: '1' // Default value
       );
 
   @override
@@ -54,7 +56,8 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
   @override
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
-
+    print(user.profileid);
+    print("=================================");
     setState(() {
       // تحديث الواجهة عند تحميل البيانات إذا لزم الأمر
     });
@@ -74,6 +77,7 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
               Mynameandavatar(
                 onLongPress: widget.onLongPress,
                 user: user,
+                onTap: widget.onTap,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 25.w),
@@ -108,11 +112,11 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                             BlocProvider.of<FollowersBloc>(context)
                                 .ListFollower
                                 .clear();
-                            BlocProvider.of<FollowersBloc>(context)
-                                .add(LoadFollowers(id: user.id));
+                            BlocProvider.of<FollowersBloc>(context).add(
+                                LoadFollowers(id: int.parse(user.profileid)));
 
-                            BlocProvider.of<DisplayFollowingBloc>(context)
-                                .add(LoadFollowing1(id: user.id));
+                            BlocProvider.of<DisplayFollowingBloc>(context).add(
+                                LoadFollowing1(id: int.parse(user.profileid)));
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -140,10 +144,10 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                       builder: (context, state) {
                         return GestureDetector(
                           onTap: () {
-                            BlocProvider.of<FollowersBloc>(context)
-                                .add(LoadFollowers(id: user.id));
-                            BlocProvider.of<DisplayFollowingBloc>(context)
-                                .add(LoadFollowing1(id: user.id));
+                            BlocProvider.of<FollowersBloc>(context).add(
+                                LoadFollowers(id: int.parse(user.profileid)));
+                            BlocProvider.of<DisplayFollowingBloc>(context).add(
+                                LoadFollowing1(id: int.parse(user.profileid)));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

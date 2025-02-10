@@ -1,1 +1,0 @@
- C:\\Users\\Options\\Documents\\GitHub\\trend_frontend\\.dart_tool\\flutter_build\\dc5b9efc2085a670f12a77f1ddcedce7\\native_assets.yaml: 

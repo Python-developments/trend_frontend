@@ -67,7 +67,7 @@ class ProfileRemoteDatasource {
     }
   }
 
-  Future<List<FollowerModel>> fetchFollowers({required int}) async {
+  Future<List<FollowerModel>> fetchFollowers({required int id}) async {
     try {
       print(token.getToken());
 

@@ -19,20 +19,20 @@ class Replaycomment extends StatefulWidget {
 class _ReplaycommentState extends State<Replaycomment> {
   void initState() {
     super.initState();
-    _loadUserReplayAvatar();
+    // _loadUserReplayAvatar();
   }
 
-  String replayavatar =
-      "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
-  Future<void> _loadUserReplayAvatar() async {
-    String Newavatar1 = await BlocProvider.of<PostBloc>(context)
-        .repository
-        .getUserAvatar(widget.reply.authorId!);
-    print(replayavatar);
-    setState(() {
-      replayavatar = Newavatar1;
-    });
-  }
+  // String replayavatar =
+  //     "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
+  // Future<void> _loadUserReplayAvatar() async {
+  //   String Newavatar1 = await BlocProvider.of<PostBloc>(context)
+  //       .repository
+  //       .getUserAvatar(widget.reply.authorId!);
+  //   print(replayavatar);
+  //   setState(() {
+  //     replayavatar = Newavatar1;
+  //   });
+  // }
 
   String getMentionedNamae(String content) {
     int firstSpaceIndex = content.indexOf(" ");
@@ -55,9 +55,9 @@ class _ReplaycommentState extends State<Replaycomment> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Avatar
         Networkimages(
-          imageUrl: replayavatar,
+          imageUrl: widget.reply.avatar ??
+              "http://167.71.92.176:8000/media/profile_images/default_image.jpg",
           size: 20,
         ),
         SizedBox(width: 10.w),

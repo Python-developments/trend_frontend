@@ -87,8 +87,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               },
             ),
             AnimatedAvatarWidget(
-                isVisible: is_visible,
-                avatarUrl: 'http://167.71.92.176${widget.user.avatar}')
+                isVisible: is_visible, avatarUrl: widget.user.avatar)
           ],
         );
       },

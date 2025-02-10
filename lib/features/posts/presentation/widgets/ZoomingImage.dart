@@ -10,7 +10,7 @@ class ZoomingImage extends StatefulWidget {
 
 class _ZoomingImageState extends State<ZoomingImage>
     with SingleTickerProviderStateMixin {
-  double _scale = 1.0;
+  double _scale = 1.3;
   double minScale = 1.0;
   double maxScale = 4.0;
   OverlayEntry? entry;
@@ -67,9 +67,11 @@ class _ZoomingImageState extends State<ZoomingImage>
           showOverlay(context);
         },
         child: Transform.scale(
-            scale: _scale, // تطبيق مقياس الصورة هنا
+            scale: 1.2, // تطبيق مقياس الصورة هنا
             child: CachedNetworkImage(
-              imageUrl: widget.image, // رابط الصورة
+              imageUrl: widget.image,
+              fit: BoxFit.fill,
+              // رابط الصورة
               // imageBuilder: (context, imageProvider) =>
               //     Image.asset('assets/images/avatar.jpg'), // الصورة المحمّلة
 
