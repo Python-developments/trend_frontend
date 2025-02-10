@@ -4,6 +4,10 @@ class ApiEndpoints {
   // Authentication Endpoints URL
   static const String login = '$baseUrl/auth/login/';
   static const String register = '$baseUrl/auth/register/';
+  static const String  verifyOtp = '$baseUrl/auth/verify-otp/';
+  static const String resendOtp = '$baseUrl/auth/resend-otp/';
+  
+  
   static const String changePassword = '$baseUrl/auth/change-password/';
   static const String resetPassword = '$baseUrl/auth/reset-password/';
 
