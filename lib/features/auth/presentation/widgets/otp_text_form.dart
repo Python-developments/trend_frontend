@@ -4,10 +4,9 @@ import '../../../../shared/style/app_styles.dart';
 
 class OtpInputField extends StatefulWidget {
   final Function() onCompleted;
-  final TextEditingController otpController;
+  final TextEditingController otpController ;
 
-  const OtpInputField(
-      {super.key, required this.onCompleted, required this.otpController});
+  const OtpInputField({super.key, required this.onCompleted, required this.otpController});
 
   @override
   State<OtpInputField> createState() => _OtpInputFieldState();
@@ -16,9 +15,10 @@ class OtpInputField extends StatefulWidget {
 class _OtpInputFieldState extends State<OtpInputField> {
   @override
   Widget build(BuildContext context) {
+
     return TextFormField(
       controller: widget.otpController,
-      onEditingComplete: () {
+      onEditingComplete: (){
         FocusScope.of(context).unfocus();
         widget.onCompleted();
       },
@@ -35,12 +35,12 @@ class _OtpInputFieldState extends State<OtpInputField> {
           borderRadius: BorderRadius.circular(10),
         ),
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter the OTP';
-        } else if (value.length != 6) {
+        } else if (value.length != 5) {
           return 'OTP must be 6 digits';
         }
         return null;
