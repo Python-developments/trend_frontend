@@ -94,7 +94,7 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
-      return response.data['message'];
+      return response.data;
     }
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));

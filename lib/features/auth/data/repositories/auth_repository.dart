@@ -17,8 +17,7 @@ class AuthRepository extends BaseAuthRepository {
   AuthRepository({required this.baseAuthDataSource});
 
   @override
-  Future<Either<Failure, LoginModel>> loginUser(
-      LoginModelLocal loginModel) async {
+  Future<Either<Failure, LoginModel>> loginUser(LoginModelLocal loginModel) async {
     try {
       final result = await baseAuthDataSource.login(loginModel);
       return Right(result);
@@ -34,16 +33,48 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, RegisterModel>> registerUser(
-      RegisterModelLocal registerModel) async {
+  Future<Either<Failure, RegisterModel>> registerUser(RegisterModelLocal registerModel) async {
     try {
       final result = await baseAuthDataSource.register(registerModel);
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(
-          ServerFailure(failure.errorServerModel.statusMessage));
+      return Left(ServerFailure(failure.errorServerModel.statusMessage));
+    } on DioException catch (e) {
+      print(e.response?.data);  // Debug: Log full response to inspect errors
+
+      final errorData = e.response?.data;
+
+      // Extract errors from the response
+      final  errors = errorData?['errors'];
+
+      // Build error message based on available fields
+      String errorMessage = '';
+
+      if (errors != null) {
+        if (errors.containsKey('username')) {
+          errorMessage += errors['username'][0];
+        }
+        if (errors.containsKey('email')) {
+          errorMessage += errors['email'][0];
+        }
+        if (errors.containsKey('password')) {
+          errorMessage += errors['password'][0];
+        }
+        if (errors.containsKey('phone')) {
+          errorMessage += errors['phone'][0];
+        }
+      }
+
+      // Fallback if no detailed error is found
+      if (errorMessage.isEmpty) {
+        errorMessage = errorData?['message'] ?? "Something went wrong, please try again later.";
+      }
+
+      return Left(ServerFailure(errorMessage));
     }
   }
+
+
 
   @override
   Future<Either<Failure, String>> resendOtp(String email) async {
@@ -53,6 +84,11 @@ class AuthRepository extends BaseAuthRepository {
     } on ServerException catch (failure) {
       return Left(
           ServerFailure(failure.errorServerModel.statusMessage));
+    } on DioException catch (e) {
+      final errorDetail = e.response?.data['detail'] ??
+          e.response?.data['message'] ??
+          "Something went wrong, please try again later";
+      return Left(ServerFailure(errorDetail));
     }
   }
 
@@ -66,6 +102,11 @@ class AuthRepository extends BaseAuthRepository {
     } on ServerException catch (failure) {
       return Left(
           ServerFailure(failure.errorServerModel.statusMessage));
+    }on DioException catch (e) {
+      final errorDetail = e.response?.data['error'] ??
+          e.response?.data['message'] ??
+          "Something went wrong, please try again later";
+      return Left(ServerFailure(errorDetail));
     }
   }
 }
