@@ -6,11 +6,15 @@ class ApiEndpoints {
   static const String register = '$baseUrl/auth/register/';
   static const String  verifyOtp = '$baseUrl/auth/verify-otp/';
   static const String resendOtp = '$baseUrl/auth/resend-otp/';
-  
-  
-  static const String changePassword = '$baseUrl/auth/change-password/';
-  static const String resetPassword = '$baseUrl/auth/reset-password/';
 
+  
+  static const String resetPasswordEmailSendOtp = '$baseUrl/auth/forgot-password/';
+  static const String resetPasswordVerifyOtp = '$baseUrl/auth/reset-password-verify-otp/';
+  static const String resetPasswordFinish = '$baseUrl/auth/reset-password-finish/';
+  static const String refreshToken = '$baseUrl/auth/login/refresh/';
+  
+  
+  
 // // Explore Endpoints URL
   static const String getAllPosts = '$baseUrl/explore/posts/?page_size=28';
 
