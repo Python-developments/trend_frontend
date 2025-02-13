@@ -27,7 +27,7 @@ class _OtpInputFieldState extends State<OtpInputField> {
         widget.onCompleted();
       },
       keyboardType: TextInputType.number,
-      maxLength: 5,
+      maxLength: 6,
       decoration: InputDecoration(
         labelText: 'OTP Code',
         labelStyle: AppStyles.styleSmall15(context),
@@ -40,7 +40,7 @@ class _OtpInputFieldState extends State<OtpInputField> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter the OTP';
-        } else if (value.length != 5) {
+        } else if (value.length != 6) {
           return 'OTP must be 6 digits';
         }
         return null;

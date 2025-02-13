@@ -22,18 +22,19 @@ class RegisterEvent extends AuthEvent {
   RegisterEvent({required this.registerModel});
 
   @override
-  List<Object?> get props => [registerModel];}
-
+  List<Object?> get props => [registerModel];
+}
 class OptConfirmEvent extends AuthEvent {
-final VerifyOtpLocal verifyOtpModel;
+  final VerifyOtpLocal verifyOtpModel;
 
   OptConfirmEvent({required this.verifyOtpModel});
-@override
-List<Object?> get props => [verifyOtpModel];
-}
 
+  @override
+  List<Object?> get props => [verifyOtpModel];
+}
 class OptResendEvent extends AuthEvent {
   final String email;
+
   OptResendEvent({required this.email});
 
   @override
@@ -41,3 +42,27 @@ class OptResendEvent extends AuthEvent {
 }
 
 
+class RestPasswordSendEmailEvent extends AuthEvent {
+  final String email;
+
+  RestPasswordSendEmailEvent({required this.email});
+
+  @override
+  List<Object?> get props => [email];
+}
+class RestPasswordVerifyOtpEvent extends AuthEvent {
+  final String restToken;
+  final String otp;
+
+  RestPasswordVerifyOtpEvent({required this.restToken, required this.otp});
+  @override
+  List<Object?> get props => [restToken, otp];
+}
+class RestPasswordFinishEvent extends AuthEvent {
+  final String restToken;
+  final String password;
+  RestPasswordFinishEvent({required this.restToken, required this.password});
+
+  @override
+  List<Object?> get props => [restToken, password];
+}

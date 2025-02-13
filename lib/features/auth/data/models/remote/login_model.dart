@@ -1,8 +1,12 @@
 import 'package:trend/features/auth/domain/entities/login.dart';
 
+
+
 class LoginModel extends Login {
   LoginModel(
-      {required super.refresh, required super.access, required super.userInfo});
+      {required super.refresh,
+      required super.access,
+      required super.userInfo});
 
   factory LoginModel.fromJson(Map<String, dynamic> json) {
     return LoginModel(
@@ -14,7 +18,6 @@ class LoginModel extends Login {
     );
   }
 }
-
 class UserInfoModel extends UserInfo {
   UserInfoModel(
       {required super.id,
@@ -47,11 +50,9 @@ class UserInfoModel extends UserInfo {
     );
   }
 }
-
 class ProfileModel extends Profile {
   ProfileModel(
-      {required super.id,
-      required super.bio,
+      {required super.bio,
       required super.isPrivate,
       required super.verified,
       required super.isBusiness,
@@ -59,7 +60,6 @@ class ProfileModel extends Profile {
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
-      id: json["id"],
       bio: json["bio"],
       isPrivate: json["is_private"],
       verified: json["verified"],

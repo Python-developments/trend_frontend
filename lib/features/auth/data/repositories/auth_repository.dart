@@ -7,6 +7,7 @@ import 'package:trend/features/auth/data/models/local/verify_otp_local.dart';
 import 'package:trend/features/auth/data/models/remote/login_model.dart';
 import 'package:trend/features/auth/data/models/remote/register_model.dart';
 import 'package:trend/features/auth/data/models/remote/verify_otp_model.dart';
+import 'package:trend/features/auth/domain/entities/resfresh_token.dart';
 import 'package:trend/features/auth/domain/repositories/base_auth_repositories.dart';
 import '../../../../shared/core/failure.dart';
 import '../../../../shared/core/network/server_exception.dart';
@@ -17,7 +18,8 @@ class AuthRepository extends BaseAuthRepository {
   AuthRepository({required this.baseAuthDataSource});
 
   @override
-  Future<Either<Failure, LoginModel>> loginUser(LoginModelLocal loginModel) async {
+  Future<Either<Failure, LoginModel>> loginUser(
+      LoginModelLocal loginModel) async {
     try {
       final result = await baseAuthDataSource.login(loginModel);
       return Right(result);
@@ -33,19 +35,22 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<Either<Failure, RegisterModel>> registerUser(RegisterModelLocal registerModel) async {
+  Future<Either<Failure, RegisterModel>> registerUser(
+      RegisterModelLocal registerModel) async {
     try {
       final result = await baseAuthDataSource.register(registerModel);
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorServerModel.statusMessage));
+      return Left(
+          ServerFailure(failure.errorServerModel.statusMessage));
     } on DioException catch (e) {
-      print(e.response?.data);  // Debug: Log full response to inspect errors
+      print(e.response
+          ?.data); // Debug: Log full response to inspect errors
 
       final errorData = e.response?.data;
 
       // Extract errors from the response
-      final  errors = errorData?['errors'];
+      final errors = errorData?['errors'];
 
       // Build error message based on available fields
       String errorMessage = '';
@@ -53,28 +58,24 @@ class AuthRepository extends BaseAuthRepository {
       if (errors != null) {
         if (errors.containsKey('username')) {
           errorMessage += errors['username'][0];
-        }
-        if (errors.containsKey('email')) {
+        } else if (errors.containsKey('email')) {
           errorMessage += errors['email'][0];
-        }
-        if (errors.containsKey('password')) {
+        } else if (errors.containsKey('password')) {
           errorMessage += errors['password'][0];
-        }
-        if (errors.containsKey('phone')) {
+        } else if (errors.containsKey('phone')) {
           errorMessage += errors['phone'][0];
         }
       }
 
       // Fallback if no detailed error is found
       if (errorMessage.isEmpty) {
-        errorMessage = errorData?['message'] ?? "Something went wrong, please try again later.";
+        errorMessage = errorData?['message'] ??
+            "Something went wrong, please try again later.";
       }
 
       return Left(ServerFailure(errorMessage));
     }
   }
-
-
 
   @override
   Future<Either<Failure, String>> resendOtp(String email) async {
@@ -102,11 +103,86 @@ class AuthRepository extends BaseAuthRepository {
     } on ServerException catch (failure) {
       return Left(
           ServerFailure(failure.errorServerModel.statusMessage));
-    }on DioException catch (e) {
+    } on DioException catch (e) {
       final errorDetail = e.response?.data['error'] ??
           e.response?.data['message'] ??
           "Something went wrong, please try again later";
       return Left(ServerFailure(errorDetail));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> restPasswordSendEmail(
+      String email) async {
+    try {
+      final result =
+          await baseAuthDataSource.restPasswordSendEmail(email);
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(
+          ServerFailure(failure.errorServerModel.statusMessage));
+    } on DioException catch (e) {
+      final errorDetail = e.response?.data['email'][0] ??
+          e.response?.data['message'] ??
+          "Too many OTP resend attempts. Please try again later.";
+      return Left(ServerFailure(errorDetail));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> restPasswordVerifyOtp(
+      {required String restToken, required String otp}) async {
+    try {
+      final result = await baseAuthDataSource.restPasswordVerifyOtp(
+          restToken: restToken, otp: otp);
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(
+          ServerFailure(failure.errorServerModel.statusMessage));
+    } on DioException catch (e) {
+      final errorDetail =
+          e.response?.data['error'] ?? "Please try again later.";
+      return Left(ServerFailure(errorDetail));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> restPasswordFinish({
+    required String restToken, required String password}) async {
+    try {
+      final result = await baseAuthDataSource.restPasswordFinish(
+          restToken: restToken, password: password);
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(
+          ServerFailure(failure.errorServerModel.statusMessage));
+    } on DioException catch (e) {
+      final errorDetail =
+          e.response?.data['new_password'][0] ??
+          e.response?.data['otp'][0] ??
+          e.response?.data['message'] ??
+          "Ensure Password or Confirm Password has at least 8 characters.";
+      return Left(ServerFailure(errorDetail));
+    }
+  }
+
+  @override
+  Future<Either<Failure, RefreshToken>> refreshToken(String oldToken)async {
+    print("------------------------------------------$oldToken---------------------------");
+    try {
+      final result = await baseAuthDataSource.refreshToken(oldToken);
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(
+          ServerFailure(failure.errorServerModel.statusMessage));
+    } on DioException catch (e) {
+      print("-#####################################${e.response?.data}"); // Debug: Log full response to inspect errors
+      final errorDetail =
+              e.response?.data['code'] ??
+              e.response?.data['refresh'][0] ??
+              "Token has wrong type";
+      return Left(ServerFailure(errorDetail));
+    }
+  }
 }
+

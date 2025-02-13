@@ -10,7 +10,7 @@ class Login extends Equatable {
     required this.access,
     required this.userInfo,
   });
-
+  
   @override
   List<Object?> get props => [
         refresh,
@@ -18,7 +18,6 @@ class Login extends Equatable {
         userInfo,
       ];
 }
-
 class UserInfo extends Equatable {
   final int? id;
   final String? username;
@@ -45,7 +44,7 @@ class UserInfo extends Equatable {
     required this.following,
     required this.totalLikes,
   });
-
+  
   @override
   List<Object?> get props => [
         id,
@@ -61,9 +60,7 @@ class UserInfo extends Equatable {
         totalLikes,
       ];
 }
-
 class Profile extends Equatable {
-  final dynamic id;
   final dynamic bio;
   final bool? isPrivate;
   final bool? verified;
@@ -71,17 +68,16 @@ class Profile extends Equatable {
   final bool? isSuspended;
 
   Profile({
-    required this.id,
     required this.bio,
     required this.isPrivate,
     required this.verified,
     required this.isBusiness,
     required this.isSuspended,
   });
+  
 
   @override
   List<Object?> get props => [
-        id,
         bio,
         isPrivate,
         verified,

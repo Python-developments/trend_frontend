@@ -10,12 +10,20 @@ import 'package:trend/shared/core/network/server_exception.dart';
 import '../../../../shared/core/error_model/error_server_model.dart';
 import '../../../../shared/core/shared_preferences.dart';
 import '../models/local/verify_otp_local.dart';
+import '../models/remote/refresh_token_model.dart';
 
 abstract class BaseAuthDataSource {
   Future<LoginModel> login(LoginModelLocal loginModelLocal);
   Future<RegisterModel> register(RegisterModelLocal registerModelLocal);
   Future<VerifyOtpModel> verifyOtp(VerifyOtpLocal VerifyOtp);
   Future<String> resendOtp(String email);
+  
+  Future<String> restPasswordSendEmail(String email);
+  Future<String> restPasswordVerifyOtp({required String restToken, required String otp});
+  Future<String> restPasswordFinish({required String restToken, required String password});
+
+  Future<RefreshTokenModel> refreshToken(String oldToken);
+  
 }
 
 class AuthDataSourceImpl extends BaseAuthDataSource {
@@ -46,7 +54,6 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     }
     
   }
-
   @override
   Future<RegisterModel> register(
       RegisterModelLocal registerModelLocal) async {
@@ -68,7 +75,6 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
           errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
-
   @override
   Future<String> resendOtp(String email) async {
     final response = await Dio().post(
@@ -83,7 +89,6 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
   }
-
   @override
   Future<VerifyOtpModel> verifyOtp(VerifyOtpLocal VerifyOtp) async {
     final response = await Dio().post(
@@ -99,4 +104,73 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
   }
+  
+  
+  @override
+  Future<String> restPasswordSendEmail(String email)async {
+    final response = await Dio().post(
+      ApiEndpoints.resetPasswordEmailSendOtp,
+      data: {
+        "email": email,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return response.data["reset_token"];
+    }
+    throw ServerException(
+        errorServerModel: ErrorServerModel.fromJson(response.data));
+  }
+  @override
+  Future<String> restPasswordVerifyOtp({required String restToken, required String otp}) async{
+    final response = await Dio().post(
+      ApiEndpoints.resetPasswordVerifyOtp,
+      data: {
+        "reset_token": restToken,
+        "otp":otp,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return response.data["message"];
+    }
+    throw ServerException(
+        errorServerModel: ErrorServerModel.fromJson(response.data));
+  }
+  @override
+  Future<String> restPasswordFinish({required String restToken, required String password})async {
+    final response = await Dio().post(
+      ApiEndpoints.resetPasswordFinish,
+      data: {
+        "reset_token": restToken,
+        "new_password": password,
+        "confirm_password": password,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return response.data["message"];
+    }
+    throw ServerException(
+        errorServerModel: ErrorServerModel.fromJson(response.data));
+    
+    
+  }
+
+  
+  @override
+  Future<RefreshTokenModel> refreshToken(String oldToken) async{
+    final response = await Dio().post(
+      ApiEndpoints.refreshToken,
+      data: {
+        "refresh": oldToken,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return RefreshTokenModel.fromJson(response.data);
+    }
+    throw ServerException(
+        errorServerModel: ErrorServerModel.fromJson(response.data));
+
+
+  }
+  
 }
+

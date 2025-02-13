@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:trend/features/auth/data/models/local/verify_otp_local.dart';
 import 'package:trend/features/auth/data/models/remote/login_model.dart';
 import 'package:trend/features/auth/data/models/remote/register_model.dart';
 import 'package:trend/features/auth/data/models/remote/verify_otp_model.dart';
@@ -15,6 +14,7 @@ class AuthInitial extends AuthState {}
 
 
 class AuthLoading extends AuthState {}
+
 class AuthAuthenticated extends AuthState {
   final LoginModel loginModel;
 
@@ -31,7 +31,6 @@ class AuthRegistered extends AuthState {
   @override
   List<Object?> get props => [registerModel];
 }
-
 class AuthOptConfirmed extends AuthState {
   final VerifyOtpModel verifyOtp;
 
@@ -40,7 +39,6 @@ class AuthOptConfirmed extends AuthState {
   List<Object?> get props => [verifyOtp];
   
 }
-
 class AuthOptSent extends AuthState {
   final String message;
   AuthOptSent({required this.message});
@@ -48,6 +46,33 @@ class AuthOptSent extends AuthState {
   @override
   List<Object?> get props => [message];
 }
+
+
+
+class RestPasswordSendEmail extends AuthState {
+  final String message;
+  RestPasswordSendEmail({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+class RestPasswordVerifyOtp extends AuthState {
+  final String message;
+  RestPasswordVerifyOtp({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+class RestPasswordFinish extends AuthState {
+  final String message;
+  RestPasswordFinish({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
+
+
 
 
 class AuthError extends AuthState {

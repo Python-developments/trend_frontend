@@ -27,6 +27,11 @@ class _CustomerTextFormState extends State<CustomerTextForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (_) => FocusScope.of(context).unfocus(),
+      onFieldSubmitted: (_) {
+        FocusScope.of(context).unfocus();
+        widget.onFieldSubmitted();
+      },
       onEditingComplete:(){
         FocusScope.of(context).unfocus();
         widget.onFieldSubmitted();
