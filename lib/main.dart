@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
 import 'package:trend/shared/utiles/bloc_providers.dart';
 import 'package:trend/shared/utiles/dependancy_injection.dart';
 import 'package:trend/shared/utiles/routes.dart';
+import 'package:trend/shared/utiles/securely%20_save.dart';
 import 'package:trend/shared/utiles/services_local.dart';
+
+import 'features/splash/presentation/pages/splash_screen.dart';
+
+String? refreshToken;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DependancyInjection.dependancyInjection.initDependancies();
   ServiceLocator().init();
+  refreshToken = await getRefreshToken() ?? ""; 
+ 
+  
   PhotoManager.setIgnorePermissionCheck(false);
-
-  print(await token.getToken());
   runApp(
     AppBlocProviders.getBlocProviders(
       child: const MyApp(),
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.light,
           title: 'Trend',
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.login,
+          initialRoute: AppRoutes.splashScreen,
           routes: routes,
           // Ensure routes are defined in utils/routes.dart
           onGenerateRoute: onGenerateRoute, // Handle dynamic routing
