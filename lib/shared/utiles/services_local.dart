@@ -4,8 +4,12 @@ import '../../features/auth/data/data_sources/auth_data_source.dart';
 import '../../features/auth/data/repositories/auth_repository.dart';
 import '../../features/auth/domain/repositories/base_auth_repositories.dart';
 import '../../features/auth/domain/use_cases/login_use_case.dart';
+import '../../features/auth/domain/use_cases/refresh_token_use_case.dart';
 import '../../features/auth/domain/use_cases/register_use_case.dart';
 import '../../features/auth/domain/use_cases/resend_otp_use_case.dart';
+import '../../features/auth/domain/use_cases/rest_password_Send_email_use_case.dart';
+import '../../features/auth/domain/use_cases/rest_password_finish_use_case.dart';
+import '../../features/auth/domain/use_cases/rest_password_verify_otp_use_case.dart';
 import '../../features/auth/domain/use_cases/verify_otp_use_case.dart';
 import '../../features/explore/data/data_sources/get_post_data_source.dart';
 import '../../features/explore/data/repositories/explore_repository.dart';
@@ -78,5 +82,17 @@ class ServiceLocator {
         () => ResendOtpUseCase(authRepository: sl()));
     sl.registerLazySingleton(
         () => VerifyOtpUseCase(authRepository: sl()));
+    
+    
+    sl.registerLazySingleton(
+            () => RestPasswordSendEmailUseCase(authRepository: sl()));
+    sl.registerLazySingleton(
+            () => RestPasswordVerifyOtpUseCase(authRepository: sl())); 
+    sl.registerLazySingleton(
+            () => RestPasswordFinishUseCase(authRepository: sl()));
+    // 
+    sl.registerLazySingleton(
+            () => RefreshTokenUseCase(authRepository: sl()));
+    
   }
 }
