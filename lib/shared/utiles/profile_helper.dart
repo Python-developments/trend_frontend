@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trend/features/authentication/presentation/pages/login.dart';
+import 'package:trend/features/auth/presentation/pages/login_screen.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_state.dart';
@@ -38,7 +38,7 @@ class ProfileHelper {
             if (state is Deletesuccess) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
+                MaterialPageRoute(builder: (context) => LoginScreen2()),
               );
             }
           },

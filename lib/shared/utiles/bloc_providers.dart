@@ -64,7 +64,14 @@ class AppBlocProviders {
             create: (context) => AuthBloc(
                 loginUseCase: sl(),
                 registerUseCase: sl(),
-                resendOtpUseCase: sl(), otpConfirmUseCase: sl())),
+                resendOtpUseCase: sl(),
+                otpConfirmUseCase: sl(),
+                
+                restPasswordEmailValidationUseCase: sl(),
+                restPasswordVerifyOtpUseCase: sl(), 
+                restPasswordFinishUseCase: sl()
+            )
+        ),
 
         // Post Bloc: Manages posts, including fetching posts and interacting with them.
         BlocProvider<PostBloc>(

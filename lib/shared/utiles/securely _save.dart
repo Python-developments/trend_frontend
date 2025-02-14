@@ -1,10 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-AndroidOptions _getAndroidOptions() => const AndroidOptions(
-  encryptedSharedPreferences: true,
-);
-
-final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+AndroidOptions _getAndroidOptions() => AndroidOptions();
+final storage = FlutterSecureStorage();
 
 // Save refresh token
 Future<void> saveRefreshToken(String token) async {
@@ -17,7 +14,8 @@ Future<String?> getRefreshToken() async {
 }
 
 // Delete refresh token
-Future<void> deleteRefreshToken() async {  // Corrected function name
+Future<void> deleteRefreshToken() async {
+  // Corrected function name
   await storage.delete(key: 'refresh_token');
 }
 
@@ -28,7 +26,7 @@ Future<void> saveAccessToken(String token) async {
 
 // Retrieve access token
 Future<String?> getAccessToken() async {
-  return await storage.read(key: 'access_token');
+  return await storage.read(key: 'access_token')??"";
 }
 
 // Delete access token
