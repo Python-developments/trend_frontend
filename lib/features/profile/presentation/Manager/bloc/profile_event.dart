@@ -7,15 +7,6 @@ class FetchProfileEvent extends ProfileEvent {
   FetchProfileEvent({required this.id});
 }
 
-// class FollowUserEvent extends ProfileEvent {
-//   final int id;
-//   FollowUserEvent({required this.id});
-// }
-
-// class UnfollowUserEvent extends ProfileEvent {
-//   final int id;
-//   UnfollowUserEvent({required this.id});
-// }
 
 class FetchUserEvent extends ProfileEvent {
   final int id;

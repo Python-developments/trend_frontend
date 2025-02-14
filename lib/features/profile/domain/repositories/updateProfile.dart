@@ -10,16 +10,18 @@ class UpdateProfileRepository {
 
   UpdateProfileRepository({required this.remoteDataSource});
 
-  Future<Response<dynamic>> updateBio(String userId, String bio) async {
+  Future<Response<dynamic>> updateBio(String userId,
+      String bio) async {
     return await remoteDataSource.updateBio(userId, bio);
   }
 
-  Future<Response<dynamic>> updatefullname(
-      String userId, String fullname) async {
+  Future<Response<dynamic>> updatefullname(String userId,
+      String fullname) async {
     return await remoteDataSource.updatefullname(userId, fullname);
   }
 
-  Future<Response<dynamic>> updateAvatar(String userId, File image) async {
+  Future<Response<dynamic>> updateAvatar(String userId,
+      File image) async {
     return await remoteDataSource.updateAvatar(userId, image);
   }
 
@@ -34,15 +36,4 @@ class UpdateProfileRepository {
   Future<List<PostModel>> getPostForUserMethod(int id) async {
     return await remoteDataSource.getPostForUserMethod(id);
   }
-//   Future<Map<String, dynamic>> updateFullName(
-//       String userId, String fullName) async {
-//     String? tok = await token.getToken();
-//     return remoteDataSource.updateFullName(userId, fullName, tok!);
-//   }
-
-//   Future<Map<String, dynamic>> updateAvatar(
-//       String userId, String imagePath) async {
-//     String? tok = await token.getToken();
-//     return remoteDataSource.updateAvatar(userId, imagePath, tok!);
-//   }
 }

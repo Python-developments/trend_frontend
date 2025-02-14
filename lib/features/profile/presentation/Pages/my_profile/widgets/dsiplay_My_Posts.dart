@@ -4,6 +4,9 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.da
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/posts/presentation/Pages/main_post.dart';
 
+import '../../../../../../shared/const/app_links.dart';
+import '../../../../../posts/presentation/Manager/Bloc_post/post_event.dart';
+
 class DisplayMyPosts extends StatefulWidget {
   const DisplayMyPosts({super.key, required this.x});
   // final List<PostModel> posts;
@@ -45,6 +48,15 @@ class _DisplayUserPostsState extends State<DisplayMyPosts> {
         slivers: [
           SliverAppBar(
             elevation: 0,
+            automaticallyImplyLeading: false,
+            leading: IconButton(
+              onPressed: () {
+                ApiEndpoints.setnext("");
+                BlocProvider.of<PostBloc>(context).add(FetchPosts());
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
             backgroundColor: Colors.white,
             floating: false,
             pinned: true,

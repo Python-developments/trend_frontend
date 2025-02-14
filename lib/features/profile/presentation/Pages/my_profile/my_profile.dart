@@ -40,7 +40,6 @@ class _MyProfileState extends State<MyProfile> {
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
     setState(() {
-      // تحديث الواجهة عند تحميل البيانات إذا لزم الأمر
     });
   }
 

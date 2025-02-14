@@ -5,6 +5,8 @@ import 'package:trend/features/profile/presentation/Manager/PostForSpecificUser/
 import 'package:trend/features/profile/presentation/Manager/PostForSpecificUser/PostsForspecificUserstate.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
+import '../../../../../main.dart';
+
 class PostsForuserBloc extends Bloc<PostEvent, PostforuserState> {
   final Dio dio;
 
@@ -17,7 +19,7 @@ class PostsForuserBloc extends Bloc<PostEvent, PostforuserState> {
     try {
       emit(LoadingUserPostsState());
 
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       final response = await dio.get(
         "http://167.71.92.176:8000/posts/${event.userId}/posts/",
         options: Options(headers: {'Authorization': 'Bearer $tok'}),

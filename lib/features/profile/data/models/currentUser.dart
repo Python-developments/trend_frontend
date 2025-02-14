@@ -47,7 +47,7 @@ class currentUser {
       totalPosts:
           map['totalPosts']?.toString() ?? '0', // Ensure totalPosts is a string
       totalLikes: map['totalLikes']?.toString() ?? '0',
-      profileid: map['Profileid'], // Ensure totalLikes is a string
+      profileid: map['Profileid'] ?? "0", // Ensure totalLikes is a string
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/states.getU.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
+import '../../../../../main.dart';
+
 class UserBloc extends Bloc<UserEvent, UserState> {
   Dio dio;
   final ProfileRepository repository;
@@ -19,7 +21,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Emitter<UserState> emit,
   ) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       final response = await dio.get(
           'http://167.71.92.176:8000/profile/${event.userId}/',
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -42,8 +44,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     emit(UserLoadingState());
     try {
-      print("object1=======================================");
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       final response = await dio.get(
           'http://167.71.92.176:8000/profile/${event.userId}/',
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -66,7 +67,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     try {
       emit(getPostLOading());
-      String tok = await token.getToken() ?? "";
+      String tok = accessToken?? "";
       final response = await dio.get(
         "http://167.71.92.176:8000/posts/${event.userId}/posts/",
         options: Options(

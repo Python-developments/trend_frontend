@@ -3,6 +3,8 @@ import 'package:trend/features/profile/data/models/FolloersModel.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
+import '../../../../main.dart';
+
 class ProfileRemoteDatasource {
   final Dio dio;
 
@@ -10,7 +12,7 @@ class ProfileRemoteDatasource {
 
   Future<ProfileModel?> getProfile(int id) async {
     try {
-      final String? tok = await token.getToken();
+      final String? tok = accessToken;
       final response = await dio.get(
         '/profile/$id',
         options: Options(
@@ -28,7 +30,7 @@ class ProfileRemoteDatasource {
 
   Future<void> followUser(int id) async {
     try {
-      final String? tok = await token.getToken();
+      final String? tok = accessToken;
       final response = await dio.post(
         'http://167.71.92.176:8000/profile/follow/$id/',
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
@@ -40,7 +42,7 @@ class ProfileRemoteDatasource {
 
   Future<void> unfollowUser(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       final response =
           await dio.post('http://167.71.92.176:8000/profile/unfollow/$id/',
               options: Options(
@@ -55,7 +57,7 @@ class ProfileRemoteDatasource {
     try {
       final response = await dio.get('http://167.71.92.176:8000/profile/$id/',
           options: Options(
-            headers: {'Authorization': 'Bearer ${token.getToken()}'},
+            headers: {'Authorization': 'Bearer ${accessToken}'},
           ));
       if (response.statusCode == 200) {
         return ProfileModel.fromJson(response.data);
@@ -69,12 +71,11 @@ class ProfileRemoteDatasource {
 
   Future<List<FollowerModel>> fetchFollowers({required int id}) async {
     try {
-      print(token.getToken());
 
       final response =
           await dio.get("http://167.71.92.176:8000/profile/$id/followers/",
               options: Options(
-                headers: {'Authorization': 'Bearer ${token.getToken()}'},
+                headers: {'Authorization': 'Bearer ${accessToken}'},
               ));
       print("${response.data}");
       if (response.statusCode == 200) {
@@ -96,7 +97,7 @@ class ProfileRemoteDatasource {
       final response =
           await dio.get("http://167.71.92.176:8000/profile/$id/following/",
               options: Options(
-                headers: {'Authorization': 'Bearer ${token.getToken()}'},
+                headers: {'Authorization': 'Bearer ${accessToken}'},
               ));
       if (response.statusCode == 200) {
         List<FollowerModel> followers = (response.data['results'] as List)
@@ -113,7 +114,7 @@ class ProfileRemoteDatasource {
 
   Future<bool> unblockUser(String userId) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = await accessToken;
       final url = 'http://167.71.92.176:8000/profile/$userId/unblock/';
       final response = await dio.post(
         url,
