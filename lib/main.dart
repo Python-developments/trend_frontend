@@ -7,17 +7,18 @@ import 'package:trend/shared/utiles/routes.dart';
 import 'package:trend/shared/utiles/securely%20_save.dart';
 import 'package:trend/shared/utiles/services_local.dart';
 
-import 'features/splash/presentation/pages/splash_screen.dart';
-
 String? refreshToken;
+String? accessToken ;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DependancyInjection.dependancyInjection.initDependancies();
   ServiceLocator().init();
-  refreshToken = await getRefreshToken() ?? ""; 
- 
+  refreshToken = await getRefreshToken() ?? "";
+  accessToken = await getAccessToken() ?? "";
   
+
+
   PhotoManager.setIgnorePermissionCheck(false);
   runApp(
     AppBlocProviders.getBlocProviders(
