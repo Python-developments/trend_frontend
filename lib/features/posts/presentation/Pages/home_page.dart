@@ -9,6 +9,10 @@ import 'package:trend/shared/core/shared_preferences.dart';
 
 import '../../../../shared/const/app_links.dart';
 import '../../../../shared/const/colors.dart';
+import '../../../../shared/core/local/SharedPreferencesDemo.dart';
+import '../../../notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
+import '../Manager/Bloc_Current_user/Current _user_Bloc.dart';
+import '../Manager/Bloc_Current_user/Current _user_event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,12 +24,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late ScrollController _scrollController;
 
+  
+  void _getUserData() async {
+    int c = await SharedPreferencesDemo.loadUserData().id;
+    BlocProvider.of<CurrentUserBloc>(context)
+        .add(GetPostForCurrentUserEvent(id: c));
+    BlocProvider.of<NotificationBloc>(context)
+        .add(FetchNotificationsEvent());
+  }
+  
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-
     _scrollController.addListener(_onScroll);
+    _getUserData();
   }
 
   void _onScroll() {

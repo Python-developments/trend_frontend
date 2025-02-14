@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
@@ -285,8 +286,10 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    showCustomBottomSheetTOshare(context);
+                    // showCustomBottomSheetTOshare(context);
                     //Share.share("'check out my website https://example.com'");
+                    Share.share(
+                        "${widget.post.description}  ${widget.post.image}");
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -4,6 +4,7 @@ import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
+import '../../../../main.dart';
 import '../../../../shared/const/app_links.dart';
 
 class DataRemoteSource {
@@ -12,7 +13,7 @@ class DataRemoteSource {
 
   Future<List<PostModel>> getPostForspecificUserMethod(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       final response = await dio.get(
         "http://167.71.92.176:8000/posts/${id}/posts/",
         options: Options(
@@ -64,7 +65,7 @@ class DataRemoteSource {
       required int commentId,
       required String comment}) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.post(
           "http://167.71.92.176:8000/posts/comments/$commentId/reply/",
           data: {"post": postId, "content": comment},
@@ -81,7 +82,7 @@ class DataRemoteSource {
 
   Future<Comment?> commentPost(int id, String comment) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.post(
           "http://167.71.92.176:8000/posts/$id/comments/",
           data: {"post": id, "content": comment},
@@ -98,7 +99,7 @@ class DataRemoteSource {
 
   Future<bool?> deleteComment(int id, int commentId) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.delete(
           "http://167.71.92.176:8000/posts/$id/comments/$commentId/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -115,7 +116,7 @@ class DataRemoteSource {
 
   Future<bool?> likeComment(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.post(
           "http://167.71.92.176:8000/posts/comments/$id/like/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -131,7 +132,7 @@ class DataRemoteSource {
 
   Future<bool?> likePost(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.post(
           "http://167.71.92.176:8000/posts/$id/like/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -147,7 +148,7 @@ class DataRemoteSource {
 
   Future<bool> blockUser(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.post(
           "http://167.71.92.176:8000/profile/$id/block/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -164,7 +165,7 @@ class DataRemoteSource {
 
   Future<bool> deletePost(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.delete(
           "http://167.71.92.176:8000/posts/$id/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));
@@ -180,7 +181,7 @@ class DataRemoteSource {
 
   Future<String> GetUserinfoAvatar(int id) async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       Response response = await dio.get(
           "http://167.71.92.176:8000/profile/$id/",
           options: Options(headers: {'Authorization': 'Bearer $tok'}));

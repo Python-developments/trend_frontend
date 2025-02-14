@@ -90,7 +90,10 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
               Row(
                 children: [
                   Text(
-                    "${ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())) == "-1" ? "0" : ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString()))}  ",
+                    "${ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())) == "-1" 
+                    ? "0" : ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())).replaceAll("-", "")
+                    
+                    }  ",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 10.sp,

@@ -10,6 +10,7 @@ import 'package:trend/features/profile/data/models/currentUser.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/display_User_Posts.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
+import '../../../../../main.dart';
 import '../../../../../shared/const/app_links.dart';
 import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
 
@@ -59,7 +60,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         url = 'http://167.71.92.176:8000/posts/all-posts/';
       }
 
-      String? tok = await token.getToken();
+      String? tok = accessToken;
 
       final response = await dio.get(
         url,
