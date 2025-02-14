@@ -7,8 +7,10 @@ import 'package:trend/features/auth/data/models/remote/verify_otp_model.dart';
 import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/core/network/server_exception.dart';
 
-import '../../../../shared/core/error_model/error_server_model.dart';
-import '../../../../shared/core/shared_preferences.dart';
+import '../../../../../shared/core/error_model/error_server_model.dart';
+import '../../../../../shared/core/shared_preferences.dart';
+import '../../../../main.dart';
+import '../../../../shared/utiles/securely _save.dart';
 import '../models/local/verify_otp_local.dart';
 import '../models/remote/refresh_token_model.dart';
 
@@ -17,21 +19,20 @@ abstract class BaseAuthDataSource {
   Future<RegisterModel> register(RegisterModelLocal registerModelLocal);
   Future<VerifyOtpModel> verifyOtp(VerifyOtpLocal VerifyOtp);
   Future<String> resendOtp(String email);
-  
+
   Future<String> restPasswordSendEmail(String email);
-  Future<String> restPasswordVerifyOtp({required String restToken, required String otp});
-  Future<String> restPasswordFinish({required String restToken, required String password});
+  Future<String> restPasswordVerifyOtp(
+      {required String restToken, required String otp});
+  Future<String> restPasswordFinish(
+      {required String restToken, required String password});
 
   Future<RefreshTokenModel> refreshToken(String oldToken);
-  
 }
 
 class AuthDataSourceImpl extends BaseAuthDataSource {
   
-  final userToken = token.getToken();
   @override
   Future<LoginModel> login(LoginModelLocal loginModelLocal) async {
-    
     final response = await Dio().post(
       ApiEndpoints.login,
       data: {
@@ -40,23 +41,21 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
       },
       options: Options(
         headers: {
-          "Authorization": userToken ??
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwNjM0NTg0LCJpYXQiOjE3MzkwOTg1ODQsImp0aSI6ImJjNmZkOWRjZjM5ODQ4MTA4Mjg1ZWEzMTUyZmNhNDg4IiwidXNlcl9pZCI6OTB9.XCm2NgLO51wGk_iiWsemmfQl58eK-fR5KQHTsYxlseg",
+          "Authorization": accessToken ?? ""
         },
       ),
     );
-    
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       return LoginModel.fromJson(response.data);
     } else {
       throw ServerException(
           errorServerModel: ErrorServerModel.fromJson(response.data));
     }
-    
   }
+
   @override
-  Future<RegisterModel> register(
-      RegisterModelLocal registerModelLocal) async {
+  Future<RegisterModel> register(RegisterModelLocal registerModelLocal) async {
     final response = await Dio().post(
       ApiEndpoints.register,
       data: {
@@ -75,6 +74,7 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
           errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
+
   @override
   Future<String> resendOtp(String email) async {
     final response = await Dio().post(
@@ -89,6 +89,7 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
   }
+
   @override
   Future<VerifyOtpModel> verifyOtp(VerifyOtpLocal VerifyOtp) async {
     final response = await Dio().post(
@@ -104,10 +105,9 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
   }
-  
-  
+
   @override
-  Future<String> restPasswordSendEmail(String email)async {
+  Future<String> restPasswordSendEmail(String email) async {
     final response = await Dio().post(
       ApiEndpoints.resetPasswordEmailSendOtp,
       data: {
@@ -120,13 +120,15 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
   }
+
   @override
-  Future<String> restPasswordVerifyOtp({required String restToken, required String otp}) async{
+  Future<String> restPasswordVerifyOtp(
+      {required String restToken, required String otp}) async {
     final response = await Dio().post(
       ApiEndpoints.resetPasswordVerifyOtp,
       data: {
         "reset_token": restToken,
-        "otp":otp,
+        "otp": otp,
       },
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -135,8 +137,10 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
   }
+
   @override
-  Future<String> restPasswordFinish({required String restToken, required String password})async {
+  Future<String> restPasswordFinish(
+      {required String restToken, required String password}) async {
     final response = await Dio().post(
       ApiEndpoints.resetPasswordFinish,
       data: {
@@ -150,13 +154,10 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     }
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
-    
-    
   }
 
-  
   @override
-  Future<RefreshTokenModel> refreshToken(String oldToken) async{
+  Future<RefreshTokenModel> refreshToken(String oldToken) async {
     final response = await Dio().post(
       ApiEndpoints.refreshToken,
       data: {
@@ -168,9 +169,5 @@ class AuthDataSourceImpl extends BaseAuthDataSource {
     }
     throw ServerException(
         errorServerModel: ErrorServerModel.fromJson(response.data));
-
-
   }
-  
 }
-

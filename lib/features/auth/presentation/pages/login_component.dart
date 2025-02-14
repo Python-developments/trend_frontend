@@ -2,36 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/auth/presentation/widgets/customer_button.dart';
+import 'package:trend/features/notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
+import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_Bloc.dart';
+import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_event.dart';
 import 'package:trend/shared/style/app_styles.dart';
-import '../../../../shared/const/colors.dart';
-import '../../../../shared/core/local/SharedPreferencesDemo.dart';
-import '../../../../shared/utiles/routes.dart';
-import '../../../notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
-import '../../../posts/presentation/Manager/Bloc_Current_user/Current _user_Bloc.dart';
-import '../../../posts/presentation/Manager/Bloc_Current_user/Current _user_event.dart';
+
+import '../../../../../shared/const/colors.dart';
+import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
+import '../../../../../shared/utiles/routes.dart';
+import '../../../../main.dart';
+import '../../../../shared/utiles/securely _save.dart';
 import '../manager/auth_bloc.dart';
 import '../manager/auth_event.dart';
 import '../manager/auth_state.dart';
 import '../widgets/customer_text_form.dart';
 
-
-
 class LoginComponent extends StatelessWidget {
   LoginComponent({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController =
-  TextEditingController();
-  final TextEditingController _passwordController =
-  TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   void _validateAndLogin(BuildContext context) {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar(); // Clear previous SnackBars
+    ScaffoldMessenger.of(context)
+        .hideCurrentSnackBar(); // Clear previous SnackBars
     if (_formKey.currentState!.validate()) {
       context.read<AuthBloc>().add(LoginEvent(
-        username: _usernameController.text,
-        password: _passwordController.text,
-      ));
+            username: _usernameController.text,
+            password: _passwordController.text,
+          ));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Please enter a valid Email or password")),
@@ -45,12 +45,13 @@ class LoginComponent extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       buildWhen: (previous, current) => previous != current,
       listener: (context, state) async {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar(); // Clear previous SnackBars
+        ScaffoldMessenger.of(context)
+            .hideCurrentSnackBar(); // Clear previous SnackBars
         if (state is AuthAuthenticated) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: Text(
-                    'Welcome, ${state.loginModel.userInfo?.username}')),
+                content:
+                    Text('Welcome, ${state.loginModel.userInfo?.username}')),
           );
           int c = await SharedPreferencesDemo.loadUserData().id;
           BlocProvider.of<CurrentUserBloc>(context)
@@ -58,11 +59,13 @@ class LoginComponent extends StatelessWidget {
           BlocProvider.of<NotificationBloc>(context)
               .add(FetchNotificationsEvent());
 
-          Future.microtask(() => Navigator.pushReplacementNamed(
+          refreshToken = await getRefreshToken() ?? "";
+          accessToken = await getAccessToken() ?? "";
+          
+          Navigator.pushReplacementNamed(
             context,
             AppRoutes.home,
-          ));
-          
+          );
         } else if (state is AuthError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('${state.message}')),
@@ -84,8 +87,7 @@ class LoginComponent extends StatelessWidget {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.stretch,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(height: 150.h),
                           Text('T  R  E  N  D',
@@ -126,14 +128,13 @@ class LoginComponent extends StatelessWidget {
                               visible: state is AuthLoading,
                               child: Center(
                                   child: CircularProgressIndicator(
-                                    color: Color(AppColors.black),
-                                  ))),
+                                color: Color(AppColors.black),
+                              ))),
                           Visibility(
                             visible: !(state is AuthLoading),
                             child: CustomButton(
                               text: 'Login',
-                              onPressed: () =>
-                                  _validateAndLogin(context),
+                              onPressed: () => _validateAndLogin(context),
                             ),
                           ),
                           SizedBox(height: 10),
@@ -141,8 +142,8 @@ class LoginComponent extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context,
-                                    AppRoutes.resetPasswordSendEmail);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.resetPasswordSendEmail);
                               },
                               child: const Text(
                                 'Forgot password?',
@@ -164,8 +165,7 @@ class LoginComponent extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w),
+                                padding: EdgeInsets.symmetric(horizontal: 10.w),
                                 child: Text(
                                   'OR',
                                   style: TextStyle(
@@ -184,8 +184,7 @@ class LoginComponent extends StatelessWidget {
                           ),
                           SizedBox(height: 20),
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ...[
                                 'google.png',
@@ -195,19 +194,19 @@ class LoginComponent extends StatelessWidget {
                               ]
                                   .map(
                                     (icon) => Flexible(
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: FittedBox(
-                                      fit: BoxFit.fill,
-                                      child: Image.asset(
-                                        'assets/icons/$icon',
-                                        width: 35.h,
-                                        height: 35.h,
+                                      child: GestureDetector(
+                                        onTap: () {},
+                                        child: FittedBox(
+                                          fit: BoxFit.fill,
+                                          child: Image.asset(
+                                            'assets/icons/$icon',
+                                            width: 35.h,
+                                            height: 35.h,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              )
+                                  )
                                   .toList(),
                             ],
                           ),
@@ -223,8 +222,7 @@ class LoginComponent extends StatelessWidget {
                         const Text('Don\'t have an account?'),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.register);
+                            Navigator.pushNamed(context, AppRoutes.register);
                           },
                           child: const Text(
                             'Sign up',

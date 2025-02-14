@@ -15,6 +15,7 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Curr
 import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 import '../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../../shared/utiles/routes.dart';
@@ -122,13 +123,18 @@ class _AddNewPostPageState extends State<AddNewPostPage> {
             child: BlocConsumer<AddPostBloc, AddPostState>(
               listener: (context, state) async {
                 if (state is AddPostSuccess) {
-                  BlocProvider.of<BottomNavBloc>(context)
-                      .add(BottomNavItemSelected(0));
+                  BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(0));
 
                   setState(() {
                     _description = "";
                     _selectedImage = null;
                   });
+
+                  int c = await SharedPreferencesDemo.getID();
+                  BlocProvider.of<CurrentUserBloc>(context).add(GetPostForCurrentUserEvent(id: c));
+
+                  ApiEndpoints.setnext("");
+                  BlocProvider.of<PostBloc>(context).add(FetchPosts());
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -137,11 +143,6 @@ class _AddNewPostPageState extends State<AddNewPostPage> {
                       duration: Duration(seconds: 2),
                     ),
                   );
-
-                  int c = await SharedPreferencesDemo.getID();
-                  BlocProvider.of<CurrentUserBloc>(context)
-                      .add(GetPostForCurrentUserEvent(id: c));
-                  BlocProvider.of<PostBloc>(context).add(FetchPosts());
                 }
               },
               builder: (context, state) {
@@ -158,24 +159,22 @@ class _AddNewPostPageState extends State<AddNewPostPage> {
                   );
                 } else {
                   return ElevatedButton(
-                    onPressed:
-                        (_selectedImage != null && _description.isNotEmpty)
-                            ? () {
-                                context.read<AddPostBloc>().add(
-                                      AddNewPostEvent(
-                                        NewPost(
-                                          fileImage: _selectedImage!,
-                                          description: _description,
-                                        ),
-                                      ),
-                                    );
-                              }
-                            : null,
+                    onPressed: (_selectedImage != null)
+                        ? () {
+                            context.read<AddPostBloc>().add(
+                                  AddNewPostEvent(
+                                    NewPost(
+                                      fileImage: _selectedImage!,
+                                      description: _description,
+                                    ),
+                                  ),
+                                );
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          (_selectedImage != null && _description.isNotEmpty)
-                              ? Colors.black
-                              : Colors.grey[400],
+                      backgroundColor: (_selectedImage != null)
+                          ? Colors.black
+                          : Colors.grey[400],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

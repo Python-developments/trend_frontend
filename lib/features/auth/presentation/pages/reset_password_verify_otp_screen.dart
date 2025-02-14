@@ -3,16 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:trend/features/auth/presentation/manager/auth_state.dart';
-import 'package:trend/features/authentication/presentation/widgets/custom_button.dart';
+import 'package:trend/features/auth/presentation/widgets/customer_button.dart';
 import 'package:trend/shared/const/colors.dart';
 
-import '../../../../shared/style/app_styles.dart';
-import '../../../../shared/utiles/routes.dart';
+import '../../../../../shared/style/app_styles.dart';
+import '../../../../../shared/utiles/routes.dart';
 import '../manager/auth_event.dart';
 import '../widgets/otp_text_form.dart';
-
-
-
 
 class ResetPasswordConfirmEmilScreen extends StatelessWidget {
   ResetPasswordConfirmEmilScreen({super.key});
@@ -20,11 +17,12 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
   final TextEditingController _OtpController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
-  void _validateAndLogin(BuildContext context,String restToken) {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar(); // Clear previous SnackBars
+  void _validateAndLogin(BuildContext context, String restToken) {
+    ScaffoldMessenger.of(context)
+        .hideCurrentSnackBar(); // Clear previous SnackBars
     if (_formKey.currentState!.validate()) {
-      context.read<AuthBloc>().add(RestPasswordVerifyOtpEvent(restToken: restToken , otp: _OtpController.text.trim()));
+      context.read<AuthBloc>().add(RestPasswordVerifyOtpEvent(
+          restToken: restToken, otp: _OtpController.text.trim()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fix the errors')),
@@ -35,26 +33,25 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-    final String? refreshToken = ModalRoute.of(context)?.settings.arguments as String?;
+    final String? refreshToken =
+        ModalRoute.of(context)?.settings.arguments as String?;
     return Scaffold(
         backgroundColor: Color(AppColors.white),
         body: BlocConsumer<AuthBloc, AuthState>(
-          buildWhen: (previous,current) => previous!= current,
+          buildWhen: (previous, current) => previous != current,
           listener: (context, state) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar(); // Clear previous SnackBars
+            ScaffoldMessenger.of(context)
+                .hideCurrentSnackBar(); // Clear previous SnackBars
             if (state is RestPasswordVerifyOtp) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                    content: Text(
-                        '${state.message}')),
+                SnackBar(content: Text('${state.message}')),
               );
-              Future.microtask(() => Navigator.pushReplacementNamed(
-                context,
-                AppRoutes.resetPasswordFinish,
-                arguments:refreshToken,
-              ));
-            } 
-            else if (state is AuthError) {
+             Navigator.pushReplacementNamed(
+                    context,
+                    AppRoutes.resetPasswordFinish,
+                    arguments: refreshToken,
+                  );
+            } else if (state is AuthError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('${state.message}')),
               );
@@ -77,21 +74,19 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
                               SizedBox(height: 120.h),
                               Text('Otp Verification',
                                   textAlign: TextAlign.center,
-                                  style: AppStyles.styleSemiBold25(
-                                      context)),
+                                  style: AppStyles.styleSemiBold25(context)),
                               SizedBox(height: 30),
                               Text(
                                   'Enter your OTP sent to your email to reset your password',
                                   textAlign: TextAlign.center,
-                                  style:
-                                  AppStyles.styleNormal13(context)
+                                  style: AppStyles.styleNormal13(context)
                                       .copyWith(
-                                      color: Color(
-                                          AppColors.greyDark))),
+                                          color: Color(AppColors.greyDark))),
                               SizedBox(height: 60.h),
                               OtpInputField(
-                                onCompleted: (){
-                                  _validateAndLogin(context, refreshToken??"");
+                                onCompleted: () {
+                                  _validateAndLogin(
+                                      context, refreshToken ?? "");
                                 },
                                 otpController: _OtpController,
                               ),
@@ -100,14 +95,14 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
                                   visible: state is AuthLoading,
                                   child: Center(
                                       child: CircularProgressIndicator(
-                                        color: Color(AppColors.black),
-                                      ))),
+                                    color: Color(AppColors.black),
+                                  ))),
                               Visibility(
                                 visible: !(state is AuthLoading),
                                 child: CustomButton(
                                   text: 'Reset Password',
-                                  onPressed: () =>
-                                      _validateAndLogin(context, refreshToken??""),
+                                  onPressed: () => _validateAndLogin(
+                                      context, refreshToken ?? ""),
                                 ),
                               ),
                               SizedBox(height: 20.h),
@@ -138,7 +133,6 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
               ),
             );
           },
-        )
-    );
+        ));
   }
 }

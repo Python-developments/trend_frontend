@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../shared/const/colors.dart';
+
+import '../../../../../shared/const/colors.dart';
 import 'login_component.dart';
-
-
 
 class LoginScreen2 extends StatelessWidget {
   @override
@@ -13,5 +12,3 @@ class LoginScreen2 extends StatelessWidget {
     );
   }
 }
-
-

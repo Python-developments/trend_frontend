@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
 import 'package:trend/features/add_post/domain/entities/post.dart';
 
+import '../../../../main.dart';
 import '../../../../shared/const/app_links.dart';
 
 class Addnewpostrepo {
@@ -9,7 +9,7 @@ class Addnewpostrepo {
 
   Future<void> uploadPost({required NewPost post}) async {
     try {
-      String? t = await token.getToken();
+      String? t = accessToken;
       Response response = await dio.post(
         ApiEndpoints.addPost,
         data: FormData.fromMap({

@@ -3,34 +3,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/auth/presentation/manager/auth_bloc.dart';
 import 'package:trend/features/auth/presentation/manager/auth_state.dart';
+import 'package:trend/features/auth/presentation/widgets/customer_button.dart';
 import 'package:trend/shared/const/colors.dart';
 import 'package:trend/shared/style/app_styles.dart';
 import 'package:trend/shared/utiles/routes.dart';
 
-import '../../../../shared/core/local/SharedPreferencesDemo.dart';
-import '../../../authentication/presentation/widgets/custom_button.dart';
+import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../data/models/local/verify_otp_local.dart';
 import '../manager/auth_event.dart';
 import '../widgets/otp_text_form.dart';
 
-
 class OtpConfirmScreen extends StatelessWidget {
   OtpConfirmScreen({super.key});
-  
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _otpController =
-      TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
 
-  void _otpConfirm(BuildContext context) async{
-    ScaffoldMessenger.of(context).hideCurrentSnackBar(); // Clear previous SnackBars
+  void _otpConfirm(BuildContext context) async {
+    ScaffoldMessenger.of(context)
+        .hideCurrentSnackBar(); // Clear previous SnackBars
     final emailUser = await SharedPreferencesDemo.loadUserData().email ?? "";
     if (_formKey.currentState!.validate()) {
       context.read<AuthBloc>().add(OptConfirmEvent(
           verifyOtpModel:
-              VerifyOtpLocal(
-                  email: emailUser,
-                  otp: _otpController.text)));
+              VerifyOtpLocal(email: emailUser, otp: _otpController.text)));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fix the errors')),
@@ -38,9 +34,9 @@ class OtpConfirmScreen extends StatelessWidget {
     }
   }
 
-  void _otpResend(BuildContext context) async{
+  void _otpResend(BuildContext context) async {
     final emailUser = await SharedPreferencesDemo.loadUserData().email;
-      context.read<AuthBloc>().add(OptResendEvent(email: emailUser));
+    context.read<AuthBloc>().add(OptResendEvent(email: emailUser));
   }
 
   @override
@@ -49,25 +45,22 @@ class OtpConfirmScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(AppColors.white),
       body: BlocConsumer<AuthBloc, AuthState>(
-        buildWhen: (previous,current) => previous!= current,
+        buildWhen: (previous, current) => previous != current,
         listener: (BuildContext context, state) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar(); // Clear previous SnackBars
+          ScaffoldMessenger.of(context)
+              .hideCurrentSnackBar(); // Clear previous SnackBars
           if (state is AuthOptSent) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('${state.message}!')),
             );
           } else if (state is AuthOptConfirmed) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content:
-                      Text('Welcome, ${state.verifyOtp.message}!')),
+              SnackBar(content: Text('Welcome, ${state.verifyOtp.message}!')),
             );
-
-            Future.microtask(() => Navigator.pushReplacementNamed(
-              context,
-              AppRoutes.login,
-            ));
-            
+            Navigator.pushReplacementNamed(
+                  context,
+                  AppRoutes.login,
+                );
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('${state.message}')),
@@ -92,11 +85,10 @@ class OtpConfirmScreen extends StatelessWidget {
                       SizedBox(height: 50.h),
                       Text('Enter the OTP sent to your email',
                           style: AppStyles.styleNormal13(context)
-                              .copyWith(
-                                  color: Color(AppColors.greyDark))),
+                              .copyWith(color: Color(AppColors.greyDark))),
                       const SizedBox(height: 20),
                       OtpInputField(
-                        onCompleted: (){
+                        onCompleted: () {
                           _otpConfirm(context);
                         },
                         otpController: _otpController,
@@ -104,7 +96,7 @@ class OtpConfirmScreen extends StatelessWidget {
                       const SizedBox(height: 30),
                       CustomButton(
                         text: 'Verify OTP',
-                        onPressed: (){
+                        onPressed: () {
                           _otpConfirm(context);
                         },
                       ),
@@ -113,8 +105,7 @@ class OtpConfirmScreen extends StatelessWidget {
                         Container(
                           height: 70,
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20.0),
+                          padding: const EdgeInsets.symmetric(vertical: 20.0),
                           child: GestureDetector(
                             onTap: () {
                               _otpResend(context);

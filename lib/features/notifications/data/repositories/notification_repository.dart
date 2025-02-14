@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 import 'package:trend/features/notifications/domain/entities/notification.dart';
 
+import '../../../../main.dart';
 import '../../../../shared/const/app_links.dart';
 
 class NotificationRepository {
@@ -13,7 +14,7 @@ class NotificationRepository {
   /// Fetches all notifications from the API.
   Future<List<NotificationModel>> fetchNotifications() async {
     try {
-      String? tok = await token.getToken();
+      String? tok = accessToken;
       final response = await dio.get(
         ApiEndpoints.allNotifications(0),
         options: Options(
