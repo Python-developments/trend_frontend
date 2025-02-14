@@ -3,6 +3,7 @@ import 'package:trend/features/explore/data/models/remote/get_all_post_model.dar
 import 'package:trend/features/explore/data/models/remote/search_model.dart';
 import 'package:trend/features/explore/data/models/remote/user_search_model.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
+import '../../../../main.dart';
 import '../../../../shared/const/app_links.dart';
 import '../../../../shared/core/error_model/error_server_model.dart';
 import '../../../../shared/core/network/server_exception.dart';
@@ -19,9 +20,7 @@ abstract class BasePostDataSource {
 }
 
 class PostDataSource extends BasePostDataSource {
-  final tok = token.getToken() ??
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwMDMwNzE2LCJpYXQiOjE3Mzg0OTQ3MTYsImp0aSI6ImJlM2ZmZGM4MGRlNTQ5MDhhYzZhMDZlMjYzNmQ1ZGE1IiwidXNlcl9pZCI6MTg1fQ.qfTGS6aLg8AKXAu-tod_R4GB8Oc8mZKngT7LAp97SqE";
-
+  final tok = accessToken;
   @override
   Future<AllPostModel> getPostWithPageNumber(
       String pageNumber) async {

@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../shared/const/colors.dart';
 import '../../../../../shared/style/app_styles.dart';
-import '../../../../../shared/utiles/routes.dart';
 
 class ExploreSearchAppBar extends StatefulWidget
     implements PreferredSizeWidget {
@@ -12,16 +11,15 @@ class ExploreSearchAppBar extends StatefulWidget
   final TextEditingController textController;
 
   const ExploreSearchAppBar(
-      {Key? key,
-      required this.onSearchPressed,
-      required this.textController})
+      {Key? key, required this.onSearchPressed, required this.textController})
       : super(key: key);
 
   @override
   _ExploreSearchViewState createState() => _ExploreSearchViewState();
 
   @override
-  Size get preferredSize =>  Size.fromHeight(kToolbarHeight.h < 56? 56 : kToolbarHeight.h);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight.h < 56 ? 56 : kToolbarHeight.h);
 }
 
 class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
@@ -84,8 +82,8 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
                       hintStyle: AppStyles.styleNormal13(context).copyWith(
                         color: const Color(AppColors.greyDark),
                       ),
-                      fillColor: const Color(AppColors.greyLighter)
-                          .withOpacity(0.2),
+                      fillColor:
+                          const Color(AppColors.greyLighter).withOpacity(0.2),
                       filled: true,
                       enabledBorder: _buildOutlineInputBorder(),
                       disabledBorder: _buildOutlineInputBorder(),
@@ -95,8 +93,7 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
                     onTapOutside: (_) =>
                         FocusManager.instance.primaryFocus?.unfocus(),
                     onEditingComplete: () {
-                      widget
-                          .onSearchPressed(); // ✅ Correct function call
+                      widget.onSearchPressed(); // ✅ Correct function call
                       FocusManager.instance.primaryFocus
                           ?.unfocus(); // Unfocus the search field
                     },

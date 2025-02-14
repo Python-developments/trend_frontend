@@ -79,7 +79,7 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
 
   PreferredSizeWidget _buildAppBar() {
     return PreferredSize(
-      preferredSize:  Size.fromHeight(kToolbarHeight.h < 56? 56 : (kToolbarHeight-2).h),
+      preferredSize:  Size.fromHeight(kToolbarHeight.h < 56? 56 : (kToolbarHeight-7).h),
     child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
