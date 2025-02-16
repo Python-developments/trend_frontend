@@ -70,10 +70,10 @@ class AccountListSearch extends StatelessWidget {
       itemCount: users.length,
       itemBuilder: (context, index) {
         final user = users[index];
-
+          print("User: ${user}");
         return UserAccountDetails(
           model: UserDetailsModel(
-            id: "${user.id}" ,
+            id: "${user.profileid}" ,
             username: user.username ?? "Unknown",
             full_name: user.fullName ?? "No Name",
             email: user.email ?? "No Email",

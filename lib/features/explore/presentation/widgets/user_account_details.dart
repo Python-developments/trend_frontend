@@ -37,6 +37,7 @@ class UserAccountDetails extends StatelessWidget {
         horizontalTitleGap: 14,
         minTileHeight: 60,
         onTap: () {
+          print("--------------${model.id}-------------User Account Details--------------");
           BlocProvider.of<UserBloc>(context)
               .add(FetchUserEvent2(int.parse(model.id) ?? 0));
           Navigator.pushNamed(context, AppRoutes.userProfile);
