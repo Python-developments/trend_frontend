@@ -85,3 +85,4 @@ class Profile extends Equatable {
         isSuspended,
       ];
 }
+

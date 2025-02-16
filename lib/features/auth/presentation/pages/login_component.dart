@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/auth/presentation/widgets/customer_button.dart';
-import 'package:trend/features/notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_Bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_event.dart';
 import 'package:trend/shared/style/app_styles.dart';
 
 import '../../../../../shared/const/colors.dart';
-import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../../../../shared/utiles/routes.dart';
 import '../../../../main.dart';
+import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../../../shared/utiles/securely _save.dart';
+import '../../../notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
+import '../../../posts/presentation/Manager/Bloc_Current_user/Current _user_Bloc.dart';
+import '../../../posts/presentation/Manager/Bloc_Current_user/Current _user_event.dart';
 import '../manager/auth_bloc.dart';
 import '../manager/auth_event.dart';
 import '../manager/auth_state.dart';
@@ -43,24 +43,27 @@ class LoginComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return BlocConsumer<AuthBloc, AuthState>(
-      buildWhen: (previous, current) => previous != current,
+      buildWhen: (previous , current) => previous != current ,
       listener: (context, state) async {
-        ScaffoldMessenger.of(context)
-            .hideCurrentSnackBar(); // Clear previous SnackBars
+        ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
         if (state is AuthAuthenticated) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
                 content:
                     Text('Welcome, ${state.loginModel.userInfo?.username}')),
           );
-          int c = await SharedPreferencesDemo.loadUserData().id;
-          BlocProvider.of<CurrentUserBloc>(context)
-              .add(GetPostForCurrentUserEvent(id: c));
-          BlocProvider.of<NotificationBloc>(context)
-              .add(FetchNotificationsEvent());
 
           refreshToken = await getRefreshToken() ?? "";
           accessToken = await getAccessToken() ?? "";
+          
+          try{
+            int c = await SharedPreferencesDemo.loadUserData().id;
+            BlocProvider.of<CurrentUserBloc>(context)
+                .add(GetPostForCurrentUserEvent(id: c));
+            BlocProvider.of<NotificationBloc>(context)
+                .add(FetchNotificationsEvent());
+          }catch(e){}
+          
           
           Navigator.pushReplacementNamed(
             context,
@@ -71,7 +74,7 @@ class LoginComponent extends StatelessWidget {
             SnackBar(content: Text('${state.message}')),
           );
           if (state.message.contains("verify your email")) {
-            Navigator.pushNamed(context, AppRoutes.resetPasswordSendEmail);
+             Navigator.pushNamed(context, AppRoutes.otpConfirm);
           }
         }
       },

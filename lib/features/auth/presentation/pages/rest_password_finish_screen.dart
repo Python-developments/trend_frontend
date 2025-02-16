@@ -15,14 +15,12 @@ class RestPasswordFinishScreen extends StatelessWidget {
   RestPasswordFinishScreen({Key? key}) : super(key: key);
 
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _validateAndLogin(BuildContext context, String restToken) {
-    ScaffoldMessenger.of(context)
-        .hideCurrentSnackBar(); // Clear previous SnackBars
+    ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
     if (_formKey.currentState!.validate()) {
       if (_passwordController.text.trim() ==
           _confirmPasswordController.text.trim()) {
@@ -47,10 +45,9 @@ class RestPasswordFinishScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color(AppColors.white),
         body: BlocConsumer<AuthBloc, AuthState>(
-          buildWhen: (previous, current) => previous != current,
+          // buildWhen: (previous, current) => previous != current,
           listener: (context, state) {
-            ScaffoldMessenger.of(context)
-                .hideCurrentSnackBar(); // Clear previous SnackBars
+            ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
             if (state is RestPasswordFinish) {
               print(state.message);
               ScaffoldMessenger.of(context).showSnackBar(
@@ -92,6 +89,7 @@ class RestPasswordFinishScreen extends StatelessWidget {
                                           color: Color(AppColors.greyDark))),
                               SizedBox(height: 60.h),
                               CustomerTextForm(
+                                isPassword: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Password is required';
@@ -101,7 +99,6 @@ class RestPasswordFinishScreen extends StatelessWidget {
                                   return null;
                                 },
                                 name: 'Password Address',
-                                isPassword: false,
                                 controller: _passwordController,
                                 onFieldSubmitted: () {
                                   _validateAndLogin(
@@ -110,6 +107,7 @@ class RestPasswordFinishScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 12),
                               CustomerTextForm(
+                                isPassword: true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Password is required';
@@ -119,7 +117,6 @@ class RestPasswordFinishScreen extends StatelessWidget {
                                   return null;
                                 },
                                 name: 'Confirm Password',
-                                isPassword: false,
                                 controller: _confirmPasswordController,
                                 onFieldSubmitted: () {
                                   _validateAndLogin(

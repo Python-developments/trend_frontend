@@ -14,6 +14,7 @@ import '../../data/models/local/register_model_local.dart';
 import '../manager/auth_bloc.dart';
 import '../manager/auth_event.dart';
 import '../manager/auth_state.dart';
+import '../widgets/customer_back_to_login_button.dart';
 import '../widgets/customer_text_form.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -23,16 +24,14 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     void _validateAndSignup(BuildContext context) {
-      ScaffoldMessenger.of(context)
-          .hideCurrentSnackBar(); // Clear previous SnackBars
+      ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
       if (_formKey.currentState!.validate()) {
         context.read<AuthBloc>().add(RegisterEvent(
             registerModel: RegisterModelLocal(
@@ -51,21 +50,16 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(AppColors.white),
       body: BlocConsumer<AuthBloc, AuthState>(
-        buildWhen: (previous, current) => previous != current,
         listener: (context, state) async {
-          ScaffoldMessenger.of(context)
-              .hideCurrentSnackBar(); // Clear previous SnackBars
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           if (state is AuthRegistered) {
+            print("Register Success");
+            print(state.registerModel.data);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                   content:
                       Text("Welcome ${state.registerModel.data?.username}")),
             );
-            int c = await SharedPreferencesDemo.loadUserData().id;
-            BlocProvider.of<CurrentUserBloc>(context)
-                .add(GetPostForCurrentUserEvent(id: c));
-            BlocProvider.of<NotificationBloc>(context)
-                .add(FetchNotificationsEvent());
             Navigator.pushReplacementNamed(
                   context,
                   AppRoutes.otpConfirm,
@@ -182,17 +176,7 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                     if (!isKeyboardOpen)
-                      Align(
-                        alignment: Alignment.center,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text('Back to Login',
-                              style: AppStyles.styleNormal16(context)
-                                  .copyWith(color: Color(AppColors.blue))),
-                        ),
-                      ),
+                      BackToLogin(),
                     if (!isKeyboardOpen) SizedBox(height: 20.h),
                   ],
                 ),

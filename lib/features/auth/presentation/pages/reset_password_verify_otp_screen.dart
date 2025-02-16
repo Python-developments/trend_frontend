@@ -18,14 +18,13 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _validateAndLogin(BuildContext context, String restToken) {
-    ScaffoldMessenger.of(context)
-        .hideCurrentSnackBar(); // Clear previous SnackBars
+    ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
     if (_formKey.currentState!.validate()) {
       context.read<AuthBloc>().add(RestPasswordVerifyOtpEvent(
           restToken: restToken, otp: _OtpController.text.trim()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fix the errors')),
+        const SnackBar(content: Text('Please enter your Otp')),
       );
     }
   }
@@ -38,7 +37,7 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color(AppColors.white),
         body: BlocConsumer<AuthBloc, AuthState>(
-          buildWhen: (previous, current) => previous != current,
+          // buildWhen: (previous, current) => previous != current,
           listener: (context, state) {
             ScaffoldMessenger.of(context)
                 .hideCurrentSnackBar(); // Clear previous SnackBars
@@ -60,7 +59,7 @@ class ResetPasswordConfirmEmilScreen extends StatelessWidget {
           builder: (context, state) {
             return Center(
               child: SizedBox(
-                width: 280.w,
+                width: 290.w,
                 child: Form(
                   key: _formKey,
                   child: Column(

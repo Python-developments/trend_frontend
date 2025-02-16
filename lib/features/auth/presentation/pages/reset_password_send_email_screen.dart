@@ -18,8 +18,7 @@ class ResetPasswordSendEmailScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _validateAndLogin(BuildContext context) {
-    ScaffoldMessenger.of(context)
-        .hideCurrentSnackBar(); // Clear previous SnackBars
+    ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
     if (_formKey.currentState!.validate()) {
       context
           .read<AuthBloc>()
@@ -38,10 +37,8 @@ class ResetPasswordSendEmailScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color(AppColors.white),
         body: BlocConsumer<AuthBloc, AuthState>(
-          buildWhen: (previous, current) => previous != current,
           listener: (context, state) {
-            ScaffoldMessenger.of(context)
-                .hideCurrentSnackBar(); // Clear previous SnackBars
+            ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
             if (state is RestPasswordSendEmail) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -93,7 +90,11 @@ class ResetPasswordSendEmailScreen extends StatelessWidget {
                                 },
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your email ';
+                                    return 'Please enter your email';
+                                  }
+                                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                                      .hasMatch(value)) {
+                                    return 'Please enter a valid email';
                                   }
                                   return null;
                                 },

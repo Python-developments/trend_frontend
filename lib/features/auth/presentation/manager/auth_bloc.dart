@@ -48,7 +48,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await result.fold(
         (failure) async => emit(AuthError(message: failure.message)),
         (response) async {
-          // await token.setToken(response.access ?? "");
 
           await saveRefreshToken(response.refresh ?? "");
           await saveAccessToken(response.access ?? "");
@@ -82,24 +81,52 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         },
       );
     });
+
     on<RegisterEvent>((event, emit) async {
       emit(AuthLoading());
-
       final result = await registerUseCase.execute(event.registerModel);
 
-      result.fold(
-        (failure) => emit(AuthError(message: failure.message)),
-        (response) {
-          emit(AuthRegistered(
-            registerModel: RegisterModel(
-              status: response.status,
-              message: response.message,
-              data: response.data,
-            ),
-          ));
+      await result.fold(
+            (failure) async {
+          if (!emit.isDone) {
+            emit(AuthError(message: failure.message));
+          }
+        },
+            (response) async {
+          final user = response.data;
+
+          await sharedPreferencesDemo.saveUserData(
+            id: "${user?.id}",
+            email: "${user?.email}",
+            username: "${user?.username}",
+            fullName: "${user?.fullName}",
+            avatar: "${user?.avatar}",
+            bio: "",
+            mobile: "",
+            followers: "",
+            following: "",
+            totalPosts: "",
+            totalLikes: "",
+            is_private: false,
+          );
+
+          // Ensure the event handler has not completed before emitting the state
+          if (!emit.isDone) {
+            emit(AuthRegistered(
+              registerModel: RegisterModel(
+                status: response.status,
+                message: response.message,
+                data: response.data,
+              ),
+            ));
+          }
         },
       );
     });
+
+
+
+
     on<OptConfirmEvent>((event, emit) async {
       emit(AuthLoading());
 
@@ -126,6 +153,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     });
 
+    
+    
+    
     on<RestPasswordSendEmailEvent>((event, emit) async {
       emit(AuthLoading());
 

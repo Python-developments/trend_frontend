@@ -20,8 +20,7 @@ class OtpConfirmScreen extends StatelessWidget {
   final TextEditingController _otpController = TextEditingController();
 
   void _otpConfirm(BuildContext context) async {
-    ScaffoldMessenger.of(context)
-        .hideCurrentSnackBar(); // Clear previous SnackBars
+    ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
     final emailUser = await SharedPreferencesDemo.loadUserData().email ?? "";
     if (_formKey.currentState!.validate()) {
       context.read<AuthBloc>().add(OptConfirmEvent(
@@ -29,7 +28,7 @@ class OtpConfirmScreen extends StatelessWidget {
               VerifyOtpLocal(email: emailUser, otp: _otpController.text)));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fix the errors')),
+        const SnackBar(content: Text('Please enter your OTP')),
       );
     }
   }
@@ -45,17 +44,15 @@ class OtpConfirmScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(AppColors.white),
       body: BlocConsumer<AuthBloc, AuthState>(
-        buildWhen: (previous, current) => previous != current,
         listener: (BuildContext context, state) {
-          ScaffoldMessenger.of(context)
-              .hideCurrentSnackBar(); // Clear previous SnackBars
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           if (state is AuthOptSent) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('${state.message}!')),
             );
           } else if (state is AuthOptConfirmed) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Welcome, ${state.verifyOtp.message}!')),
+              SnackBar(content: Text('Welcome, ${state.verifyOtp.message}')),
             );
             Navigator.pushReplacementNamed(
                   context,
@@ -111,7 +108,7 @@ class OtpConfirmScreen extends StatelessWidget {
                               _otpResend(context);
                             },
                             child: const Text(
-                              'Didn\'t receive the code? Resend',
+                              'Didn\'t receive the Otp? Resend',
                               style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 color: Colors.black,

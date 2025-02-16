@@ -27,13 +27,13 @@ class AuthRepository extends BaseAuthRepository {
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorServerModel.statusMessage));
     } on DioException catch (e) {
-      final errorDetail = e.response?.data['detail'] ??
+      final errorDetail = 
+          e.response?.data?['detail'] ??
           e.response?.data['error'] ??
           "Something went wrong, please try again later";
       return Left(ServerFailure(errorDetail));
     }
   }
-
   @override
   Future<Either<Failure, RegisterModel>> registerUser(
       RegisterModelLocal registerModel) async {
@@ -43,14 +43,9 @@ class AuthRepository extends BaseAuthRepository {
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorServerModel.statusMessage));
     } on DioException catch (e) {
-      print(e.response?.data); // Debug: Log full response to inspect errors
-
       final errorData = e.response?.data;
-
-      // Extract errors from the response
       final errors = errorData?['errors'];
-
-      // Build error message based on available fields
+      
       String errorMessage = '';
 
       if (errors != null) {
@@ -65,7 +60,6 @@ class AuthRepository extends BaseAuthRepository {
         }
       }
 
-      // Fallback if no detailed error is found
       if (errorMessage.isEmpty) {
         errorMessage = errorData?['message'] ??
             "Something went wrong, please try again later.";
@@ -74,10 +68,10 @@ class AuthRepository extends BaseAuthRepository {
       return Left(ServerFailure(errorMessage));
     }
   }
-
   @override
   Future<Either<Failure, String>> resendOtp(String email) async {
     try {
+      print("----------------------------$email----------");
       final result = await baseAuthDataSource.resendOtp(email);
       return Right(result);
     } on ServerException catch (failure) {
@@ -89,23 +83,24 @@ class AuthRepository extends BaseAuthRepository {
       return Left(ServerFailure(errorDetail));
     }
   }
-
   @override
   Future<Either<Failure, VerifyOtpModel>> verifyOtpUser(
       VerifyOtpLocal verifyOtpModel) async {
     try {
       final result = await baseAuthDataSource.verifyOtp(verifyOtpModel);
+      print("----------$result----------");
       return Right(result);
     } on ServerException catch (failure) {
+      print("----------${failure.errorServerModel.statusMessage}----------");
       return Left(ServerFailure(failure.errorServerModel.statusMessage));
     } on DioException catch (e) {
+      print("----------${e.response?.data}----------");
       final errorDetail = e.response?.data['error'] ??
           e.response?.data['message'] ??
           "Something went wrong, please try again later";
       return Left(ServerFailure(errorDetail));
     }
   }
-
   @override
   Future<Either<Failure, String>> restPasswordSendEmail(String email) async {
     try {
@@ -120,13 +115,11 @@ class AuthRepository extends BaseAuthRepository {
       return Left(ServerFailure(errorDetail));
     }
   }
-
   @override
   Future<Either<Failure, String>> restPasswordVerifyOtp(
       {required String restToken, required String otp}) async {
     try {
-      final result = await baseAuthDataSource.restPasswordVerifyOtp(
-          restToken: restToken, otp: otp);
+      final result = await baseAuthDataSource.restPasswordVerifyOtp(restToken: restToken, otp: otp);
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorServerModel.statusMessage));
@@ -136,7 +129,6 @@ class AuthRepository extends BaseAuthRepository {
       return Left(ServerFailure(errorDetail));
     }
   }
-
   @override
   Future<Either<Failure, String>> restPasswordFinish(
       {required String restToken, required String password}) async {
@@ -154,7 +146,6 @@ class AuthRepository extends BaseAuthRepository {
       return Left(ServerFailure(errorDetail));
     }
   }
-
   @override
   Future<Either<Failure, RefreshToken>> refreshToken(String oldToken) async {
     print(
