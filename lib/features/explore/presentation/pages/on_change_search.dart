@@ -191,7 +191,7 @@ class OnChangeSearchUserList extends StatelessWidget {
           final user = state.userSearch.results?.users[index];
           return UserAccountDetails(
             model: UserDetailsModel(
-              id: "${user?.id ?? ""}",
+              id: "${user?.profileid ?? ""}",
               username: user?.username ?? "",
               full_name: user?.fullName ?? "",
               email: user?.email ?? "",
