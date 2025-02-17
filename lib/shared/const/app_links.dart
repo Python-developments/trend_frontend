@@ -1,5 +1,5 @@
 class ApiEndpoints {
-  static const String baseUrl = "http://127.0.0.1";
+  static const String baseUrl = "http://167.71.92.176:8000";
   // Authentication Endpoints URL
   static const String login = '$baseUrl/auth/login/';
   static const String register = '$baseUrl/auth/register/';
