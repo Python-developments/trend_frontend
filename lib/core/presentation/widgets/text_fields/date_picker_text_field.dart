@@ -104,7 +104,7 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
               width: 32,
             ),
             Text(
-              selectedDate?.dayFormat ?? widget.title.translateWord,
+              selectedDate?.dayFormat ?? widget.title,
               style: AppStyle.textTheme.bodyMedium!
                   .copyWith(color: AppStyle.black.shade600),
             )

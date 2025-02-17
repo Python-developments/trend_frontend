@@ -20,7 +20,7 @@ class SharingModule extends ISharingModule {
     final String sharableLink =
         '${dotenv.get('websiteUrl')}/p/$mainCategorySlug/$vendorSlug/$productSlug';
     await Share.share(
-      '${'Check out'.translateWord} $productName ${'available now in WOW VIR store'.translateWord} $sharableLink',
+      '${'Check out'} $productName ${'available now in WOW VIR store'} $sharableLink',
     );
   }
 
@@ -29,7 +29,7 @@ class SharingModule extends ISharingModule {
     final String generatedSharingLink =
         '${dotenv.get('websiteUrl')}/referralCode/$referralCode';
     await Share.share(
-        '${'Download WOW VIR application and use my referral code'.translateWord} ( $referralCode )'
-        '${"so we can both enjoy discounts and offers!".translateWord} $generatedSharingLink');
+        '${'Download WOW VIR application and use my referral code'} ( $referralCode )'
+        '${"so we can both enjoy discounts and offers!"} $generatedSharingLink');
   }
 }

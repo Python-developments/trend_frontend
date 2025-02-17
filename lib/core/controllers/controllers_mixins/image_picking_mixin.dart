@@ -1,3 +1,4 @@
+/*
 import 'package:mobx/mobx.dart';
 import 'package:trend/core/controllers/base_controller.dart';
 import 'package:trend/data/dtos/file_dto.dart';
@@ -24,3 +25,4 @@ mixin MultipleImagePickingMixin on BaseController {
           {required final int index, required final FileDto? newImage}) =>
       images[index] = newImage;
 }
+*/

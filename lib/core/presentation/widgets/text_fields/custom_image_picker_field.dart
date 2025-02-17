@@ -68,13 +68,13 @@ class _CustomImagePickerFieldState extends State<CustomImagePickerField> {
                         : widget.initialValue != null
                             ? CustomNetworkImage(imagePath: widget.initialValue)
                             : const Icon(Icons.image_outlined,
-                                color: AppStyle.lightPrimaryColor)),
+                                color: AppStyle.blue)),
               ),
               const CustomSizedBox(
                 width: 8,
               ),
               Text(
-                'Upload a photo'.translateWord,
+                'Upload a photo',
                 style: AppStyle.textTheme.bodySmall!
                     .copyWith(color: AppStyle.black.shade400),
               )

@@ -16,12 +16,12 @@ class CustomShimmerWidget extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Shimmer.fromColors(
-      highlightColor: AppStyle.black.shade100.withOpacity(0.2),
-      baseColor: AppStyle.lightGray,
+      baseColor: Color(AppStyle.grey),
+      highlightColor: Color(AppStyle.greyLight),
       period: const Duration(milliseconds: 800),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: AppStyle.white,
+          color: Color(AppStyle.greyDark),
           borderRadius:
               shape == BoxShape.rectangle ? AppStyle.borderRadius : null,
           shape: shape,
@@ -34,4 +34,5 @@ class CustomShimmerWidget extends StatelessWidget {
       ),
     );
   }
+
 }

@@ -5,7 +5,6 @@ import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:trend/core/controllers/controllers_mixins/form_mixin.dart';
-import 'package:trend/core/controllers/localization_controller.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/assets.dart';
 import 'package:trend/core/presentation/validators/is_shorter_than_validator.dart';
@@ -75,7 +74,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField>
       child: IntlPhoneField(
         flagsButtonPadding: EdgeInsets.all(8.r),
         initialCountryCode: 'AE',
-        invalidNumberMessage: 'Invalid mobile number'.translateWord,
+        invalidNumberMessage: 'Invalid mobile number',
         controller: textController,
         onCountryChanged: (final country) => changeCountry(country.dialCode),
         onChanged: (final phone) => changePhoneNumber(phone.number),
@@ -85,7 +84,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField>
             backgroundColor: AppStyle.black.shade100,
             searchFieldInputDecoration: InputDecoration(
               label: Text(
-                'Search'.translateWord,
+                'Search',
                 style: AppStyle.textTheme.bodyMedium,
               ),
               prefixIcon: const Icon(Icons.search),
@@ -99,21 +98,21 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField>
         autovalidateMode: AutovalidateMode.disabled,
         validator: (final _) async => IsShorterThanValidator(minLength: 13)
             .check(fieldName: widget.title, toCheckString: textController.text)
-            ?.translateWord,
+            ?,
         cursorColor: AppStyle.black.shade600,
         inputFormatters: [MaskedInputFormatter('000000000')],
         decoration: InputDecoration(
           filled: true,
           fillColor: AppStyle.black.shade100,
           errorText: widget
-              .formController.validationErrors[widget.errorKey]?.translateWord,
+              .formController.validationErrors[widget.errorKey]?,
           border: const OutlineInputBorder(
             borderRadius: AppStyle.borderRadius,
             borderSide: BorderSide.none,
           ),
           focusedBorder: const OutlineInputBorder(
             borderRadius: AppStyle.borderRadius,
-            borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+            borderSide: BorderSide(color: AppStyle.blue),
           ),
           errorBorder: const OutlineInputBorder(
             borderRadius: AppStyle.borderRadius,
@@ -124,7 +123,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField>
             borderSide: BorderSide(color: AppStyle.errorColor),
           ),
           prefixIcon: const CustomSvgImage(path: Assets.phone),
-          hintText: widget.title.translateWord,
+          hintText: widget.title,
           hintStyle: AppStyle.textTheme.bodyLarge!
               .copyWith(color: AppStyle.black.shade600),
         ),

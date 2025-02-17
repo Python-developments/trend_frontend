@@ -82,7 +82,7 @@ class _PostsInUserBodyState extends State<PostsInUserBody> {
                         enabled: true,
                         effect: ShimmerEffect(
                           duration: const Duration(milliseconds: 1500),
-                          baseColor: Color(AppColors.greyLight),
+                          baseColor: AppStyle.black.100,
                           highlightColor: Color(AppColors.white),
                         ),
                         child: Card(

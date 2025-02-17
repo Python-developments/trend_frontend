@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
@@ -17,14 +16,14 @@ class LoggerModule extends ILoggerModule {
   @override
   Future<void> init() async {
     if (!appFlavor.showErrors) {
-      FlutterError.onError = (final details) {
+      /*FlutterError.onError = (final details) {
         FirebaseCrashlytics.instance.recordFlutterFatalError(details);
       };
 
       PlatformDispatcher.instance.onError = (final error, final stackTrace) {
         FirebaseCrashlytics.instance.recordError(error, stackTrace);
         return true;
-      };
+      };*/
     }
   }
 
@@ -33,10 +32,10 @@ class LoggerModule extends ILoggerModule {
       {required final Object exception,
       required final StackTrace stackTrace})  {
     if (!appFlavor.showErrors) {
-       FirebaseCrashlytics.instance.recordError(
+       /*FirebaseCrashlytics.instance.recordError(
         exception,
         stackTrace,
-      );
+      );*/
     } else {
       logger.w('Wiso error log $exception $stackTrace');
     }

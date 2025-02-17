@@ -37,7 +37,7 @@ class SheetHeader extends StatelessWidget {
             ),
           ),
           Text(
-            title.translateWord,
+            title,
             style: AppStyle.textTheme.bodyLarge!.copyWith(
               color: AppStyle.black.shade900,
               fontWeight: FontWeight.w600,

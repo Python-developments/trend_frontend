@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/core/controllers/localization_controller.dart';
 import 'package:trend/dependencies.dart';
 
-class   AppStyle {
+class AppStyle {
   static final ThemeData theme = ThemeData(
-      primaryColor: lightPrimaryColor,
+      primaryColor: blue,
       textTheme: textTheme,
       scaffoldBackgroundColor: white,
       colorScheme: const ColorScheme.light(
-          primary: AppStyle.lightPrimaryColor, secondary: Colors.red),
-      indicatorColor: lightPrimaryColor,
-      fontFamily: !getIt<LocalizationController>().isRtlLanguage
-          ? 'Proxima Nova'
-          : 'Traditional Arabic',
+          primary: AppStyle.blue, secondary: Colors.red),
+      indicatorColor: blue,
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
         padding: WidgetStateProperty.all(EdgeInsets.zero),
@@ -75,26 +71,21 @@ class   AppStyle {
         color: AppStyle.black.shade200,
         blurRadius: 1.r)
   ];
+  static const BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
+
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color errorColor = Color(0xFFE30000);
   static const Color warringColor = Color(0xFFFFEB3B);
-  static const Color starsColor = Color(0xFFF5C107);
-  static const Color lightPrimaryColor = Color(0xFFDF7E8E);
-  static const Color darkPrimaryColor = Color(0xFFBC6470);
   static const Color confirmationColor = Color(0xFF10C84F);
-  static const Color lightPink = Color(0xFFFFE5EF);
   static const Color lightGray = Color(0xFFF2F1F1);
+  static const Color blue = Color(0xFF2196F3);
 
-  static const LinearGradient gradient = LinearGradient(
-    colors: [lightPrimaryColor, Color(0xFFAF4F64)],
-  );
-  static const BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
   static const MaterialColor black = MaterialColor(0xFF1A0700, {
-    100: Color(0xFFEFF5FA),
-    200: Color(0xFFE5E5E5),
+    100: Color(0xFFFAFAFA),
+    200: Color(0xFFE0E0E0),
     300: Color(0xFFC9CDD5),
-    400: Color(0xFF949BAB),
+    400: Color(0xFFBDBDBD),
     500: Color(0xFF8E989E),
     600: Color(0xFF73858F),
     700: Color(0xFF53555F),

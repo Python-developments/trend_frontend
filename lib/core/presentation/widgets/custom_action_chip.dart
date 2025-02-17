@@ -28,14 +28,14 @@ class CustomActionChip extends StatelessWidget {
         }
       },
       color: WidgetStatePropertyAll(
-          chipState==ChipState.selected ? AppStyle.lightPrimaryColor:
+          chipState==ChipState.selected ? AppStyle.blue:
                 chipState==ChipState.disabled ? AppStyle.black.shade200
                     : AppStyle.white),
       shape: RoundedRectangleBorder(
           borderRadius: AppStyle.borderRadius,
           side: BorderSide(
               color: chipState==ChipState.selected
-                  ? AppStyle.lightPrimaryColor
+                  ? AppStyle.blue
                   : AppStyle.black.shade200
           )),
       label:Stack(
@@ -49,7 +49,7 @@ class CustomActionChip extends StatelessWidget {
     SizedBox(
     width: width+8.w,
     child: Text(
-              title.translateWord,
+              title,
               textAlign: TextAlign.center,
               style: AppStyle.textTheme.bodyMedium!.copyWith(
                   color: chipState==ChipState.selected ? AppStyle.white : AppStyle.black.shade600,

@@ -35,7 +35,7 @@ class ExploreMainPage extends StatelessWidget {
                 child: Text(
                   explorePost,
                   style: AppStyles.styleNormal16
-                      .copyWith(color: Color(AppColors.black)),
+                      .copyWith(color: AppStyle.black),
                 ),
               ),
               // explore post grid

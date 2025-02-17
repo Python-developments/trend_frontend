@@ -38,7 +38,7 @@ class CustomAppBar extends AppBar {
               children: [
                 Expanded(
                   child: Text(
-                    barTitle.translateWord,
+                    barTitle,
                     style: AppStyle.textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
                         color: isColorfulBar

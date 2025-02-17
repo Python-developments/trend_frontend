@@ -1,10 +1,9 @@
-import 'package:trend/data/models/core/notification_model.dart';
 import 'package:trend/data/models/core/pagination_data_model.dart';
 import 'package:trend/data/repositories/abstract/i_repository_impl.dart';
+import 'package:trend/features/notifications/domain/entities/notification.dart';
 
-abstract class IProfileRepository extends IRepositoryImpl {
-  IProfileRepository(super.appFlavor,super.httpClient, super.appDatabase, super.logger,
-      super.currentLocationController);
+abstract class IProfileRepository extends IRepository {
+  IProfileRepository(super.appFlavor,super.httpClient, super.appDatabase, super.logger,);
 
   Future<PaginationDataModel<NotificationModel>> getNotifications(
       {required final int pageNumber, required final int perPage});

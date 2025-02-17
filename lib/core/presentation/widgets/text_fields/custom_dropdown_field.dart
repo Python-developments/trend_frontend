@@ -26,12 +26,12 @@ class CustomDropdownField<T> extends StatelessWidget {
     return DropdownButtonFormField<String>(
       dropdownColor: AppStyle.white,
       iconEnabledColor:
-          selectedOption != null ? AppStyle.white : AppStyle.lightPrimaryColor,
+          selectedOption != null ? AppStyle.white : AppStyle.blue,
       value: selectedOption == null ? null : valueGetter(selectedOption as T),
       decoration: InputDecoration(
         filled: true,
         fillColor: selectedOption != null
-            ? AppStyle.lightPrimaryColor
+            ? AppStyle.blue
             : AppStyle.white,
         errorBorder: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
@@ -43,15 +43,15 @@ class CustomDropdownField<T> extends StatelessWidget {
         ),
         enabledBorder: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
-          borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+          borderSide: BorderSide(color: AppStyle.blue),
         ),
         border: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
-          borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+          borderSide: BorderSide(color: AppStyle.blue),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
-          borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+          borderSide: BorderSide(color: AppStyle.blue),
         ),
       ),
       validator: (final value) => value == null
@@ -64,7 +64,7 @@ class CustomDropdownField<T> extends StatelessWidget {
                   height: 40.h,
                   color: selectedOption != null &&
                           (valueGetter(e) == valueGetter(selectedOption as T))
-                      ? AppStyle.lightPrimaryColor
+                      ? AppStyle.blue
                       : Colors.transparent,
                   child: Center(
                       child: Text(
@@ -73,7 +73,7 @@ class CustomDropdownField<T> extends StatelessWidget {
                       color: selectedOption != null &&
                               (valueGetter(e) == valueGetter(selectedOption as T))
                           ? AppStyle.white
-                          : AppStyle.lightPrimaryColor,
+                          : AppStyle.blue,
                     ),
                   )))))
           .toList(),
@@ -84,7 +84,7 @@ class CustomDropdownField<T> extends StatelessWidget {
                 .firstWhere((final element) => valueGetter(element) == value));
       },
       hint: Text(
-        title.translateWord,
+        title,
         style: AppStyle.textTheme.bodyMedium,
       ),
     );

@@ -64,7 +64,7 @@ class CustomImageDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            content.translateWord,
+            content,
             style: AppStyle.textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
@@ -73,7 +73,7 @@ class CustomImageDialog extends StatelessWidget {
               height: 8,
             ),
             Text(
-              subtitle!.translateWord,
+              subtitle!,
               style: AppStyle.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -86,14 +86,14 @@ class CustomImageDialog extends StatelessWidget {
           children: [
             MainButton(
                 isLoading: false,
-                title: mainActionTitle.translateWord,
+                title: mainActionTitle,
                 onPressed: onMainActionPressed),
             if (secondaryButton != null) ...[
               const CustomSizedBox(
                 height: 8,
               ),
               SecondaryButton(
-                title: secondaryButton!.$1.translateWord,
+                title: secondaryButton!.$1,
                 onPressed: secondaryButton!.$2,
               )
             ]

@@ -12,7 +12,7 @@ class CustomLinearIndicator extends StatelessWidget {
   Widget build(final BuildContext context) {
     return LinearProgressIndicator(
       backgroundColor: AppStyle.black.shade200,
-      color: AppStyle.lightPrimaryColor,
+      color: AppStyle.blue,
       minHeight: 4.h,
       value: value,
       borderRadius: borderRadius,

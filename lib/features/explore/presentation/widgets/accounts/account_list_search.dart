@@ -44,7 +44,7 @@ class AccountListSearch extends StatelessWidget {
           child: Skeletonizer.zone(
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
-              baseColor: Color(AppColors.greyLight),
+              baseColor: AppStyle.black.100,
               highlightColor: Color(AppColors.white),
             ),
             child: Card(

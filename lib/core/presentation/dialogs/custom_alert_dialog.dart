@@ -33,7 +33,7 @@ class CustomAlertDialog extends StatelessWidget {
   Widget build(final BuildContext context) {
     return AlertDialog.adaptive(
         title: Text(
-          title.translateWord,
+          title,
           style: AppStyle.textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
@@ -44,7 +44,7 @@ class CustomAlertDialog extends StatelessWidget {
             const RoundedRectangleBorder(borderRadius: AppStyle.borderRadius),
         content: content != null
             ? Text(
-                content!.translateWord,
+                content!,
                 style: AppStyle.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               )
@@ -54,14 +54,14 @@ class CustomAlertDialog extends StatelessWidget {
             ? [
                 CupertinoDialogAction(
                     onPressed: onMainActionPressed,
-                    child: Text(mainActionText.translateWord,
+                    child: Text(mainActionText,
                         style: AppStyle.textTheme.bodyLarge!.copyWith(
                             color: Colors.blueAccent,
                             fontWeight: FontWeight.w400))),
                 if (secondaryButton != null)
                   CupertinoDialogAction(
                       onPressed: secondaryButton!.$2,
-                      child: Text(secondaryButton!.$1.translateWord,
+                      child: Text(secondaryButton!.$1,
                           style: AppStyle.textTheme.bodyLarge!.copyWith(
                               color: secondaryButton!.$3
                                   ? AppStyle.errorColor
@@ -75,12 +75,12 @@ class CustomAlertDialog extends StatelessWidget {
                     onPressed: onMainActionPressed),
                 if (secondaryButton != null && secondaryButton!.$3)
                   NegativeButton(
-                    title: secondaryButton!.$1.translateWord,
+                    title: secondaryButton!.$1,
                     onPressed: secondaryButton!.$2,
                   ),
                 if (secondaryButton != null && !secondaryButton!.$3)
                   SecondaryButton(
-                    title: secondaryButton!.$1.translateWord,
+                    title: secondaryButton!.$1,
                     onPressed: secondaryButton!.$2,
                   ),
               ]);

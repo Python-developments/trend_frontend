@@ -33,7 +33,7 @@ class CustomMenuButton<T> extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(4.r),
         decoration: const BoxDecoration(
-          gradient: AppStyle.gradient,
+          color: AppStyle.blue,
           borderRadius: AppStyle.borderRadius,
         ),
         child: Icon(

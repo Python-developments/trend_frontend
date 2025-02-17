@@ -8,6 +8,7 @@ import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/utils/flavors.dart';
 import 'package:trend/data/errors/core_errors.dart';
 import 'package:trend/dependencies.dart';
+import 'package:trend/features/app/presentation/app.dart';
 
 Future<void> customAppRunner(final Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();

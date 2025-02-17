@@ -33,7 +33,7 @@ class LongTextField extends StatelessWidget {
       priority: priority,
       prefixIcon: const Icon(
         Icons.edit_note,
-        color: AppStyle.lightPrimaryColor,
+        color: AppStyle.blue,
       ),
     );
   }

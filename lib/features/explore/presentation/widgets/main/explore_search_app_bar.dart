@@ -56,7 +56,7 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
                     icon: Icon(
                       Icons.arrow_back_ios,
                       size: 28,
-                      color: Color(AppColors.black),
+                      color: AppStyle.black,
                     ),
                   ),
                 ),
@@ -82,7 +82,7 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
                       ),
                       hintText: 'Search',
                       hintStyle: AppStyles.styleNormal13.copyWith(
-                        color: const Color(AppColors.greyDark),
+                        color: const AppStyle.black.400,
                       ),
                       fillColor: const Color(AppColors.greyLighter)
                           .withOpacity(0.2),
@@ -121,7 +121,7 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
   OutlineInputBorder _buildOutlineInputBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(7),
-      borderSide: const BorderSide(color: Color(AppColors.greyLight)),
+      borderSide: const BorderSide(color: AppStyle.black.100),
     );
   }
 }

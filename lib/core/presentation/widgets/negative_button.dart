@@ -61,7 +61,7 @@ class _NegativeButtonState extends State<NegativeButton> {
                     ),
                   ],
                   Text(
-                    widget.title.translateWord,
+                    widget.title,
                     style: AppStyle.textTheme.bodyMedium!.copyWith(
                         color: AppStyle.errorColor,
                         fontWeight: FontWeight.bold),

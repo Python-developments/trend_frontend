@@ -42,7 +42,7 @@ class CustomEmptyView extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Text(controller.error!.errorMessage.translateWord,
+                  child: Text(controller.error!.errorMessage,
                       textAlign: TextAlign.center,
                       style: AppStyle.textTheme.titleSmall!
                           .copyWith(color: AppStyle.black.shade600)),
@@ -53,7 +53,7 @@ class CustomEmptyView extends StatelessWidget {
                 if (helperButton != null)
                   Center(
                     child: MainButton(
-                        title: helperButton.$1.translateWord,
+                        title: helperButton.$1,
                         isLoading: controller.isLoading,
                         onPressed: helperButton.$2),
                   ),

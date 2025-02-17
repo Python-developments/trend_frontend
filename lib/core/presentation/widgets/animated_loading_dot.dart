@@ -44,7 +44,7 @@ class _AnimatedLoadingDotState extends State<AnimatedLoadingDot>
               width:
                   8.r + (sin(sizeAnimation.value + widget.initialValue) * 4).r,
               decoration: const BoxDecoration(
-                  color: AppStyle.lightPrimaryColor, shape: BoxShape.circle),
+                  color: AppStyle.blue, shape: BoxShape.circle),
             ));
   }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/core/controllers/localization_controller.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
 import 'package:trend/core/utils/extensions.dart';
@@ -19,7 +18,7 @@ Future<DateTime?> showCustomDatePicker(
   return await showRoundedDatePicker(
     height: 400.h,
     context: getAppRouter.currentContext,
-    locale: Locale(getIt<LocalizationController>().currentLocale.languageCode),
+    locale: Locale("en"),
     initialDate: initialDate,
     firstDate: startDate,
     lastDate: endDate,
@@ -37,13 +36,13 @@ Future<DateTime?> showCustomDatePicker(
         textStyleYearButton: largeStyle.copyWith(color: AppStyle.white),
         textStyleDayButton: hugeStyle.copyWith(color: AppStyle.white),
         textStyleButtonPositive:
-            largeStyle.copyWith(color: AppStyle.lightPrimaryColor),
+            largeStyle.copyWith(color: AppStyle.blue),
         textStyleButtonNegative:
-            largeStyle.copyWith(color: AppStyle.lightPrimaryColor),
+            largeStyle.copyWith(color: AppStyle.blue),
         decorationDateSelected: const BoxDecoration(
-            shape: BoxShape.circle, color: AppStyle.lightPrimaryColor)),
+            shape: BoxShape.circle, color: AppStyle.blue)),
     theme: ThemeData(
-      primaryColor: AppStyle.lightPrimaryColor,
+      primaryColor: AppStyle.blue,
     ),
   );
 }

@@ -31,7 +31,7 @@ class _CustomPaymentCardFieldState extends State<CustomPaymentCardField> {
       enablePostalCode: false,
       countryCode: 'UAE',
       style: AppStyle.textTheme.bodyMedium,
-      cursorColor: AppStyle.lightPrimaryColor,
+      cursorColor: AppStyle.blue,
       androidPlatformViewRenderType:
       AndroidPlatformViewRenderType.androidView,
       decoration: InputDecoration(
@@ -40,15 +40,15 @@ class _CustomPaymentCardFieldState extends State<CustomPaymentCardField> {
         isDense: true,
         border: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
-          borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+          borderSide: BorderSide(color: AppStyle.blue),
         ),
         enabledBorder: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
-          borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+          borderSide: BorderSide(color: AppStyle.blue),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,
-          borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+          borderSide: BorderSide(color: AppStyle.blue),
         ),
         errorBorder: const OutlineInputBorder(
           borderRadius: AppStyle.borderRadius,

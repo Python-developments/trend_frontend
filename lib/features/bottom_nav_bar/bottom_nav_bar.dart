@@ -113,8 +113,8 @@ class _MainScreenState extends State<MainScreen> {
         iconPath,
         height: 25.5,
         color: currentIndex == index
-            ? Color(AppColors.black)
-            : Color(AppColors.greyDark),
+            ? AppStyle.black
+            : AppStyle.black.400,
       ),
     );
   }

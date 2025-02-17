@@ -17,7 +17,7 @@ class LocationSearchContainer extends StatelessWidget {
         contentPadding:
             EdgeInsets.symmetric(horizontal: 13, vertical: 7),
         leading: CircleAvatar(
-          backgroundColor:Color(AppColors.greyLight) ,
+          backgroundColor:AppStyle.black.100 ,
             radius: 24, 
           child: Icon(Icons.location_on_outlined),
         ),

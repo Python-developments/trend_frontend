@@ -16,7 +16,7 @@ class GrantPermissionDialog extends StatelessWidget with WidgetModuleCreatorMixi
         imagePath: Assets.permissions,
         mainActionTitle: 'Go to settings',
         content: 'Permission required',
-        subtitle: 'Please enable [0] permissions to continue'.translateWordWithArguments(arguments: [(permissionName.translateWord)]),
+        subtitle: 'Please enable [0] permissions to continue',
         onMainActionPressed: createdModule.openAppSettings,
         imageSize: 122,
     );

@@ -42,7 +42,7 @@ class LocationListSearch extends StatelessWidget {
           child: Skeletonizer.zone(
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
-              baseColor: Color(AppColors.greyLight),
+              baseColor: AppStyle.black.100,
               highlightColor: Color(AppColors.white),
             ),
             child: Card(
@@ -52,7 +52,7 @@ class LocationListSearch extends StatelessWidget {
               child: const ListTile(
                 leading: Icon(
                   Icons.location_on,
-                  color: Color(AppColors.greyDark),
+                  color: AppStyle.black.400,
                 ),
                 title: Bone.text(words: 2),
                 subtitle: Bone.text(),

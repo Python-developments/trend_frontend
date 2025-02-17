@@ -3,13 +3,8 @@ import 'dart:math';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:trend/core/controllers/localization_controller.dart';
-import 'package:trend/core/presentation/arguments/address_details_page_arguments.dart';
-import 'package:trend/core/presentation/arguments/map_location_selection_page_arguments.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
 import 'package:trend/core/utils/enums.dart';
-import 'package:trend/data/models/cart/cart_item_model.dart';
-import 'package:trend/data/models/core/location_model.dart';
 import 'package:trend/dependencies.dart';
 import 'package:trend/third_parties_modules/abstract/i_logger_module.dart';
 
@@ -28,20 +23,7 @@ extension AppRouteUtils on AppRouter {
       replaceAll([HomeRouteNavigation(), route]);
   Future<void> redirectToRoutes(final List<PageRouteInfo> routes) =>
       replaceAll([HomeRouteNavigation(), ...routes]);
-  void addNewAddress(
-          {required final void Function() pageRefresher,
-          required final LocationModel initialLocation}) =>
-      push(MapLocationSelectionRoute(
-          args: MapLocationSelectionPageArguments(
-              title: 'Select the location',
-              initialValue: initialLocation,
-              onSubmitLocation: (final location, final addressString) =>
-                  getAppRouter.push(AddressDetailsRoute(
-                      args: AddressDetailsPageArguments(
-                          address: null,
-                          addressPageRefresher: pageRefresher,
-                          initialLocation: location,
-                          addressString: addressString))))));
+
 }
 
 extension StringUtils on String {
@@ -68,30 +50,9 @@ extension StringUtils on String {
     return letters.fold('', (final pre, final current) => '$pre$current');
   }
 
-  String get translateWord => getIt<LocalizationController>().translate(this);
-
-  String translateWordWithArguments({required final List<String> arguments}) =>
-      getIt<LocalizationController>().translate(this, arguments);
   void debugPrint() => getIt<ILoggerModule>().debugLog(this);
 }
 
-extension NumberUtils on num {
-  String get currency {
-    final String thousandFormat =
-        NumberFormat.decimalPattern('en').format(this);
-    return '${"AED".translateWord} $thousandFormat';
-  }
-}
-
-extension CartListUtils on List<CartItemModel> {
-  double get totalCost => fold(
-      0,
-      (final previousValue, final element) =>
-          previousValue + element.totalPrice);
-
-  int get totalItems =>fold(
-  0, (final prev, final current) => prev + current.quantity);
-}
 
 extension BuildContextUtils on BuildContext {
   ClientDeviceType get deviceType {

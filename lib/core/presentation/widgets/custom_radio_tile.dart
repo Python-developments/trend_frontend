@@ -29,7 +29,7 @@ class CustomRadioTile<T> extends StatelessWidget {
           Radio<T>(
             value: value,
             groupValue: selectedValue,
-            activeColor: AppStyle.lightPrimaryColor,
+            activeColor: AppStyle.blue,
             onChanged: onTapRadio,
           ),
           if (icon != null) ...[
@@ -42,11 +42,11 @@ class CustomRadioTile<T> extends StatelessWidget {
             ),
           ],
           Text(
-            title.translateWord,
+            title,
             style: AppStyle.textTheme.bodyMedium!.copyWith(
                 fontWeight: FontWeight.bold,
                 color: value == selectedValue
-                    ? AppStyle.lightPrimaryColor
+                    ? AppStyle.blue
                     : AppStyle.black.shade400),
           ),
         ],

@@ -10,6 +10,7 @@ import 'package:trend/data/models/core/pagination_response_model.dart';
 import 'package:trend/data/models/core/response_model.dart';
 import 'package:trend/third_parties_modules/abstract/i_logger_module.dart';
 
+bool emptyMapper(final Map<String, dynamic> data) => true;
 abstract class IRepository {
   final Flavor appFlavor;
   final IHttpClient httpClient;

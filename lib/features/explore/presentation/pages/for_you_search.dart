@@ -19,7 +19,7 @@ class ExploreSearchForYou extends StatelessWidget {
             child: Text(
               accounts,
               style: AppStyles.styleNormal16
-                  .copyWith(color: Color(AppColors.black)),
+                  .copyWith(color: AppStyle.black),
             ),
           ),
         ),
@@ -34,7 +34,7 @@ class ExploreSearchForYou extends StatelessWidget {
             child: Text(
               explorePost,
               style: AppStyles.styleNormal16
-                  .copyWith(color: Color(AppColors.black)),
+                  .copyWith(color: AppStyle.black),
             ),
           ),
         ),

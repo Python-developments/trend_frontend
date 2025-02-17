@@ -45,7 +45,7 @@ class ExploreSearchForYouPost extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
-          baseColor: Color(AppColors.greyLight),
+          baseColor: AppStyle.black.100,
           highlightColor: Colors.grey[100]!,
           child: Container(
             decoration: BoxDecoration(color: Color(AppColors.greyLighter)),

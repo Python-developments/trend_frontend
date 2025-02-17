@@ -53,7 +53,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                     icon: Icon(
                       FontAwesomeIcons.userFriends,
                       size: 28,
-                      color: Color(AppColors.black),
+                      color: AppStyle.black,
                     ),
                   ),
                 ),
@@ -80,7 +80,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                       Text(
                         '  Search',
                         style: AppStyles.styleNormal13.copyWith(
-                          color: Color(AppColors.greyDark),
+                          color: AppStyle.black.400,
                         ),
                       ),
                     ],

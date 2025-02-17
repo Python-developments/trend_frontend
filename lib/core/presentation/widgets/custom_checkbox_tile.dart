@@ -21,10 +21,10 @@ class CustomCheckboxTile extends StatelessWidget {
           child: Row(
             children: [
               Checkbox(
-                  side: const BorderSide(color: AppStyle.lightPrimaryColor),
+                  side: const BorderSide(color: AppStyle.blue),
                   value: isSelected,
                   checkColor: AppStyle.white,
-                  activeColor: AppStyle.lightPrimaryColor,
+                  activeColor: AppStyle.blue,
                   onChanged: (final _) => onTap()),
               Text(
                 title,

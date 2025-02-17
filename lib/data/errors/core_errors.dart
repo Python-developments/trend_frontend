@@ -74,7 +74,7 @@ class IsNotBiggerThanError extends CustomError {
       {required final String fieldName, required final num number})
       : super(
             errorMessage:
-                "${fieldName.translateWord} ${"should be bigger than".translateWord} $number",
+                "${fieldName} ${"should be bigger than"} $number",
             errorImage: null);
 }
 
@@ -83,7 +83,7 @@ class IsNotSmallerThanError extends CustomError {
       {required final String fieldName, required final num number})
       : super(
             errorMessage:
-                "${fieldName.translateWord} ${"should be smaller than".translateWord} $number",
+                "${fieldName} ${"should be smaller than"} $number",
             errorImage: null);
 }
 
@@ -91,7 +91,7 @@ class IsNotNameError extends CustomError {
   IsNotNameError({required final String fieldName})
       : super(
             errorMessage:
-                "${fieldName.translateWord} ${"is not a valid name".translateWord}",
+                "${fieldName} ${"is not a valid name"}",
             errorImage: null);
 }
 
@@ -99,7 +99,7 @@ class IsNotNumberError extends CustomError {
   IsNotNumberError({required final String fieldName})
       : super(
             errorMessage:
-                "${fieldName.translateWord} ${"is not a valid number".translateWord}",
+                "${fieldName} ${"is not a valid number"}",
             errorImage: null);
 }
 
@@ -107,7 +107,7 @@ class EmptyFieldError extends CustomError {
   EmptyFieldError({required final String fieldName})
       : super(
             errorMessage:
-                "${fieldName.translateWord} ${"should not be empty".translateWord}",
+                "${fieldName} ${"should not be empty"}",
             errorImage: null);
 }
 
@@ -116,7 +116,7 @@ class ShorterThanError extends CustomError {
       {required final String fieldName, required final int minLength})
       : super(
             errorMessage:
-                "${fieldName.translateWord} ${"should be with length".translateWord} $minLength",
+                "${fieldName} ${"should be with length"} $minLength",
             errorImage: null);
 }
 
@@ -124,6 +124,6 @@ class IsNotSelectedError extends CustomError {
   IsNotSelectedError({required final String fieldName})
       : super(
             errorMessage:
-                "${"Please select".translateWord} ${fieldName.translateWord}",
+                "${"Please select"} ${fieldName}",
             errorImage: null);
 }

@@ -34,7 +34,7 @@ class MaintenanceAlertDialog extends StatelessWidget {
             height: 16,
           ),
           Text(
-            'We’ll Be Back Soon!'.translateWord,
+            'We’ll Be Back Soon!',
             style: AppStyle.textTheme.titleMedium,
 
             textAlign: TextAlign.center,
@@ -46,7 +46,7 @@ class MaintenanceAlertDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
             Text(
-              'We’re busy with fantastic updates. We appreciate your patience.'.translateWord,
+              'We’re busy with fantastic updates. We appreciate your patience.',
               style: AppStyle.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),

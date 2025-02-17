@@ -28,7 +28,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 50),
         decoration: BoxDecoration(
-            border: Border.all(color: AppStyle.lightPrimaryColor),
+            border: Border.all(color: AppStyle.blue),
             borderRadius: AppStyle.borderRadius),
         margin: EdgeInsets.all(isLongPressed ? 2.r : 0),
         child: Material(
@@ -46,9 +46,9 @@ class _SecondaryButtonState extends State<SecondaryButton> {
                 child: Padding(
               padding: EdgeInsets.all(4.r),
               child: Text(
-                widget.title.translateWord,
+                widget.title,
                 style: AppStyle.textTheme.bodyMedium!.copyWith(
-                    color: AppStyle.lightPrimaryColor,
+                    color: AppStyle.blue,
                     fontWeight: FontWeight.bold),
               ),
             )),

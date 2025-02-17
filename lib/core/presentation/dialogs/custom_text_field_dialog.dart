@@ -59,7 +59,7 @@ class _CustomTextFieldDialogState extends State<CustomTextFieldDialog> {
           title: Row(
             children: [
               Text(
-                widget.title.translateWord,
+                widget.title,
                 style: AppStyle.textTheme.titleSmall!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
@@ -75,7 +75,7 @@ class _CustomTextFieldDialogState extends State<CustomTextFieldDialog> {
                 height: 8,
               ),
               Text(
-                widget.dialogTextContent.translateWord,
+                widget.dialogTextContent,
                 style: AppStyle.textTheme.bodyMedium!.copyWith(
                     color: AppStyle.black.shade800,
                     fontWeight: FontWeight.bold),

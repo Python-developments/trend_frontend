@@ -67,7 +67,7 @@ class CustomTextField extends StatelessWidget {
                     ? validator!.check(fieldName: title!, toCheckString: value)
                     : IsNotEmptyValidator()
                         .check(fieldName: title!, toCheckString: value),
-        cursorColor: AppStyle.lightPrimaryColor,
+        cursorColor: AppStyle.blue,
         inputFormatters: [
           if (inputFormatter != null) inputFormatter!,
         ],
@@ -90,7 +90,7 @@ class CustomTextField extends StatelessWidget {
           ),
           focusedBorder: const OutlineInputBorder(
             borderRadius: AppStyle.borderRadius,
-            borderSide: BorderSide(color: AppStyle.lightPrimaryColor),
+            borderSide: BorderSide(color: AppStyle.blue),
           ),
           errorBorder: const OutlineInputBorder(
             borderRadius: AppStyle.borderRadius,
@@ -100,7 +100,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: AppStyle.borderRadius,
             borderSide: BorderSide(color: AppStyle.errorColor),
           ),
-          hintText: hint?.translateWord,
+          hintText: hint?,
           hintStyle: AppStyle.textTheme.bodySmall!
               .copyWith(color: AppStyle.black.shade600),
           prefixIconConstraints: BoxConstraints(
@@ -116,13 +116,13 @@ class CustomTextField extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   text: TextSpan(
-                      text: title!.translateWord,
+                      text: title!,
                       style: AppStyle.textTheme.bodyMedium!
                           .copyWith(color: AppStyle.black.shade600),
                       children: [
                         TextSpan(
                           text: fieldPriority == FieldPriority.optional
-                              ? ' (${fieldPriority.name.translateWord})'
+                              ? ' (${fieldPriority.name})'
                               : '',
                           style: AppStyle.textTheme.bodySmall!
                               .copyWith(color: AppStyle.errorColor),

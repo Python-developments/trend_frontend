@@ -16,6 +16,4 @@ class LoginResponseModel {
   factory LoginResponseModel.fromJson(final Map<String, dynamic> data) =>
       _$LoginResponseModelFromJson(data);
 
-  factory LoginResponseModel.empty() =>
-      LoginResponseModel(token: 'token', user: UserProfileModel.empty());
 }

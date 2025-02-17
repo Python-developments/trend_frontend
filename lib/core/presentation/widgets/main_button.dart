@@ -90,7 +90,7 @@ class _MainButtonState extends State<MainButton> {
                             child: Padding(
                             padding: EdgeInsets.all(4.r),
                             child: Text(
-                              widget.title.translateWord,
+                              widget.title,
                               style: AppStyle.textTheme.bodyMedium!.copyWith(
                                   color: AppStyle.white,
                                   fontWeight: FontWeight.bold),
