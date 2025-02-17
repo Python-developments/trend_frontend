@@ -9,28 +9,6 @@ part of 'auth_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AuthController on AuthControllerBase, Store {
-  Computed<bool>? _$isSocialLoginComputed;
-
-  @override
-  bool get isSocialLogin =>
-      (_$isSocialLoginComputed ??= Computed<bool>(() => super.isSocialLogin,
-              name: 'AuthControllerBase.isSocialLogin'))
-          .value;
-  Computed<bool>? _$isGuestUserComputed;
-
-  @override
-  bool get isGuestUser =>
-      (_$isGuestUserComputed ??= Computed<bool>(() => super.isGuestUser,
-              name: 'AuthControllerBase.isGuestUser'))
-          .value;
-  Computed<bool>? _$isVerifiedUserComputed;
-
-  @override
-  bool get isVerifiedUser =>
-      (_$isVerifiedUserComputed ??= Computed<bool>(() => super.isVerifiedUser,
-              name: 'AuthControllerBase.isVerifiedUser'))
-          .value;
-
   late final _$userProfileModelAtom =
       Atom(name: 'AuthControllerBase.userProfileModel', context: context);
 
@@ -75,22 +53,8 @@ mixin _$AuthController on AuthControllerBase, Store {
       AsyncAction('AuthControllerBase.login', context: context);
 
   @override
-  Future<void> login(
-      {required LoginDto loginDto,
-      required HomeNavigationBarTileType destination}) {
-    return _$loginAsyncAction
-        .run(() => super.login(loginDto: loginDto, destination: destination));
-  }
-
-  late final _$loginUsingFacebookAsyncAction =
-      AsyncAction('AuthControllerBase.loginUsingFacebook', context: context);
-
-  @override
-  Future<void> loginUsingFacebook(
-      {required HomeNavigationBarTileType destination,
-      required String? referralCode}) {
-    return _$loginUsingFacebookAsyncAction.run(() => super.loginUsingFacebook(
-        destination: destination, referralCode: referralCode));
+  Future<void> login({required LoginDto loginDto}) {
+    return _$loginAsyncAction.run(() => super.login(loginDto: loginDto));
   }
 
   late final _$registerAsyncAction =
@@ -127,17 +91,6 @@ mixin _$AuthController on AuthControllerBase, Store {
   }
 
   @override
-  Future<void> changePhoneNumber() {
-    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
-        name: 'AuthControllerBase.changePhoneNumber');
-    try {
-      return super.changePhoneNumber();
-    } finally {
-      _$AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<void> logout() {
     final _$actionInfo = _$AuthControllerBaseActionController.startAction(
         name: 'AuthControllerBase.logout');
@@ -154,34 +107,6 @@ mixin _$AuthController on AuthControllerBase, Store {
         name: 'AuthControllerBase.deleteAccount');
     try {
       return super.deleteAccount();
-    } finally {
-      _$AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<void> loginUsingApple(
-      {required HomeNavigationBarTileType destination,
-      required String? referralCode}) {
-    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
-        name: 'AuthControllerBase.loginUsingApple');
-    try {
-      return super.loginUsingApple(
-          destination: destination, referralCode: referralCode);
-    } finally {
-      _$AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  Future<void> loginUsingGmail(
-      {required HomeNavigationBarTileType destination,
-      required String? referralCode}) {
-    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
-        name: 'AuthControllerBase.loginUsingGmail');
-    try {
-      return super.loginUsingGmail(
-          destination: destination, referralCode: referralCode);
     } finally {
       _$AuthControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -224,10 +149,7 @@ mixin _$AuthController on AuthControllerBase, Store {
   String toString() {
     return '''
 userProfileModel: ${userProfileModel},
-cachedUser: ${cachedUser},
-isSocialLogin: ${isSocialLogin},
-isGuestUser: ${isGuestUser},
-isVerifiedUser: ${isVerifiedUser}
+cachedUser: ${cachedUser}
     ''';
   }
 }

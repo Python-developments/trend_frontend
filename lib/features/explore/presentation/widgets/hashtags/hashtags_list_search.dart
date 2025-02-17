@@ -42,7 +42,7 @@ class HashtagsListSearch extends StatelessWidget {
           child: Skeletonizer.zone(
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
-              baseColor: AppStyle.black.100,
+              baseColor: AppStyle.black.shade100,
               highlightColor: Color(AppColors.white),
             ),
             child: Card(
@@ -52,7 +52,7 @@ class HashtagsListSearch extends StatelessWidget {
               child: const ListTile(
                 leading: Icon(
                   FontAwesomeIcons.hashtag,
-                  color: AppStyle.black.400,
+                  color: AppStyle.black.shade400,
                 ),
                 title: Bone.text(words: 2),
                 subtitle: Bone.text(),

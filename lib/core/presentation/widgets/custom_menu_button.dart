@@ -25,8 +25,7 @@ class CustomMenuButton<T> extends StatelessWidget {
                 value: e,
                 child: Text(
                   titleGetter(e),
-                  style: AppStyle.textTheme.bodyMedium!
-                      .copyWith(color: AppStyle.darkPrimaryColor),
+                  style: AppStyle.textTheme.bodyMedium!.copyWith(color: AppStyle.blue),
                 ),
               ))
           .toList(),

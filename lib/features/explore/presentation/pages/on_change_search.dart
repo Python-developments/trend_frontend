@@ -65,7 +65,7 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
 
   OutlineInputBorder _buildOutlineInputBorder() => OutlineInputBorder(
         borderRadius: BorderRadius.circular(7),
-        borderSide: const BorderSide(color: AppStyle.black.100),
+        borderSide: const BorderSide(color: AppStyle.black.shade100),
       );
 
   @override
@@ -113,7 +113,7 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
                           size: 16, color: Colors.black),
                       hintText: 'Search',
                       hintStyle: AppStyles.styleNormal13
-                          .copyWith(color: const AppStyle.black.400),
+                          .copyWith(color: const AppStyle.black.shade400),
                       fillColor:
                           const Color(AppColors.greyLighter).withOpacity(0.2),
                       filled: true,
@@ -164,7 +164,7 @@ class OnChangeSearchUserList extends StatelessWidget {
           child: Skeletonizer.zone(
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
-              baseColor: const AppStyle.black.100,
+              baseColor: const AppStyle.black.shade100,
               highlightColor: const Color(AppColors.white),
             ),
             child: const Card(

@@ -20,11 +20,11 @@ class HashtagsContainer extends StatelessWidget {
         contentPadding:
             EdgeInsets.symmetric(horizontal: 13, vertical: 7),
         leading: CircleAvatar(
-          backgroundColor: AppStyle.black.100,
+          backgroundColor: AppStyle.black.shade100,
           radius: 24,
           child: Icon(
             FontAwesomeIcons.hashtag,
-            color: AppStyle.black.400,
+            color: AppStyle.black.shade400,
           ),
         ),
         title: Text(

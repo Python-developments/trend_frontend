@@ -75,8 +75,7 @@ class _MainButtonState extends State<MainButton> {
                   : {},
               child: Ink(
                 decoration: BoxDecoration(
-                    gradient: !widget.isDisabled ? AppStyle.gradient : null,
-                    color: widget.isDisabled ? AppStyle.black.shade300 : null,
+                    color: widget.isDisabled ? AppStyle.black.shade300 : AppStyle.blue,
                     borderRadius: AppStyle.borderRadius),
                 child: Padding(
                   padding: EdgeInsets.all(4.r),

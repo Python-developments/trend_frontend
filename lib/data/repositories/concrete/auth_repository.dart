@@ -6,7 +6,7 @@ import 'package:trend/data/local_database/entities/user_entity.dart';
 import 'package:trend/data/models/auth/login_response_model.dart';
 import 'package:trend/data/models/auth/user_profile_model.dart';
 import 'package:trend/data/repositories/abstract/i_auth_repository.dart';
-import 'package:trend/data/repositories/abstract/i_repository_impl.dart';
+import 'package:trend/data/repositories/abstract/i_repository.dart';
 
 @Singleton(as: IAuthRepository)
 class AuthRepository extends IAuthRepository {
@@ -19,7 +19,7 @@ class AuthRepository extends IAuthRepository {
         url: 'customer/auth/signup',
         parameters: registerDto.toJson(),
         mapper: LoginResponseModel.fromJson,
-        needLocation: false);
+        );
 
     await setCurrentTokenSession(
       token: response.token,
@@ -33,7 +33,7 @@ class AuthRepository extends IAuthRepository {
           url: url,
           parameters: parameters,
           mapper: LoginResponseModel.fromJson,
-          needLocation: false);
+          );
   Future<LoginResponseModel> _login(
       {required final String url,
       required final String loginMethod,
@@ -65,7 +65,7 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<void> sendEmailConfirmationCode({required final String email}) => post(
       url: 'customer/auth/resend-email',
-      needLocation: false,
+      ,
       parameters: {'email': email},
       mapper: emptyMapper);
 
@@ -83,7 +83,7 @@ class AuthRepository extends IAuthRepository {
             'otp': otpCode,
             'newPassword': newPassword
           },
-          needLocation: false);
+          );
 
   @override
   Future<void> changePassword(
@@ -93,13 +93,13 @@ class AuthRepository extends IAuthRepository {
           url: 'customer/auth/change-password',
           parameters: {'oldPassword': oldPassword, 'newPassword': newPassword},
           mapper: emptyMapper,
-          needLocation: false);
+          );
 
   @override
   Future<UserProfileModel> getUserProfile() => getObject(
       url: 'customers/profile',
       mapper: UserProfileModel.fromJson,
-      needLocation: false);
+      );
 
 
 
@@ -111,7 +111,7 @@ class AuthRepository extends IAuthRepository {
         'notificationServer': notificationsModule.providerType.name
       },
       mapper: emptyMapper,
-      needLocation: false);
+      );
 
   @override
   Future<void> logout() async {
@@ -129,14 +129,14 @@ class AuthRepository extends IAuthRepository {
           {required final String email, required final String otpCode}) =>
       post(
           url: 'customer/auth/verify-email',
-          needLocation: false,
+          ,
           parameters: {'email': email, 'otp': otpCode},
           mapper: emptyMapper);
 
   @override
   Future<void> sendForgetPasswordCode({required final String email}) => post(
       url: 'customer/auth/forgot-password',
-      needLocation: false,
+      ,
       parameters: {'email': email},
       mapper: emptyMapper);
 
@@ -146,7 +146,7 @@ class AuthRepository extends IAuthRepository {
       notificationsModule.deleteToken(),
       appDatabase.clearUserCache(),
       deleteNotificationsToken(),
-      delete(url: 'customers/profile', needLocation: false),
+      delete(url: 'customers/profile', ),
     ]);
 
     await setCurrentTokenSession(token: '');
@@ -155,7 +155,7 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<UserProfileModel> changeEmail({required final String email}) => put(
       url: 'customers/profile',
-      needLocation: false,
+      ,
       parameters: {'email': email},
       mapper: UserProfileModel.fromJson);
 
@@ -164,7 +164,7 @@ class AuthRepository extends IAuthRepository {
           {required final UpdateProfileDto updateProfileDto}) =>
       put(
           url: 'customers/profile',
-          needLocation: false,
+          ,
           parameters: updateProfileDto.toJson(),
           mapper: UserProfileModel.fromJson);
 

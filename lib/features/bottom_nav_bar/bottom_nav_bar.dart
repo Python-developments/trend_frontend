@@ -114,7 +114,7 @@ class _MainScreenState extends State<MainScreen> {
         height: 25.5,
         color: currentIndex == index
             ? AppStyle.black
-            : AppStyle.black.400,
+            : AppStyle.black.shade400,
       ),
     );
   }

@@ -9,11 +9,9 @@ class CustomAppBar extends AppBar {
   final String barTitle;
   final BuildContext context;
   final List<Widget> barActions;
-  final bool isColorfulBar;
   CustomAppBar(
       {required this.barTitle,
       required this.context,
-      required this.isColorfulBar,
       super.key,
       this.barActions = const []})
       : super(
@@ -22,8 +20,7 @@ class CustomAppBar extends AppBar {
             scrolledUnderElevation: 0,
             flexibleSpace: Container(
               decoration: BoxDecoration(
-                gradient: isColorfulBar ? AppStyle.gradient : null,
-                color: !isColorfulBar ? AppStyle.white : null,
+                color: AppStyle.white ,
               ),
             ),
             leading: getAppRouter.canPop()

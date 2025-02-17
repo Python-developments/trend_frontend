@@ -72,7 +72,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
               ),
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
-                  baseColor: AppStyle.black.100,
+                  baseColor: AppStyle.black.shade100,
                   highlightColor: Colors.grey[100]!,
                   child: Container(
                     decoration: BoxDecoration(
@@ -93,7 +93,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                   // Show a loading indicator at the bottom
                   if (state.allPost.results.length  % 2 == 0){
                     return Shimmer.fromColors(
-                      baseColor: AppStyle.black.100,
+                      baseColor: AppStyle.black.shade100,
                       highlightColor: Colors.grey[100]!,
                       child: Container(
                         decoration: BoxDecoration(
@@ -103,8 +103,8 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                     );
                   }else{
                     return Shimmer.fromColors(
-                      baseColor: AppStyle.black.100,
-                      highlightColor: AppStyle.black.400,
+                      baseColor: AppStyle.black.shade100,
+                      highlightColor: AppStyle.black.shade400,
                       child: Container(
                         decoration: BoxDecoration(
                             color: Color(AppColors.greyLighter)

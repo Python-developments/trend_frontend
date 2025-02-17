@@ -23,7 +23,7 @@ abstract class IRepository {
           required final Map<String, dynamic> parameters}) =>
       httpClient.sendRequest(
           requestType: RequestMethod.get, url: url, parameters: parameters);
-  Future<T> getObjectMethod<T>(
+  Future<T> getObject<T>(
       {required final String url,
       required final T Function(Map<String, dynamic>) mapper,
       required final Map<String, dynamic> parameters}) async {
@@ -39,7 +39,7 @@ abstract class IRepository {
     }
   }
 
-  Future<List<T>> getListMethod<T>(
+  Future<List<T>> getList<T>(
       {required final String url,
       required final T Function(Map<String, dynamic>) mapper,
       required final Map<String, dynamic> parameters}) async {
@@ -55,7 +55,7 @@ abstract class IRepository {
     }
   }
 
-  Future<PaginationDataModel<T>> getPaginationMethod<T>(
+  Future<PaginationDataModel<T>> getPagination<T>(
       {required final String url,
       required final int page,
       required final int perPage,
@@ -76,7 +76,7 @@ abstract class IRepository {
     }
   }
 
-  Future<T> postMethod<T>(
+  Future<T> post<T>(
       {required final String url,
       required final Map<String, dynamic> parameters,
       required final T Function(Map<String, dynamic>) mapper,
@@ -97,7 +97,7 @@ abstract class IRepository {
     }
   }
 
-  Future<T> patchMethod<T>(
+  Future<T> patch<T>(
       {required final String url,
       required final Map<String, dynamic> parameters,
       required final T Function(Map<String, dynamic>) mapper}) async {
@@ -117,7 +117,7 @@ abstract class IRepository {
     }
   }
 
-  Future<T> putMethod<T>(
+  Future<T> put<T>(
       {required final String url,
       required final Map<String, dynamic> parameters,
       required final T Function(Map<String, dynamic>) mapper}) async {

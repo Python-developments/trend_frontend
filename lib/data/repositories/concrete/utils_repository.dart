@@ -20,12 +20,12 @@ class UtilsRepository extends IUtilsRepository {
   Future<List<CategoryModel>> getCategories() =>getList<CategoryModel>(
   url: 'store/categories',
   parameters: {},
-  needLocation: true,
+  ,
   mapper: CategoryModel.fromJson);
   @override
   Future<AppSettingsModel> getAppSettings() async => getObject(
   url: 'store/settings',
-  needLocation: false,
+  ,
   mapper: (final data) => AppSettingsModel.fromJson(data));
 
   @override
@@ -33,7 +33,7 @@ class UtilsRepository extends IUtilsRepository {
           {required final String languageCode}) async =>
       getObject(
           url: 'store/translations',
-          needLocation: false,
+          ,
           parameters: {'acceptLanguage': languageCode},
           mapper: (final data) => AppTranslationModel(
               translation: data.map(
@@ -43,12 +43,12 @@ class UtilsRepository extends IUtilsRepository {
   Future<String> getStaticPage({required final StaticPageType type}) =>
       getObject(
           url: 'store/pages/${type.name}',
-          needLocation: false,
+          ,
           mapper: (final data) => data['content']);
   @override
   Future<String> uploadMedia({required final FileDto fileDto}) async => post(
       url: 'files/upload',
-      needLocation: false,
+      ,
       parameters: {
         'mediaType': 'Normal',
         'file': MultipartFile.fromBytes(fileDto.fileBytes,

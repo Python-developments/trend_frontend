@@ -4,7 +4,7 @@ import 'package:trend/data/dtos/update_profile_dto.dart';
 import 'package:trend/data/local_database/entities/user_entity.dart';
 import 'package:trend/data/models/auth/login_response_model.dart';
 import 'package:trend/data/models/auth/user_profile_model.dart';
-import 'package:trend/data/repositories/abstract/i_repository_impl.dart';
+import 'package:trend/data/repositories/abstract/i_repository.dart';
 
 abstract class IAuthRepository extends IRepository {
   IAuthRepository(super.appFlavor,super.httpClient, super.appDatabase, super.logger,);
