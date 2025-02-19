@@ -60,7 +60,7 @@ class CustomNetworkImage extends StatelessWidget {
                     : Container(
                         height: height,
                         width: width,
-                        color: AppStyle.lightGray,
+                        color: AppStyle.black.shade200,
                       ),
           ),
         ),

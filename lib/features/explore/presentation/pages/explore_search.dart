@@ -1,5 +1,6 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:trend/features/explore/presentation/manager/location/location_event.dart';
 import 'package:trend/features/explore/presentation/pages/account_search.dart';
 import 'package:trend/shared/const/colors.dart';
@@ -100,7 +101,7 @@ class _ExploreSearchPageState extends State<ExploreSearchPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(AppColors.white),
+      backgroundColor: AppStyle.white,
       appBar: ExploreSearchAppBar(
         onSearchPressed: _handleSearch,
         textController: _textController,
@@ -159,3 +160,4 @@ class _ExploreSearchPageState extends State<ExploreSearchPage>
     super.dispose();
   }
 }
+*/

@@ -6,7 +6,7 @@ class Editandsetting extends StatelessWidget {
   const Editandsetting({super.key, this.onTap});
   final void Function()? onTap;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 50.w),
       child: Row(

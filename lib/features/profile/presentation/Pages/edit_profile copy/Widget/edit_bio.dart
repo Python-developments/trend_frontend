@@ -13,12 +13,7 @@ class EditBio extends StatefulWidget {
   final String title;
   final String value;
 
-  const EditBio({
-    required this.profileEdiable,
-    required this.lineCount,
-    required this.charsCount,
-    required this.title,
-    required this.value,
+  const EditBio({required this.profileEdiable, required this.lineCount, required this.charsCount, required this.title, required this.value, super.key,
   });
 
   @override
@@ -59,7 +54,7 @@ class _EditBioState extends State<EditBio> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Stack(
       children: [
         Scaffold(
@@ -82,7 +77,7 @@ class _EditBioState extends State<EditBio> {
                           width: 20.sp,
                         ),
                         Text(
-                          "Cancel",
+                          'Cancel',
                         ),
                         SizedBox(
                           width: 20.sp,
@@ -99,7 +94,7 @@ class _EditBioState extends State<EditBio> {
                   TextButton(
                     onPressed: _saveProfile,
                     child: Text(
-                      "Save",
+                      'Save',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -113,7 +108,7 @@ class _EditBioState extends State<EditBio> {
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     keyboardType: TextInputType.multiline,
-                    onChanged: (text) {
+                    onChanged: (final text) {
                       // Dynamically limit the number of lines
                       final lines = text.split('\n');
                       if (lines.length > widget.lineCount) {

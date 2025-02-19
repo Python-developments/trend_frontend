@@ -7,15 +7,16 @@ part of 'api_error.dart';
 // **************************************************************************
 
 ApiError _$ApiErrorFromJson(Map<String, dynamic> json) => ApiError(
-      statusCode: (json['code'] as num).toInt(),
-      validationErrors: (json['fields'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
+      validationErrors: (json['errors'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
       ),
-      apiErrorMessage: json['message'] as String,
+      apiErrorMessage: json['error'] as String?,
+      message: json['message'] as String,
     );
 
 Map<String, dynamic> _$ApiErrorToJson(ApiError instance) => <String, dynamic>{
-      'code': instance.statusCode,
-      'fields': instance.validationErrors,
-      'message': instance.apiErrorMessage,
+      'errors': instance.validationErrors,
+      'error': instance.apiErrorMessage,
+      'message': instance.message,
     };

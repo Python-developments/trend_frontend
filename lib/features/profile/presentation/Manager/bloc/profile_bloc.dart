@@ -1,15 +1,16 @@
+/*
 import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/features/profile/domain/repositories/updateProfile.dart';
 import 'package:trend/shared/const/app_links.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
+trend/
 
-import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
-import 'profile_event.dart';
-import 'profile_state.dart';
+
+import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
+import 'package:trend/features/profile/presentation/Manager/bloc/profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository repository;
@@ -23,7 +24,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<Logout>(_Logout);
     on<Delete>(_Delete);
     on<UpdateAvatar>(_UpdateAvatar);
-    on<ResetProfileState>((event, emit) {
+    on<ResetProfileState>((final event, final emit) {
       emit(ProfileInitial());
     });
     on<Updatebio>(_Updatebio);
@@ -33,39 +34,39 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   /// Fetch user profile
   Future<void> _onFetchProfile(
-    FetchProfileEvent event,
-    Emitter<ProfileState> emit,
+    final FetchProfileEvent event,
+    final Emitter<ProfileState> emit,
   ) async {
     emit(ProfileLoading());
     final userProfile = await repository.getProfile(event.id);
     userProfile.fold(
-      (failure) => emit(ProfileError(failure.message)),
-      (profile) {
+      (final failure) => emit(ProfileError(failure.message)),
+      (final profile) {
         if (profile != null) {
           emit(ProfileLoaded(profile));
         } else {
-          emit(ProfileError("Profile not found"));
+          emit(ProfileError('Profile not found'));
         }
       },
     );
   }
 
   Future<void> _getPostForUserMethod(
-    getPostForUserevent event,
-    Emitter<ProfileState> emit,
+    final getPostForUserevent event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(getPostForspecificUserLoading());
-      String? tok = await token.getToken();
+      final String? tok = await token.getToken();
       final response = await dio.get(
-        "${ApiEndpoints.baseUrl}/posts/${event.id}/posts/",
+        '${ApiEndpoints.baseUrl}/posts/${event.id}/posts/',
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),
       );
 
-      var data = response.data["results"];
-      List<PostModel> posts = [];
+      final data = response.data['results'];
+      final List<PostModel> posts = [];
       for (var element in data) {
         posts.add(PostModel.fromJson(element));
       }
@@ -82,8 +83,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _getBlockedUser(
-    getBlockedUser event,
-    Emitter<ProfileState> emit,
+    final getBlockedUser event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(getBlockedUserLoading());
@@ -95,7 +96,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       //   ),
       // );
 
-      List<ProfileModel> posts = await updateProfileRepository.getBlockedUser();
+      final List<ProfileModel> posts = await updateProfileRepository.getBlockedUser();
 
       emit(getBlockedUserLoaded(posts: posts));
     } catch (e) {
@@ -104,13 +105,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _Logout(
-    Logout event,
-    Emitter<ProfileState> emit,
+    final Logout event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(LogoutLoading());
 
-      SharedPreferencesDemo sh = SharedPreferencesDemo();
+      final SharedPreferencesDemo sh = SharedPreferencesDemo();
       await sh.clearUserData();
       emit(Logoutsuccess());
     } catch (e) {
@@ -119,8 +120,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _Delete(
-    Delete event,
-    Emitter<ProfileState> emit,
+    final Delete event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(DeleteLoading());
@@ -133,8 +134,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<void> _Updatebio(
-    Updatebio event,
-    Emitter<ProfileState> emit,
+    final Updatebio event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(UpdateLoading());
@@ -150,47 +151,47 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       //     headers: {'Authorization': 'Bearer $tok'},
       //   ),
       // );
-      final response = await updateProfileRepository.updateBio("${event.id}", event.bio!);
+      final response = await updateProfileRepository.updateBio('${event.id}', event.bio!);
       if (response.statusCode == 200) {
         emit(Updatesuccess(
-          response.data["avatar"],
-          response.data["bio"] ?? "",
-          response.data["full_name"] ?? "",
+          response.data['avatar'],
+          response.data['bio'] ?? '',
+          response.data['full_name'] ?? '',
         ));
       } else {
         emit(UpdateFailuer());
       }
     } catch (e) {
-      print("Error: $e");
+      print('Error: $e');
       emit(UpdateFailuer());
     }
   }
 
   Future<void> _Updatefullname(
-    Updatefullname event,
-    Emitter<ProfileState> emit,
+    final Updatefullname event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(UpdateLoading());
-      final response = await updateProfileRepository.updatefullname("${event.id}", event.full_name);
+      final response = await updateProfileRepository.updatefullname('${event.id}', event.full_name);
       if (response.statusCode == 200) {
         emit(Updatesuccess(
-          response.data["avatar"],
-          response.data["bio"] ?? "",
-          response.data["full_name"] ?? "",
+          response.data['avatar'],
+          response.data['bio'] ?? '',
+          response.data['full_name'] ?? '',
         ));
       } else {
         emit(UpdateFailuer());
       }
     } catch (e) {
-      print("Error: $e");
+      print('Error: $e');
       emit(UpdateFailuer());
     }
   }
 
   Future<void> _UpdateAvatar(
-    UpdateAvatar event,
-    Emitter<ProfileState> emit,
+    final UpdateAvatar event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
       emit(UpdateLoading());
@@ -210,43 +211,44 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       //     headers: {'Authorization': 'Bearer $tok'},
       //   ),
       // );
-      final response = await updateProfileRepository.updateAvatar("${event.id}", event.image);
+      final response = await updateProfileRepository.updateAvatar('${event.id}', event.image);
 
       if (response.statusCode == 200) {
         emit(Updatesuccess(
-          response.data["avatar"],
-          response.data["bio"] ?? "",
-          response.data["full_name"] ?? "",
+          response.data['avatar'],
+          response.data['bio'] ?? '',
+          response.data['full_name'] ?? '',
         ));
       } else {
         emit(UpdateFailuer());
       }
     } catch (e) {
-      print("Error: $e");
+      print('Error: $e');
       emit(UpdateFailuer());
     }
   }
 
   Future<void> _Accountprivacy(
-    Accountprivacy event,
-    Emitter<ProfileState> emit,
+    final Accountprivacy event,
+    final Emitter<ProfileState> emit,
   ) async {
     try {
-      String? tok = await token.getToken();
+      final String? tok = await token.getToken();
 
       final data = {
-        "is_private": event.private,
+        'is_private': event.private,
       };
       final response = await dio.put(
-        "${ApiEndpoints.baseUrl}/profile/${event.id}/",
+        '${ApiEndpoints.baseUrl}/profile/${event.id}/',
         data: FormData.fromMap(data),
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),
       );
     } catch (e) {
-      print("Error: $e");
+      print('Error: $e');
       emit(UpdateFailuer());
     }
   }
 }
+*/

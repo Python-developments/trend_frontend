@@ -1,8 +1,8 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:trend/features/posts/data/models/CommentModel.dart';
+import 'package:flutter_svg/svg.dart';import 'package:trend/data/models/posts/comment_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
@@ -130,3 +130,4 @@ class _ReplaycommentState extends State<Replaycomment> {
     );
   }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/cupertino.dart';
 import '../widgets/location/location_list_search.dart';
 
@@ -14,3 +15,4 @@ class LocationSearch extends StatelessWidget {
     );
   }
 }
+*/

@@ -1,7 +1,7 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../shared/const/colors.dart';
@@ -71,7 +71,7 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(AppColors.white),
+      backgroundColor: const AppStyle.white,
       appBar: _buildAppBar(),
       body: const CustomScrollView(slivers: [OnChangeSearchUserList()]),
     );
@@ -112,10 +112,10 @@ class _OnChangeSearchState extends State<OnChangeSearch> {
                       prefixIcon: const Icon(FontAwesomeIcons.search,
                           size: 16, color: Colors.black),
                       hintText: 'Search',
-                      hintStyle: AppStyles.styleNormal13
+                      hintStyle: AppStyle.styleNormal13
                           .copyWith(color: const AppStyle.black.shade400),
                       fillColor:
-                          const Color(AppColors.greyLighter).withOpacity(0.2),
+                          const Color(AppStyle.greyLighter).withOpacity(0.2),
                       filled: true,
                       border: _buildOutlineInputBorder(),
                       enabledBorder: _buildOutlineInputBorder(),
@@ -165,10 +165,10 @@ class OnChangeSearchUserList extends StatelessWidget {
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
               baseColor: const AppStyle.black.shade100,
-              highlightColor: const Color(AppColors.white),
+              highlightColor: const AppStyle.white,
             ),
             child: const Card(
-              color: Color(AppColors.white),
+              color: AppStyle.white,
               margin: EdgeInsets.zero,
               elevation: 0,
               child: ListTile(
@@ -211,3 +211,4 @@ class OnChangeSearchUserList extends StatelessWidget {
     );
   }
 }
+*/

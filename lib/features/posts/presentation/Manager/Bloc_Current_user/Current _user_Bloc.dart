@@ -1,5 +1,6 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+/*
+
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_state.dart';
@@ -21,3 +22,4 @@ class CurrentUserBloc extends Bloc<CurrentUserEvent, CurrentuserState> {
     }
   }
 }
+*/

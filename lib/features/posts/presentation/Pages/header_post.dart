@@ -1,11 +1,10 @@
+/*
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
-import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_event.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/widgets/post_details.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_get.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
@@ -13,7 +12,6 @@ import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.da
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
 import 'package:trend/shared/const/app_links.dart';
 
-import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 import '../../../../shared/utiles/routes.dart';
 
 class HeaderPost extends StatelessWidget {
@@ -163,3 +161,4 @@ class HeaderPost extends StatelessWidget {
     );
   }
 }
+*/

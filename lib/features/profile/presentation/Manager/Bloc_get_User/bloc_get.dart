@@ -1,12 +1,13 @@
+/*
 import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/states.getU.dart';
 import 'package:trend/shared/const/app_links.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
+trend/
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   Dio dio;
@@ -87,3 +88,4 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 }
+*/

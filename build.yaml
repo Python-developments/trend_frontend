@@ -1,0 +1,57 @@
+
+targets:
+  $default:
+    builders:
+      auto_route_generator:auto_route_generator: # this for @RoutePage
+        options:
+          enable_cached_builds: true
+        generate_for:
+            - lib/features/**/presentation/pages/**_page.dart
+            - lib/core/presentation/pages/**_page.dart
+            - lib/features/home/presentation/pages/home_page_navigation.dart
+            - lib/core/presentation/router/auto_router.dart
+
+      json_serializable:
+        options:
+          explicit_to_json: true
+          field_rename: snake
+      mobx_codegen:mobx_generator:
+        options:
+          generate_for:
+            - lib/core/controllers/**_controller.dart
+            - lib/features/**/presentation/controllers/**_controller.dart
+
+      injectable_generator:injectable_builder:
+        options:
+          generate_for:
+            - lib/core/controllers/**_controller.dart
+            - lib/features/**/presentation/controllers/**_controller.dart
+            - lib/data/**/concrete/**
+
+      freezed:
+        options:
+          generate_for:
+            - lib/data/models/**
+
+global_options:
+  json_serializable:
+    runs_before:
+      - mobx_codegen:mobx_generator
+  freezed:
+    runs_before:
+      - mobx_codegen:mobx_generator
+#builders:
+ # mobx_codegen|mobx_generator:
+  #  import: "package:mobx_codegen/builder.dart"
+   # build_extensions: {}
+    #builder_factories: ["mobxGenerator"]
+    #required_inputs: [ freezed, json_serializable,drift_dev ]
+
+
+
+#build_extensions:
+# .dart:
+#   - json_serializable|*.dart
+#   - drift_dev|*.dart
+#   - drift|*.dart
+#   - mobx_codegen|*.dart

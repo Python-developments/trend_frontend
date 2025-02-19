@@ -1,8 +1,9 @@
+/*
 import 'package:dartz/dartz.dart';
 
-import '../../../../shared/core/failure.dart';
-import '../entities/location_search.dart';
-import '../repositories/get_post_base_repository.dart';
+import 'package:trend/shared/core/failure.dart';
+import 'package:trend/features/explore/domain/entities/location_search.dart';
+import 'package:trend/features/explore/domain/repositories/get_post_base_repository.dart';
 
 
 
@@ -11,7 +12,7 @@ class LocationSearchUseCase {
 
   LocationSearchUseCase({required this.baseGetPostRepository});
 
-  Future<Either<Failure,LocationsSearch >> execute(String query)async {
+  Future<Either<Failure,LocationsSearch >> execute(final String query)async {
     return await baseGetPostRepository.locationSearch(query);
   }
-}
+}*/

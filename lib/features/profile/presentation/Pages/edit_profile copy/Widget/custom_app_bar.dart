@@ -1,7 +1,8 @@
+/*
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
@@ -82,6 +83,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
+*//*
+
+*/
 /**() {
               // ProfileHelper.saveProfile(
               //     context, userId, fullname, bio, selectedImage);
@@ -100,4 +104,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               // );
 
               // Navigator.pop(context);
-            } */
+            } *//*
+*/
+/*
+
+*/

@@ -1,8 +1,9 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../../shared/const/colors.dart';
+
 import '../../../../../shared/core/enum.dart';
 import '../../../data/models/local/user_details_model.dart';
 import '../../manager/for_you/for_you_search_bloc.dart';
@@ -45,12 +46,12 @@ class AccountListSearch extends StatelessWidget {
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
               baseColor: AppStyle.black.shade100,
-              highlightColor: Color(AppColors.white),
+              highlightColor: AppStyle.white,
             ),
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
-              color: Color(AppColors.white),
+              color: AppStyle.white,
               child: const ListTile(
                 leading: Bone.circle(size: 60),
                 title: Bone.text(words: 2),
@@ -93,3 +94,4 @@ class AccountListSearch extends StatelessWidget {
     );
   }
 }
+*/

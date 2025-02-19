@@ -1,11 +1,11 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trend/features/explore/data/models/local/location_details.dart';
 import 'package:trend/features/explore/presentation/manager/location/location_state.dart';
 
-import '../../../../../shared/const/colors.dart';
+
 import '../../../../../shared/core/enum.dart';
 import '../../manager/location/location_bloc.dart';
 import 'location_search_container.dart';
@@ -43,12 +43,12 @@ class LocationListSearch extends StatelessWidget {
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
               baseColor: AppStyle.black.shade100,
-              highlightColor: Color(AppColors.white),
+              highlightColor: AppStyle.white,
             ),
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
-              color: Color(AppColors.white),
+              color: AppStyle.white,
               child: const ListTile(
                 leading: Icon(
                   Icons.location_on,
@@ -98,3 +98,4 @@ class LocationListSearch extends StatelessWidget {
     );
   }
 }
+*/

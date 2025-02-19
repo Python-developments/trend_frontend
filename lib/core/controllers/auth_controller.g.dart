@@ -124,17 +124,6 @@ mixin _$AuthController on AuthControllerBase, Store {
   }
 
   @override
-  void loginAsGuest() {
-    final _$actionInfo = _$AuthControllerBaseActionController.startAction(
-        name: 'AuthControllerBase.loginAsGuest');
-    try {
-      return super.loginAsGuest();
-    } finally {
-      _$AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   Future<void> updateProfile({required UpdateProfileDto updateProfileDto}) {
     final _$actionInfo = _$AuthControllerBaseActionController.startAction(
         name: 'AuthControllerBase.updateProfile');

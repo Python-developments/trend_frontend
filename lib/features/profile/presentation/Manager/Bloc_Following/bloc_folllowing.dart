@@ -1,4 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+/*
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_Following/State_Following.dart';
@@ -12,17 +13,17 @@ class FollowingBloc extends Bloc<FollowingEvent, FollowingState> {
   }
 
   Future<void> _followUserEvent(
-      FollowUserEvent event, Emitter<FollowingState> emit) async {
+      final FollowUserEvent event, final Emitter<FollowingState> emit) async {
     emit(FollowingLoadding());
     try {
       await repository.followUser(event.userId);
-      SharedPreferences sharedPreferences =
+      final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      int c = await int.parse(sharedPreferences.getString('following')!);
+      int c = int.parse(sharedPreferences.getString('following')!);
 
       c++;
-      bool x = await sharedPreferences.setString('following', c.toString());
-      print("follow success $x");
+      final bool x = await sharedPreferences.setString('following', c.toString());
+      print('follow success $x');
       print(c);
       emit(FollowingSuccess());
     } catch (e) {
@@ -31,21 +32,21 @@ class FollowingBloc extends Bloc<FollowingEvent, FollowingState> {
   }
 
   Future<void> _unfollowUserEvent(
-      UnFollowUserEvent event, Emitter<FollowingState> emit) async {
+      final UnFollowUserEvent event, final Emitter<FollowingState> emit) async {
     emit(UnFollowingLoadding());
     try {
       await repository.unfollowUser(event.userId);
-      SharedPreferences sharedPreferences =
+      final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
 
-      int c = await int.parse(sharedPreferences.getString('following')!);
+      int c = int.parse(sharedPreferences.getString('following')!);
       c--;
-      bool x = await sharedPreferences.setString('following', c.toString());
+      final bool x = await sharedPreferences.setString('following', c.toString());
 
       emit(UnFollowingSuccess());
     } catch (e) {
       emit(UnFollowingFailuer());
-      ;
     }
   }
 }
+*/

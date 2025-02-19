@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+/*
+import
 
 class UserSearch extends Equatable {
   final int? count;
@@ -78,3 +79,4 @@ class User extends Equatable {
         avatar,
       ];
 }
+*/

@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/profile/data/models/currentUser.dart';
@@ -44,3 +45,4 @@ class Mynameandavatar extends StatelessWidget {
     ;
   }
 }
+*/

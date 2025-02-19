@@ -1,10 +1,11 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:trend/features/profile/data/models/currentUser.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/AnimatedAvatarWidget.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/body_Myprofile.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/custom_Backdrop_Filter.dart';
 
-import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
+
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -71,3 +72,4 @@ class _MyProfileState extends State<MyProfile> {
     );
   }
 }
+*/

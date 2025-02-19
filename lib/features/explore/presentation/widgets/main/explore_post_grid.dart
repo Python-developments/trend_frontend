@@ -1,10 +1,11 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:shimmer/shimmer.dart';
 import 'package:trend/features/explore/data/models/local/explor_explore_post_container_model.dart';
 import 'package:trend/features/explore/presentation/manager/explore/explore_state.dart';
 import 'package:trend/features/explore/presentation/widgets/for_you/explore_explore_post_container.dart';
-import '../../../../../shared/const/colors.dart';
+
 import '../../../../../shared/core/enum.dart';
 import '../../manager/explore/explore_bloc.dart';
 import '../../manager/explore/explore_event.dart';
@@ -76,7 +77,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                   highlightColor: Colors.grey[100]!,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Color(AppColors.greyLighter)
+                        color: Color(AppStyle.greyLighter)
                     ),
                   ),
                 );
@@ -97,7 +98,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                       highlightColor: Colors.grey[100]!,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color(AppColors.greyLighter)
+                            color: Color(AppStyle.greyLighter)
                         ),
                       ),
                     );
@@ -107,7 +108,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                       highlightColor: AppStyle.black.shade400,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color(AppColors.greyLighter)
+                            color: Color(AppStyle.greyLighter)
                         ),
                       ),
                     ); 
@@ -145,4 +146,4 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
       },
     );
   }
-}
+}*/

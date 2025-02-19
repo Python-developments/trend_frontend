@@ -1,9 +1,9 @@
 // import 'package:dio/dio.dart';
 // import 'package:path/path.dart' as path;
-// import 'package:trend/features/posts/data/models/post_model.dart';
+// import 'package:trend/data/models/posts/post_model.dart';
 // import 'package:trend/features/profile/data/models/profile_model.dart';
 // import 'package:trend/shared/core/local/SharedPreferencesDemo.dart';
-// import 'package:trend/shared/core/shared_preferences.dart';
+// trend/
 
 // abstract class ProfileRemoteDataSource {
 //   Future<ProfileModel?> getProfile(String id);

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Commentcontent extends StatelessWidget {
-  const Commentcontent({super.key, required this.content});
+  const Commentcontent({required this.content, super.key});
   final String content;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

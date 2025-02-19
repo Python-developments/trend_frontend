@@ -3,7 +3,6 @@ import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
 import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
 import 'package:trend/core/presentation/widgets/horizontal_arrow_icon.dart';
-import 'package:trend/core/utils/extensions.dart';
 
 class CustomAppBar extends AppBar {
   final String barTitle;
@@ -27,9 +26,7 @@ class CustomAppBar extends AppBar {
                 ? HorizontalArrowIcon(
                     size: 24,
                     onTap: getAppRouter.maybePop,
-                    color: isColorfulBar
-                        ? AppStyle.white
-                        : AppStyle.black.shade900)
+                    color: AppStyle.black.shade900)
                 : null,
             title: Row(
               children: [
@@ -38,9 +35,7 @@ class CustomAppBar extends AppBar {
                     barTitle,
                     style: AppStyle.textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: isColorfulBar
-                            ? AppStyle.white
-                            : AppStyle.black.shade900),
+                        color: AppStyle.black.shade900),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

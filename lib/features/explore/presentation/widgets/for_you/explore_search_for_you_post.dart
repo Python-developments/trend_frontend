@@ -1,13 +1,10 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:shimmer/shimmer.dart'; // For Instagram-like animation
 
-import '../../../../../shared/const/colors.dart';
-import '../../../../../shared/core/enum.dart';
-import '../../../data/models/local/explor_explore_post_container_model.dart';
+
 import '../../../domain/entities/for_you_search.dart';
-import '../../manager/for_you/for_you_search_bloc.dart';
-import '../../manager/for_you/for_you_search_state.dart';
 import '../../pages/user_search_posts.dart';
 import 'explore_explore_post_container.dart';
 
@@ -48,7 +45,7 @@ class ExploreSearchForYouPost extends StatelessWidget {
           baseColor: AppStyle.black.shade100,
           highlightColor: Colors.grey[100]!,
           child: Container(
-            decoration: BoxDecoration(color: Color(AppColors.greyLighter)),
+            decoration: BoxDecoration(color: Color(AppStyle.greyLighter)),
           ),
         );
       },
@@ -106,3 +103,4 @@ class ExploreSearchForYouPost extends StatelessWidget {
     );
   }
 }
+*/

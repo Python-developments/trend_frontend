@@ -1,8 +1,8 @@
-import 'package:dio/dio.dart';
-import 'package:trend/features/posts/data/models/CommentModel.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+/*
+import 'package:dio/dio.dart';import 'package:trend/data/models/posts/comment_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
+
 
 import '../../../../shared/const/app_links.dart';
 
@@ -181,3 +181,4 @@ class DataRemoteSource {
     }
   }
 }
+*/

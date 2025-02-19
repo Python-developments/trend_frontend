@@ -1,5 +1,4 @@
 import 'package:trend/core/presentation/assets.dart';
-import 'package:trend/core/utils/extensions.dart';
 import 'package:trend/data/errors/custom_error.dart';
 
 class InternetConnectionError extends CustomError {
@@ -33,13 +32,6 @@ class ForbiddenError extends CustomError {
             errorImage: Assets.wowvir);
 }
 
-class UnSupportedLocationError extends CustomError {
-  UnSupportedLocationError()
-      : super(
-            errorMessage:
-                'Unfortunately, our services are currently unavailable in your area.',
-            errorImage: Assets.addressesEmptyView);
-}
 
 class NotFoundError extends CustomError {
   NotFoundError({required super.errorMessage})
@@ -74,7 +66,7 @@ class IsNotBiggerThanError extends CustomError {
       {required final String fieldName, required final num number})
       : super(
             errorMessage:
-                "${fieldName} ${"should be bigger than"} $number",
+                "$fieldName ${"should be bigger than"} $number",
             errorImage: null);
 }
 
@@ -83,7 +75,7 @@ class IsNotSmallerThanError extends CustomError {
       {required final String fieldName, required final num number})
       : super(
             errorMessage:
-                "${fieldName} ${"should be smaller than"} $number",
+                "$fieldName ${"should be smaller than"} $number",
             errorImage: null);
 }
 
@@ -91,7 +83,7 @@ class IsNotNameError extends CustomError {
   IsNotNameError({required final String fieldName})
       : super(
             errorMessage:
-                "${fieldName} ${"is not a valid name"}",
+                "$fieldName ${"is not a valid name"}",
             errorImage: null);
 }
 
@@ -99,7 +91,7 @@ class IsNotNumberError extends CustomError {
   IsNotNumberError({required final String fieldName})
       : super(
             errorMessage:
-                "${fieldName} ${"is not a valid number"}",
+                "$fieldName ${"is not a valid number"}",
             errorImage: null);
 }
 
@@ -107,7 +99,7 @@ class EmptyFieldError extends CustomError {
   EmptyFieldError({required final String fieldName})
       : super(
             errorMessage:
-                "${fieldName} ${"should not be empty"}",
+                "$fieldName ${"should not be empty"}",
             errorImage: null);
 }
 
@@ -116,7 +108,7 @@ class ShorterThanError extends CustomError {
       {required final String fieldName, required final int minLength})
       : super(
             errorMessage:
-                "${fieldName} ${"should be with length"} $minLength",
+                "$fieldName ${"should be with length"} $minLength",
             errorImage: null);
 }
 
@@ -124,6 +116,6 @@ class IsNotSelectedError extends CustomError {
   IsNotSelectedError({required final String fieldName})
       : super(
             errorMessage:
-                "${"Please select"} ${fieldName}",
+                "${"Please select"} $fieldName",
             errorImage: null);
 }

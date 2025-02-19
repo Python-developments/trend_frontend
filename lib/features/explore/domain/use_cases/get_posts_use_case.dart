@@ -1,8 +1,8 @@
+/*
 import 'package:dartz/dartz.dart';
 import 'package:trend/features/explore/domain/repositories/get_post_base_repository.dart';
 
-import '../../../../shared/core/failure.dart';
-import '../entities/all_post.dart';
+import 'package:trend/shared/core/failure.dart';
 
 class GetPostsUseCase {
   final BaseExploreRepository baseGetPostRepository;
@@ -13,3 +13,4 @@ class GetPostsUseCase {
     return await baseGetPostRepository.getAllPostsExplore();
   }
 }
+*/

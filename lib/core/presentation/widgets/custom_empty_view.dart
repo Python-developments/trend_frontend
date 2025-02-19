@@ -5,7 +5,6 @@ import 'package:trend/core/controllers/base_controller.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
 import 'package:trend/core/presentation/widgets/main_button.dart';
-import 'package:trend/core/utils/extensions.dart';
 
 class CustomEmptyView extends StatelessWidget {
   final BaseController controller;

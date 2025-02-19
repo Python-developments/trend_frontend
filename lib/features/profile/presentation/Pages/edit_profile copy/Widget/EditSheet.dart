@@ -10,14 +10,8 @@ class EditBottomSheet extends StatefulWidget {
   final double heightfactor;
   final void Function(String)? onChanged;
   const EditBottomSheet({
-    Key? key,
-    required this.x,
-    required this.onCancel,
-    required this.onChanged,
-    required this.Lenght,
-    required this.line,
-    required this.heightfactor,
-  }) : super(key: key);
+    required this.x, required this.onCancel, required this.onChanged, required this.Lenght, required this.line, required this.heightfactor, super.key,
+  });
 
   @override
   _EditBottomSheetState createState() => _EditBottomSheetState();
@@ -43,12 +37,12 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return LayoutBuilder(
-      builder: (context, cons) {
+      builder: (final context, final cons) {
         final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
-        return Container(
+        return DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30), topRight: Radius.circular(30)),
@@ -75,7 +69,7 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
                         Navigator.pop(context);
                       },
                       child: const Text(
-                        "Done",
+                        'Done',
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),
@@ -96,7 +90,7 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
                         Navigator.pop(context);
                       },
                       child: const Text(
-                        "Cancel",
+                        'Cancel',
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),

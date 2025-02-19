@@ -1,5 +1,6 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_get.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/states.getU.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
@@ -71,3 +72,4 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 }
+*/

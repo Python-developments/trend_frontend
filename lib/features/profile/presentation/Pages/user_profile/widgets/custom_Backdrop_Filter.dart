@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class customBackdropFilter extends StatelessWidget {
   const customBackdropFilter(
-      {super.key, required this.is_visible, this.onPointerUp});
+      {required this.is_visible, super.key, this.onPointerUp});
   final bool is_visible;
   final void Function(PointerUpEvent)? onPointerUp;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Visibility(
       visible: is_visible,
       child: Listener(

@@ -1,17 +1,16 @@
+/*
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trend/features/posts/data/models/CommentModel.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/data/models/posts/comment_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/profile/data/models/currentUser.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/display_User_Posts.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
 
 import '../../../../../shared/const/app_links.dart';
-import '../../../../../shared/core/local/SharedPreferencesDemo.dart';
+
 
 class PostBloc extends Bloc<PostEvent, PostState> {
   final PostRepository repository;
@@ -258,3 +257,4 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     final result = await repository.likeComment(event.subCommentId);
   }
 }
+*/

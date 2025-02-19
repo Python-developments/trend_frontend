@@ -7,7 +7,6 @@ import 'package:trend/core/presentation/widgets/close_widget.dart';
 import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
 import 'package:trend/core/presentation/widgets/main_button.dart';
 import 'package:trend/core/presentation/widgets/text_fields/form_controller_text_field.dart';
-import 'package:trend/core/utils/extensions.dart';
 import 'package:trend/dependencies.dart';
 
 class CustomTextFieldDialog extends StatefulWidget {

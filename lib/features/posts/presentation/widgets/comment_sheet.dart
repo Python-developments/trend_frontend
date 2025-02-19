@@ -1,11 +1,10 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
-import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_event.dart';
-import 'package:trend/features/posts/data/models/CommentModel.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/data/models/posts/comment_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/CommentSheet_Header.dart';
@@ -14,7 +13,6 @@ import 'package:trend/features/posts/presentation/widgets/comment_widget.dart';
 import 'package:trend/features/posts/presentation/widgets/customTextFiled.dart';
 import 'package:trend/shared/const/app_links.dart';
 
-import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 
 class CommentSheet extends StatefulWidget {
   const CommentSheet({super.key, required this.post, required this.postindex});
@@ -148,3 +146,4 @@ class _CommentSheetState extends State<CommentSheet> {
     );
   }
 }
+*/

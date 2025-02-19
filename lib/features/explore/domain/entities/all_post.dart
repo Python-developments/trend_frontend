@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+/*
+import 
 
 class AllPost extends Equatable {
   
@@ -86,3 +87,4 @@ class Post extends Equatable {
         hashtagsData,
       ];
 }
+*/

@@ -7,13 +7,11 @@ part of 'login_dto.dart';
 // **************************************************************************
 
 LoginDto _$LoginDtoFromJson(Map<String, dynamic> json) => LoginDto(
-      email: json['email'] as String,
+      username: json['username'] as String,
       password: json['password'] as String,
-      referralCode: json['referralCode'] as String?,
     );
 
 Map<String, dynamic> _$LoginDtoToJson(LoginDto instance) => <String, dynamic>{
-      'email': instance.email,
+      'username': instance.username,
       'password': instance.password,
-      'referralCode': instance.referralCode,
     };

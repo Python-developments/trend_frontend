@@ -1,5 +1,6 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:trend/features/profile/presentation/Manager/Display_followerBloc/followers_bloc.dart';
 import 'package:trend/features/profile/presentation/Manager/Display_followerBloc/followers_state.dart';
 import 'package:trend/features/profile/presentation/Pages/Followers/FollowerWidget.dart';
@@ -34,3 +35,4 @@ class FollowersList extends StatelessWidget {
     );
   }
 }
+*/

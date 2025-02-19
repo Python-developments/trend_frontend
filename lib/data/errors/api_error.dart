@@ -6,37 +6,36 @@ part 'api_error.g.dart';
 
 @JsonSerializable()
 class ApiError {
-  @JsonKey(name: 'code')
-  final int statusCode;
-  @JsonKey(name: 'fields')
-  final Map<String, String>? validationErrors;
-  @JsonKey(name: 'message')
-  final String apiErrorMessage;
+  @JsonKey(name: 'errors')
+  final Map<String, List<String>>? validationErrors;
+  @JsonKey(name: 'error')
+  final String? apiErrorMessage;
+  final String message;
 
   ApiError({
-    required this.statusCode,
     required this.validationErrors,
     required this.apiErrorMessage,
+    required this.message,
   });
 
   factory ApiError.fromJson(final Map<String, dynamic> data) =>
       _$ApiErrorFromJson(data);
 
-  CustomError get customError {
+  CustomError  customError(int statusCode) {
     return statusCode == 400
         ? BadRequestError(
-            errorMessage: apiErrorMessage, validationErrors: validationErrors)
+            errorMessage: apiErrorMessage??message??'', validationErrors: validationErrors?.map(
+          (key, value) => MapEntry(key, value.isNotEmpty ? value.first : ''),
+    ))
         : statusCode == 401
             ? UnAuthorizedError()
             : statusCode == 403
                 ? ForbiddenError()
                 : statusCode == 404
-                    ? NotFoundError(errorMessage: apiErrorMessage)
+                    ? NotFoundError(errorMessage: apiErrorMessage??message??'')
                     : statusCode == 422
                         ? UnProcessableEntityError(
-                            errorMessage: apiErrorMessage)
-                        : statusCode == 477
-                            ? UnSupportedLocationError()
+                            errorMessage: apiErrorMessage??message??'')
                             : ServerError();
   }
 }

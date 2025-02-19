@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 
 import 'package:trend/core/utils/enums.dart';
 import 'package:trend/core/utils/flavors.dart';
-import 'package:trend/dependencies.dart';
 import 'package:trend/third_parties_modules/abstract/i_http_requestor_module.dart';
 
 
@@ -25,7 +24,7 @@ class HttpRequestorModule extends IHttpRequestorModule {
   }
 
   Map<String, String> _headers(final String userToken) => {
-        'accept-language':"en",
+        'accept-language':'en',
         'accept': 'application/json',
         'X-Platform': 'mobileApp',
         if (userToken.length > 7) 'Authorization': 'Bearer $userToken',

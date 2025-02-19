@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/core/presentation/app_style.dart';
-import 'package:trend/dependencies.dart';
 
 class HorizontalArrowIcon extends StatelessWidget {
    final double size;
@@ -16,12 +15,15 @@ class HorizontalArrowIcon extends StatelessWidget {
       onTap: onTap,
       child: Center(
           child:Icon(
-            !getIt<LocalizationController>().isRtlLanguage?isLeftInEnglish
+            /*!getIt<LocalizationController>().isRtlLanguage?isLeftInEnglish
                 ? Icons.arrow_back_ios_new
                 : Icons.arrow_forward_ios
                 :!isLeftInEnglish
                 ? Icons.arrow_back_ios_new
-                : Icons.arrow_forward_ios,
+                : Icons.arrow_forward_ios*/
+          isLeftInEnglish
+          ? Icons.arrow_back_ios_new
+              : Icons.arrow_forward_ios,
             size: size.r,
             color: color ?? AppStyle.black.shade900,
             textDirection: TextDirection.ltr,

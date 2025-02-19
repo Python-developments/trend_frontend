@@ -7,16 +7,16 @@ part of 'register_dto.dart';
 // **************************************************************************
 
 RegisterDto _$RegisterDtoFromJson(Map<String, dynamic> json) => RegisterDto(
-      name: json['name'] as String,
+      username: json['username'] as String,
       email: json['email'] as String,
-      referralCode: json['referralCode'] as String?,
+      confirmPassword: json['passwordConfirm'] as String,
       password: json['password'] as String,
     );
 
 Map<String, dynamic> _$RegisterDtoToJson(RegisterDto instance) =>
     <String, dynamic>{
-      'email': instance.email,
+      'username': instance.username,
       'password': instance.password,
-      'name': instance.name,
-      'referralCode': instance.referralCode,
+      'email': instance.email,
+      'passwordConfirm': instance.confirmPassword,
     };

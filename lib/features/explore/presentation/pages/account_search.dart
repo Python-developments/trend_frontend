@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import '../widgets/accounts/account_list_search.dart';
 
@@ -14,3 +15,4 @@ class SearchAccounts extends StatelessWidget {
     );
   }
 }
+*/

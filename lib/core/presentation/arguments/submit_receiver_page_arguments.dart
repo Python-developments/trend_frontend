@@ -1,4 +1,3 @@
-import 'package:trend/core/utils/enums.dart';
 
 class SubmitReceiverPageArguments {
   final Future<void> Function({required String receiver})

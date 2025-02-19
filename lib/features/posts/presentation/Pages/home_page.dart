@@ -1,11 +1,12 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/posts/presentation/Pages/main_post.dart';
 import 'package:trend/features/posts/presentation/widgets/Post_Shimmer.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
+trend/
 
 import '../../../../shared/const/app_links.dart';
 import '../../../../shared/const/colors.dart';
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Color(AppColors.white),
+        backgroundColor: AppStyle.white,
         scrolledUnderElevation: 0,
         elevation: 0,
         title: const Align(
@@ -113,3 +114,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+*/

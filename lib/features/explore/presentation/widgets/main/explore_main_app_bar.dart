@@ -1,11 +1,11 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trend/shared/style/app_styles.dart';
 import 'package:trend/shared/utiles/routes.dart';
 
-import '../../../../../shared/const/colors.dart';
+
 import '../../../../../shared/utiles/services_local.dart';
 import '../../manager/for_you/for_you_search_bloc.dart';
 import '../../pages/on_change_search.dart';
@@ -65,7 +65,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
                   decoration: BoxDecoration(
-                    color: Color(AppColors.greyLighter).withOpacity(0.2),
+                    color: Color(AppStyle.greyLighter).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(7),
                   ),
                   child: Row(
@@ -79,7 +79,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                       SizedBox(width: 8),
                       Text(
                         '  Search',
-                        style: AppStyles.styleNormal13.copyWith(
+                        style: AppStyle.styleNormal13.copyWith(
                           color: AppStyle.black.shade400,
                         ),
                       ),
@@ -94,3 +94,4 @@ class ExploreMainAppBarContainer extends StatelessWidget
     );
   }
 }
+*/

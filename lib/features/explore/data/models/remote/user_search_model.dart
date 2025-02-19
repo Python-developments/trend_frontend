@@ -1,3 +1,4 @@
+/*
 import 'package:trend/features/explore/domain/entities/user_search.dart';
 
 class UserSearchModel extends UserSearch {
@@ -7,14 +8,14 @@ class UserSearchModel extends UserSearch {
       required super.previous,
       required super.results});
 
-  factory UserSearchModel.fromJson(Map<String, dynamic> json) {
+  factory UserSearchModel.fromJson(final Map<String, dynamic> json) {
     return UserSearchModel(
-      count: json["count"],
-      next: json["next"],
-      previous: json["previous"],
-      results: json["results"] == null
+      count: json['count'],
+      next: json['next'],
+      previous: json['previous'],
+      results: json['results'] == null
           ? null
-          : ResultsModel.fromJson(json["results"]),
+          : ResultsModel.fromJson(json['results']),
     );
   }
 }
@@ -22,15 +23,15 @@ class UserSearchModel extends UserSearch {
 class ResultsModel extends Results {
   ResultsModel({required super.metadata, required super.users});
 
-  factory ResultsModel.fromJson(Map<String, dynamic> json) {
+  factory ResultsModel.fromJson(final Map<String, dynamic> json) {
     return ResultsModel(
-      metadata: json["metadata"] == null
+      metadata: json['metadata'] == null
           ? null
-          : MetadataModel.fromJson(json["metadata"]),
-      users: json["users"] == null
+          : MetadataModel.fromJson(json['metadata']),
+      users: json['users'] == null
           ? []
           : List<User>.from(
-              json["users"]!.map((x) => UserModel.fromJson(x))),
+              json['users']!.map((final x) => UserModel.fromJson(x))),
     );
   }
 }
@@ -38,10 +39,10 @@ class ResultsModel extends Results {
 class MetadataModel extends Metadata {
   MetadataModel({required super.totalCount, required super.query});
 
-  factory MetadataModel.fromJson(Map<String, dynamic> json) {
+  factory MetadataModel.fromJson(final Map<String, dynamic> json) {
     return MetadataModel(
-      totalCount: json["total_count"],
-      query: json["query"],
+      totalCount: json['total_count'],
+      query: json['query'],
     );
   }
 }
@@ -54,13 +55,14 @@ class UserModel extends User {
       required super.fullName,
       required super.avatar});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromJson(final Map<String, dynamic> json) {
     return UserModel(
-      id: json["id"],
-      username: json["username"],
-      email: json["email"],
-      fullName: json["full_name"],
-      avatar: json["avatar"],
+      id: json['id'],
+      username: json['username'],
+      email: json['email'],
+      fullName: json['full_name'],
+      avatar: json['avatar'],
     );
   }
 }
+*/

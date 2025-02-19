@@ -1,12 +1,11 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trend/core/presentation/app_style.dart';
+
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_get.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
 
-import '../../../../shared/const/colors.dart';
-import '../../../../shared/style/app_styles.dart';
-import '../../../../shared/utiles/routes.dart';
-import '../../data/models/local/user_details_model.dart';
+
 
 class UserAccountDetails extends StatelessWidget {
   const UserAccountDetails({Key? key, required this.model}) : super(key: key);
@@ -15,7 +14,7 @@ class UserAccountDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(AppColors.white),
+      color: AppStyle.white,
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 13, vertical: 9),
         leading: CircleAvatar(
@@ -25,13 +24,12 @@ class UserAccountDetails extends StatelessWidget {
         ),
         title: Text(
           model.username,
-          style: AppStyles.styleBold16,
+          style: AppStyle.styleBold16,
         ),
         subtitle: Text(
           model.full_name,
-          style: AppStyles.styleNormal11.copyWith(
-              color: Color(
-            AppColors.greyDark,
+          style: AppStyle.textTheme!.bodySmall!.copyWith(
+              color: AppStyle.black.shade400,
           )),
         ),
         horizontalTitleGap: 14,
@@ -45,3 +43,4 @@ class UserAccountDetails extends StatelessWidget {
     );
   }
 }
+*/

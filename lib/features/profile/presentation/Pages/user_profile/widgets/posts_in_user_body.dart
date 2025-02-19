@@ -1,5 +1,6 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
@@ -83,12 +84,12 @@ class _PostsInUserBodyState extends State<PostsInUserBody> {
                         effect: ShimmerEffect(
                           duration: const Duration(milliseconds: 1500),
                           baseColor: AppStyle.black.shade100,
-                          highlightColor: Color(AppColors.white),
+                          highlightColor: AppStyle.white,
                         ),
                         child: Card(
                           margin: const EdgeInsets.all(0),
                           elevation: 0,
-                          color: Color(AppColors.white),
+                          color: AppStyle.white,
                           child: ListTile(
                             leading: Bone.circle(size: 60),
                             title: Bone.text(words: 2),
@@ -100,3 +101,4 @@ class _PostsInUserBodyState extends State<PostsInUserBody> {
         });
   }
 }
+*/

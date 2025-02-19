@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trend/shared/const/colors.dart';
@@ -12,12 +13,12 @@ class PostSkeleton extends StatelessWidget {
       effect: ShimmerEffect(
         duration: const Duration(milliseconds: 1500),
         baseColor: AppStyle.black.shade100,
-        highlightColor: Color(AppColors.white),
+        highlightColor: AppStyle.white,
       ),
       child: Container(
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Color(AppColors.white),
+          color: AppStyle.white,
           borderRadius: BorderRadius.circular(10),
         ),
         height: 120,
@@ -58,3 +59,4 @@ class PostSkeleton extends StatelessWidget {
     return _buildGridSkeleton();
   }
 }
+*/

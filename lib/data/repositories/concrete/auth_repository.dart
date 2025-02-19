@@ -16,7 +16,7 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<void> register(final RegisterDto registerDto) async {
     final LoginResponseModel response = await post(
-        url: 'customer/auth/signup',
+        url: 'auth/register/',
         parameters: registerDto.toJson(),
         mapper: LoginResponseModel.fromJson,
         );
@@ -45,19 +45,16 @@ class AuthRepository extends IAuthRepository {
       token: response.token,
     );
 
-    await Future.wait([
-      migrateLocalUserToOnline(),
-      updateNotificationsToken(),
-    ]);
+
     return response;
   }
 
   @override
   Future<LoginResponseModel> loginByEmail(final LoginDto loginDto) async {
     final LoginResponseModel responseModel = await _login(
-        url: 'customer/auth/login',
+        url: 'auth/login/',
         parameters: loginDto.toJson(),
-        email: loginDto.email,
+        email: loginDto.username,
         loginMethod: 'Email');
     return responseModel;
   }
@@ -65,7 +62,7 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<void> sendEmailConfirmationCode({required final String email}) => post(
       url: 'customer/auth/resend-email',
-      ,
+
       parameters: {'email': email},
       mapper: emptyMapper);
 
@@ -102,23 +99,10 @@ class AuthRepository extends IAuthRepository {
       );
 
 
-
-  @override
-  Future<void> deleteNotificationsToken() => put(
-      url: 'customers/ns-token',
-      parameters: {
-        'notificationToken': null,
-        'notificationServer': notificationsModule.providerType.name
-      },
-      mapper: emptyMapper,
-      );
-
   @override
   Future<void> logout() async {
     await Future.wait([
-      notificationsModule.deleteToken(),
       appDatabase.clearUserCache(),
-      deleteNotificationsToken()
     ]);
 
     await setCurrentTokenSession(token: '');
@@ -129,24 +113,19 @@ class AuthRepository extends IAuthRepository {
           {required final String email, required final String otpCode}) =>
       post(
           url: 'customer/auth/verify-email',
-          ,
           parameters: {'email': email, 'otp': otpCode},
           mapper: emptyMapper);
 
   @override
   Future<void> sendForgetPasswordCode({required final String email}) => post(
       url: 'customer/auth/forgot-password',
-      ,
       parameters: {'email': email},
       mapper: emptyMapper);
 
   @override
   Future<void> deleteAccount() async {
     await Future.wait([
-      notificationsModule.deleteToken(),
       appDatabase.clearUserCache(),
-      deleteNotificationsToken(),
-      delete(url: 'customers/profile', ),
     ]);
 
     await setCurrentTokenSession(token: '');
@@ -155,7 +134,6 @@ class AuthRepository extends IAuthRepository {
   @override
   Future<UserProfileModel> changeEmail({required final String email}) => put(
       url: 'customers/profile',
-      ,
       parameters: {'email': email},
       mapper: UserProfileModel.fromJson);
 
@@ -164,7 +142,6 @@ class AuthRepository extends IAuthRepository {
           {required final UpdateProfileDto updateProfileDto}) =>
       put(
           url: 'customers/profile',
-          ,
           parameters: updateProfileDto.toJson(),
           mapper: UserProfileModel.fromJson);
 

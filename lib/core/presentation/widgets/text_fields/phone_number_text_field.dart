@@ -8,10 +8,8 @@ import 'package:trend/core/controllers/controllers_mixins/form_mixin.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/assets.dart';
 import 'package:trend/core/presentation/validators/is_shorter_than_validator.dart';
-import 'package:trend/core/utils/extensions.dart';
 import 'package:trend/core/utils/masked_formatter.dart';
 import 'package:trend/core/utils/mixins.dart';
-import 'package:trend/dependencies.dart';
 
 class PhoneNumberTextField extends StatefulWidget {
   final FormMixin formController;
@@ -90,22 +88,19 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField>
               prefixIcon: const Icon(Icons.search),
             )),
         disableLengthCheck: true,
-        languageCode:
-            getIt<LocalizationController>().currentLocale.languageCode,
+        languageCode:'en',
         countries: countries
             .where((final element) => element.name == 'United Arab Emirates')
             .toList(),
         autovalidateMode: AutovalidateMode.disabled,
         validator: (final _) async => IsShorterThanValidator(minLength: 13)
-            .check(fieldName: widget.title, toCheckString: textController.text)
-            ?,
+            .check(fieldName: widget.title, toCheckString: textController.text),
         cursorColor: AppStyle.black.shade600,
         inputFormatters: [MaskedInputFormatter('000000000')],
         decoration: InputDecoration(
           filled: true,
           fillColor: AppStyle.black.shade100,
-          errorText: widget
-              .formController.validationErrors[widget.errorKey]?,
+          errorText: widget.formController.validationErrors[widget.errorKey],
           border: const OutlineInputBorder(
             borderRadius: AppStyle.borderRadius,
             borderSide: BorderSide.none,

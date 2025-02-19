@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:trend/features/explore/domain/entities/for_you_search.dart';
 import 'package:trend/features/posts/presentation/Pages/main_post.dart';
@@ -25,7 +26,7 @@ class _UserSearchPostsPageState extends State<UserSearchPostsPage> {
       return Scaffold(body: Center(child: Text('No posts found')));
     }
     return Scaffold(
-        backgroundColor: Color(AppColors.white),
+        backgroundColor: AppStyle.white,
         appBar: UserSearchPostAppBar(title: widget.search),
         body: CustomScrollView(
           slivers: [
@@ -77,14 +78,15 @@ class UserSearchPostAppBar extends StatelessWidget
     return AppBar(
       centerTitle: true,
       title:
-          Text(title, style: AppStyles.styleSemiBold21.copyWith(fontSize: 18)),
+          Text(title, style: AppStyle.styleSemiBold21.copyWith(fontSize: 18)),
       shadowColor: AppStyle.black,
       elevation: 0,
-      surfaceTintColor: Color(AppColors.white),
-      backgroundColor: Color(AppColors.white),
+      surfaceTintColor: AppStyle.white,
+      backgroundColor: AppStyle.white,
     );
   }
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
+*/

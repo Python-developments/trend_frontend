@@ -6,7 +6,6 @@ import 'package:trend/core/presentation/widgets/close_widget.dart';
 import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
 import 'package:trend/core/presentation/widgets/main_button.dart';
 import 'package:trend/core/presentation/widgets/secondary_button.dart';
-import 'package:trend/core/utils/extensions.dart';
 
 class CustomImageDialog extends StatelessWidget {
   final String imagePath, mainActionTitle, content;

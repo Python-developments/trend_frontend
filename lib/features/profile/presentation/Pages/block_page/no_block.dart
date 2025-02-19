@@ -5,7 +5,7 @@ class NoBlock extends StatelessWidget {
   const NoBlock({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -20,7 +20,7 @@ class NoBlock extends StatelessWidget {
         children: [
           SizedBox(height: 100.h),
           Center(
-            child: Container(
+            child: SizedBox(
               height: 200,
               width: 200,
               child: Image.asset('assets/icons/block.png'),

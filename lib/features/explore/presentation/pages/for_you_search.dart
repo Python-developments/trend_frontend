@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/cupertino.dart';
 import '../../../../shared/const/colors.dart';
 import '../../../../shared/const/const.dart';
@@ -18,7 +19,7 @@ class ExploreSearchForYou extends StatelessWidget {
                 top: 14.0, left: 12.0, right: 12.0, bottom: 10.0),
             child: Text(
               accounts,
-              style: AppStyles.styleNormal16
+              style: AppStyle.bodyMedium
                   .copyWith(color: AppStyle.black),
             ),
           ),
@@ -33,7 +34,7 @@ class ExploreSearchForYou extends StatelessWidget {
                 top: 14.0, left: 12.0, right: 12.0, bottom: 7.0),
             child: Text(
               explorePost,
-              style: AppStyles.styleNormal16
+              style: AppStyle.bodyMedium
                   .copyWith(color: AppStyle.black),
             ),
           ),
@@ -45,3 +46,4 @@ class ExploreSearchForYou extends StatelessWidget {
     );
   }
 }
+*/

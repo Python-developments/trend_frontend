@@ -4,6 +4,12 @@ import 'package:trend/core/utils/enums.dart';
 import 'package:trend/core/utils/flavors.dart';
 import 'package:trend/data/clients/abstract/i_http_client.dart';
 import 'package:trend/data/errors/core_errors.dart';
+import 'package:trend/data/errors/custom_error.dart';
+import 'package:trend/data/errors/custom_error.dart';
+import 'package:trend/data/errors/custom_error.dart';
+import 'package:trend/data/errors/custom_error.dart';
+import 'package:trend/data/errors/custom_error.dart';
+import 'package:trend/data/errors/custom_error.dart';
 import 'package:trend/data/local_database/databases/abstract/i_app_local_database.dart';
 import 'package:trend/data/models/core/pagination_data_model.dart';
 import 'package:trend/data/models/core/pagination_response_model.dart';
@@ -26,13 +32,13 @@ abstract class IRepository {
   Future<T> getObject<T>(
       {required final String url,
       required final T Function(Map<String, dynamic>) mapper,
-      required final Map<String, dynamic> parameters}) async {
+       final Map<String, dynamic>? parameters}) async {
     try {
     final Map<String, dynamic> data =
-        (await _get(url: url, parameters: parameters)).data;
+        (await _get(url: url, parameters: parameters??{})).data;
       return mapper(data);
-    } catch (_) {
-      if(appFlavor.showErrors) {
+    } catch (e) {
+      if(appFlavor.showErrors|| e is CustomError) {
         rethrow;
       }
       throw SomethingWentWrongError();
@@ -47,8 +53,8 @@ abstract class IRepository {
     final ResponseModel response = await _get(url: url, parameters: parameters);
       final List<dynamic> data=response.data;
       return data.map((final e)=>mapper(e)).toList();
-    } catch (_) {
-      if(appFlavor.showErrors) {
+    } catch (e) {
+      if(appFlavor.showErrors|| e is CustomError) {
         rethrow;
       }
       throw SomethingWentWrongError();
@@ -68,8 +74,8 @@ abstract class IRepository {
         as PaginationResponseModel;
 
       return  PaginationDataModel.fromPaginationResponse(response,mapper);
-    } catch (_) {
-      if(appFlavor.showErrors) {
+    } catch (e) {
+      if(appFlavor.showErrors|| e is CustomError) {
         rethrow;
       }
       throw SomethingWentWrongError();
@@ -89,8 +95,8 @@ abstract class IRepository {
         isFormData: isFormData);
 
       return mapper(response.data);
-    } catch (_) {
-      if(appFlavor.showErrors) {
+    } catch (e) {
+      if(appFlavor.showErrors|| e is CustomError) {
         rethrow;
       }
       throw SomethingWentWrongError();
@@ -109,8 +115,8 @@ abstract class IRepository {
         isFormData: false);
 
       return mapper(response.data);
-    } catch (_) {
-      if(appFlavor.showErrors) {
+    } catch (e) {
+      if(appFlavor.showErrors|| e is CustomError) {
         rethrow;
       }
       throw SomethingWentWrongError();
@@ -128,8 +134,8 @@ abstract class IRepository {
         parameters: parameters,
         isFormData: false);
       return mapper(response.data);
-    } catch (_) {
-      if(appFlavor.showErrors) {
+    } catch (e) {
+      if(appFlavor.showErrors|| e is CustomError) {
         rethrow;
       }
       throw SomethingWentWrongError();

@@ -5,7 +5,6 @@ import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/validators/custom_validator.dart';
 import 'package:trend/core/presentation/validators/is_not_empty_validator.dart';
 import 'package:trend/core/utils/enums.dart';
-import 'package:trend/core/utils/extensions.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? title;
@@ -100,7 +99,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: AppStyle.borderRadius,
             borderSide: BorderSide(color: AppStyle.errorColor),
           ),
-          hintText: hint?,
+          hintText: hint,
           hintStyle: AppStyle.textTheme.bodySmall!
               .copyWith(color: AppStyle.black.shade600),
           prefixIconConstraints: BoxConstraints(

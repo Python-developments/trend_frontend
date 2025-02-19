@@ -109,7 +109,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ZoomingImage extends StatefulWidget {
-  const ZoomingImage({Key? key, required this.image}) : super(key: key);
+  const ZoomingImage({required this.image, super.key});
   final String image;
   @override
   State<ZoomingImage> createState() => _ZoomingImageState();
@@ -117,7 +117,7 @@ class ZoomingImage extends StatefulWidget {
 
 class _ZoomingImageState extends State<ZoomingImage>
     with SingleTickerProviderStateMixin {
-  double _scale = 1.0;
+  final double _scale = 1.0;
   double minScale = 1.0;
   double maxScale = 4.0;
   OverlayEntry? entry;
@@ -133,7 +133,7 @@ class _ZoomingImageState extends State<ZoomingImage>
     animationcontroller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200))
           ..addListener(() => controller.value = animation.value)
-          ..addStatusListener((status) {
+          ..addStatusListener((final status) {
             if (status == AnimationStatus.completed) {
               removeoverlay();
             }
@@ -145,6 +145,7 @@ class _ZoomingImageState extends State<ZoomingImage>
     entry = null;
   }
 
+  @override
   void dispose() {
     controller.dispose();
     animationcontroller.dispose();
@@ -152,23 +153,23 @@ class _ZoomingImageState extends State<ZoomingImage>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Center(child: buildimage());
   }
 
   Widget buildimage() {
     return Builder(
-      builder: (context) => InteractiveViewer(
+      builder: (final context) => InteractiveViewer(
         clipBehavior: Clip.none,
         minScale: minScale, // أقل تكبير (لن تقل الصورة عن حجمها الأصلي)
         maxScale: maxScale, // أكبر تكبير (يمكنك زيادته حسب الحاجة)
         panEnabled: false, // السماح بالحركة
         // boundaryMargin: EdgeInsets.all(0), // المسافة حول الصورة
         transformationController: controller,
-        onInteractionEnd: (details) {
+        onInteractionEnd: (final details) {
           resetanimation();
         },
-        onInteractionStart: (details) {
+        onInteractionStart: (final details) {
           if (details.pointerCount < 2) return;
 
           showOverlay(context);
@@ -180,20 +181,20 @@ class _ZoomingImageState extends State<ZoomingImage>
               // imageBuilder: (context, imageProvider) =>
               //     Image.asset('assets/images/avatar.jpg'), // الصورة المحمّلة
 
-              placeholder: (context, url) =>
+              placeholder: (final context, final url) =>
                   Image.asset('assets/images/avatar.jpg'), // صورة أثناء التحميل
 
-              errorWidget: (context, url, error) =>
+              errorWidget: (final context, final url, final error) =>
                   Image.asset('assets/images/avatar.jpg'), // صورة في حال الخطأ
             )),
       ),
     );
   }
 
-  void showOverlay(BuildContext context) {
+  void showOverlay(final BuildContext context) {
     final renderBox = context.findRenderObject()! as RenderBox;
     final offset = renderBox.localToGlobal(Offset.zero);
-    entry = OverlayEntry(builder: (context) {
+    entry = OverlayEntry(builder: (final context) {
       return Positioned(
           left: offset.dx,
           top: offset.dy,

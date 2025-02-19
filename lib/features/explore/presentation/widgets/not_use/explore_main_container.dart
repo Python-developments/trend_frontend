@@ -60,7 +60,7 @@
 //                       fit: BoxFit.scaleDown,
 //                       child: Text(
 //                         "#hsdahshdjg",
-//                         style: AppStyles.styleBold12,
+//                         style: AppStyle.styleBold12,
 //                       ),
 //                     ))
 //               ],

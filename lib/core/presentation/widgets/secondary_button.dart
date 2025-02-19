@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/core/presentation/app_style.dart';
-import 'package:trend/core/utils/extensions.dart';
 
 class SecondaryButton extends StatefulWidget {
   final String title;

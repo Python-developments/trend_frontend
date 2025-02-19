@@ -9,13 +9,13 @@ part of 'pagination_response_model.dart';
 PaginationResponseModel _$PaginationResponseModelFromJson(
         Map<String, dynamic> json) =>
     PaginationResponseModel(
-      totalItems: (json['totalItems'] as num).toInt(),
+      totalItems: (json['total_items'] as num).toInt(),
       items: json['items'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$PaginationResponseModelToJson(
         PaginationResponseModel instance) =>
     <String, dynamic>{
-      'totalItems': instance.totalItems,
+      'total_items': instance.totalItems,
       'items': instance.items,
     };

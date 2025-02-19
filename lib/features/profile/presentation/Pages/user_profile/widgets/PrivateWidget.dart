@@ -5,7 +5,7 @@ class PrivateWidget extends StatelessWidget {
   const PrivateWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -17,7 +17,7 @@ class PrivateWidget extends StatelessWidget {
         ),
         SizedBox(height: 10.h),
         Text(
-          "This Account is Private Follow this",
+          'This Account is Private Follow this',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 12.sp,
@@ -26,7 +26,7 @@ class PrivateWidget extends StatelessWidget {
           ),
         ),
         Text(
-          " Account to see his photos",
+          ' Account to see his photos',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 12.sp,

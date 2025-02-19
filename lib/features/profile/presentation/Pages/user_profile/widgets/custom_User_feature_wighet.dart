@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomUserFeatureWighet extends StatelessWidget {
   const CustomUserFeatureWighet(
-      {super.key, required this.number, required this.name});
+      {required this.number, required this.name, super.key});
   final String number;
   final String name;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
         Text(
-          '${number}',
+          number,
           style: TextStyle(
             fontSize: 13.sp,
             fontWeight: FontWeight.bold,

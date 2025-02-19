@@ -1,10 +1,8 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../shared/const/colors.dart';
-import '../../../../../shared/style/app_styles.dart';
-import '../../../../../shared/utiles/routes.dart';
+
 
 class ExploreSearchAppBar extends StatefulWidget
     implements PreferredSizeWidget {
@@ -81,10 +79,10 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
                         color: Colors.black,
                       ),
                       hintText: 'Search',
-                      hintStyle: AppStyles.styleNormal13.copyWith(
+                      hintStyle: AppStyle.styleNormal13.copyWith(
                         color: const AppStyle.black.shade400,
                       ),
-                      fillColor: const Color(AppColors.greyLighter)
+                      fillColor: const Color(AppStyle.greyLighter)
                           .withOpacity(0.2),
                       filled: true,
                       enabledBorder: _buildOutlineInputBorder(),
@@ -125,3 +123,4 @@ class _ExploreSearchViewState extends State<ExploreSearchAppBar> {
     );
   }
 }
+*/

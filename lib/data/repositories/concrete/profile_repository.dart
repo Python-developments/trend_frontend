@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
+import 'package:trend/data/models/core/notification_model.dart';
 import 'package:trend/data/models/core/pagination_data_model.dart';
 import 'package:trend/data/repositories/abstract/i_profile_repository.dart';
 import 'package:trend/data/repositories/abstract/i_repository.dart';
-import 'package:trend/features/notifications/data/models/notification_model.dart';
 
 @Singleton(as: IProfileRepository)
 class ProfileRepository extends IProfileRepository {

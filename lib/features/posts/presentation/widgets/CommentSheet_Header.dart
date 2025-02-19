@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CommentsheetHeader extends StatelessWidget {
-  const CommentsheetHeader({super.key, required this.commentcount});
+  const CommentsheetHeader({required this.commentcount, super.key});
   final String commentcount;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
         SizedBox(
@@ -29,8 +29,8 @@ class CommentsheetHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Comments "),
-            Text("${commentcount == "0" ? "" : commentcount}")
+            Text('Comments '),
+            Text(commentcount == '0' ? '' : commentcount)
           ],
         ),
         SizedBox(

@@ -62,7 +62,7 @@ mixin _$BaseController on BaseControllerBase, Store {
 
   @override
   Future<bool> runStorePrimaryFunction(Future<void> Function() function,
-      {void Function(Object) onCatchError}) {
+      {void Function(Object)? onCatchError}) {
     return _$runStorePrimaryFunctionAsyncAction.run(() =>
         super.runStorePrimaryFunction(function, onCatchError: onCatchError));
   }
@@ -73,7 +73,7 @@ mixin _$BaseController on BaseControllerBase, Store {
 
   @override
   Future<bool> runStoreSecondaryFunction(Future<void> Function() function,
-      {void Function(Object) onCatchError}) {
+      {void Function(Object)? onCatchError}) {
     return _$runStoreSecondaryFunctionAsyncAction.run(() =>
         super.runStoreSecondaryFunction(function, onCatchError: onCatchError));
   }

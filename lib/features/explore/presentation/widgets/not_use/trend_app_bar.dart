@@ -17,7 +17,7 @@
 //     return AppBar(
 //       backgroundColor: Colors.white,
 //       centerTitle: true,
-//       title: Text(trendName,style: AppStyles.styleSemiBold21,),
+//       title: Text(trendName,style: AppStyle.styleSemiBold21,),
 //     );
 //   }
 //

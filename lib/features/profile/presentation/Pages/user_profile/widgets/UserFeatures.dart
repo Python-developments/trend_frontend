@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
@@ -34,3 +35,4 @@ class UserFeatures extends StatelessWidget {
     );
   }
 }
+*/

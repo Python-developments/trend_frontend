@@ -1,6 +1,7 @@
+/*
 import 'dart:convert';
 
-import 'package:equatable/equatable.dart';
+import 
 
 class PostSearch extends Equatable {
   final int? count;
@@ -127,22 +128,22 @@ class RecentPost extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      "id": this.id,
-      "author": this.author,
-      "authorId": this.authorId,
-      "avatar": this.avatar,
-      "description": this.description,
-      "image": this.image,
-      "isLiked": this.isLiked,
-      "createdAt": this.createdAt?.toIso8601String(),
-      "updatedAt": this.updatedAt?.toIso8601String(),
-      "likesCount": this.likesCount,
-      "commentsCount": this.commentsCount,
-      "sharesCount": this.sharesCount,
-      "viewsCount": this.viewsCount,
-      "isPublic": this.isPublic,
-      "allowComments": this.allowComments,
-      "comments": jsonEncode(this.comments),
+      'id': id,
+      'author': author,
+      'authorId': authorId,
+      'avatar': avatar,
+      'description': description,
+      'image': image,
+      'isLiked': isLiked,
+      'createdAt': createdAt?.toIso8601String(),
+      'updatedAt': updatedAt?.toIso8601String(),
+      'likesCount': likesCount,
+      'commentsCount': commentsCount,
+      'sharesCount': sharesCount,
+      'viewsCount': viewsCount,
+      'isPublic': isPublic,
+      'allowComments': allowComments,
+      'comments': jsonEncode(comments),
     };
   }
 
@@ -232,3 +233,4 @@ class LikedUser extends Equatable {
         username,
       ];
 }
+*/

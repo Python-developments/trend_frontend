@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/PrivateWidget.dart';
@@ -13,3 +14,4 @@ class PrivateOrDiplayPosts extends StatelessWidget {
         : PostsInUserBody(userid: user.id);
   }
 }
+*/

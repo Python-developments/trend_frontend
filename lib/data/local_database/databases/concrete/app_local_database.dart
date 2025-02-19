@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:injectable/injectable.dart';
-import 'package:trend/core/utils/enums.dart';
 import 'package:trend/data/local_database/daos/users_dao.dart';
 import 'package:trend/data/local_database/databases/abstract/i_app_local_database.dart';
 import 'package:trend/data/local_database/entities/user_entity.dart';

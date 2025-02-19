@@ -1,5 +1,6 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:trend/features/explore/presentation/manager/explore/explore_bloc.dart';
 import 'package:trend/shared/const/colors.dart';
 import 'package:trend/shared/style/app_styles.dart';
@@ -23,7 +24,7 @@ class ExploreMainPage extends StatelessWidget {
           return Future.value(false);
         },
         child: Scaffold(
-          backgroundColor: Color(AppColors.white),
+          backgroundColor: AppStyle.white,
           appBar: ExploreMainAppBarContainer(),
           body: SafeArea(
               child: Column(
@@ -34,7 +35,7 @@ class ExploreMainPage extends StatelessWidget {
                     top: 14.0, left: 12.0, right: 12.0, bottom: 10.0),
                 child: Text(
                   explorePost,
-                  style: AppStyles.styleNormal16
+                  style: AppStyle.bodyMedium
                       .copyWith(color: AppStyle.black),
                 ),
               ),
@@ -47,3 +48,4 @@ class ExploreMainPage extends StatelessWidget {
     );
   }
 }
+*/

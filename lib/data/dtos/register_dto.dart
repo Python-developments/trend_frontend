@@ -4,12 +4,16 @@ part 'register_dto.g.dart';
 
 @JsonSerializable()
 class RegisterDto {
-  final String email, password, name;
-  final String? referralCode;
+  final String username, password, email;
+
+  @JsonKey(name: 'passwordConfirm')
+  final String confirmPassword;
+
+
   RegisterDto(
-      {required this.name,
+      {required this.username,
       required this.email,
-      required this.referralCode,
+      required this.confirmPassword,
       required this.password});
 
   Map<String, dynamic> toJson() => _$RegisterDtoToJson(this);

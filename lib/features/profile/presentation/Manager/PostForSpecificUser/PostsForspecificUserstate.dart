@@ -1,3 +1,4 @@
+/*
 import 'package:trend/features/explore/data/models/remote/get_all_post_model.dart';
 
 abstract class PostforuserState {}
@@ -17,3 +18,4 @@ class ErrorUserPostsState extends PostforuserState {
 
   ErrorUserPostsState({required this.message});
 }
+*/

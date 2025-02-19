@@ -3,12 +3,9 @@ import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:trend/core/controllers/base_controller.dart';
-import 'package:trend/core/presentation/arguments/confirm_otp_page_arguments.dart';
 import 'package:trend/core/presentation/arguments/submit_new_password_arguments.dart';
 import 'package:trend/core/presentation/arguments/submit_receiver_page_arguments.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
-import 'package:trend/core/presentation/snake_bars/snack_bar_messages.dart';
-import 'package:trend/core/utils/enums.dart';
 import 'package:trend/data/dtos/login_dto.dart';
 import 'package:trend/data/dtos/register_dto.dart';
 import 'package:trend/data/dtos/update_profile_dto.dart';
@@ -19,7 +16,6 @@ import 'package:trend/data/models/auth/user_profile_model.dart';
 import 'package:trend/data/repositories/abstract/i_auth_repository.dart';
 import 'package:trend/data/repositories/abstract/i_profile_repository.dart';
 import 'package:trend/dependencies.dart';
-import 'package:trend/third_parties_modules/abstract/i_sharing_module.dart';
 
 part 'auth_controller.g.dart';
 
@@ -63,8 +59,7 @@ abstract class AuthControllerBase extends BaseController with Store {
   }
 
   @action
-  Future<void> _refreshProfile() => Future.wait(
-      [checkAccountConfirmation()]);
+  Future<void> _refreshProfile() => checkAccountConfirmation();
 
 
   @action
@@ -86,25 +81,8 @@ abstract class AuthControllerBase extends BaseController with Store {
             .replace(LoginRoute());
       });
 
-  void emptyUserData() => userDataController.emptyUserData();
-  Future<void> changeUserLastLocation(
-          {required final double latitude,
-          required final double longitude,
-          required final String? addressString,
-          required final AddressModel? address}) =>
-      runStoreSecondaryFunction(() async {
-        await authRepository.setLastLocation(
-            latitude: latitude,
-            longitude: longitude,
-            addressString: addressString,
-            address: address);
-      });
-  Future<void> changeUserLanguage({required final String languageCode}) =>
-      runStoreSecondaryFunction(() async {
-        if (!isGuestUser) {
-          await profileRepository.changeAppLanguage(languageCode: languageCode);
-        }
-      });
+  void emptyUserData() {}
+
 
   Future<void> _login(final Future<LoginResponseModel> Function() profileGetter,) async {
     final LoginResponseModel loginResponseModel = await profileGetter();
@@ -134,12 +112,14 @@ abstract class AuthControllerBase extends BaseController with Store {
             appRouter.popUntilRoot();
           })));
 
+/*
   @action
   void loginAsGuest() {
     userProfileModel = null;
     appRouter.popUntilRoot();
     appRouter.replace(HomeRouteNavigation());
   }
+*/
 
   @action
   Future<void> updateProfile(
@@ -194,6 +174,7 @@ abstract class AuthControllerBase extends BaseController with Store {
             })));
   }
 
+  checkAccountConfirmation(){}
 
 
   @override

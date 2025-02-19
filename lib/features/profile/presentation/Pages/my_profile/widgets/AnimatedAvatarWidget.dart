@@ -7,19 +7,17 @@ class AnimatedAvatarWidget extends StatelessWidget {
   final String avatarUrl;
 
   const AnimatedAvatarWidget({
-    Key? key,
-    required this.isVisible,
-    required this.avatarUrl,
-  }) : super(key: key);
+    required this.isVisible, required this.avatarUrl, super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Visibility(
       visible: isVisible,
       child: Positioned.fill(
         child: Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Column(
@@ -28,7 +26,7 @@ class AnimatedAvatarWidget extends StatelessWidget {
                 TweenAnimationBuilder<double>(
                   tween: Tween<double>(begin: 0.0, end: 100),
                   duration: Duration(milliseconds: 70),
-                  builder: (context, size, child) {
+                  builder: (final context, final size, final child) {
                     return Networkimages(
                       imageUrl: avatarUrl.startsWith('http') ? avatarUrl : '${ApiEndpoints.baseUrl}$avatarUrl',
                       size: size,

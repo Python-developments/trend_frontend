@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
 import 'package:trend/core/utils/extensions.dart';
-import 'package:trend/dependencies.dart';
 
 Future<DateTime?> showCustomDatePicker(
     {required final DateTime? startDate,
@@ -18,7 +17,7 @@ Future<DateTime?> showCustomDatePicker(
   return await showRoundedDatePicker(
     height: 400.h,
     context: getAppRouter.currentContext,
-    locale: Locale("en"),
+    locale: Locale('en'),
     initialDate: initialDate,
     firstDate: startDate,
     lastDate: endDate,

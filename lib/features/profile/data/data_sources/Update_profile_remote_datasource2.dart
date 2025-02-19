@@ -1,3 +1,4 @@
+/*
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -5,7 +6,7 @@ import 'package:path/path.dart' as path;
 import 'package:trend/features/explore/data/models/remote/get_all_post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/shared/const/app_links.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
+trend/
 
 class updateProfileRemoteDataSource {
   final Dio dio;
@@ -111,6 +112,7 @@ class updateProfileRemoteDataSource {
     return posts;
   }
 }
+*/
 /**
  * 
  *  Future<void> _getPostForUserMethod(
@@ -143,7 +145,9 @@ class updateProfileRemoteDataSource {
       // }
     }
   }
- */
+ *//*
+
+*/
 /**
  * 
  * Future<void> _Updatefullname(
@@ -178,9 +182,11 @@ class updateProfileRemoteDataSource {
       emit(UpdateFailuer());
     }
   }
- */
+ *//*
+
 
 //   Future<Map<String, dynamic>> updateFullName(String userId, String fullName, String token) async {
 //     final data = {"full_name": fullName.isEmpty ? null : fullName};
 //     return _sendUpdateRequest(userId, data, token);
 //   }
+*/

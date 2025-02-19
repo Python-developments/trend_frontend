@@ -1,8 +1,8 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trend/core/presentation/app_style.dart';
 
-import '../../../../../shared/const/colors.dart';
-import '../../../../../shared/style/app_styles.dart';
+
 import '../../../data/models/local/hashtags_details.dart';
 import 'package:intl/intl.dart';
 
@@ -15,7 +15,7 @@ class HashtagsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(AppColors.white),
+      color: AppStyle.white,
       child: ListTile(
         contentPadding:
             EdgeInsets.symmetric(horizontal: 13, vertical: 7),
@@ -23,27 +23,25 @@ class HashtagsContainer extends StatelessWidget {
           backgroundColor: AppStyle.black.shade100,
           radius: 24,
           child: Icon(
-            FontAwesomeIcons.hashtag,
+            Icons.tag,
             color: AppStyle.black.shade400,
           ),
         ),
         title: Text(
           model.author,
-          style: AppStyles.styleBold16,
+          style: AppStyle.styleBold16,
         ),
         subtitle: Text(
           model.posts_count,
-          style: AppStyles.styleNormal11.copyWith(
-              color: Color(
-            AppColors.greyDark,
-          )),
+          style: AppStyle.textTheme!.bodySmall!.copyWith(
+              color: AppStyle.black.shade400,
+          ),
         ),
         trailing: Text(
           formatCreatedAt(model.created_at),
-          style: AppStyles.styleNormal11.copyWith(
-              color: Color(
-            AppColors.greyDark,
-          )),
+          style: AppStyle.textTheme!.bodySmall!.copyWith(
+              color: AppStyle.black.shade400,
+          ),
         ),
         horizontalTitleGap: 14,
         minTileHeight: 60,
@@ -65,3 +63,4 @@ class HashtagsContainer extends StatelessWidget {
     return formattedDate;
   }
 }
+*/

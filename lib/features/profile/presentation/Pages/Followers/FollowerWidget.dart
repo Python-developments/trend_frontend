@@ -1,5 +1,6 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 import 'package:trend/features/profile/data/models/FolloersModel.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_Following/State_Following.dart';
@@ -10,7 +11,6 @@ import 'package:trend/features/profile/presentation/Manager/Display_Following_bl
 import 'package:trend/features/profile/presentation/Manager/Display_followerBloc/followers_bloc.dart';
 import 'package:trend/features/profile/presentation/Manager/Display_followerBloc/followers_event.dart';
 
-import '../../../../../shared/utiles/routes.dart';
 import '../../Manager/Bloc_get_User/bloc_get.dart';
 import '../../Manager/Bloc_get_User/event_getU.dart';
 
@@ -126,3 +126,4 @@ class _FollowerWidgetState extends State<FollowerWidget> {
         ));
   }
 }
+*/

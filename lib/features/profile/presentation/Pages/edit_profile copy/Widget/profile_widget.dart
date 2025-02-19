@@ -8,13 +8,10 @@ class ProfileWidget extends StatelessWidget {
   final bool showDivider;
 
   const ProfileWidget(
-      {super.key,
-      required this.icon,
-      required this.title,
-      this.showDivider = false,
-      required this.value});
+      {required this.icon, required this.title, required this.value, super.key,
+      this.showDivider = false});
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     // TODO: implement build
     return Container(
       alignment: Alignment.center,

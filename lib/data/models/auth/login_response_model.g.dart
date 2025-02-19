@@ -15,5 +15,5 @@ LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
     <String, dynamic>{
       'access_token': instance.token,
-      'user': instance.user,
+      'user': instance.user.toJson(),
     };

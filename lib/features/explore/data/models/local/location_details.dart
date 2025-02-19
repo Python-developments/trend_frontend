@@ -1,7 +1,8 @@
-import 'package:equatable/equatable.dart';
+/*
+import 
 
 class LocationDetails extends Equatable {
-  final String id;
+  final int id;
   final String location_name;
   final String slug;
   final String city;
@@ -36,3 +37,4 @@ class LocationDetails extends Equatable {
         last_activity,
       ];
 }
+*/

@@ -1,3 +1,4 @@
+/*
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -5,7 +6,7 @@ import 'package:trend/features/explore/data/models/remote/get_all_post_model.dar
 import 'package:trend/features/profile/data/data_sources/Update_profile_remote_datasource2.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 
-class UpdateProfileRepository {
+class UpdateProfileRepository final{
   final updateProfileRemoteDataSource remoteDataSource; // كلاس لإدارة التوكن
 
   UpdateProfileRepository({required this.remoteDataSource});
@@ -46,3 +47,4 @@ class UpdateProfileRepository {
 //     return remoteDataSource.updateAvatar(userId, imagePath, tok!);
 //   }
 }
+*/

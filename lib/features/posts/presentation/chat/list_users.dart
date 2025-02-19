@@ -11,7 +11,7 @@ class ListUsersChat extends StatefulWidget {
 
 class _ListUsersChatState extends State<ListUsersChat> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

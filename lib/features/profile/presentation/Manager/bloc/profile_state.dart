@@ -1,5 +1,6 @@
-import 'package:equatable/equatable.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+/*
+import
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 
 /// Base class for all Profile-related states.
@@ -28,7 +29,7 @@ class ProfileLoaded extends ProfileState {
 class ProfileError extends ProfileState {
   final String message;
 
-  ProfileError([this.message = "An unknown error occurred"]);
+  ProfileError([this.message = 'An unknown error occurred']);
 
   @override
   List<Object?> get props => [message];
@@ -72,3 +73,4 @@ class Updatesuccess extends ProfileState {
 class UpdateLoading extends ProfileState {}
 
 class UpdateFailuer extends ProfileState {}
+*/

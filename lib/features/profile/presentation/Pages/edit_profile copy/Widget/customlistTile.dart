@@ -7,15 +7,11 @@ class CustomListTile extends StatelessWidget {
   final Function() onTap;
 
   const CustomListTile({
-    Key? key,
-    required this.imagePath,
-    required this.title,
-    required this.fullname,
-    required this.onTap,
-  }) : super(key: key);
+    required this.imagePath, required this.title, required this.fullname, required this.onTap, super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.all(0),
       leading: Image.asset(imagePath),
@@ -29,7 +25,7 @@ class CustomListTile extends StatelessWidget {
       ),
       trailing: Text(
         fullname.isEmpty
-            ? "Default Full Name"
+            ? 'Default Full Name'
             : fullname, // Replace with default name if empty
         style: TextStyle(
           fontSize: 15,

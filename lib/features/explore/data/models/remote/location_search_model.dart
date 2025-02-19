@@ -1,4 +1,5 @@
-import '../../../domain/entities/location_search.dart';
+/*
+import 'package:trend/features/explore/domain/entities/location_search.dart';
 
 class LocationsSearchModel extends LocationsSearch {
   LocationsSearchModel(
@@ -7,14 +8,14 @@ class LocationsSearchModel extends LocationsSearch {
       required super.previous,
       required super.results});
 
-  factory LocationsSearchModel.fromJson(Map<String, dynamic> json) {
+  factory LocationsSearchModel.fromJson(final Map<String, dynamic> json) {
     return LocationsSearchModel(
-      count: json["count"],
-      next: json["next"],
-      previous: json["previous"],
-      results: json["results"] == null
+      count: json['count'],
+      next: json['next'],
+      previous: json['previous'],
+      results: json['results'] == null
           ? null
-          : ResultsModel.fromJson(json["results"]),
+          : ResultsModel.fromJson(json['results']),
     );
   }
 }
@@ -22,12 +23,12 @@ class LocationsSearchModel extends LocationsSearch {
 class ResultsModel extends Results {
   ResultsModel({required super.locations});
 
-  factory ResultsModel.fromJson(Map<String, dynamic> json) {
+  factory ResultsModel.fromJson(final Map<String, dynamic> json) {
     return ResultsModel(
-      locations: json["locations"] == null
+      locations: json['locations'] == null
           ? []
           : List<Location>.from(
-              json["locations"]!.map((x) => LocationModel.fromJson(x))),
+              json['locations']!.map((final x) => LocationModel.fromJson(x))),
     );
   }
 }
@@ -46,19 +47,20 @@ class LocationModel extends Location {
       required super.postsCount,
       required super.lastActivity});
 
-  factory LocationModel.fromJson(Map<String, dynamic> json) {
+  factory LocationModel.fromJson(final Map<String, dynamic> json) {
     return LocationModel(
-      id: json["id"],
-      locationName: json["location_name"],
-      slug: json["slug"],
-      city: json["city"],
-      country: json["country"],
-      latitude: json["latitude"],
-      longitude: json["longitude"],
-      radius: json["radius"],
-      description: json["description"],
-      postsCount: json["posts_count"],
-      lastActivity: json["last_activity"],
+      id: json['id'],
+      locationName: json['location_name'],
+      slug: json['slug'],
+      city: json['city'],
+      country: json['country'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      radius: json['radius'],
+      description: json['description'],
+      postsCount: json['posts_count'],
+      lastActivity: json['last_activity'],
     );
   }
 }
+*/

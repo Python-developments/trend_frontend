@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+/*
+import 
 
 class HashtagsDetailsModel extends Equatable {
   final String author;
@@ -16,3 +17,4 @@ class HashtagsDetailsModel extends Equatable {
   List<Object?> get props =>
       [author, author_id, created_at, posts_count];
 }
+*/

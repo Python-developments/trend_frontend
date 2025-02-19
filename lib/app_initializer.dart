@@ -1,5 +1,4 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,9 +21,9 @@ Future<void> customAppRunner(final Flavor flavor) async {
 /*
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );*/
+  );*//*
   await EasyLocalization.ensureInitialized();
-  EasyLocalization.logger.enableLevels = [];
+  EasyLocalization.logger.enableLevels = [];*/
   mainContext.config =
       mainContext.config.clone(disableErrorBoundaries: flavor.showErrors);
 
@@ -40,18 +39,18 @@ Future<void> customAppRunner(final Flavor flavor) async {
 
   runApp(DevicePreview(
       enabled: flavor.isMultiDevicePreview,
-      builder: (final context) => EasyLocalization(
+      builder: (final context) =>/* EasyLocalization(
               supportedLocales: const [
                 Locale('en'),
                 Locale('ar'),
               ],
               path: 'assets/translations',
               fallbackLocale: const Locale('en'),
-              child: ScreenUtilInit(
+              child:*/ ScreenUtilInit(
                   designSize: const Size(375, 812),
                   splitScreenMode: true,
                   minTextAdapt: true,
                   child: App(
                     appFlavor: flavor,
-                  )))));
+                  ))));
 }

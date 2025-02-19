@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/core/controllers/pagination_list_data_loader.dart';
 import 'package:trend/core/presentation/widgets/custom_animated_list.dart';
 import 'package:trend/core/presentation/widgets/custom_empty_view.dart';
-import 'package:trend/core/presentation/widgets/custom_fade_in_loading_widget.dart';
 import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
 import 'package:trend/core/presentation/widgets/three_dots_loading_indicator.dart';
 
@@ -80,7 +79,7 @@ class _CustomAnimatedPaginationListDataLoaderWidgetState<T>
                           ]
                         ]),
                       )
-                    : const Center(child: CustomFadeInLoadingWidget())
+                    : const Center(child: CircularProgressIndicator())
                 : widget.dataLoader.error != null
                     ? CustomEmptyView(controller: widget.dataLoader)
                     : Column(

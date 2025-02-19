@@ -1,3 +1,4 @@
+/*
 // Bloc States
 import 'package:trend/features/profile/data/models/FolloersModel.dart';
 
@@ -16,3 +17,4 @@ class FollowingError extends DisplayFollowingsState {
   final String message;
   FollowingError(this.message);
 }
+*/

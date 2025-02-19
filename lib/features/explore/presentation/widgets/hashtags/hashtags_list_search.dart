@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:trend/features/explore/data/models/local/hashtags_details.dart';
-import 'package:trend/features/explore/presentation/manager/hashtags/hashtags_state.dart';
-
-import '../../../../../shared/const/colors.dart';
-import '../../../../../shared/core/enum.dart';
-import '../../manager/hashtags/hashtags_bloc.dart';
-import 'hashtags_container.dart';
 
 class HashtagsListSearch extends StatelessWidget {
-  const HashtagsListSearch({Key? key}) : super(key: key);
+  const HashtagsListSearch({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
+    return Container();
+    /*
     return BlocBuilder<HashtagsBloc, HashtagsSearchState>(
       builder: (context, state) {
         print("State Request Status: ${state.requestStatus}");
@@ -30,9 +22,9 @@ class HashtagsListSearch extends StatelessWidget {
             return const SliverToBoxAdapter(child: SizedBox.shrink());
         }
       },
-    );
+    );*/
   }
-
+/*
   Widget _buildLoadingList() {
     return SliverList.builder(
       itemCount: 9, // Instagram-style skeleton placeholders
@@ -43,12 +35,12 @@ class HashtagsListSearch extends StatelessWidget {
             effect: ShimmerEffect(
               duration: const Duration(milliseconds: 1500),
               baseColor: AppStyle.black.shade100,
-              highlightColor: Color(AppColors.white),
+              highlightColor: AppStyle.white,
             ),
             child: Card(
               margin: EdgeInsets.zero,
               elevation: 0,
-              color: Color(AppColors.white),
+              color: AppStyle.white,
               child: const ListTile(
                 leading: Icon(
                   FontAwesomeIcons.hashtag,
@@ -91,5 +83,5 @@ class HashtagsListSearch extends StatelessWidget {
         child: Center(child: Text(message)),
       ),
     );
-  }
+  }*/
 }

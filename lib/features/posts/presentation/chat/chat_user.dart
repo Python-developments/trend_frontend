@@ -11,10 +11,10 @@ class ChatUser extends StatefulWidget {
 
 class _ChatUserState extends State<ChatUser> {
   final List<Map<String, dynamic>> _messages = [
-    {"text": "Hello!", "isUser": true},
-    {"text": "Hi there! How are you?", "isUser": false},
-    {"text": "I'm good, thanks. What about you?", "isUser": true},
-    {"text": "I'm doing well too, thank you!", "isUser": false},
+    {'text': 'Hello!', 'isUser': true},
+    {'text': 'Hi there! How are you?', 'isUser': false},
+    {'text': "I'm good, thanks. What about you?", 'isUser': true},
+    {'text': "I'm doing well too, thank you!", 'isUser': false},
   ];
 
   final TextEditingController _messageController = TextEditingController();
@@ -22,14 +22,14 @@ class _ChatUserState extends State<ChatUser> {
   void _sendMessage() {
     if (_messageController.text.trim().isNotEmpty) {
       setState(() {
-        _messages.add({"text": _messageController.text.trim(), "isUser": true});
+        _messages.add({'text': _messageController.text.trim(), 'isUser': true});
       });
       _messageController.clear();
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -75,7 +75,7 @@ class _ChatUserState extends State<ChatUser> {
         body: Stack(
           children: [
             // Background image and messages
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Image.asset(
                 'assets/images/background_chat.png',
@@ -91,10 +91,10 @@ class _ChatUserState extends State<ChatUser> {
               child: ListView.builder(
                 reverse: true, // Show latest messages at the bottom
                 itemCount: _messages.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (final context, final index) {
                   final message = _messages[_messages.length - 1 - index];
                   return Align(
-                    alignment: message["isUser"]
+                    alignment: message['isUser']
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
                     child: Container(
@@ -103,22 +103,22 @@ class _ChatUserState extends State<ChatUser> {
                       padding: EdgeInsets.symmetric(
                           vertical: 10.h, horizontal: 15.w),
                       decoration: BoxDecoration(
-                        color: message["isUser"]
+                        color: message['isUser']
                             ? const Color.fromARGB(255, 136, 244, 139)
                             : const Color.fromARGB(255, 255, 255, 255),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(12.r),
                           topRight: Radius.circular(12.r),
-                          bottomLeft: message["isUser"]
+                          bottomLeft: message['isUser']
                               ? Radius.circular(12.r)
                               : Radius.zero,
-                          bottomRight: message["isUser"]
+                          bottomRight: message['isUser']
                               ? Radius.zero
                               : Radius.circular(12.r),
                         ),
                       ),
                       child: Text(
-                        message["text"],
+                        message['text'],
                         style: TextStyle(
                           fontSize: 14.5.sp,
                           color: Colors.black,
@@ -136,7 +136,7 @@ class _ChatUserState extends State<ChatUser> {
               bottom: 0,
               left: 0,
               right: 0,
-              child: Container(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(
@@ -162,7 +162,7 @@ class _ChatUserState extends State<ChatUser> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
+                          child: DecoratedBox(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20.r),
@@ -192,7 +192,7 @@ class _ChatUserState extends State<ChatUser> {
                                 ),
                                 border: InputBorder.none,
                               ),
-                              onSubmitted: (_) => _sendMessage(),
+                              onSubmitted: (final _) => _sendMessage(),
                             ),
                           ),
                         ),

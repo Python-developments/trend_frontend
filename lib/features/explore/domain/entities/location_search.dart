@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+/*
+import
 
 
 
@@ -70,3 +71,4 @@ class Location extends Equatable {
     id, locationName, slug, city, country, latitude, longitude, radius, description, postsCount, lastActivity, ];
 }
 
+*/

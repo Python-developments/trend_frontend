@@ -43,7 +43,7 @@ class HttpClient extends IHttpClient {
         throw ServerError();
       }
       final Map<String, dynamic> data = e.response!.data;
-      throw ApiError.fromJson(data).customError;
+      throw ApiError.fromJson(data).customError(e.response?.statusCode??500);
     } on Exception {
       throw ServerError();
     }

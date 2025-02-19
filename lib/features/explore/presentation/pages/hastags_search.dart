@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/hashtags/hashtags_list_search.dart';
+import 'package:trend/features/explore/presentation/widgets/hashtags/hashtags_list_search.dart';
 
 
 
 
 class HashtagsSearch extends StatelessWidget {
-  const HashtagsSearch({Key? key}) : super(key: key);
+  const HashtagsSearch({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return CustomScrollView(
        slivers: [
          HashtagsListSearch()

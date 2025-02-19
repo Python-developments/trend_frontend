@@ -1,5 +1,6 @@
-import 'package:trend/features/posts/data/models/CommentModel.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+/*
+import 'package:trend/data/models/posts/CommentModel.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 
 sealed class PostState {}
 
@@ -45,3 +46,4 @@ class getPostForSpecificUserSuccess extends PostState {
 class getPostForSpecificUserFailuer extends PostState {}
 
 class getPostForSpecificUserLoading extends PostState {}
+*/

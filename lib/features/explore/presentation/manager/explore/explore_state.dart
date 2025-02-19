@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+/*
+import 
 import 'package:trend/features/explore/domain/entities/all_post.dart';
 import '../../../../../shared/core/enum.dart';
 
@@ -38,4 +39,4 @@ class ExploreState extends Equatable {
 
   @override
   List<Object?> get props => [allPost, getExploreAllPostMessage, requestStatus];
-}
+}*/

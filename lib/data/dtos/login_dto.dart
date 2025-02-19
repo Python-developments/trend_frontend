@@ -4,16 +4,14 @@ part 'login_dto.g.dart';
 
 @JsonSerializable()
 class LoginDto {
-  final String email, password;
-  final String? referralCode;
+  final String username, password;
 
   LoginDto({
-    required this.email,
+    required this.username,
     required this.password,
-    required this.referralCode,
   });
 
   Map<String, dynamic> toJson() => _$LoginDtoToJson(this);
-  factory LoginDto.empty()=>LoginDto(email:'email',password:'password',referralCode: null);
+  factory LoginDto.empty()=>LoginDto(username:'username',password:'password');
 
 }

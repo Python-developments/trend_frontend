@@ -1,10 +1,10 @@
+/*
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
@@ -339,3 +339,4 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
     );
   }
 }
+*/

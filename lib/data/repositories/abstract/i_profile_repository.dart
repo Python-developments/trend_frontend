@@ -1,3 +1,4 @@
+import 'package:trend/data/models/core/notification_model.dart';
 import 'package:trend/data/models/core/pagination_data_model.dart';
 import 'package:trend/data/repositories/abstract/i_repository.dart';
 

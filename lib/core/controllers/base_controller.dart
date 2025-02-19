@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:mobx/mobx.dart';
-import 'package:trend/core/presentation/arguments/login_page_arguments.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
 import 'package:trend/core/presentation/snake_bars/bottom_snack_bar.dart';
 import 'package:trend/core/utils/enums.dart';
@@ -46,16 +45,11 @@ abstract class BaseControllerBase with Store {
         ? (
             'Login / Register',
             () => appRouter
-                .push(LoginRoute(args: LoginPageArguments(homePageTile: HomeNavigationBarTileType.wowvir )))
+                .push(LoginRoute())
           )
         : (error is ServerError || error is InternetConnectionError || error is SomethingWentWrongError)
             ? ('Try again', loadData)
-            : error is UnSupportedLocationError
-                ? (
-                    'Change my location',
-                    () => appRouter.push(AddressSelectionRoute()),
-                  )
-                : null;
+            : null;
   }
 
   @action

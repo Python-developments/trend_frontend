@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+/*
 
 class SearchHashtags extends Equatable {
   final List<Hashtag> hashtags;
@@ -46,3 +46,4 @@ class Hashtag extends Equatable {
         createdAt,
       ];
 }
+*/

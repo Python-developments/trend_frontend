@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/dependencies.dart';
 
 class AppStyle {
   static final ThemeData theme = ThemeData(
@@ -78,7 +77,6 @@ class AppStyle {
   static const Color errorColor = Color(0xFFE30000);
   static const Color warringColor = Color(0xFFFFEB3B);
   static const Color confirmationColor = Color(0xFF10C84F);
-  static const Color lightGray = Color(0xFFF2F1F1);
   static const Color blue = Color(0xFF2196F3);
 
   static const MaterialColor black = MaterialColor(0xFF1A0700, {

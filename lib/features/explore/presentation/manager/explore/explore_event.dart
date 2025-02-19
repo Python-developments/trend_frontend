@@ -1,4 +1,5 @@
-import 'package:equatable/equatable.dart';
+/*
+import 
 
 abstract class ExploreEvent extends Equatable {
   const ExploreEvent();
@@ -9,3 +10,4 @@ abstract class ExploreEvent extends Equatable {
 class GetAllPostsEvent extends ExploreEvent {}
 
 class GetPostWithPageNumberEvent extends ExploreEvent {}
+*/

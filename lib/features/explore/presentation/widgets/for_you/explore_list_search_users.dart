@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:trend/features/explore/data/models/local/user_details_model.dart';
-import '../../../../../shared/const/colors.dart';
-import '../../../../../shared/core/enum.dart';
-import '../../manager/for_you/for_you_search_bloc.dart';
-import '../../manager/for_you/for_you_search_state.dart';
-import '../user_account_details.dart';
+
 
 class ExploreListSearch extends StatelessWidget {
-  const ExploreListSearch({Key? key}) : super(key: key);
+  const ExploreListSearch({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    print("ExploreListSearch Build");
+  Widget build(final BuildContext context) {
+    print('ExploreListSearch Build');
+    return Container();
+    /*
     return BlocBuilder<ForYouSearchBloc, ForYouSearchState>(
       builder: (context, state) {
         switch (state.userRequestStatus) {
@@ -57,9 +52,9 @@ class ExploreListSearch extends StatelessWidget {
             );
         }
       },
-    );
+    );*/
   }
-
+/*
   Widget _buildSkeletonItem() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -67,12 +62,12 @@ class ExploreListSearch extends StatelessWidget {
         effect: ShimmerEffect(
           duration: const Duration(milliseconds: 1500),
           baseColor: AppStyle.black.shade100,
-          highlightColor: Color(AppColors.white),
+          highlightColor: AppStyle.white,
         ),
         child: Card(
           margin: const EdgeInsets.all(0),
           elevation: 0,
-          color: Color(AppColors.white),
+          color: AppStyle.white,
           child: ListTile(
             leading: Bone.circle(size: 60),
             title: Bone.text(words: 2),
@@ -81,5 +76,5 @@ class ExploreListSearch extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 }

@@ -17,7 +17,7 @@ class CustomCheckboxTile extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: ColoredBox(
-          color: isSelected ? AppStyle.lightGray : AppStyle.white,
+          color: isSelected ? AppStyle.black.shade200 : AppStyle.white,
           child: Row(
             children: [
               Checkbox(

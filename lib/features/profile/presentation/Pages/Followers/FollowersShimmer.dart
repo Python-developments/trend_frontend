@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class FollowersShimmer extends StatelessWidget {
+  const FollowersShimmer({super.key});
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ListView.builder(
       itemCount: 10, // عدد العناصر الوهمية
-      itemBuilder: (context, index) => Padding(
+      itemBuilder: (final context, final index) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: Shimmer.fromColors(
           baseColor: Colors.grey[300]!,

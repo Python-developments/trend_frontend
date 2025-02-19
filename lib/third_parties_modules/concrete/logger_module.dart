@@ -1,6 +1,4 @@
-import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:trend/core/utils/flavors.dart';

@@ -4,7 +4,6 @@ import 'package:trend/core/presentation/assets.dart';
 import 'package:trend/core/presentation/widgets/custom_svg_image.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
-import 'package:trend/core/utils/extensions.dart';
 
 class MaintenanceAlertDialog extends StatelessWidget {
   const MaintenanceAlertDialog({super.key});

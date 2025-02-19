@@ -12,13 +12,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
-        body:Container(
-          height: 1.sh,
-            width: 1.sw,
-            decoration: const BoxDecoration(
-              color: AppStyle.blue,
-            ),
-            child: Lottie.asset(Assets.splashAnimation)),
+      backgroundColor: AppStyle.white,
 /*    body: Stack(
         fit: StackFit.expand,
         children: [

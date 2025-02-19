@@ -5,8 +5,8 @@ class Messagebutton extends StatelessWidget {
   const Messagebutton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(final BuildContext context) {
+    return SizedBox(
       width: 145.w,
       height: 28.h,
       child: OutlinedButton(

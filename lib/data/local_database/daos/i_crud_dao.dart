@@ -8,9 +8,9 @@ abstract class ICrudDao<T> extends DatabaseAccessor<AppLocalDatabase> {
 
   TableInfo<BaseCacheTable, T> get table;
 
-  String entityIdGetter(final T entity);
+  int entityIdGetter(final T entity);
 
-  Future<T?> getEntityById(final String id) =>
+  Future<T?> getEntityById(final int id) =>
       (select(table)..where((final entity) => entity.id.equals(id)))
           .getSingleOrNull();
 
@@ -37,16 +37,16 @@ abstract class ICrudDao<T> extends DatabaseAccessor<AppLocalDatabase> {
       table.insertAll(entities.map((final e)=>e as Insertable<T>) );
 
   Future<void> updateEntity(
-          final String id, final UpdateCompanion<T> newCompanion) =>
+          final int id, final UpdateCompanion<T> newCompanion) =>
       (update(table)..where((final tbl) => tbl.id.equals(id)))
           .replace(newCompanion);
 
-  Future<void> deleteEntity(final String id) =>
+  Future<void> deleteEntity(final int id) =>
       (delete(table)..where((final tbl) => tbl.id.equals(id))).go();
 
   Future<void> deleteAllEntities() => table.deleteAll();
 
-  Future<bool> checkIfExist(final String id) async =>
+  Future<bool> checkIfExist(final int id) async =>
       (await getEntityById(id)) != null;
 
   Future<void> upsertEntity(final T entity) => upsertAll([entity]);

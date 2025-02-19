@@ -1,7 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:toastification/toastification.dart';
 import 'package:trend/core/presentation/app_style.dart';
 import 'package:trend/core/presentation/router/auto_router.dart';
@@ -29,10 +27,10 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: getIt<SnakeBarShower>().snakeBarKey,
         routerConfig: getAppRouter.config(),
-      
+      /*
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: EasyLocalization.of(context)?.currentLocale ?? context.deviceLocale,
+        locale: EasyLocalization.of(context)?.currentLocale ?? context.deviceLocale,*/
         theme: AppStyle.theme,
       
         builder: widget.appFlavor.isMultiDevicePreview

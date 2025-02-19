@@ -1,7 +1,8 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/ZoomingImage.dart';
@@ -122,3 +123,4 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
     );
   }
 }
+*/

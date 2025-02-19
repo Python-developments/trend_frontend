@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
 
 @immutable
 sealed class PostEvent {}

@@ -1,4 +1,5 @@
-import 'package:trend/features/posts/data/models/post_model.dart';
+/*
+import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 
 abstract class UserState {}
@@ -33,3 +34,4 @@ class getPostSuccess extends UserpostsState {
 }
 
 class getPostFailuer extends UserpostsState {}
+*/
