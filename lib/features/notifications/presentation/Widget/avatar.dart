@@ -7,10 +7,10 @@ import 'package:trend/features/notifications/presentation/Widget/Get_Icon_For_No
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 
 class NotificationAvatar extends StatelessWidget {
-  const NotificationAvatar({super.key, required this.notification});
+  const NotificationAvatar({required this.notification, super.key});
   final NotificationModel notification;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
       children: [

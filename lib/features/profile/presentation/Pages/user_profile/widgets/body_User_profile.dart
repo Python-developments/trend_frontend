@@ -7,11 +7,11 @@ import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/U
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/avatar_And_Name.dart';
 
 class BodyuserProfile extends StatelessWidget {
-  const BodyuserProfile({super.key, required this.user, this.onLongPress});
+  const BodyuserProfile({required this.user, super.key, this.onLongPress});
   final UserProfileModel user;
   final void Function()? onLongPress;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

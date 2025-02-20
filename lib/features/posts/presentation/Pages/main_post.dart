@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/Pages/activities_post.dart';
@@ -7,22 +6,18 @@ import 'package:trend/features/posts/presentation/Pages/header_post.dart';
 
 class MainPost extends StatelessWidget {
   final PostModel post;
-  final int index;
-  MainPost({Key? key, required this.post, required this.index})
-      : super(key: key);
+  const MainPost({required this.post, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
         HeaderPost(post: post),
         BodyPost(post: post),
         ActivitiesPost(
           post: post,
-          postIndex: index,
         ),
       ],
     );
   }
 }
-*/

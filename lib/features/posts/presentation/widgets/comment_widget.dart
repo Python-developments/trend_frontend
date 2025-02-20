@@ -1,55 +1,20 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';import 'package:trend/data/models/posts/comment_model.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/custom_comment_body.dart';
-import 'package:trend/shared/const/app_links.dart';
 
 class CommentWidget extends StatefulWidget {
-  Comment comment;
-  Function replyFunction;
-  CommentWidget(this.comment, this.replyFunction);
+  CommentModel comment;
+  CommentWidget(this.comment, {super.key});
   @override
   State<CommentWidget> createState() => _CommentWidgetState();
 }
 
 class _CommentWidgetState extends State<CommentWidget> {
-  bool showMore = false;
-
-  String avatar = "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
-  String replayavatar = "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _loadUserAvatar();
-  }
-
-  Future<void> _loadUserAvatar() async {
-    int id = BlocProvider.of<PostBloc>(context).id = widget.comment.authorId ?? 0;
-    String Newavatar = await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(id);
-
-    setState(() {
-      avatar = Newavatar;
-    });
-  }
-
-  // Future<void> _loadUserReplayAvatar(int id) async {
-  //   String Newavatar1 =
-  //       await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(id);
-
-  //   setState(() {
-  //     replayavatar = Newavatar1;
-  //   });
-  // }
 
   @override
-  Widget build(BuildContext context) {
-    int c = 0;
-    c = widget.comment.likesCount ?? 0;
+  Widget build(final BuildContext context) {
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
@@ -57,7 +22,6 @@ class _CommentWidgetState extends State<CommentWidget> {
         children: [
           CustomCommentBody(
             comment: widget.comment,
-            replyFunction: widget.replyFunction,
           ),
           Positioned.fill(
             top: 20,
@@ -66,25 +30,23 @@ class _CommentWidgetState extends State<CommentWidget> {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      context.read<PostBloc>().add(LikeComment(commentId: widget.comment.id ?? 0, postId: widget.comment.post ?? 0));
-                    },
+                    onTap: () {},
                     child: (widget.comment.isLiked ?? false)
                         ? SvgPicture.asset(
-                            "assets/icons/like_fill.svg",
+                            'assets/icons/like_fill.svg',
                             height: 17,
                             width: 17,
                             fit: BoxFit.none,
                           ) // Filled like icon
                         : SvgPicture.asset(
-                            "assets/icons/like.svg",
+                            'assets/icons/like.svg',
                             height: 17,
                             width: 17,
                             fit: BoxFit.none,
                           ),
                   ),
                   Text(
-                    "${c != 0 ? c : ''}",
+                    '2',
                     style: TextStyle(
                       fontSize: 9.sp,
                       fontWeight: FontWeight.bold,
@@ -100,4 +62,3 @@ class _CommentWidgetState extends State<CommentWidget> {
     );
   }
 }
-*/

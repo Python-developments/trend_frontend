@@ -4,14 +4,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/core/controllers/auth_controller.dart';
 import 'package:trend/dependencies.dart';
-import 'package:trend/features/profile/presentation/Manager/Bloc_Following/State_Following.dart';
-import 'package:trend/features/profile/presentation/Manager/Bloc_Following/bloc_folllowing.dart';
-import 'package:trend/features/profile/presentation/Manager/Display_Following_bloc/followers_bloc.dart';
-import 'package:trend/features/profile/presentation/Manager/Display_Following_bloc/followers_event.dart';
-import 'package:trend/features/profile/presentation/Manager/Display_followerBloc/followers_bloc.dart';
-import 'package:trend/features/profile/presentation/Manager/Display_followerBloc/followers_event.dart';
-import 'package:trend/features/profile/presentation/Pages/Followers/Followers_main.dart';
-import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Pages/edit_profile.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/DisplayBio.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/Dsiplay_My_posts_in_body.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/EditAndSetting.dart';
@@ -24,11 +16,11 @@ class BodyForMyProfile extends StatelessWidget {
 
   final AuthController authController=getIt<AuthController>();
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Observer(
-        builder: (context) {
+        builder: (final context) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(), // Enables smooth scrolling
             child: Padding(
@@ -48,13 +40,13 @@ class BodyForMyProfile extends StatelessWidget {
                       children: [
 
                            CustomUserFeatureWighet(
-                                number: authController.userProfileModel?.totalPosts?.toString()??'', name: "Posts"),
+                                number: authController.userProfileModel?.totalPosts.toString()??'', name: 'Posts'),
 
                              GestureDetector(
                               onTap: () {
                               },
                               child: CustomUserFeatureWighet(
-                                  number: authController.userProfileModel?.followers.toString()??'', name: "Followers"),
+                                  number: authController.userProfileModel?.followers.toString()??'', name: 'Followers'),
                             ),
 
 
@@ -62,11 +54,11 @@ class BodyForMyProfile extends StatelessWidget {
                               onTap: () {
                               },
                               child: CustomUserFeatureWighet(
-                                  number: authController.userProfileModel?.following.toString()??'', name: "Following"),
+                                  number: authController.userProfileModel?.following.toString()??'', name: 'Following'),
 
                         ),
                         CustomUserFeatureWighet(
-                            number: authController.userProfileModel?.totalLikes.toString()??'', name: "Likes"),
+                            number: authController.userProfileModel?.totalLikes.toString()??'', name: 'Likes'),
                       ],
                     ),
                   ),

@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/data/models/auth/user_profile_model.dart';
 
 class Displaybio extends StatelessWidget {
-  const Displaybio({super.key, required this.user});
+  const Displaybio({required this.user, super.key});
   final UserProfileModel user;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: Center(

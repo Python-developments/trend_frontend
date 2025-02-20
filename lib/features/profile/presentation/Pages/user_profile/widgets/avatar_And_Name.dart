@@ -5,11 +5,11 @@ import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 import 'package:trend/shared/const/app_links.dart';
 
 class AvatarAndName extends StatelessWidget {
-  const AvatarAndName({super.key, required this.onLongPress, required this.user});
+  const AvatarAndName({required this.onLongPress, required this.user, super.key});
   final void Function() onLongPress;
   final UserProfileModel user;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
         GestureDetector(

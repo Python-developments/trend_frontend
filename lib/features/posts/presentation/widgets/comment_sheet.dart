@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,47 +14,25 @@ import 'package:trend/shared/const/app_links.dart';
 
 
 class CommentSheet extends StatefulWidget {
-  const CommentSheet({super.key, required this.post, required this.postindex});
+  const CommentSheet({required this.post, super.key});
   final PostModel post;
-  final int postindex;
   @override
   _CommentSheetState createState() => _CommentSheetState();
 }
 
 class _CommentSheetState extends State<CommentSheet> {
-  String avatar = "/media/profile_images/default_image.jpg";
-  void initState() {
-    super.initState();
-    _loadAvatar();
-  }
+  String avatar = '/media/profile_images/default_image.jpg';
 
-  void _loadAvatar() async {
-    final loadedAvatar = await SharedPreferencesDemo.getAvatar();
-    setState(() {
-      avatar = loadedAvatar;
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   final TextEditingController _controller = TextEditingController();
 
   bool isReply = false;
   int commentId = 0;
   FocusNode focusNode = FocusNode();
-  replyFunction(Comment comment) {
-    isReply = true;
-    commentId = comment.id ?? 0;
-    _controller.text = "@" + (comment.author ?? '') + ' ';
-    focusNode.requestFocus();
-  }
 
   bool isMe = false;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height - 50.sp,
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
@@ -64,20 +41,19 @@ class _CommentSheetState extends State<CommentSheet> {
           Column(
             children: [
               CommentsheetHeader(
-                commentcount: "${widget.post.commentsCount}",
+                commentcount: '${widget.post.commentsCount}',
               ),
               Expanded(
                 child: ListView(
                   children: [
-                    if (widget.post.comments != null)
-                      ListView(
-                        reverse: true,
-                        shrinkWrap: true, // يسمح بـ ListView أن يكون بحجم التعليقات فقط
-                        physics: NeverScrollableScrollPhysics(), // لمنع التمرير داخل ListView الداخلية
-                        children: widget.post.comments!.map((comment) {
-                          return CommentWidget(comment, replyFunction);
-                        }).toList(),
-                      ),
+                    ListView(
+                      reverse: true,
+                      shrinkWrap: true, // يسمح بـ ListView أن يكون بحجم التعليقات فقط
+                      physics: NeverScrollableScrollPhysics(), // لمنع التمرير داخل ListView الداخلية
+                      children: widget.post.comments.map((final comment) {
+                        return CommentWidget(comment);
+                      }).toList(),
+                    ),
                     SizedBox(height: MediaQuery.of(context).viewInsets.bottom > 0 ? MediaQuery.of(context).size.height * 0.5 : 100),
                   ],
                 ),
@@ -88,16 +64,14 @@ class _CommentSheetState extends State<CommentSheet> {
             bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? MediaQuery.of(context).viewInsets.bottom : 0,
             left: 0,
             right: 0,
-            child: Container(
+            child: ColoredBox(
               color: Colors.white,
               child: Padding(
                 padding: EdgeInsets.only(left: 16.w, right: 1.w, top: 8.h, bottom: MediaQuery.of(context).viewInsets.bottom > 0 ? 5 : 8.h),
                 child: Row(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
-                      },
+                      onTap: () {},
                       child: Networkimages(
                         imageUrl: '${ApiEndpoints.baseUrl}$avatar',
                         size: 20,
@@ -109,30 +83,10 @@ class _CommentSheetState extends State<CommentSheet> {
                     Expanded(
                       child: CustomTextFiledForComment(
                         controller: _controller,
-                        onChanged: (String) {
+                        onChanged: (final String) {
                           setState(() {});
                         },
-                        onTap: () {
-                          if (_controller.text.isNotEmpty) {
-                            if (isReply) {
-                              context.read<PostBloc>().add(AddCommentOnComment(postId: widget.post.id ?? 0, commentId: commentId, content: _controller.text));
-                            } else {
-                              context.read<PostBloc>().add(AddComment(postId: widget.post.id!, content: _controller.text));
-                            }
-                            _controller.text = "";
-                            commentId = 0;
-                            isReply = false;
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: "Please Enter Any Text",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.green,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
-                          }
-                        },
+                        onTap: () {},
                       ),
                     ),
                     SizedBox(width: 10.w),
@@ -145,5 +99,9 @@ class _CommentSheetState extends State<CommentSheet> {
       ),
     );
   }
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
 }
-*/

@@ -49,7 +49,7 @@ class HomeNavigationBar extends StatelessWidget {
 
   BottomNavigationBarItem buildNavigationBarItem(
       final int tileIndex, final bool isSelected) {
-    String currentImagePath = HomeNavigationBarTileType.sortedValues[tileIndex].iconPath;
+    final String currentImagePath = HomeNavigationBarTileType.sortedValues[tileIndex].iconPath;
     return BottomNavigationBarItem(
         icon: Padding(
             padding: EdgeInsets.only(bottom: 4.r),

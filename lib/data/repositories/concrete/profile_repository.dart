@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:trend/data/models/core/notification_model.dart';
-import 'package:trend/data/models/core/pagination_data_model.dart';
 import 'package:trend/data/repositories/abstract/i_profile_repository.dart';
 import 'package:trend/data/repositories/abstract/i_repository.dart';
 
@@ -9,12 +8,9 @@ class ProfileRepository extends IProfileRepository {
   ProfileRepository(super.appFlavor,super.httpClient, super.appDatabase, super.logger,);
 
   @override
-  Future<PaginationDataModel<NotificationModel>> getNotifications(
-          {required final int pageNumber, required final int perPage}) =>
-      getPagination(
-          url: 'customer/notifications',
-          page: pageNumber,
-          perPage: perPage,
+  Future<List<NotificationModel>> getNotifications() =>
+      getList(
+          url: 'notifications/all/',
           parameters: {},
           mapper: NotificationModel.fromJson,
           );

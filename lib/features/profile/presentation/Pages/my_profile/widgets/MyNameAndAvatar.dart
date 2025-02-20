@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/data/models/auth/user_profile_model.dart';
-import 'package:trend/shared/const/app_links.dart';
 
 class Mynameandavatar extends StatelessWidget {
-  const Mynameandavatar({super.key, required this.onLongPress, required this.user});
+  const Mynameandavatar({required this.onLongPress, required this.user, super.key});
   final void Function()? onLongPress;
   final UserProfileModel user;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       children: [
         GestureDetector(
@@ -17,7 +16,7 @@ class Mynameandavatar extends StatelessWidget {
             radius: 50.r, // تحديد الحجم
             backgroundColor: Colors.white, // لون الخلفية (اختياري)
             backgroundImage: NetworkImage(
-              user?.avatar??'',
+              user.avatar??'',
             ),
           ),
         ),
@@ -39,6 +38,5 @@ class Mynameandavatar extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

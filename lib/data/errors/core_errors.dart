@@ -123,6 +123,6 @@ class EmptyDataError extends CustomError {
   EmptyDataError({required final String entityName})
       : super(
             errorMessage:
-                "There are no ${entityName} to show",
+                'There are no $entityName to show',
             errorImage: null);
 }

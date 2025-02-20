@@ -3,7 +3,6 @@ import 'package:trend/core/presentation/widgets/custom_animated_list_data_loader
 import 'package:trend/dependencies.dart';
 import 'package:trend/features/notifications/controllers/notifications_controller.dart';
 import 'package:trend/features/notifications/presentation/Widget/Notificatioitem.dart';
-import 'package:trend/features/profile/presentation/Pages/Followers/FollowersShimmer.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -16,7 +15,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
   List<bool> isFollowing = []; // حالة زر المتابعة لكل إشعار
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -34,7 +33,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         ),
       ),
       body: CustomAnimatedListDataLoaderWidget(dataLoader: getIt<NotificationsController>(),
-          dataToWidgetMapper: (notification)=>NotificationItem(notification: notification),
+          dataToWidgetMapper: (final notification)=>NotificationItem(notification: notification),
     ));
   }
 }

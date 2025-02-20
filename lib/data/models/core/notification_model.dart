@@ -23,7 +23,7 @@ class NotificationModel {
   });
 
   /// Factory method to map NotificationModel to Notification
-  factory NotificationModel.fromModel(NotificationModel model) {
+  factory NotificationModel.fromModel(final NotificationModel model) {
     return NotificationModel(
       id: model.id,
       target: model.target,
@@ -37,15 +37,15 @@ class NotificationModel {
     );
   }
 
-  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+  factory NotificationModel.fromJson(final Map<String, dynamic> json) {
     return NotificationModel(
       id: json['id'] ?? 0,
-      actor: json['actor'] ?? "actor",
-      verb: json['verb'] ?? "action",
-      target: json['target'] ?? "target",
+      actor: json['actor'] ?? 'actor',
+      verb: json['verb'] ?? 'action',
+      target: json['target'] ?? 'target',
       is_read: json['is_read'] ?? false,
       is_following: json['is_following'] ?? false, // Added new field
-      avatar: json['avatar'] ?? "avatar",
+      avatar: json['avatar'] ?? 'avatar',
       id_actor: json['id_actor'] ?? 0,
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'])

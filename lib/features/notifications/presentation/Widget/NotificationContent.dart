@@ -7,7 +7,7 @@ import 'package:trend/features/notifications/presentation/Widget/actorandtime.da
 import 'package:trend/features/notifications/presentation/Widget/notificatioVerb.dart';
 
 class Notificationcontent extends StatefulWidget {
-  const Notificationcontent({super.key, required this.notification});
+  const Notificationcontent({required this.notification, super.key});
   final NotificationModel notification;
 
   @override
@@ -16,7 +16,7 @@ class Notificationcontent extends StatefulWidget {
 
 class _NotificationcontentState extends State<Notificationcontent> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +28,7 @@ class _NotificationcontentState extends State<Notificationcontent> {
           verb: widget.notification.verb,
         ),
         SizedBox(height: 5),
-        if (widget.notification.verb.contains("following you"))
+        if (widget.notification.verb.contains('following you'))
           Row(
             children: [
               Visibility(
@@ -56,7 +56,7 @@ class _NotificationcontentState extends State<Notificationcontent> {
                   ),
                   child: Center(
                     child: Text(
-                      "Remove",
+                      'Remove',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,

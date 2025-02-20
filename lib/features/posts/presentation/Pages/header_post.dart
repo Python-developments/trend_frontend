@@ -1,9 +1,7 @@
-/*
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/widgets/post_details.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_get.dart';
@@ -12,12 +10,11 @@ import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.da
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
 import 'package:trend/shared/const/app_links.dart';
 
-import '../../../../shared/utiles/routes.dart';
 
 class HeaderPost extends StatelessWidget {
   final PostModel post;
-  HeaderPost({super.key, required this.post});
-  String getTimeAgoShort(DateTime createdAt) {
+  HeaderPost({required this.post, super.key});
+  String getTimeAgoShort(final DateTime createdAt) {
     final currentTime = DateTime.now();
     final difference = currentTime.difference(createdAt);
 
@@ -35,11 +32,10 @@ class HeaderPost extends StatelessWidget {
   bool isMe = false;
   bool is_vervied = false;
   @override
-  Widget build(BuildContext context) {
-    String timeAgo = getTimeAgoShort(post.createdAt);
+  Widget build(final BuildContext context) {
+    final String timeAgo = getTimeAgoShort(post.createdAt);
 
-    isMe = SharedPreferencesDemo.loadUserData().id == post.authorId;
-    return Container(
+    return ColoredBox(
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
@@ -52,35 +48,22 @@ class HeaderPost extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        int id = await SharedPreferencesDemo.getID();
-                        if (id != post.authorId) {
-                          BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(
-                            post.authorId ?? 0,
-                          ));
-                          Navigator.pushNamed(context, AppRoutes.userProfile);
-                        } else {
-                          int c = await SharedPreferencesDemo.getID();
-
-                          BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
-
-                          BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
-                        }
-                      },
+                                            },
                       child: CircleAvatar(
                         radius: 16,
                         backgroundColor: Colors.transparent,
                         child: CachedNetworkImage(
-                          imageUrl: post.avatar ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg", // رابط الصورة
-                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                          imageUrl: post.avatar ?? '${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg', // رابط الصورة
+                          imageBuilder: (final context, final imageProvider) => CircleAvatar(
                             radius: 16,
                             backgroundColor: Colors.white,
                             backgroundImage: imageProvider, // الصورة المحمّلة
                           ),
-                          placeholder: (context, url) => CircleAvatar(
+                          placeholder: (final context, final url) => CircleAvatar(
                             radius: 16,
                             backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة أثناء التحميل
                           ),
-                          errorWidget: (context, url, error) => CircleAvatar(
+                          errorWidget: (final context, final url, final error) => CircleAvatar(
                             radius: 16,
                             backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة في حال الخطأ
                           ),
@@ -90,18 +73,6 @@ class HeaderPost extends StatelessWidget {
                     const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () async {
-                        int id = await SharedPreferencesDemo.getID();
-                        if (id != post.authorId) {
-                          BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(post.authorId ?? 0));
-                          Navigator.pushNamed(context, AppRoutes.userProfile);
-                        } else {
-                          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                          int c = await int.parse(sharedPreferences.getString('id')!);
-
-                          BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
-
-                          BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
-                        }
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,11 +108,10 @@ class HeaderPost extends StatelessWidget {
                       onTap: () {
                         showModalBottomSheet(
                           context: context,
-                          builder: (BuildContext context) {
+                          builder: (final BuildContext context) {
                             return PostDetails(
                               post: post,
-                              isMe: isMe,
-                            );
+                              );
                           },
                         );
                       },
@@ -161,4 +131,3 @@ class HeaderPost extends StatelessWidget {
     );
   }
 }
-*/

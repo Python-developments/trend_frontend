@@ -1,9 +1,7 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/data/models/posts/post_model.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/ZoomingImage.dart';
 import 'package:trend/shared/const/app_links.dart';
@@ -11,7 +9,7 @@ import 'package:trend/shared/const/app_links.dart';
 class BodyPost extends StatefulWidget {
   final PostModel post;
 
-  BodyPost({super.key, required this.post});
+  const BodyPost({required this.post, super.key});
 
   @override
   State<BodyPost> createState() => _BodyPostState();
@@ -39,7 +37,7 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
           _heartSize = 30.sp * _animation.value;
         });
       })
-      ..addStatusListener((status) {
+      ..addStatusListener((final status) {
         if (status == AnimationStatus.completed) {
           _controller.reverse();
         } else if (status == AnimationStatus.dismissed) {
@@ -54,7 +52,7 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
     super.dispose();
   }
 
-  void _animateHeart() async {
+  Future<void> _animateHeart() async {
     if (!_isAnimating) {
       _isAnimating = true;
       _controller.forward();
@@ -63,8 +61,8 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
     }
   }
 
-  Future<void> _likeOrUnLikePost(BuildContext context) async {
-    context.read<PostBloc>().add(LikePost(postId: widget.post.id ?? 0));
+  Future<void> _likeOrUnLikePost(final BuildContext context) async {
+   // context.read<PostBloc>().add(LikePost(postId: widget.post.id ?? 0));
 
     _animateHeart();
     await Future.delayed(const Duration(milliseconds: 300));
@@ -74,7 +72,7 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return GestureDetector(
       onDoubleTap: () {
         _likeOrUnLikePost(context);
@@ -98,7 +96,7 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
                   child: FittedBox(
                     fit: BoxFit.cover,
                     child: ZoomingImage(
-                      image: widget.post.image ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg",
+                      image: widget.post.image ?? '${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg',
                     ),
                   ),
                 ),
@@ -123,4 +121,3 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
     );
   }
 }
-*/

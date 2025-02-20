@@ -4,10 +4,10 @@ import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/P
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/posts_in_user_body.dart';
 
 class PrivateOrDiplayPosts extends StatelessWidget {
-  const PrivateOrDiplayPosts({super.key, required this.user});
+  const PrivateOrDiplayPosts({required this.user, super.key});
   final UserProfileModel user;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return (user.isPrivate)
         ? PrivateWidget()
         : PostsInUserBody(userid: user.id);

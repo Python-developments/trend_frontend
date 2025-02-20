@@ -5,14 +5,14 @@ import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/F
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/Messagebutton.dart';
 
 class Followingandmessage extends StatelessWidget {
-  const Followingandmessage({super.key, required this.user});
+  const Followingandmessage({required this.user, super.key});
   final UserProfileModel user;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Row(
       children: [
         SizedBox(width: 30.w),
-        Container(
+        SizedBox(
           width: 145.w,
           height: 28.h,
           child: FollowingButton(

@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:trend/data/models/core/notification_model.dart';
 
-import 'package:trend/features/profile/presentation/Manager/Bloc_Following/State_Following.dart';
-import 'package:trend/features/profile/presentation/Manager/Bloc_Following/bloc_folllowing.dart';
 
 class Followinfandremove extends StatelessWidget {
-  const Followinfandremove({super.key, required this.notification, this.onTap});
+  const Followinfandremove({required this.notification, super.key, this.onTap});
   final void Function()? onTap;
   final NotificationModel notification;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Row(
       children: [
         GestureDetector(
@@ -23,7 +21,7 @@ class Followinfandremove extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Center(
                 child: Text(
-                  "Follow Back",
+                  'Follow Back',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -45,7 +43,7 @@ class Followinfandremove extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Center(
               child: Text(
-                "Remove",
+                'Remove',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,

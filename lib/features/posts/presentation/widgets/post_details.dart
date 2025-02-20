@@ -1,24 +1,17 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trend/data/models/posts/post_model.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_Bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_event.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 
 
 class PostDetails extends StatelessWidget {
   final PostModel post;
-  final bool isMe;
-  const PostDetails({super.key, required this.post, this.isMe = false});
+  const PostDetails({required this.post, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(final BuildContext context) {
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -56,25 +49,8 @@ class PostDetails extends StatelessWidget {
                       width: double.infinity,
                       child: Padding(
                         padding: EdgeInsets.all(15.h),
-                        child: isMe
-                            ? GestureDetector(
-                                onTap: () async {
-                                  SharedPreferences sharedPreferences =
-                                      await SharedPreferences.getInstance();
-                                  int c = await int.parse(sharedPreferences
-                                      .getString('totalPosts')!);
-
-                                  c--;
-                                  bool x = await sharedPreferences.setString(
-                                      'totalPosts', c.toString());
-                                  int id = await SharedPreferencesDemo.getID();
-                                  Navigator.of(context).pop();
-                                  context
-                                      .read<PostBloc>()
-                                      .add(AddDeletePostEvent(post.id ?? 0));
-                                  BlocProvider.of<CurrentUserBloc>(context)
-                                      .add(GetPostForCurrentUserEvent(id: id));
-                                },
+                        child: /*?GestureDetector(
+                                onTap: (){},
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 1.h),
                                   child: Row(children: [
@@ -97,7 +73,7 @@ class PostDetails extends StatelessWidget {
                                   ]),
                                 ),
                               )
-                            : Column(
+                            : */Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
@@ -126,11 +102,7 @@ class PostDetails extends StatelessWidget {
                                     thickness: 0.2,
                                   ),
                                   GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).pop();
-                                      context.read<PostBloc>().add(
-                                          AddBlocUserEvent(post.authorId ?? 0));
-                                    },
+                                    onTap: () {},
                                     child: Row(children: [
                                       Icon(
                                         Icons.block_rounded,
@@ -161,4 +133,3 @@ class PostDetails extends StatelessWidget {
     );
   }
 }
-*/

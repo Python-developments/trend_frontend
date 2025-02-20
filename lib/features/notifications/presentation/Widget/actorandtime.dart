@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Actorandtime extends StatefulWidget {
-  const Actorandtime({super.key, required this.Actor, required this.createdAt});
+  const Actorandtime({required this.Actor, required this.createdAt, super.key});
   final String Actor;
   final DateTime createdAt;
   @override
@@ -9,7 +9,7 @@ class Actorandtime extends StatefulWidget {
 }
 
 class _ActorandtimeState extends State<Actorandtime> {
-  String getTimeAgoShort(DateTime createdAt) {
+  String getTimeAgoShort(final DateTime createdAt) {
     final currentTime = DateTime.now();
     final difference = currentTime.difference(createdAt);
 
@@ -25,7 +25,7 @@ class _ActorandtimeState extends State<Actorandtime> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Row(
       children: [
         Text(
@@ -40,7 +40,7 @@ class _ActorandtimeState extends State<Actorandtime> {
           width: 5,
         ),
         Text(
-          "${getTimeAgoShort(widget.createdAt)}",
+          getTimeAgoShort(widget.createdAt),
           style: const TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w400,

@@ -11,7 +11,7 @@ class Buttonsfollowing {
       ),
       child: Center(
         child: Text(
-          "Following",
+          'Following',
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -32,7 +32,7 @@ class Buttonsfollowing {
       ),
       child: Center(
         child: Text(
-          "Follow Back",
+          'Follow Back',
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,

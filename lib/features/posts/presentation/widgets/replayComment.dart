@@ -1,47 +1,30 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';import 'package:trend/data/models/posts/comment_model.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
-import 'package:trend/shared/const/app_links.dart';
 
 // ignore: must_be_immutable
 class Replaycomment extends StatefulWidget {
-  const Replaycomment({super.key, required this.reply, required this.comment});
-  final Comment reply;
-  final Comment comment;
+  const Replaycomment({required this.reply, required this.comment, super.key});
+  final CommentModel reply;
+  final CommentModel comment;
   @override
   State<Replaycomment> createState() => _ReplaycommentState();
 }
 
 class _ReplaycommentState extends State<Replaycomment> {
-  void initState() {
-    super.initState();
-    _loadUserReplayAvatar();
-  }
 
-  String replayavatar = "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
-  Future<void> _loadUserReplayAvatar() async {
-    String Newavatar1 = await BlocProvider.of<PostBloc>(context).repository.getUserAvatar(widget.reply.authorId!);
-    print(replayavatar);
-    setState(() {
-      replayavatar = Newavatar1;
-    });
-  }
-
-  String getMentionedNamae(String content) {
-    int firstSpaceIndex = content.indexOf(" ");
+  String getMentionedNamae(final String content) {
+    final int firstSpaceIndex = content.indexOf(' ');
     if (firstSpaceIndex == -1) {
       return content;
     }
     return content.substring(0, firstSpaceIndex);
   }
 
-  String getWithoutMentionedNamae(String content) {
-    int firstSpaceIndex = content.indexOf(" ");
+  String getWithoutMentionedNamae(final String content) {
+    final int firstSpaceIndex = content.indexOf(' ');
     if (firstSpaceIndex == -1) {
       return content;
     }
@@ -49,13 +32,13 @@ class _ReplaycommentState extends State<Replaycomment> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Avatar
         Networkimages(
-          imageUrl: replayavatar,
+          imageUrl: '',
           size: 20,
         ),
         SizedBox(width: 10.w),
@@ -97,9 +80,7 @@ class _ReplaycommentState extends State<Replaycomment> {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            context.read<PostBloc>().add(LikeComment(commentId: widget.comment.id!, postId: widget.comment.post!, subCommentId: widget.reply.id));
-          },
+          onTap: () {},
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -108,13 +89,13 @@ class _ReplaycommentState extends State<Replaycomment> {
               ),
               (widget.reply.isLiked ?? false)
                   ? SvgPicture.asset(
-                      "assets/icons/like_fill.svg",
+                      'assets/icons/like_fill.svg',
                       height: 17,
                       width: 17,
                       fit: BoxFit.none,
                     ) // Filled like icon
                   : SvgPicture.asset(
-                      "assets/icons/like.svg",
+                      'assets/icons/like.svg',
                       height: 17,
                       width: 17,
                       fit: BoxFit.none,
@@ -130,4 +111,3 @@ class _ReplaycommentState extends State<Replaycomment> {
     );
   }
 }
-*/

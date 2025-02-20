@@ -4,11 +4,11 @@ class Removeicon extends StatelessWidget {
   const Removeicon({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Text(
-        "x",
+        'x',
         style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.w300,

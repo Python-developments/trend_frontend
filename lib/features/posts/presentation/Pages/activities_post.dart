@@ -1,9 +1,9 @@
-/*
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
@@ -11,21 +11,22 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.d
 import 'package:trend/features/posts/presentation/widgets/comment_sheet.dart';
 
 class ActivitiesPost extends StatefulWidget {
-  ActivitiesPost({super.key, required this.postIndex, required this.post});
-  final int postIndex;
+  const ActivitiesPost({required this.post, super.key});
   final PostModel post;
+
   @override
-  _ActivitiesPostState createState() => _ActivitiesPostState();
+  State<ActivitiesPost> createState() => _ActivitiesPostState();
 }
 
 class _ActivitiesPostState extends State<ActivitiesPost> {
-  bool isLiked = false;
 
-  void toggleLike() {
-    context.read<PostBloc>().add(LikePost(postId: widget.post.id!));
-  }
+  bool isLiked=false;
 
-  void showCustomBottomSheetTOshare(BuildContext context) {
+  void toggleIsLiked()=>setState(() {
+    isLiked=!isLiked;
+  });
+
+  void showCustomBottomSheetTOshare(final BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -34,16 +35,16 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
           top: Radius.circular(16),
         ),
       ),
-      builder: (context) {
+      builder: (final context) {
         return SafeArea(
           child: LayoutBuilder(
-            builder: (context, constraints) {
+            builder: (final context, final constraints) {
               final isKeyboardOpen =
                   MediaQuery.of(context).viewInsets.bottom > 0;
 
               return FractionallySizedBox(
                 heightFactor: isKeyboardOpen ? 1.0 : 0.4,
-                child: Container(
+                child: DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
@@ -133,7 +134,7 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
     );
   }
 
-  Widget _buildIconWithLabel(IconData icon, String label, Color color) {
+  Widget _buildIconWithLabel(final IconData icon, final String label, final Color color) {
     return Column(
       children: [
         CircleAvatar(
@@ -155,7 +156,7 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
     );
   }
 
-  Widget _buildContactRow(String name, String imagePath) {
+  Widget _buildContactRow(final String name, final String imagePath) {
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: AssetImage(imagePath),
@@ -177,8 +178,8 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(final BuildContext context) {
+    return ColoredBox(
       color: Colors.white,
       child: Column(
         children: [
@@ -194,7 +195,7 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      toggleLike();
+                      toggleIsLiked();
                     });
                   },
                   child: Row(
@@ -202,8 +203,8 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                     children: [
                       (widget.post.isLiked ?? false)
                           ? SvgPicture.asset(
-                              "assets/icons/like_fill.svg") // Filled like icon
-                          : SvgPicture.asset("assets/icons/like.svg"),
+                              'assets/icons/like_fill.svg') // Filled like icon
+                          : SvgPicture.asset('assets/icons/like.svg'),
                       SizedBox(width: 3.w),
                       Text(
                         '${widget.post.likesCount == 0 ? '' : widget.post.likesCount} Like${(widget.post.likesCount ?? 0) > 1 ? 's' : ''}',
@@ -226,41 +227,17 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                       showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
-                        builder: (BuildContext context) {
-                          return BlocBuilder<PostBloc, PostState>(
-                            builder: (context, state) {
-                              if (state is PostLoaded) {
-                                final isKeyboardOpen =
-                                    MediaQuery.of(context).viewInsets.bottom >
-                                        0;
-
+                        builder: (final BuildContext context) {
                                 return FractionallySizedBox(
-                                  heightFactor: isKeyboardOpen
-                                      ? MediaQuery.of(context).size.height *
+                                  heightFactor: MediaQuery.of(context).size.height *
                                           0.95 /
-                                          MediaQuery.of(context).size.height
-                                      : widget.post.commentsCount! > 1
-                                          ? (MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.95) /
-                                              (MediaQuery.of(context)
-                                                  .size
-                                                  .height)
-                                          : 0.7,
+                                          MediaQuery.of(context).size.height,
                                   child: CommentSheet(
-                                    postindex: widget.postIndex,
-                                    post: state.posts[widget.postIndex],
+                                    post: widget.post,
                                   ),
                                 );
-                              } else {
-                                return SizedBox();
-                              }
-                            },
-                          );
                         },
                       );
-                      ;
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -339,4 +316,3 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
     );
   }
 }
-*/
