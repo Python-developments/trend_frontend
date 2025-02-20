@@ -29,12 +29,14 @@ abstract class AppControllerBase extends BaseController with Store {
         await logger.init();
 
         await authController.loadData();
-        if(authController.error!=null)
+        if(authController.error!=null) {
           throw authController.error!;
-        if(authController.cachedUser==null)
+        }
+        if(authController.cachedUser==null) {
           await appRouter.replace(LoginRoute());
-        else
+        } else {
           await appRouter.replace(HomeRouteNavigation());
+        }
       }, onCatchError: (final _) async {
         await appRouter.replace(AppErrorRoute());
       });

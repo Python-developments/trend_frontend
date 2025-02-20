@@ -1,13 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:trend/core/presentation/app_style.dart';
-import 'package:trend/core/presentation/assets.dart';
 import 'package:trend/features/add_post/presentation/add_new_post_page.dart';
-import 'package:trend/features/explore/presentation/pages/explore_main.dart';
-import 'package:trend/features/posts/presentation/Pages/home_page.dart';
-import 'package:trend/features/profile/presentation/Pages/my_profile/my_profile.dart';
 
 enum ToastType { success, error }
 

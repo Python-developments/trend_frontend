@@ -1,10 +1,6 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/features/add_post/bloc/Add_Post_State.dart';
-import 'package:trend/features/add_post/bloc/Add_Post_cubit.dart';
-import 'package:trend/features/profile/data/models/currentUser.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_Following/State_Following.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_Following/bloc_folllowing.dart';
 import 'package:trend/features/profile/presentation/Manager/Display_Following_bloc/followers_bloc.dart';
@@ -19,7 +15,6 @@ import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/Edi
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/MyNameAndAvatar.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/custom_User_feature_wighet.dart';
 
-import '../../../../../../shared/core/local/SharedPreferencesDemo.dart';
 
 class BodyForMyProfile extends StatefulWidget {
   const BodyForMyProfile({super.key, this.onLongPress});
@@ -45,21 +40,6 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
       is_private: false // Default value
       );
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _loadUserData();
-  }
-
-  @override
-  Future<void> _loadUserData() async {
-    user = await SharedPreferencesDemo.loadUserData();
-
-    setState(() {
-      // تحديث الواجهة عند تحميل البيانات إذا لزم الأمر
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,4 +171,3 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
     );
   }
 }
-*/

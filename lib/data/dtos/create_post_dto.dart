@@ -1,5 +1,4 @@
 
-import 'package:json_annotation/json_annotation.dart';
 import 'package:trend/data/dtos/file_dto.dart';
 
 class CreatePostDto {
@@ -11,7 +10,7 @@ class CreatePostDto {
 
   Map<String, dynamic> toJson() =>{
     'image':image.toMultipartFile(),
-    "description":description,
+    'description':description,
   };
 
 }

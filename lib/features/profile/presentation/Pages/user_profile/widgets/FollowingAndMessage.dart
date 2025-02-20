@@ -1,13 +1,12 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/features/profile/data/models/profile_model.dart';
+import 'package:trend/data/models/auth/user_profile_model.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/Following_Button.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/Messagebutton.dart';
 
 class Followingandmessage extends StatelessWidget {
   const Followingandmessage({super.key, required this.user});
-  final ProfileModel user;
+  final UserProfileModel user;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,4 +26,3 @@ class Followingandmessage extends StatelessWidget {
     );
   }
 }
-*/

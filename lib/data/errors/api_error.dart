@@ -21,11 +21,11 @@ class ApiError {
   factory ApiError.fromJson(final Map<String, dynamic> data) =>
       _$ApiErrorFromJson(data);
 
-  CustomError  customError(int statusCode) {
+  CustomError  customError(final int statusCode) {
     return statusCode == 400
         ? BadRequestError(
             errorMessage: apiErrorMessage??message??'', validationErrors: validationErrors?.map(
-          (key, value) => MapEntry(key, value.isNotEmpty ? value.first : ''),
+          (final key, final value) => MapEntry(key, value.isNotEmpty ? value.first : ''),
     ))
         : statusCode == 401
             ? UnAuthorizedError()

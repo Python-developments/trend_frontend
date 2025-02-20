@@ -1,13 +1,12 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/features/profile/data/models/currentUser.dart';
+import 'package:trend/data/models/auth/user_profile_model.dart';
 import 'package:trend/shared/const/app_links.dart';
 
 class Mynameandavatar extends StatelessWidget {
   const Mynameandavatar({super.key, required this.onLongPress, required this.user});
   final void Function()? onLongPress;
-  final currentUser user;
+  final UserProfileModel user;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,9 +17,7 @@ class Mynameandavatar extends StatelessWidget {
             radius: 50.r, // تحديد الحجم
             backgroundColor: Colors.white, // لون الخلفية (اختياري)
             backgroundImage: NetworkImage(
-              user.avatar.startsWith('http')
-                  ? user.avatar // إذا كانت الصورة تحتوي بالفعل على URL كامل
-                  : '${ApiEndpoints.baseUrl}${user.avatar}',
+              user?.avatar??'',
             ),
           ),
         ),
@@ -45,4 +42,3 @@ class Mynameandavatar extends StatelessWidget {
     ;
   }
 }
-*/
