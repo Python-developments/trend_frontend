@@ -119,3 +119,10 @@ class IsNotSelectedError extends CustomError {
                 "${"Please select"} $fieldName",
             errorImage: null);
 }
+class EmptyDataError extends CustomError {
+  EmptyDataError({required final String entityName})
+      : super(
+            errorMessage:
+                "There are no ${entityName} to show",
+            errorImage: null);
+}

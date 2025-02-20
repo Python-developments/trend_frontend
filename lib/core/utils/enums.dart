@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:trend/features/add_post/presentation/add_new_post_page.dart';
+import 'package:trend/features/notifications/presentation/pages/notifications.dart';
 
 enum ToastType { success, error }
 
@@ -15,7 +16,7 @@ enum HomeNavigationBarTileType {
   wowvir(order: 0, iconPath: 'assets/icons/home_icon.svg', destination: AddNewPostPage()),
   search(order: 1, iconPath: 'assets/icons/search.svg', destination: AddNewPostPage()),
   newPost(order: 2, iconPath: 'assets/icons/plus-circle.svg', destination: AddNewPostPage()),
-  notifications(order: 3, iconPath: 'assets/icons/bell.svg', destination: AddNewPostPage()),
+  notifications(order: 3, iconPath: 'assets/icons/bell.svg', destination: NotificationsPage()),
   profile(order: 4, iconPath: 'assets/icons/person.svg', destination: AddNewPostPage());
 
   final String iconPath;
