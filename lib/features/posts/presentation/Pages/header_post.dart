@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/features/posts/presentation/widgets/post_details.dart';
-import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_get.dart';
-import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
 import 'package:trend/shared/const/app_links.dart';
 
 

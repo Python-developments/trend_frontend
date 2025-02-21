@@ -51,6 +51,7 @@ class HomeNavigationBar extends StatelessWidget {
       final int tileIndex, final bool isSelected) {
     final String currentImagePath = HomeNavigationBarTileType.sortedValues[tileIndex].iconPath;
     return BottomNavigationBarItem(
+      label: ' ',
         icon: Padding(
             padding: EdgeInsets.only(bottom: 4.r),
             child:CustomSvgImage(

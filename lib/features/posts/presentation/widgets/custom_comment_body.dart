@@ -28,12 +28,12 @@ class CustomCommentBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                comment.author ?? '',
+                comment.author,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff1F2232)),
               ),
-              Commentcontent(content: comment.content ?? ''),
+              Commentcontent(content: comment.content),
               Row(
                 children: [
                   Text(

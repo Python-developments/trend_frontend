@@ -32,7 +32,7 @@ class _NotificationcontentState extends State<Notificationcontent> {
           Row(
             children: [
               Visibility(
-                visible: !widget.notification.is_following,
+                visible: !widget.notification.isFollowing,
                 child: GestureDetector(
                   onTap: () {
 

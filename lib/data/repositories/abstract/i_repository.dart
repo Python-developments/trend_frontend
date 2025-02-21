@@ -46,6 +46,7 @@ abstract class IRepository {
       required final Map<String, dynamic> parameters}) async {
     try {
     final ResponseModel response = await _get(url: url, parameters: parameters);
+    print('Wiso response ${response.data}');
       final List<dynamic> data=response.data;
       return data.map((final e)=>mapper(e)).toList();
     } catch (e) {
@@ -65,7 +66,7 @@ abstract class IRepository {
     try {
     final PaginationResponseModel response = await _get(
             url: url,
-            parameters: parameters..addAll({'page': page, 'limit': perPage}))
+            parameters: parameters..addAll({'page': page, 'page_size': perPage}))
         as PaginationResponseModel;
 
       return  PaginationDataModel.fromPaginationResponse(response,mapper);
@@ -89,6 +90,7 @@ abstract class IRepository {
         parameters: parameters,
         isFormData: isFormData);
 
+    print('Wiso response $response');
       return mapper(response.data);
     } catch (e) {
       if(appFlavor.showErrors|| e is CustomError) {

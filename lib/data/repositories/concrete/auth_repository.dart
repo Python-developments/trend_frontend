@@ -4,6 +4,8 @@ import 'package:trend/data/dtos/register_dto.dart';
 import 'package:trend/data/dtos/update_profile_dto.dart';
 import 'package:trend/data/local_database/entities/user_entity.dart';
 import 'package:trend/data/models/auth/login_response_model.dart';
+import 'package:trend/data/models/auth/user_info_model.dart';
+import 'package:trend/data/models/auth/user_info_model.dart';
 import 'package:trend/data/models/auth/user_profile_model.dart';
 import 'package:trend/data/repositories/abstract/i_auth_repository.dart';
 import 'package:trend/data/repositories/abstract/i_repository.dart';
@@ -15,15 +17,15 @@ class AuthRepository extends IAuthRepository {
 
   @override
   Future<void> register(final RegisterDto registerDto) async {
-    final LoginResponseModel response = await post(
+    await post(
         url: 'auth/register/',
         parameters: registerDto.toJson(),
-        mapper: LoginResponseModel.fromJson,
+        mapper: emptyMapper,
         );
+    /*await setCurrentTokenSession(
+      token: response.tokens.accessToken,
+    );*/
 
-    await setCurrentTokenSession(
-      token: response.token,
-    );
   }
 
   Future<LoginResponseModel> getLoginCredentials(
@@ -40,9 +42,9 @@ class AuthRepository extends IAuthRepository {
       required final String email,
       required final Map<String, dynamic> parameters}) async {
     final LoginResponseModel response =
-        await getLoginCredentials(url: url, parameters: parameters);
+         await getLoginCredentials(url: url, parameters: parameters);
     await setCurrentTokenSession(
-      token: response.token,
+      token: response.tokens.accessToken,userId: response.user.id
     );
 
 
@@ -93,9 +95,9 @@ class AuthRepository extends IAuthRepository {
           );
 
   @override
-  Future<UserProfileModel> getUserProfile() => getObject(
+  Future<UserInfoModel> getUserProfile() => getObject(
       url: 'customers/profile',
-      mapper: UserProfileModel.fromJson,
+      mapper: UserInfoModel.fromJson,
       );
 
 
@@ -105,7 +107,7 @@ class AuthRepository extends IAuthRepository {
       appDatabase.clearUserCache(),
     ]);
 
-    await setCurrentTokenSession(token: '');
+    await setCurrentTokenSession(token: '',userId: 0);
   }
 
   @override
@@ -128,7 +130,7 @@ class AuthRepository extends IAuthRepository {
       appDatabase.clearUserCache(),
     ]);
 
-    await setCurrentTokenSession(token: '');
+    await setCurrentTokenSession(token: '',userId: 0);
   }
 
   @override
@@ -138,19 +140,19 @@ class AuthRepository extends IAuthRepository {
       mapper: UserProfileModel.fromJson);
 
   @override
-  Future<UserProfileModel> updateUserProfile(
+  Future<UserInfoModel> updateUserProfile(
           {required final UpdateProfileDto updateProfileDto}) =>
       put(
           url: 'customers/profile',
           parameters: updateProfileDto.toJson(),
-          mapper: UserProfileModel.fromJson);
+          mapper: UserInfoModel.fromJson);
 
 
 
   @override
-  Future<void> setCurrentTokenSession({required final String token}) async {
+  Future<void> setCurrentTokenSession({required final String token,required final int userId}) async {
     httpClient.setToken(token);
-    await appDatabase.setToken(token);
+    await appDatabase.setToken(newToken: token,userId: userId);
   }
 
   @override

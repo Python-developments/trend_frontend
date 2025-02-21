@@ -47,7 +47,7 @@ class _ReplaycommentState extends State<Replaycomment> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.reply.author ?? '',
+                widget.reply.author,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff1F2232)),
               ),
               Padding(
@@ -62,7 +62,7 @@ class _ReplaycommentState extends State<Replaycomment> {
                     ),
                     children: [
                       TextSpan(
-                        text: getMentionedNamae(widget.reply.content ?? ''),
+                        text: getMentionedNamae(widget.reply.content),
                         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11.sp, color: Colors.blue),
                       ),
                       TextSpan(

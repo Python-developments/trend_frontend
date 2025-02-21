@@ -5,9 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trend/data/models/posts/post_model.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/posts/presentation/widgets/comment_sheet.dart';
 
 class ActivitiesPost extends StatefulWidget {
@@ -207,7 +204,7 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                           : SvgPicture.asset('assets/icons/like.svg'),
                       SizedBox(width: 3.w),
                       Text(
-                        '${widget.post.likesCount == 0 ? '' : widget.post.likesCount} Like${(widget.post.likesCount ?? 0) > 1 ? 's' : ''}',
+                        '${widget.post.likesCount == 0 ? '' : widget.post.likesCount} Like${(widget.post.likesCount) > 1 ? 's' : ''}',
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.black,
@@ -248,7 +245,7 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          '${widget.post.commentsCount == 0 ? '' : widget.post.commentsCount} Comment${(widget.post.commentsCount ?? 0) > 1 ? 's' : ''}',
+                          '${widget.post.commentsCount == 0 ? '' : widget.post.commentsCount} Comment${(widget.post.commentsCount) > 1 ? 's' : ''}',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,

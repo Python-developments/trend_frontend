@@ -2,6 +2,7 @@
 
 import 'package:injectable/injectable.dart';
 import 'package:trend/data/dtos/create_post_dto.dart';
+import 'package:trend/data/models/core/pagination_data_model.dart';
 import 'package:trend/data/models/posts/post_model.dart';
 import 'package:trend/data/repositories/abstract/i_posts_repository.dart';
 import 'package:trend/data/repositories/abstract/i_repository.dart';
@@ -12,7 +13,7 @@ class PostsRepository extends IPostsRepository {
   PostsRepository(super.appFlavor, super.httpClient, super.appDatabase, super.logger,);
 
   @override
-  Future<void> createPost({required final CreatePostDto postDto})=>post(url:'posts/create',parameters: postDto.toJson()   , mapper: emptyMapper,isFormData: true);
+  Future<void> createPost({required final CreatePostDto postDto})=>post(url:'posts/create/',parameters: postDto.toJson()   , mapper: emptyMapper,isFormData: true);
 
   @override
   Future<void> createComment({required final int postId, required final String comment}) {
@@ -39,10 +40,8 @@ class PostsRepository extends IPostsRepository {
   }
 
   @override
-  Future<List<PostModel>> getAllPosts() {
-    // TODO: implement getAllPosts
-    throw UnimplementedError();
-  }
+  Future<PaginationDataModel<PostModel>> getAllPosts({required final int page,required final int perPage})=>getPagination(url: 'posts/all-posts/',
+      mapper: PostModel.fromJson,page: page,perPage: perPage, parameters: {});
 
   @override
   Future<List<PostModel>> getUserPosts({required final int userId}) {

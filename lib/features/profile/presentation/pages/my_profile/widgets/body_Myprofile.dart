@@ -9,6 +9,7 @@ import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/Dsi
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/EditAndSetting.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/MyNameAndAvatar.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/custom_User_feature_wighet.dart';
+import 'package:trend/features/profile/presentation/pages/my_profile/widgets/AnimatedAvatarWidget.dart';
 
 
 class BodyForMyProfile extends StatelessWidget {
@@ -28,6 +29,8 @@ class BodyForMyProfile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                  AnimatedAvatarWidget(avatarUrl: '',),
                   if(authController.userProfileModel!=null)
                   Mynameandavatar(
                     onLongPress: (){},
@@ -69,7 +72,7 @@ class BodyForMyProfile extends StatelessWidget {
                   SizedBox(height: 10.h),
                   if(authController.userProfileModel!=null)
                   Displaybio(
-                    user: authController.userProfileModel!,
+                    user: authController.userProfileModel!.profile,
                   ),
                   SizedBox(height: 10.h),
                   DsiplayMyPostsInBody()

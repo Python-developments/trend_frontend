@@ -4,11 +4,7 @@ import 'package:trend/core/presentation/widgets/custom_animated_list_data_loader
 import 'package:trend/dependencies.dart';
 import 'package:trend/features/posts/controllers/posts_controller.dart';
 
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
-import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/posts/presentation/Pages/main_post.dart';
-import 'package:trend/features/posts/presentation/widgets/Post_Shimmer.dart';
 
 
 

@@ -1,7 +1,6 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Pages/EditBioPage.dart';
+import 'package:trend/core/presentation/router/auto_router.dart';
 
 class CustomBioTile extends StatelessWidget {
   final String bio;
@@ -9,15 +8,11 @@ class CustomBioTile extends StatelessWidget {
   final String userBio;
   final int userid;
   const CustomBioTile({
-    Key? key,
-    required this.bio,
-    required this.onBioChanged,
-    required this.userBio,
-    required this.userid,
-  }) : super(key: key);
+    required this.bio, required this.onBioChanged, required this.userBio, required this.userid, super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       height: 50,
       decoration: BoxDecoration(
@@ -30,7 +25,7 @@ class CustomBioTile extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 5),
         leading: SvgPicture.asset(
-          "assets/icons/Security.svg",
+          'assets/icons/Security.svg',
           width: 24,
           height: 24,
           fit: BoxFit.cover,
@@ -40,7 +35,7 @@ class CustomBioTile extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                "Bio",
+                'Bio',
                 style: TextStyle(
                   fontSize: 15,
                   color: Colors.black,
@@ -73,7 +68,7 @@ class CustomBioTile extends StatelessWidget {
                 ),
               ),
               SvgPicture.asset(
-                "assets/icons/chevron-small-left.svg",
+                'assets/icons/chevron-small-left.svg',
                 height: 20,
                 width: 20,
                 fit: BoxFit.cover,
@@ -81,17 +76,13 @@ class CustomBioTile extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () async {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Editbiopage(
+        onTap: ()  {
+           getAppRouter.push( EditBioRoute(
                         userid: userid,
                         bio: userBio,
-                      )));
+                      ));
         },
       ),
     );
   }
 }
-*/

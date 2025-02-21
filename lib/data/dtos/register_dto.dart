@@ -6,7 +6,7 @@ part 'register_dto.g.dart';
 class RegisterDto {
   final String username, password, email;
 
-  @JsonKey(name: 'passwordConfirm')
+  @JsonKey(name: 'password_confirm')
   final String confirmPassword;
 
 

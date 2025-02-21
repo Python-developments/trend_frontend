@@ -12,6 +12,8 @@ import 'package:trend/features/auth/presentation/pages/register_page.dart';
 import 'package:trend/features/auth/presentation/pages/submit_email_page.dart';
 import 'package:trend/features/auth/presentation/pages/submit_new_password_page.dart';
 import 'package:trend/features/home/presentation/pages/home_page_navigation.dart';
+import 'package:trend/features/profile/presentation/Pages/editi_full_name_page.dart';
+import 'package:trend/features/profile/presentation/pages/EditBioPage.dart';
 
 part 'auto_router.gr.dart';
 

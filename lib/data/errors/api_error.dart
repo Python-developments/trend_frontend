@@ -10,7 +10,7 @@ class ApiError {
   final Map<String, List<String>>? validationErrors;
   @JsonKey(name: 'error')
   final String? apiErrorMessage;
-  final String message;
+  final String? message;
 
   ApiError({
     required this.validationErrors,

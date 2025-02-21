@@ -6,10 +6,10 @@ targets:
         options:
           enable_cached_builds: true
         generate_for:
-            - lib/features/**/presentation/pages/**_page.dart
-            - lib/core/presentation/pages/**_page.dart
-            - lib/features/home/presentation/pages/home_page_navigation.dart
-            - lib/core/presentation/router/auto_router.dart
+            #- lib/features/**/presentation/pages/**_page.dart
+            #- lib/core/presentation/pages/**_page.dart
+            #- lib/features/home/presentation/pages/home_page_navigation.dart
+            #- lib/core/presentation/router/auto_router.dart
 
       json_serializable:
         options:

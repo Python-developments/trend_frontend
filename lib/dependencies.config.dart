@@ -44,7 +44,12 @@ import 'features/auth/controllers/login_controller.dart' as _i701;
 import 'features/auth/controllers/register_controller.dart' as _i656;
 import 'features/auth/controllers/submit_new_password_controller.dart' as _i524;
 import 'features/auth/controllers/submit_receiver_controller.dart' as _i752;
+import 'features/explore/presentation/controllers/explore_posts_controller.dart'
+    as _i660;
 import 'features/home/controllers/bottom_navigator_controller.dart' as _i665;
+import 'features/notifications/controllers/notifications_controller.dart'
+    as _i624;
+import 'features/posts/controllers/posts_controller.dart' as _i1065;
 import 'third_parties_modules/abstract/i_crop_image_module.dart' as _i859;
 import 'third_parties_modules/abstract/i_http_requestor_module.dart' as _i669;
 import 'third_parties_modules/abstract/i_image_picking_module.dart' as _i964;
@@ -180,6 +185,12 @@ _i174.GetIt $initGetIt(
         gh<_i658.AppRouter>(),
         gh<_i573.SnakeBarShower>(),
       ));
+  gh.factory<_i624.NotificationsController>(() => _i624.NotificationsController(
+        gh<_i1007.IProfileRepository>(),
+        gh<_i1037.ILoggerModule>(),
+        gh<_i658.AppRouter>(),
+        gh<_i573.SnakeBarShower>(),
+      ));
   gh.singleton<_i710.AuthController>(() => _i710.AuthController(
         gh<_i762.IAuthRepository>(),
         gh<_i1007.IProfileRepository>(),
@@ -226,6 +237,18 @@ _i174.GetIt $initGetIt(
         gh<_i573.SnakeBarShower>(),
       ));
   gh.factory<_i57.CreatePostController>(() => _i57.CreatePostController(
+        gh<_i1069.IPostsRepository>(),
+        gh<_i1037.ILoggerModule>(),
+        gh<_i658.AppRouter>(),
+        gh<_i573.SnakeBarShower>(),
+      ));
+  gh.factory<_i660.ExplorePostsController>(() => _i660.ExplorePostsController(
+        gh<_i1069.IPostsRepository>(),
+        gh<_i1037.ILoggerModule>(),
+        gh<_i658.AppRouter>(),
+        gh<_i573.SnakeBarShower>(),
+      ));
+  gh.factory<_i1065.PostsController>(() => _i1065.PostsController(
         gh<_i1069.IPostsRepository>(),
         gh<_i1037.ILoggerModule>(),
         gh<_i658.AppRouter>(),

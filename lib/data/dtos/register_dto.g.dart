@@ -9,7 +9,7 @@ part of 'register_dto.dart';
 RegisterDto _$RegisterDtoFromJson(Map<String, dynamic> json) => RegisterDto(
       username: json['username'] as String,
       email: json['email'] as String,
-      confirmPassword: json['passwordConfirm'] as String,
+      confirmPassword: json['password_confirm'] as String,
       password: json['password'] as String,
     );
 
@@ -18,5 +18,5 @@ Map<String, dynamic> _$RegisterDtoToJson(RegisterDto instance) =>
       'username': instance.username,
       'password': instance.password,
       'email': instance.email,
-      'passwordConfirm': instance.confirmPassword,
+      'password_confirm': instance.confirmPassword,
     };

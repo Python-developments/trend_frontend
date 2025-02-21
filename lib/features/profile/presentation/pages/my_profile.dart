@@ -3,23 +3,15 @@ import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/Ani
 import 'package:trend/features/profile/presentation/Pages/my_profile/widgets/body_Myprofile.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/custom_Backdrop_Filter.dart';
 
-class MyProfilePage extends StatefulWidget {
+class MyProfilePage extends StatelessWidget {
   const MyProfilePage({super.key});
 
-  @override
-  State<MyProfilePage> createState() => _MyProfilePageState();
-}
-
-class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(final BuildContext context) {
     return Stack(
       children: [
         BodyForMyProfile(),
-        customBackdropFilter(),
-        AnimatedAvatarWidget(
-          avatarUrl: '',
-        )
+        //customBackdropFilter(),
       ],
     );
   }

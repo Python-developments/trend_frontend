@@ -1,7 +1,6 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Pages/EditFullname.dart';
+import 'package:trend/core/presentation/router/auto_router.dart';
 
 class ProfileInfoTile extends StatefulWidget {
   final String property;
@@ -10,13 +9,8 @@ class ProfileInfoTile extends StatefulWidget {
   final Function() onCancel;
   final int userid;
   const ProfileInfoTile({
-    Key? key,
-    required this.property,
-    required this.userpro,
-    required this.onChanged,
-    required this.onCancel,
-    required this.userid,
-  }) : super(key: key);
+    required this.property, required this.userpro, required this.onChanged, required this.onCancel, required this.userid, super.key,
+  });
 
   @override
   _ProfileInfoTileState createState() => _ProfileInfoTileState();
@@ -24,7 +18,7 @@ class ProfileInfoTile extends StatefulWidget {
 
 class _ProfileInfoTileState extends State<ProfileInfoTile> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       height: 50,
       decoration: BoxDecoration(
@@ -37,9 +31,9 @@ class _ProfileInfoTileState extends State<ProfileInfoTile> {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 5),
-        leading: Image.asset("assets/images/User.png"),
+        leading: Image.asset('assets/images/User.png'),
         title: Text(
-          "Full Name",
+          'Full Name',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -71,7 +65,7 @@ class _ProfileInfoTileState extends State<ProfileInfoTile> {
                 ),
               ),
               SvgPicture.asset(
-                "assets/icons/chevron-small-left.svg",
+                'assets/icons/chevron-small-left.svg',
                 height: 20,
                 width: 20,
                 fit: BoxFit.cover,
@@ -80,13 +74,7 @@ class _ProfileInfoTileState extends State<ProfileInfoTile> {
           ),
         ),
         onTap: () async {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => EditFullname(
-                        Fullname: widget.userpro,
-                        userid: widget.userid,
-                      )));
+          getAppRouter.push(EditFullNameRoute(Fullname: '',userid: widget.userid,));
           // showModalBottomSheet(
           //   context: context,
           //   builder: (BuildContext context) {
@@ -113,4 +101,3 @@ class _ProfileInfoTileState extends State<ProfileInfoTile> {
     );
   }
 }
-*/

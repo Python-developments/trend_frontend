@@ -45,6 +45,110 @@ class AppErrorRouteArgs {
 }
 
 /// generated route for
+/// [EditBioPage]
+class EditBioRoute extends PageRouteInfo<EditBioRouteArgs> {
+  EditBioRoute({
+    required String bio,
+    required int userid,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditBioRoute.name,
+          args: EditBioRouteArgs(
+            bio: bio,
+            userid: userid,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditBioRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<EditBioRouteArgs>();
+      return EditBioPage(
+        bio: args.bio,
+        userid: args.userid,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class EditBioRouteArgs {
+  const EditBioRouteArgs({
+    required this.bio,
+    required this.userid,
+    this.key,
+  });
+
+  final String bio;
+
+  final int userid;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditBioRouteArgs{bio: $bio, userid: $userid, key: $key}';
+  }
+}
+
+/// generated route for
+/// [EditFullNamePage]
+class EditFullNameRoute extends PageRouteInfo<EditFullNameRouteArgs> {
+  EditFullNameRoute({
+    required String Fullname,
+    required int userid,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          EditFullNameRoute.name,
+          args: EditFullNameRouteArgs(
+            Fullname: Fullname,
+            userid: userid,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EditFullNameRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<EditFullNameRouteArgs>();
+      return EditFullNamePage(
+        Fullname: args.Fullname,
+        userid: args.userid,
+        key: args.key,
+      );
+    },
+  );
+}
+
+class EditFullNameRouteArgs {
+  const EditFullNameRouteArgs({
+    required this.Fullname,
+    required this.userid,
+    this.key,
+  });
+
+  final String Fullname;
+
+  final int userid;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'EditFullNameRouteArgs{Fullname: $Fullname, userid: $userid, key: $key}';
+  }
+}
+
+/// generated route for
 /// [HomePageNavigation]
 class HomeRouteNavigation extends PageRouteInfo<HomeRouteNavigationArgs> {
   HomeRouteNavigation({

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/data/models/auth/user_profile_model.dart';
-import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
-import 'package:trend/shared/const/app_links.dart';
+import 'package:trend/data/models/auth/user_info_model.dart';
 
-class AvatarAndName extends StatelessWidget {
-  const AvatarAndName({required this.onLongPress, required this.user, super.key});
-  final void Function() onLongPress;
-  final UserProfileModel user;
+class Mynameandavatar extends StatelessWidget {
+  const Mynameandavatar({required this.onLongPress, required this.user, super.key});
+  final void Function()? onLongPress;
+  final UserInfoModel user;
   @override
   Widget build(final BuildContext context) {
     return Column(
       children: [
         GestureDetector(
           onLongPress: onLongPress,
-          child: Networkimages(
-            imageUrl: user.avatar?.startsWith('http')==true
-                ? user.avatar??'${ApiEndpoints.baseUrl}${user.avatar}':'${ApiEndpoints.baseUrl}${user.avatar}',
-            size: 50.r,
+          child: CircleAvatar(
+            radius: 50.r, // تحديد الحجم
+            backgroundColor: Colors.white, // لون الخلفية (اختياري)
+            backgroundImage: NetworkImage(
+              user.avatar??'',
+            ),
           ),
         ),
         SizedBox(height: 12.h),

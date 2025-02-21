@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:trend/core/controllers/controllers_mixins/image_picking_mixin.dart';
 import 'package:trend/core/presentation/validators/is_not_empty_validator.dart';
+import 'package:trend/core/presentation/widgets/custom_app_bar.dart';
+import 'package:trend/core/presentation/widgets/custom_sized_box.dart';
 import 'package:trend/core/presentation/widgets/main_button.dart';
 import 'package:trend/core/presentation/widgets/text_fields/custom_image_picker_field.dart';
 import 'package:trend/core/presentation/widgets/text_fields/long_text_field.dart';
@@ -26,47 +28,33 @@ class _AddNewPostPageState extends State<AddNewPostPage> {
       key: controller.formKey,
       child: Scaffold(
           backgroundColor: Colors.white,
-          bottomNavigationBar: Observer(
-            builder: (final _) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child:MainButton(title: 'Save and Share',
-                    isLoading: controller.isLoading,
-                    onPressed: controller.submitForm,
-                    isDisabled: controller.selectedImage==ImagePickingState.empty(),
-                )
-              )
-          ),
+          appBar: CustomAppBar(barTitle: 'Add a new post', context: context),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: AppBar(
-                    automaticallyImplyLeading: false,
-                    backgroundColor: Colors.white,
-                    elevation: 0,
-                    title: const Text(
-                      'Add a new post',
-                      style: TextStyle(color: Colors.black, fontSize: 20),
-                    ),
-                  ),
+            child: Column(
+              children: [
+                LongTextField(
+                  formController: controller,title: 'Description',
+                  fieldKey: 'description',errorKey: 'description',
+                  validator: IsNotEmptyValidator(),
                 ),
-                SliverToBoxAdapter(
-                  child: LongTextField(
-                    formController: controller,title: 'Description',
-                    fieldKey: 'description',errorKey: 'description',
-                    validator: IsNotEmptyValidator(),
-                  ),
+                const SizedBox(height: 16),
+                CustomSingleImagePickerField(
+                  formController: controller,
+                  title: 'Image', isFromGallery: true,
+                  withCrop: true,
                 ),
-                SliverToBoxAdapter(child: const SizedBox(height: 16)),
-                SliverToBoxAdapter(
-                  child:CustomSingleImagePickerField(
-                    formController: controller,
-                    title: 'Image', isFromGallery: true,
-                    withCrop: true,
-                  )
+                Spacer(),
+                Observer(
+                    builder: (final _) => Center(
+                      child: MainButton(title: 'Save and Share',
+                        isLoading: controller.isLoading,
+                        onPressed: controller.submitForm,
+                        isDisabled: controller.selectedImage==ImagePickingState.empty(),
+                      ),
+                    )
                 ),
-                SliverToBoxAdapter(child: const SizedBox(height: 20)),
+                CustomSizedBox(height: 32,),
               ],
             ),
           ),

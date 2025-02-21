@@ -1,0 +1,20 @@
+import 'package:injectable/injectable.dart';
+import 'package:trend/core/controllers/pagination_list_data_loader.dart';
+import 'package:trend/data/errors/core_errors.dart';
+import 'package:trend/data/errors/custom_error.dart';
+import 'package:trend/data/models/core/pagination_data_model.dart';
+import 'package:trend/data/models/posts/post_model.dart';
+import 'package:trend/data/repositories/abstract/i_posts_repository.dart';
+
+@injectable
+class ExplorePostsController extends PaginationListDataLoader<PostModel> {
+  final IPostsRepository postsRepository;
+
+  ExplorePostsController(this.postsRepository, super.logger, super.appRouter, super.snakeBarShower);
+
+  @override
+  Future<PaginationDataModel<PostModel>> paginationGetter(
+      {required final int pageNumber, required final int perPage}) => postsRepository.getAllPosts(page: pageNumber,perPage: perPage);
+  @override
+  CustomError? get emptyError => EmptyDataError(entityName: 'posts');
+}

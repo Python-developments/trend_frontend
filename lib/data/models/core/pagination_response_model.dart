@@ -5,9 +5,10 @@ part 'pagination_response_model.g.dart';
 
 @JsonSerializable()
 class PaginationResponseModel extends ResponseModel {
+  @JsonKey(name: 'count')
   final int totalItems;
-  final List<dynamic> items;
-  PaginationResponseModel({required this.totalItems, required this.items})
+  final List<dynamic> results;
+  PaginationResponseModel({required this.totalItems, required this.results})
       : super(data: null);
 
   factory PaginationResponseModel.fromJson(

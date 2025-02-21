@@ -1,17 +1,13 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
-import 'package:trend/features/profile/presentation/Pages/block_page/block.dart';
 
 class blockTile extends StatelessWidget {
-  const blockTile({super.key, required this.id});
+  const blockTile({required this.id, super.key});
   final int id;
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       height: 50,
       decoration: BoxDecoration(
@@ -22,23 +18,15 @@ class blockTile extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 5),
         leading: Icon(Icons.block, size: 20.sp),
-        title: Text("BlockList"),
+        title: Text('BlockList'),
         trailing: SvgPicture.asset(
-          "assets/icons/chevron-small-left.svg",
+          'assets/icons/chevron-small-left.svg',
           height: 20,
           width: 20,
           fit: BoxFit.cover,
         ),
-        onTap: () {
-          BlocProvider.of<ProfileBloc>(context).add(getBlockedUser(id: id));
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      BlockedUsers(id: id))); // Navigate to BlockList
-        },
+        onTap: () {},
       ),
     );
   }
 }
-*/

@@ -75,11 +75,11 @@ class CustomAnimatedListState extends State<CustomAnimatedList>with WidgetsBindi
       controller: widget.scrollController,
       itemBuilder: (final context, final index, final animation) => FadeTransition(
     opacity: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
-    child:SlideTransition(
-          position: CurvedAnimation(
+    child:FadeTransition(
+          opacity: CurvedAnimation(
             curve: Curves.linear,
             parent: animation,
-          ).drive((Tween<Offset>(begin: const Offset(0, -0.3), end: Offset.zero))),
+          ).drive((Tween<double>(begin:0, end:1))),
           child: toRenderChildren[index],
         ),
     ));

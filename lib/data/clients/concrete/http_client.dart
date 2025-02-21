@@ -51,10 +51,11 @@ class HttpClient extends IHttpClient {
 
   ResponseModel mapResponseToModel(final Response response) {
     final Map<String, dynamic>? data = response.data;
+    print('Wiso data $data');
     try {
-      return PaginationResponseModel.fromJson(json: data?['data'] ?? {});
+      return PaginationResponseModel.fromJson(json: data?? {});
     } catch (_) {
-      return ResponseModel(data: data?['data'] ?? {});
+      return ResponseModel(data: data ?? {});
     }
   }
 }

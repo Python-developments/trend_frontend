@@ -12,7 +12,7 @@ import 'package:trend/data/dtos/update_profile_dto.dart';
 import 'package:trend/data/local_database/databases/abstract/i_app_local_database.dart';
 import 'package:trend/data/local_database/entities/user_entity.dart';
 import 'package:trend/data/models/auth/login_response_model.dart';
-import 'package:trend/data/models/auth/user_profile_model.dart';
+import 'package:trend/data/models/auth/user_info_model.dart';
 import 'package:trend/data/repositories/abstract/i_auth_repository.dart';
 import 'package:trend/data/repositories/abstract/i_profile_repository.dart';
 import 'package:trend/dependencies.dart';
@@ -38,7 +38,7 @@ abstract class AuthControllerBase extends BaseController with Store {
   @override
   bool get isLazyController => true;
   @observable
-  UserProfileModel? userProfileModel;
+  UserInfoModel? userProfileModel;
   @observable
   UserEntity? cachedUser;
 
@@ -174,7 +174,9 @@ abstract class AuthControllerBase extends BaseController with Store {
             })));
   }
 
-  checkAccountConfirmation(){}
+  Future<void> checkAccountConfirmation()async{
+    return;
+  }
 
 
   @override

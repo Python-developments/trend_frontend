@@ -10,13 +10,12 @@ class UsersDao extends DatabaseAccessor<AppLocalDatabase> with _$UsersDaoMixin {
 
   Future<UserEntity?> getCurrentUser() async {
     final User? result = await select(attachedDatabase.users).getSingleOrNull();
-    return result != null ? UserEntity(token: result.token) : null;
+    return result != null ? UserEntity(token: result.token,id: result.id) : null;
   }
 
-  Future<void> setToken(final String newToken) async {
-    final UserEntity currentUser = (await getCurrentUser())!;
+  Future<void> setToken({required final String newToken,required final int userId}) async {
     await _deleteUser();
-    await into(attachedDatabase.users).insert(User(token: newToken));
+    await into(attachedDatabase.users).insert(User(token: newToken,id:userId));
     return;
   }
 

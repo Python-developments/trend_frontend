@@ -1,14 +1,10 @@
-/*
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:trend/features/profile/data/models/currentUser.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
-import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
+import 'package:trend/data/models/auth/user_info_model.dart';
 import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Widget/Block_tile.dart';
 import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Widget/CustomBioTile.dart';
 import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Widget/Delete_tile.dart';
@@ -17,21 +13,21 @@ import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Wi
 import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Widget/profile_avatar.dart';
 import 'package:trend/features/profile/presentation/Pages/edit_profile%20copy/Widget/profile_info_tile.dart';
 
-class Editpage extends StatefulWidget {
-  const Editpage({super.key, required this.user, this.onTap});
+class EditPage extends StatefulWidget {
+  const EditPage({required this.user, super.key, this.onTap});
 
-  final currentUser user;
+  final  UserInfoModel user;
   final void Function()? onTap;
   @override
-  State<Editpage> createState() => _EditpageState();
+  State<EditPage> createState() => _EditPageState();
 }
 
-class _EditpageState extends State<Editpage> {
+class _EditPageState extends State<EditPage> {
   File? _selectedImage; // لتخزين الصورة المختارة
   final ImagePicker _picker = ImagePicker(); // لإنشاء مثيل لالتقاط الصور
-  late String username = "";
-  late String fullname = "";
-  late String bio = "";
+  late String username = '';
+  late String fullname = '';
+  late String bio = '';
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -50,36 +46,23 @@ class _EditpageState extends State<Editpage> {
     } else {}
   }
 
-  void pickAvatarImage() async {
+  Future<void> pickAvatarImage() async {
     await _pickImageFromCamera();
   }
 
   bool is_visible = false;
   bool isLoading = false;
   @override
-  Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: isLoading, // عرض شاشة التحميل عند true
-      opacity: 0.5,
-      progressIndicator: CircularProgressIndicator(
-        color: Colors.black,
-      ),
-      child: Scaffold(
+  Widget build(final BuildContext context) {
+    return Scaffold(
         backgroundColor: Colors.white,
-        appBar: CustomAppBar(
-          title: "Edit my profile",
+        appBar: ProfileAppBar(
+          title: 'Edit my profile',
           userId: widget.user.id,
           fullname: fullname,
           bio: bio,
           selectedImage: _selectedImage,
           onPressed: () {
-            if (_selectedImage != null) {
-              BlocProvider.of<ProfileBloc>(context)
-                  .add(UpdateAvatar(widget.user.id, _selectedImage!));
-            }
-            setState(() {
-              isLoading = true;
-            });
           },
         ),
         body: Column(
@@ -89,7 +72,7 @@ class _EditpageState extends State<Editpage> {
             ),
             ProfileAvatar(
               onTap: widget.onTap,
-              avatarUrl: widget.user.avatar,
+              avatarUrl: widget.user.avatar??'',
               selectedImage: _selectedImage,
               pickImageFromCamera: _pickImageFromCamera,
               pickImage: _pickImage,
@@ -103,7 +86,7 @@ class _EditpageState extends State<Editpage> {
                     height: 20.sp,
                   ),
                   Text(
-                    "Personal Informations",
+                    'Personal Informations',
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
                   ),
                   SizedBox(
@@ -111,8 +94,8 @@ class _EditpageState extends State<Editpage> {
                   ),
                   ProfileInfoTile(
                     property: fullname,
-                    userpro: widget.user.fullName,
-                    onChanged: (newFullName) {
+                    userpro: widget.user.fullName??'',
+                    onChanged: (final newFullName) {
                       setState(() {
                         fullname = newFullName;
                       });
@@ -127,18 +110,18 @@ class _EditpageState extends State<Editpage> {
                   CustomBioTile(
                     userid: widget.user.id,
                     bio: bio, // Pass the current bio
-                    onBioChanged: (newBio) {
+                    onBioChanged: (final newBio) {
                       setState(() {
                         bio = newBio;
                       });
                     },
                     userBio:
-                        widget.user.bio, // Pass the initial bio from the user
+                        widget.user.profile.bio??'', // Pass the initial bio from the user
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
                     child: Text(
-                      "Other",
+                      'Other',
                       style:
                           TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
                     ),
@@ -153,8 +136,6 @@ class _EditpageState extends State<Editpage> {
             ),
           ],
         ),
-      ),
     );
   }
 }
-*/

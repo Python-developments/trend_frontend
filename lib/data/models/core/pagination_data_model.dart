@@ -9,7 +9,7 @@ class PaginationDataModel<T> {
       final PaginationResponseModel response,
       final T Function(Map<String, dynamic>) mapper) {
     return PaginationDataModel(
-        items: response.items.map((final e) => mapper(e)).toList(),
+        items: response.results.map((final e) => mapper(e)).toList(),
         totalItems: response.totalItems);
   }
 

@@ -1,14 +1,8 @@
-/*
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trend/shared/style/app_styles.dart';
-import 'package:trend/shared/utiles/routes.dart';
-
-
-import '../../../../../shared/utiles/services_local.dart';
-import '../../manager/for_you/for_you_search_bloc.dart';
-import '../../pages/on_change_search.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trend/core/presentation/app_style.dart';
 
 class ExploreMainAppBarContainer extends StatelessWidget
     implements PreferredSizeWidget {
@@ -18,23 +12,10 @@ class ExploreMainAppBarContainer extends StatelessWidget
   Size get preferredSize =>  Size.fromHeight(kToolbarHeight.h < 56? 56 : kToolbarHeight.h);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return SafeArea(
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    MultiBlocProvider(providers: [
-                  BlocProvider(
-                      create: (_) => ForYouSearchBloc(
-                            searchExploreUseCase: sl(),
-                            userSearchUseCase: sl(),
-                          )),
-                ], child: OnChangeSearch()),
-                transitionDuration: Duration(milliseconds: 0), // No transition
-              ));
         },
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 11),
@@ -46,9 +27,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                   fit: BoxFit.fill,
                   child: IconButton(
                     onPressed: () {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pushNamed(context, AppRoutes.home);
-                      }
+
                     },
                     icon: Icon(
                       FontAwesomeIcons.userFriends,
@@ -65,7 +44,7 @@ class ExploreMainAppBarContainer extends StatelessWidget
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
                   decoration: BoxDecoration(
-                    color: Color(AppStyle.greyLighter).withOpacity(0.2),
+                    color: AppStyle.black.shade400.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(7),
                   ),
                   child: Row(
@@ -78,8 +57,8 @@ class ExploreMainAppBarContainer extends StatelessWidget
                       ),
                       SizedBox(width: 8),
                       Text(
-                        '  Search',
-                        style: AppStyle.styleNormal13.copyWith(
+                        'Search',
+                        style: AppStyle.textTheme.bodyMedium!.copyWith(
                           color: AppStyle.black.shade400,
                         ),
                       ),
@@ -94,4 +73,3 @@ class ExploreMainAppBarContainer extends StatelessWidget
     );
   }
 }
-*/

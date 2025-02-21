@@ -1,9 +1,9 @@
-/*
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trend/shared/const/app_links.dart';
 
 class ProfileAvatar extends StatefulWidget {
@@ -13,13 +13,9 @@ class ProfileAvatar extends StatefulWidget {
   final VoidCallback pickImage;
   final void Function()? onTap;
   const ProfileAvatar({
-    Key? key,
-    required this.avatarUrl,
-    required this.selectedImage,
-    required this.pickImageFromCamera,
-    required this.pickImage,
+    required this.avatarUrl, required this.selectedImage, required this.pickImageFromCamera, required this.pickImage, super.key,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   _ProfileAvatarState createState() => _ProfileAvatarState();
@@ -27,7 +23,7 @@ class ProfileAvatar extends StatefulWidget {
 
 class _ProfileAvatarState extends State<ProfileAvatar> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.topCenter,
@@ -62,7 +58,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
             onTap: () {
               showModalBottomSheet(
                 context: context,
-                builder: (BuildContext context) {
+                builder: (final BuildContext context) {
                   return FractionallySizedBox(
                     heightFactor: 0.3,
                     child: Column(
@@ -126,7 +122,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               radius: 12.sp,
               backgroundColor: Colors.white,
               child: SvgPicture.asset(
-                "assets/icons/EditIcon.svg",
+                'assets/icons/EditIcon.svg',
                 height: 20,
                 width: 20,
                 fit: BoxFit.none,
@@ -138,4 +134,3 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
     );
   }
 }
-*/

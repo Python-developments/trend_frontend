@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:trend/features/add_post/presentation/add_new_post_page.dart';
+import 'package:trend/features/explore/presentation/pages/explore_main.dart';
 import 'package:trend/features/notifications/presentation/pages/notifications.dart';
+import 'package:trend/features/posts/presentation/Pages/posts_page.dart';
+import 'package:trend/features/profile/presentation/Pages/my_profile.dart';
 
 enum ToastType { success, error }
 
@@ -13,11 +16,11 @@ enum ClientDeviceType { phone, tablet, largerDevice }
 enum FieldPriority { required, optional, optionalHidden }
 
 enum HomeNavigationBarTileType {
-  wowvir(order: 0, iconPath: 'assets/icons/home_icon.svg', destination: AddNewPostPage()),
-  search(order: 1, iconPath: 'assets/icons/search.svg', destination: AddNewPostPage()),
+  home(order: 0, iconPath: 'assets/icons/home_icon.svg', destination: PostsPage()),
+  explore(order: 1, iconPath: 'assets/icons/search.svg', destination: ExploreMainPage()),
   newPost(order: 2, iconPath: 'assets/icons/plus-circle.svg', destination: AddNewPostPage()),
   notifications(order: 3, iconPath: 'assets/icons/bell.svg', destination: NotificationsPage()),
-  profile(order: 4, iconPath: 'assets/icons/person.svg', destination: AddNewPostPage());
+  profile(order: 4, iconPath: 'assets/icons/person.svg', destination: MyProfilePage());
 
   final String iconPath;
   final int order;

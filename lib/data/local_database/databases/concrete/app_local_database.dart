@@ -35,7 +35,7 @@ class AppLocalDatabase extends _$AppLocalDatabase implements IAppLocalDatabase {
   @override
   Future<UserEntity?> getCurrentUser() => usersDao.getCurrentUser();
   @override
-  Future<void> setToken(final String newToken) => usersDao.setToken(newToken);
+  Future<void> setToken({required final String newToken,required final int userId}) => usersDao.setToken(newToken: newToken,userId: userId);
 
 
 }

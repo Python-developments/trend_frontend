@@ -1,29 +1,18 @@
-/*
 import 'package:flutter/material.dart';
+import 'package:trend/core/presentation/app_style.dart';
+import 'package:trend/core/presentation/widgets/custom_pagination_list_data_loader_widget.dart';
+import 'package:trend/dependencies.dart';
+import 'package:trend/features/explore/presentation/controllers/explore_posts_controller.dart';
 
-import 'package:trend/features/explore/presentation/manager/explore/explore_bloc.dart';
-import 'package:trend/shared/const/colors.dart';
-import 'package:trend/shared/style/app_styles.dart';
-
-import '../../../../shared/const/const.dart';
-import '../../../../shared/utiles/routes.dart';
-import '../../../../shared/utiles/services_local.dart';
-import '../widgets/main/explore_main_app_bar.dart';
-import '../widgets/main/explore_post_grid.dart';
+import 'package:trend/features/explore/presentation/widgets/main/explore_main_app_bar.dart';
+import 'package:trend/features/explore/presentation/widgets/main/explore_post_grid.dart';
 
 class ExploreMainPage extends StatelessWidget {
-  const ExploreMainPage({Key? key}) : super(key: key);
+  const ExploreMainPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<ExploreBloc>(),
-      child: WillPopScope(
-        onWillPop: () {
-          Navigator.pushNamed(context, AppRoutes.home);
-          return Future.value(false);
-        },
-        child: Scaffold(
+  Widget build(final BuildContext context) {
+    return Scaffold(
           backgroundColor: AppStyle.white,
           appBar: ExploreMainAppBarContainer(),
           body: SafeArea(
@@ -34,18 +23,20 @@ class ExploreMainPage extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 14.0, left: 12.0, right: 12.0, bottom: 10.0),
                 child: Text(
-                  explorePost,
-                  style: AppStyle.bodyMedium
+                  'Explore',
+                  style: AppStyle.textTheme.bodyMedium!
                       .copyWith(color: AppStyle.black),
                 ),
               ),
               // explore post grid
-              Expanded(child: ExplorePostGrid())
+              Expanded(child: CustomPaginationListDataLoaderWidget(
+                dataLoader: getIt<ExplorePostsController>(),
+                  dataToWidgetMapper: (final posts) {
+                  return ExplorePostGrid(posts: posts,);
+                }
+              ))
             ],
           )),
-        ),
-      ),
     );
   }
 }
-*/

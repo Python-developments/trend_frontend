@@ -12,7 +12,7 @@ ApiError _$ApiErrorFromJson(Map<String, dynamic> json) => ApiError(
             MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
       ),
       apiErrorMessage: json['error'] as String?,
-      message: json['message'] as String,
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$ApiErrorToJson(ApiError instance) => <String, dynamic>{

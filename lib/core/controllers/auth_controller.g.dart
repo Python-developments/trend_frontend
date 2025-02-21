@@ -13,13 +13,13 @@ mixin _$AuthController on AuthControllerBase, Store {
       Atom(name: 'AuthControllerBase.userProfileModel', context: context);
 
   @override
-  UserProfileModel? get userProfileModel {
+  UserInfoModel? get userProfileModel {
     _$userProfileModelAtom.reportRead();
     return super.userProfileModel;
   }
 
   @override
-  set userProfileModel(UserProfileModel? value) {
+  set userProfileModel(UserInfoModel? value) {
     _$userProfileModelAtom.reportWrite(value, super.userProfileModel, () {
       super.userProfileModel = value;
     });

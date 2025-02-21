@@ -13,8 +13,13 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   late final GeneratedColumn<String> token = GeneratedColumn<String>(
       'token', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  List<GeneratedColumn> get $columns => [token];
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [token, id];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -31,6 +36,11 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     } else if (isInserting) {
       context.missing(_tokenMeta);
     }
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
     return context;
   }
 
@@ -42,6 +52,8 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     return User(
       token: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}token'])!,
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
     );
   }
 
@@ -53,17 +65,20 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
 
 class User extends DataClass implements Insertable<User> {
   final String token;
-  const User({required this.token});
+  final int id;
+  const User({required this.token, required this.id});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['token'] = Variable<String>(token);
+    map['id'] = Variable<int>(id);
     return map;
   }
 
   UsersCompanion toCompanion(bool nullToAbsent) {
     return UsersCompanion(
       token: Value(token),
+      id: Value(id),
     );
   }
 
@@ -72,6 +87,7 @@ class User extends DataClass implements Insertable<User> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return User(
       token: serializer.fromJson<String>(json['token']),
+      id: serializer.fromJson<int>(json['id']),
     );
   }
   @override
@@ -79,57 +95,70 @@ class User extends DataClass implements Insertable<User> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'token': serializer.toJson<String>(token),
+      'id': serializer.toJson<int>(id),
     };
   }
 
-  User copyWith({String? token}) => User(
+  User copyWith({String? token, int? id}) => User(
         token: token ?? this.token,
+        id: id ?? this.id,
       );
   User copyWithCompanion(UsersCompanion data) {
     return User(
       token: data.token.present ? data.token.value : this.token,
+      id: data.id.present ? data.id.value : this.id,
     );
   }
 
   @override
   String toString() {
     return (StringBuffer('User(')
-          ..write('token: $token')
+          ..write('token: $token, ')
+          ..write('id: $id')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => token.hashCode;
+  int get hashCode => Object.hash(token, id);
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is User && other.token == this.token);
+      identical(this, other) ||
+      (other is User && other.token == this.token && other.id == this.id);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
   final Value<String> token;
+  final Value<int> id;
   final Value<int> rowid;
   const UsersCompanion({
     this.token = const Value.absent(),
+    this.id = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
     required String token,
+    required int id,
     this.rowid = const Value.absent(),
-  }) : token = Value(token);
+  })  : token = Value(token),
+        id = Value(id);
   static Insertable<User> custom({
     Expression<String>? token,
+    Expression<int>? id,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (token != null) 'token': token,
+      if (id != null) 'id': id,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
-  UsersCompanion copyWith({Value<String>? token, Value<int>? rowid}) {
+  UsersCompanion copyWith(
+      {Value<String>? token, Value<int>? id, Value<int>? rowid}) {
     return UsersCompanion(
       token: token ?? this.token,
+      id: id ?? this.id,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -139,6 +168,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     final map = <String, Expression>{};
     if (token.present) {
       map['token'] = Variable<String>(token.value);
+    }
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -150,6 +182,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   String toString() {
     return (StringBuffer('UsersCompanion(')
           ..write('token: $token, ')
+          ..write('id: $id, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -170,10 +203,12 @@ abstract class _$AppLocalDatabase extends GeneratedDatabase {
 
 typedef $$UsersTableCreateCompanionBuilder = UsersCompanion Function({
   required String token,
+  required int id,
   Value<int> rowid,
 });
 typedef $$UsersTableUpdateCompanionBuilder = UsersCompanion Function({
   Value<String> token,
+  Value<int> id,
   Value<int> rowid,
 });
 
@@ -188,6 +223,9 @@ class $$UsersTableFilterComposer
   });
   ColumnFilters<String> get token => $composableBuilder(
       column: $table.token, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
 }
 
 class $$UsersTableOrderingComposer
@@ -201,6 +239,9 @@ class $$UsersTableOrderingComposer
   });
   ColumnOrderings<String> get token => $composableBuilder(
       column: $table.token, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 }
 
 class $$UsersTableAnnotationComposer
@@ -214,6 +255,9 @@ class $$UsersTableAnnotationComposer
   });
   GeneratedColumn<String> get token =>
       $composableBuilder(column: $table.token, builder: (column) => column);
+
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
 }
 
 class $$UsersTableTableManager extends RootTableManager<
@@ -240,18 +284,22 @@ class $$UsersTableTableManager extends RootTableManager<
               $$UsersTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> token = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               UsersCompanion(
             token: token,
+            id: id,
             rowid: rowid,
           ),
           createCompanionCallback: ({
             required String token,
+            required int id,
             Value<int> rowid = const Value.absent(),
           }) =>
               UsersCompanion.insert(
             token: token,
+            id: id,
             rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0

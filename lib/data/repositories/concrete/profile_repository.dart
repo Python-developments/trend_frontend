@@ -9,10 +9,13 @@ class ProfileRepository extends IProfileRepository {
 
   @override
   Future<List<NotificationModel>> getNotifications() =>
-      getList(
+      getObject(
           url: 'notifications/all/',
           parameters: {},
-          mapper: NotificationModel.fromJson,
+          mapper:(final data){
+            final List<dynamic>results=data['notifications'];
+            return results.map((final notification)=>NotificationModel.fromJson(notification)).toList();
+          },
           );
   @override
   Future<void> changeAppLanguage({required final String languageCode}) => put(

@@ -6,6 +6,6 @@ abstract class IAppLocalDatabase {
 
   Future<UserEntity?> getCurrentUser();
 
-  Future<void> setToken(final String newToken);
+  Future<void> setToken({required final String newToken,required final int userId});
 
 }
