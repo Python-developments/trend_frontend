@@ -50,3 +50,18 @@ app.*.map.json
 
 
 /git
+
+
+.fvmrc
+.fvm
+.vscode
+build/
+ios/Pods
+ios/.symlinks
+android/local.properties
+ios/Flutter/Flutter.podspec
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
+linux/
+macos/
+pubspec.lock
