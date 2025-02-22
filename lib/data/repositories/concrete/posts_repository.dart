@@ -56,8 +56,12 @@ class PostsRepository extends IPostsRepository {
   }
 
   @override
-  Future<bool?> likePost({required final int postId}) {
-    // TODO: implement likePost
+  Future<void> likePost({required final int postId})=>post(url: 'posts/$postId/like/',
+      parameters: {}, mapper: emptyMapper);
+
+  @override
+  Future<void> unlikePost({required int postId}) {
+    // TODO: implement unlikePost
     throw UnimplementedError();
   }
 

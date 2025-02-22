@@ -18,6 +18,7 @@ abstract class IPostsRepository extends IRepository {
   Future<void> createComment({required final int postId,required final String comment});
   Future<void> deleteComment({required final int postId,required final int commentId});
   Future<void> likeComment({required final int commentId});
-  Future<bool?> likePost({required final int postId});
+  Future<void> likePost({required final int postId});
+  Future<void> unlikePost({required final int postId});
   Future<bool> deletePost({required final int postId});
 }

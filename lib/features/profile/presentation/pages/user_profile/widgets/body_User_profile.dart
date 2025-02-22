@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trend/data/models/auth/user_info_model.dart';
 import 'package:trend/data/models/auth/user_profile_model.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/DisplayPrivateOrPosts.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/FollowingAndMessage.dart';
@@ -8,7 +9,7 @@ import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/a
 
 class BodyuserProfile extends StatelessWidget {
   const BodyuserProfile({required this.user, super.key, this.onLongPress});
-  final UserProfileModel user;
+  final UserInfoModel user;
   final void Function()? onLongPress;
   @override
   Widget build(final BuildContext context) {
@@ -35,7 +36,7 @@ class BodyuserProfile extends StatelessWidget {
               ),
               SizedBox(height: 7.h),
               Followingandmessage(
-                user: user,
+                user: user.profile,
               ),
               SizedBox(height: 7.h),
               Padding(

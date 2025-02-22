@@ -33,7 +33,7 @@ codemagic_api_key.p8
 .pub-cache/
 .pub/
 /build/
-
+*.g.dart
 # Web related
 lib/generated_plugin_registrant.dart
 
