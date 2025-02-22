@@ -4,3 +4,22 @@ build/*
 
 # FVM Version Cache
 .fvm/
+.dart_tool/*
+.flutter-plugins
+.flutter-plugins-dependencies
+ios/Podfile.lock
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
+.fvmrc
+pubspec.lock
+android/local.properties
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+ios/Runner/GeneratedPluginRegistrant.m
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugins.cmake
+macos/Flutter/GeneratedPluginRegistrant.swift
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugins.cmake
+ios/.symlinks/*
+ios/Flutter/Flutter.podspec
+ios/Pods/
