@@ -123,7 +123,7 @@ class DataRemoteSource {
   Future<bool?> likePost(int id) async {
     try {
       String? tok = accessToken;
-      Response response = await dio.post("${ApiEndpoints.baseUrl}/posts/$id/like/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      Response response = await dio.post("${ApiEndpoints.baseUrl}/posts/$id/toggle-like/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
         return true;
       } else {
