@@ -39,8 +39,7 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
-    setState(() {
-    });
+    setState(() {});
   }
 
   bool is_visible = false;

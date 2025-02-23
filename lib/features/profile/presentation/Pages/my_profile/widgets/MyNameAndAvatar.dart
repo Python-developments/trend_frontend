@@ -21,7 +21,7 @@ class Mynameandavatar extends StatelessWidget {
             backgroundImage: NetworkImage(
               user.avatar.startsWith('http')
                   ? user.avatar // إذا كانت الصورة تحتوي بالفعل على URL كامل
-                  : '${ApiEndpoints.baseUrl}${user.avatar ?? "/media/profile_images/default_image.jpg"}',
+                  : '${ApiEndpoints.baseUrl}/${user.avatar ?? "/media/profile_images/default_image.jpg"}',
             ),
           ),
         ),
