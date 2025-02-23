@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trend/features/auth/presentation/manager/auth_bloc.dart';
+import 'package:trend/features/auth/presentation/manager/auth_state.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_event.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
@@ -39,146 +41,133 @@ class HeaderPost extends StatelessWidget {
   Widget build(BuildContext context) {
     String timeAgo = getTimeAgoShort(post.createdAt);
 
-    isMe = SharedPreferencesDemo.loadUserData().id == post.authorId;
-    return Container(
-      color: Colors.white,
-      child: Padding(
-        padding:
-            const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthAuthenticated) {
+          isMe = state.loginModel.userInfo!.id == post.authorId;
+        }
+        return Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+            child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () async {
-                        int id = await SharedPreferencesDemo.getID();
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            int id = await SharedPreferencesDemo.getID();
 
-                        if (id != post.authorId) {
-                          BlocProvider.of<UserBloc>(context)
-                              .add(FetchUserEvent2(
-                            post.authorId ?? 80,
-                          ));
-                          Navigator.pushNamed(context, AppRoutes.userProfile);
-                        } else {
-                          int c = await SharedPreferencesDemo.getID();
+                            if (id != post.authorId) {
+                              BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(
+                                post.authorId ?? 80,
+                              ));
+                              Navigator.pushNamed(context, AppRoutes.userProfile);
+                            } else {
+                              int c = await SharedPreferencesDemo.getID();
 
-                          BlocProvider.of<ProfileBloc>(context)
-                              .add(getPostForUserevent(id: c));
+                              BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
 
-                          BlocProvider.of<BottomNavBloc>(context)
-                              .add(BottomNavItemSelected(4));
-                        }
-                      },
-                      child: CircleAvatar(
-                        radius: 16,
-                        backgroundColor: Colors.white,
-                        child: CachedNetworkImage(
-                          imageUrl: post.avatar!, // رابط الصورة
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
+                              BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
+                            }
+                          },
+                          child: CircleAvatar(
                             radius: 16,
                             backgroundColor: Colors.white,
-                            backgroundImage: imageProvider, // الصورة المحمّلة
-                          ),
-                          placeholder: (context, url) => CircleAvatar(
-                            radius: 16,
-                            backgroundImage: AssetImage(
-                                'assets/images/avatar.jpg'), // صورة أثناء التحميل
-                          ),
-                          errorWidget: (context, url, error) => CircleAvatar(
-                            radius: 16,
-                            backgroundImage: AssetImage(
-                                'assets/images/avatar.jpg'), // صورة في حال الخطأ
+                            child: CachedNetworkImage(
+                              imageUrl: post.avatar!, // رابط الصورة
+                              imageBuilder: (context, imageProvider) => CircleAvatar(
+                                radius: 16,
+                                backgroundColor: Colors.white,
+                                backgroundImage: imageProvider, // الصورة المحمّلة
+                              ),
+                              placeholder: (context, url) => CircleAvatar(
+                                radius: 16,
+                                backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة أثناء التحميل
+                              ),
+                              errorWidget: (context, url, error) => CircleAvatar(
+                                radius: 16,
+                                backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة في حال الخطأ
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      onTap: () async {
-                        int id = await SharedPreferencesDemo.getID();
-                        if (id != post.authorId) {
-                          BlocProvider.of<UserBloc>(context)
-                              .add(FetchUserEvent2(post.authorId ?? 0));
-                          Navigator.pushNamed(context, AppRoutes.userProfile);
-                        } else {
-                          SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          int c = await int.parse(
-                              sharedPreferences.getString('id')!);
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () async {
+                            int id = await SharedPreferencesDemo.getID();
+                            if (id != post.authorId) {
+                              BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(post.authorId ?? 0));
+                              Navigator.pushNamed(context, AppRoutes.userProfile);
+                            } else {
+                              SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                              int c = await int.parse(sharedPreferences.getString('id')!);
 
-                          BlocProvider.of<ProfileBloc>(context)
-                              .add(getPostForUserevent(id: c));
+                              BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
 
-                          BlocProvider.of<BottomNavBloc>(context)
-                              .add(BottomNavItemSelected(4));
-                        }
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            post.author ??
-                                'Unknown Author', // Fallback if author is null
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14),
+                              BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
+                            }
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                post.author ?? 'Unknown Author', // Fallback if author is null
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Visibility(
+                          visible: is_vervied,
+                          child: Icon(
+                            Icons.verified,
+                            size: 12.h,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: 4,
-                    ),
-                    Visibility(
-                      visible: is_vervied,
-                      child: Icon(
-                        Icons.verified,
-                        size: 12.h,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      timeAgo,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(width: 5.w),
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return PostDetails(
-                              post: post,
-                              isMe: isMe,
+                    Row(
+                      children: [
+                        Text(
+                          timeAgo,
+                          style: TextStyle(color: Colors.black, fontSize: 13, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(width: 5.w),
+                        GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return PostDetails(
+                                  post: post,
+                                  isMe: isMe,
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                      child: const Icon(
-                        Icons.more_horiz,
-                        color: Colors.grey,
-                        size: 19,
-                      ),
+                          child: const Icon(
+                            Icons.more_horiz,
+                            color: Colors.grey,
+                            size: 19,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
