@@ -33,11 +33,9 @@ class _EditbiopageState extends State<EditFullname> {
     return BlocListener<ProfileBloc, ProfileState>(
       listener: (context, state) async {
         if (state is Updatesuccess) {
-          SharedPreferences sharedPreferences =
-              await SharedPreferences.getInstance();
+          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
           await sharedPreferences.setString("fullName", state.full_name);
-          BlocProvider.of<ProfileBloc>(context)
-              .add(getPostForUserevent(id: widget.userid));
+          BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: widget.userid));
           Navigator.pop(context);
         }
       },
@@ -57,8 +55,7 @@ class _EditbiopageState extends State<EditFullname> {
               TextButton(
                 onPressed: () async {
                   if (newfullname.isNotEmpty) {
-                    BlocProvider.of<ProfileBloc>(context)
-                        .add(Updatefullname(widget.userid, newfullname));
+                    BlocProvider.of<ProfileBloc>(context).add(Updatefullname(widget.userid, newfullname));
                     setState(() {
                       isLoading = true;
                     });
@@ -81,9 +78,7 @@ class _EditbiopageState extends State<EditFullname> {
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: Color(0xffFAFAFA),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffFAFAFA)),
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffFAFAFA)), borderRadius: BorderRadius.all(Radius.circular(12))),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xffFAFAFA)),
                 ),

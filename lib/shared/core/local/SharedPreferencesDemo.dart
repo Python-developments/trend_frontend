@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trend/features/profile/data/models/currentUser.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 import '../../utiles/dependancy_injection.dart';
-
 
 class SharedPreferencesDemo {
   Future<void> saveUserData(
@@ -41,8 +41,7 @@ class SharedPreferencesDemo {
       'username': prefs.getString('username') ?? 'username',
       'email': prefs.getString('email') ?? 'email',
       'fullName': prefs.getString('fullName') ?? '',
-      'avatar': prefs.getString('avatar') ??
-          "https://example.com/default_avatar.jpg", // Use a full URL
+      'avatar': prefs.getString('avatar') ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg", // Use a full URL
       'bio': prefs.getString('bio') ?? '',
       'mobile': prefs.getString('mobile') ?? 'null', // Load mobile
       'followers': prefs.getString('followers') ?? '0', // Load followers
@@ -60,8 +59,7 @@ class SharedPreferencesDemo {
 
   static Future<String> getAvatar() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString('avatar') ??
-        "https://example.com/default_avatar.jpg"; // Parse ID
+    return await prefs.getString('avatar') ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg"; // Parse ID
   }
 
   static Future<int> getID() async {
