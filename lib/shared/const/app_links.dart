@@ -1,34 +1,28 @@
 class ApiEndpoints {
-  static const String baseUrl = 'http://167.71.92.176:8000';
+  static const String baseUrl = 'http://45.159.248.44:8000';
 
   // Authentication Endpoints URL
   static const String login = '$baseUrl/auth/login/';
   static const String register = '$baseUrl/auth/register/';
-  static const String  verifyOtp = '$baseUrl/auth/verify-otp/';
+  static const String verifyOtp = '$baseUrl/auth/verify-otp/';
   static const String resendOtp = '$baseUrl/auth/resend-otp/';
+  static const String resetPassword = '$baseUrl/auth/change-password/';
 
-  
   static const String resetPasswordEmailSendOtp = '$baseUrl/auth/forgot-password/';
   static const String resetPasswordVerifyOtp = '$baseUrl/auth/reset-password-verify-otp/';
   static const String resetPasswordFinish = '$baseUrl/auth/reset-password-finish/';
   static const String refreshToken = '$baseUrl/auth/login/refresh/';
-  
-  
-  
+
 // // Explore Endpoints URL
   static const String getAllPosts = '$baseUrl/explore/posts/?page_size=28';
 
-  static String getSearchPostsByUserName(String query) =>
-      '$baseUrl/explore/search/user-posts/?page_size=40&q=$query';
+  static String getSearchPostsByUserName(String query) => '$baseUrl/explore/search/user-posts/?page_size=40&q=$query';
 
   //static String forYouPostSearch(String query) => '$baseUrl/explore/search/user-posts/?q=$query';
 
-  static String getTrendingHashtags(String query) =>
-      '$baseUrl/explore/search/hashtag/?q=$query';
-  static String getLocationSearch(String query) =>
-      '$baseUrl/explore/search/location/?q=$query';
-  static String getUserSearch(String query) =>
-      '$baseUrl/explore/search/user/?q=$query';
+  static String getTrendingHashtags(String query) => '$baseUrl/explore/search/hashtag/?q=$query';
+  static String getLocationSearch(String query) => '$baseUrl/explore/search/location/?q=$query';
+  static String getUserSearch(String query) => '$baseUrl/explore/search/user/?q=$query';
 
   // Profile Endpoints URL
   static const String allProfiles = '$baseUrl/profile/';

@@ -11,7 +11,6 @@ import '../../features/auth/presentation/pages/reset_password_verify_otp_screen.
 import '../../features/auth/presentation/pages/rest_password_finish_screen.dart';
 import '../../features/splash/presentation/pages/splash_screen.dart';
 
-
 class AppRoutes {
   static const String home = '/home';
   static const String login = '/login';
@@ -23,6 +22,8 @@ class AppRoutes {
   static const String resetPasswordConfirmOtp = '/password-confirm-otp';
   static const String resetPasswordFinish = '/password-finish';
   static const String splashScreen = '/splash-screen';
+  static const String resetPassword = '/reset-password';
+  static const String signup = '/sign-up';
 }
 
 Map<String, WidgetBuilder> routes = {
@@ -31,13 +32,10 @@ Map<String, WidgetBuilder> routes = {
   AppRoutes.home: (context) => MainScreen(),
   AppRoutes.userProfile: (context) => UserProfile(),
   AppRoutes.otpConfirm: (context) => OtpConfirmScreen(),
-  
   AppRoutes.resetPasswordSendEmail: (context) => ResetPasswordSendEmailScreen(),
   AppRoutes.resetPasswordConfirmOtp: (context) => ResetPasswordConfirmEmilScreen(),
-  
   AppRoutes.resetPasswordFinish: (context) => RestPasswordFinishScreen(),
   AppRoutes.splashScreen: (context) => SplashScreen(),
-
 };
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {

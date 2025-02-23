@@ -9,8 +9,7 @@ import '../../../shared/core/local/SharedPreferencesDemo.dart';
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final dio = Dio(BaseOptions(
     followRedirects: true, // Automatically follow redirects
     validateStatus: (status) {
@@ -31,16 +30,12 @@ class AuthenticationBloc
         await token.setToken(response.data["access"]);
         final data = response.data['user_info'];
         User user = User(
-            id: data['id']?.toString() ??
-                "", // إذا كان id null، يتم تعيين سلسلة فارغة
-            username: data['username'] ??
-                "", // إذا كان username null، يتم تعيين سلسلة فارغة
-            email: data['email'] ??
-                "", // إذا كان email null، يتم تعيين سلسلة فارغة
+            id: data['id']?.toString() ?? "", // إذا كان id null، يتم تعيين سلسلة فارغة
+            username: data['username'] ?? "", // إذا كان username null، يتم تعيين سلسلة فارغة
+            email: data['email'] ?? "", // إذا كان email null، يتم تعيين سلسلة فارغة
             fullName: data['full_name'], // يمكن أن تكون null
             avatar: data['avatar'], // يمكن أن تكون null
-            bio: data['bio'] ??
-                'Hardcoded Bio for Debugging', // إضافة قيمة افتراضية
+            bio: data['bio'] ?? 'Hardcoded Bio for Debugging', // إضافة قيمة افتراضية
             mobile: data['mobile'], // يمكن أن تكون null
             followers: data['followers'] ?? 0, // إذا كان null، يتم تعيين 0
             following: data['following'] ?? 0, // إذا كان null، يتم تعيين 0
@@ -49,8 +44,8 @@ class AuthenticationBloc
             is_private: data['is_private'] ?? false);
 
         await sharedPreferencesDemo.saveUserData(
-            verified: false,
-            Profileid: "0",
+            // verified: false,
+            // Profileid: "0",
             id: user.id,
             email: user.email,
             username: user.username,
@@ -86,8 +81,7 @@ class AuthenticationBloc
       emit(AuthenticationLoading());
       try {
         // Simulate dynamic authentication status
-        final isAuthenticated =
-            DateTime.now().second % 2 == 0; // Simulates true/false dynamically
+        final isAuthenticated = DateTime.now().second % 2 == 0; // Simulates true/false dynamically
 
         if (isAuthenticated) {
           emit(AuthenticationAuthenticated(username: "ExistingUser"));
@@ -111,7 +105,7 @@ class AuthenticationBloc
         );
 
         await sharedPreferencesDemo.saveUserData(
-          Profileid: "0",
+          // Profileid: "0",
           is_private: user.is_private ?? false,
           id: user.id ?? "0",
           email: user.email ?? "null",
@@ -124,7 +118,7 @@ class AuthenticationBloc
           following: user.following.toString() ?? "0",
           totalPosts: user.totalPosts.toString() ?? "0", // Added totalPosts
           totalLikes: user.totalLikes.toString() ?? "0",
-          verified: false, // Added totalLikes
+          // verified: false, // Added totalLikes
         );
 
         emit(RegistrationSuccess(message: user.username));
