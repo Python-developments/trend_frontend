@@ -48,7 +48,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await result.fold(
         (failure) async => emit(AuthError(message: failure.message)),
         (response) async {
-
           await saveRefreshToken(response.refresh ?? "");
           await saveAccessToken(response.access ?? "");
 
@@ -87,12 +86,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final result = await registerUseCase.execute(event.registerModel);
 
       await result.fold(
-            (failure) async {
+        (failure) async {
           if (!emit.isDone) {
             emit(AuthError(message: failure.message));
           }
         },
-            (response) async {
+        (response) async {
           final user = response.data;
 
           await sharedPreferencesDemo.saveUserData(
@@ -124,9 +123,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     });
 
-
-
-
     on<OptConfirmEvent>((event, emit) async {
       emit(AuthLoading());
 
@@ -153,14 +149,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     });
 
-    
-    
-    
     on<RestPasswordSendEmailEvent>((event, emit) async {
       emit(AuthLoading());
 
-      final result =
-          await restPasswordEmailValidationUseCase.execute(event.email);
+      final result = await restPasswordEmailValidationUseCase.execute(event.email);
 
       result.fold(
         (failure) => emit(AuthError(message: failure.message)),
@@ -170,8 +162,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RestPasswordVerifyOtpEvent>((event, emit) async {
       emit(AuthLoading());
 
-      final result = await restPasswordVerifyOtpUseCase.execute(
-          restToken: event.restToken, otp: event.otp);
+      final result = await restPasswordVerifyOtpUseCase.execute(restToken: event.restToken, otp: event.otp);
 
       result.fold(
         (failure) => emit(AuthError(message: failure.message)),
@@ -181,8 +172,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RestPasswordFinishEvent>((event, emit) async {
       emit(AuthLoading());
 
-      final result = await restPasswordFinishUseCase.execute(
-          restToken: event.restToken, password: event.password);
+      final result = await restPasswordFinishUseCase.execute(restToken: event.restToken, password: event.password);
 
       result.fold(
         (failure) => emit(AuthError(message: failure.message)),

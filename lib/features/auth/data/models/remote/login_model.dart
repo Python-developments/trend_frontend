@@ -1,23 +1,17 @@
 import 'package:trend/features/auth/domain/entities/login.dart';
 
-
-
 class LoginModel extends Login {
-  LoginModel(
-      {required super.refresh,
-      required super.access,
-      required super.userInfo});
+  LoginModel({required super.refresh, required super.access, required super.userInfo});
 
   factory LoginModel.fromJson(Map<String, dynamic> json) {
     return LoginModel(
-      refresh: json["refresh"],
-      access: json["access"],
-      userInfo: json["user_info"] == null
-          ? null
-          : UserInfoModel.fromJson(json["user_info"]),
+      refresh: json["token"]["refresh"],
+      access: json["token"]["access"],
+      userInfo: json["user_info"] == null ? null : UserInfoModel.fromJson(json["user_info"]),
     );
   }
 }
+
 class UserInfoModel extends UserInfo {
   UserInfoModel(
       {required super.id,
@@ -39,9 +33,7 @@ class UserInfoModel extends UserInfo {
       email: json["email"],
       fullName: json["full_name"],
       mobile: json["mobile"],
-      profile: json["profile"] == null
-          ? null
-          : ProfileModel.fromJson(json["profile"]),
+      profile: json["profile"] == null ? null : ProfileModel.fromJson(json["profile"]),
       avatar: json["avatar"],
       totalPosts: json["total_posts"],
       followers: json["followers"],
@@ -50,13 +42,9 @@ class UserInfoModel extends UserInfo {
     );
   }
 }
+
 class ProfileModel extends Profile {
-  ProfileModel(
-      {required super.bio,
-      required super.isPrivate,
-      required super.verified,
-      required super.isBusiness,
-      required super.isSuspended});
+  ProfileModel({required super.bio, required super.isPrivate, required super.verified, required super.isBusiness, required super.isSuspended});
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
