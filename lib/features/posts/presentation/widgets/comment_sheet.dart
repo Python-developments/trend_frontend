@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_event.dart';
 import 'package:trend/features/posts/data/models/CommentModel.dart';
@@ -125,14 +124,8 @@ class _CommentSheetState extends State<CommentSheet> {
                             commentId = 0;
                             isReply = false;
                           } else {
-                            Fluttertoast.showToast(
-                                msg: "Please Enter Any Text",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.green,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Please Enter Any Text",)));
                           }
                         },
                       ),

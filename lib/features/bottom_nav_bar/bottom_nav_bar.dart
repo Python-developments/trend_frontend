@@ -10,6 +10,9 @@ import 'package:trend/features/notifications/presentation/Manager/NotificationBl
 import 'package:trend/features/notifications/presentation/pages/notifications.dart';
 import 'package:trend/features/posts/presentation/Pages/home_page.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/my_profile.dart';
+import 'package:trend/shared/utiles/dependancy_injection.dart';
+import 'package:trend/third_parties_module/abstract/i_deep_linking_module.dart';
+import 'package:trend/third_parties_module/abstract/i_sharing_module.dart';
 
 import '../../shared/const/colors.dart';
 import '../explore/presentation/pages/explore_main.dart';
@@ -23,6 +26,16 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  bool isFirstDependency=true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if(!isFirstDependency)
+      return;
+    isFirstDependency=false;
+    getIt<IDeepLinkingModule>().init(context: context);
+  }
 
   final List<Widget> _pages = [
     const HomePage(),

@@ -27,7 +27,7 @@ dependencies:
   expandable_text: ^2.3.0
   cached_network_image: ^3.4.1
   font_awesome_flutter: ^10.8.0
-  fluttertoast: ^8.2.10
+  #fluttertoast: ^8.2.12
   emoji_selector: ^0.0.6
   device_preview: ^1.0.1
   flutter_fadein: ^2.0.0
@@ -67,15 +67,18 @@ dependencies:
   share_plus: ^10.1.4
   flutter_secure_storage: ^9.2.4
 
-  
-  
-  
-  
-  
+  uni_links2: ^0.6.0+2
+
+
+
+
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  change_app_package_name: ^1.5.0
 
   # flutter_lints: ^4.0.0
 
