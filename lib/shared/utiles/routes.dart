@@ -39,6 +39,7 @@ Map<String, WidgetBuilder> routes = {
 };
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  print('Wiso hehe ${settings.name}');
   switch (settings.name) {
     case AppRoutes.resetPasswordSendEmail:
       return MaterialPageRoute(builder: (_) => ResetPasswordConfirmEmilScreen());
@@ -60,12 +61,6 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
       final model = settings.arguments as PostModel;
       return MaterialPageRoute(builder: (_) => UserProfile());
     default:
-      return MaterialPageRoute(
-        builder: (_) => Scaffold(
-          body: Center(
-            child: Text('404: Page not found'),
-          ),
-        ),
-      );
+      return null;
   }
 }

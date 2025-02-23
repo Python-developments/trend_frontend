@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:trend/third_parties_module/abstract/i_sharing_module.dart';
+import 'package:trend/third_parties_module/concrete/sharing_module.dart';
 
 import '../../features/auth/data/data_sources/auth_data_source.dart';
 import '../../features/auth/data/repositories/auth_repository.dart';
@@ -28,6 +30,7 @@ final sl = GetIt.instance;
 
 class ServiceLocator {
   void init() {
+
     // this is for explore block injection
     sl.registerFactory(() => ExploreBloc(
         getPostsUseCase: sl(), getPostWithPageNumberUseCase: sl())
