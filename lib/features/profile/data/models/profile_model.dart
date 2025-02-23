@@ -3,7 +3,7 @@ class ProfileModel {
   final String user;
   final String fullName;
   final String bio;
-  final int location;
+  final int? location;
   final String birthDate;
   final bool verified;
   final bool isPrivate;
@@ -46,7 +46,7 @@ class ProfileModel {
       user: json['user'] ?? 'Unknown User',
       fullName: json['full_name'] ?? 'No Name Provided',
       bio: json['bio'] ?? 'No bio available',
-      location: json['location'], // Optional, already nullable
+      location: json['location'] ?? 0, // Optional, already nullable
       birthDate: json['birth_date'] ?? '1970-01-01',
       verified: json['verified'] ?? false,
       isPrivate: json['is_private'] ?? false,

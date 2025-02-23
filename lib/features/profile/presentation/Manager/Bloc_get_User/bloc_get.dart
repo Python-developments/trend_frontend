@@ -6,7 +6,6 @@ import 'package:trend/features/profile/domain/repositories/profile_repository.da
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/states.getU.dart';
 import 'package:trend/shared/const/app_links.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
 
 import '../../../../../main.dart';
 
@@ -53,8 +52,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserErrorState('Failed to load user'));
       }
     } catch (e) {
-      print("$e");
-      emit(UserErrorState('Error: $e'));
+      emit(UserErrorState('check Model error: $e'));
     }
   }
 
