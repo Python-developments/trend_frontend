@@ -22,7 +22,7 @@ class updateProfileRemoteDataSource {
     };
     print("--------------------------$userId");
     final response = await dio.put(
-      "${ApiEndpoints.baseUrl}/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profiles/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -39,7 +39,7 @@ class updateProfileRemoteDataSource {
       "full_name": fullname,
     };
     final response = await dio.put(
-      "${ApiEndpoints.baseUrl}/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profiles/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -57,7 +57,7 @@ class updateProfileRemoteDataSource {
 
     final data = {"avatar": await MultipartFile.fromFile(image.path, filename: fileName)};
     final response = await dio.put(
-      "${ApiEndpoints.baseUrl}/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profiles/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -81,7 +81,7 @@ class updateProfileRemoteDataSource {
   Future<List<ProfileModel>> getBlockedUser() async {
     String? tok = accessToken;
     final response = await dio.get(
-      "${ApiEndpoints.baseUrl}/profile/blocked/",
+      "${ApiEndpoints.baseUrl}/profiles/blocked/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),

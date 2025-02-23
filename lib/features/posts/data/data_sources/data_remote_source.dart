@@ -137,7 +137,7 @@ class DataRemoteSource {
   Future<bool> blockUser(int id) async {
     try {
       String? tok = accessToken;
-      Response response = await dio.post("${ApiEndpoints.baseUrl}/profile/$id/block/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      Response response = await dio.post("${ApiEndpoints.baseUrl}/profiles/$id/block/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if ((response.statusCode ?? 400) < 300) {
         return true;
@@ -166,7 +166,7 @@ class DataRemoteSource {
   Future<String> GetUserinfoAvatar(int id) async {
     try {
       String? tok = accessToken;
-      Response response = await dio.get("${ApiEndpoints.baseUrl}/profile/$id/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      Response response = await dio.get("${ApiEndpoints.baseUrl}/profiles/$id/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
       if ((response.statusCode ?? 400) < 300) {
         print(response.data["avatar"]);
         return response.data["avatar"];

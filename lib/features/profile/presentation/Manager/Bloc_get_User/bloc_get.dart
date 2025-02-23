@@ -23,7 +23,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     try {
       String? tok = accessToken;
-      final response = await dio.get('${ApiEndpoints.baseUrl}/profile/${event.userId}/', options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      final response = await dio.get('${ApiEndpoints.baseUrl}/profiles/${event.userId}/', options: Options(headers: {'Authorization': 'Bearer $tok'}));
 
       if (response.statusCode == 200) {
         final user = ProfileModel.fromJson(response.data);
@@ -44,7 +44,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(UserLoadingState());
     try {
       String? tok = accessToken;
-      final response = await dio.get('${ApiEndpoints.baseUrl}/profile/${event.userId}/', options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      final response = await dio.get('${ApiEndpoints.baseUrl}/profiles/${event.userId}/', options: Options(headers: {'Authorization': 'Bearer $tok'}));
       print("object2=======================================");
       if (response.statusCode == 200) {
         final user = ProfileModel.fromJson(response.data);

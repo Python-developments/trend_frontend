@@ -25,8 +25,8 @@ class ApiEndpoints {
   static String getUserSearch(String query) => '$baseUrl/explore/search/user/?q=$query';
 
   // Profile Endpoints URL
-  static const String allProfiles = '$baseUrl/profile/';
-  static String profileId(int id) => '$baseUrl/profile/$id/';
+  static const String allProfiles = '$baseUrl/profiles/';
+  static String profileId(int id) => '$baseUrl/profiles/$id/';
 
   // Posts Endpoints URL
   static const String allPosts = '$baseUrl/posts/all-posts/';

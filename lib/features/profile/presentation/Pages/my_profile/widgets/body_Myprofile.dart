@@ -53,7 +53,6 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
     _loadUserData();
   }
 
-  @override
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
     print(user.profileid);
@@ -93,14 +92,12 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                         }
                       },
                       builder: (context, state) {
-                        return CustomUserFeatureWighet(
-                            number: user.totalPosts, name: "Posts");
+                        return CustomUserFeatureWighet(number: user.totalPosts, name: "Posts");
                       },
                     ),
                     BlocConsumer<FollowingBloc, FollowingState>(
                       listener: (context, state) {
-                        if (state is FollowingSuccess ||
-                            state is UnFollowingSuccess) {
+                        if (state is FollowingSuccess || state is UnFollowingSuccess) {
                           setState(() {
                             _loadUserData();
                           });
@@ -109,14 +106,10 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                       builder: (context, state) {
                         return GestureDetector(
                           onTap: () {
-                            BlocProvider.of<FollowersBloc>(context)
-                                .ListFollower
-                                .clear();
-                            BlocProvider.of<FollowersBloc>(context).add(
-                                LoadFollowers(id: int.parse(user.profileid)));
+                            BlocProvider.of<FollowersBloc>(context).ListFollower.clear();
+                            BlocProvider.of<FollowersBloc>(context).add(LoadFollowers(id: user.id));
 
-                            BlocProvider.of<DisplayFollowingBloc>(context).add(
-                                LoadFollowing1(id: int.parse(user.profileid)));
+                            BlocProvider.of<DisplayFollowingBloc>(context).add(LoadFollowing1(id: user.id));
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -127,15 +120,13 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                               ),
                             );
                           },
-                          child: CustomUserFeatureWighet(
-                              number: user.followers, name: "Followers"),
+                          child: CustomUserFeatureWighet(number: user.followers, name: "Followers"),
                         );
                       },
                     ),
                     BlocConsumer<FollowingBloc, FollowingState>(
                       listener: (context, state) {
-                        if (state is FollowingSuccess ||
-                            state is UnFollowingSuccess) {
+                        if (state is FollowingSuccess || state is UnFollowingSuccess) {
                           setState(() {
                             _loadUserData();
                           });
@@ -144,10 +135,8 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                       builder: (context, state) {
                         return GestureDetector(
                           onTap: () {
-                            BlocProvider.of<FollowersBloc>(context).add(
-                                LoadFollowers(id: int.parse(user.profileid)));
-                            BlocProvider.of<DisplayFollowingBloc>(context).add(
-                                LoadFollowing1(id: int.parse(user.profileid)));
+                            BlocProvider.of<FollowersBloc>(context).add(LoadFollowers(id: int.parse(user.profileid)));
+                            BlocProvider.of<DisplayFollowingBloc>(context).add(LoadFollowing1(id: int.parse(user.profileid)));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -156,13 +145,11 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                                           index: 1,
                                         )));
                           },
-                          child: CustomUserFeatureWighet(
-                              number: user.following, name: "Following"),
+                          child: CustomUserFeatureWighet(number: user.following, name: "Following"),
                         );
                       },
                     ),
-                    CustomUserFeatureWighet(
-                        number: user.totalLikes, name: "Likes"),
+                    CustomUserFeatureWighet(number: user.totalLikes, name: "Likes"),
                   ],
                 ),
               ),

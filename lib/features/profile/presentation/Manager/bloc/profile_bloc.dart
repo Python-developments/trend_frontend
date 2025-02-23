@@ -204,7 +204,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         "is_private": event.private,
       };
       final response = await dio.put(
-        "${ApiEndpoints.baseUrl}/profile/${event.id}/",
+        "${ApiEndpoints.baseUrl}/profiles/${event.id}/",
         data: FormData.fromMap(data),
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},

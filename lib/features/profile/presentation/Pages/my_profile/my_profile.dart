@@ -36,7 +36,6 @@ class _MyProfileState extends State<MyProfile> {
     _loadUserData();
   }
 
-  @override
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
     setState(() {});
