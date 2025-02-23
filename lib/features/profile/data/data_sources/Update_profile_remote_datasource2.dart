@@ -19,9 +19,9 @@ class updateProfileRemoteDataSource {
     final data = {
       "bio": bio,
     };
-print("--------------------------$userId");
+    print("--------------------------$userId");
     final response = await dio.put(
-      "http://167.71.92.176:8000/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -31,15 +31,14 @@ print("--------------------------$userId");
     return response;
   }
 
-  Future<Response<dynamic>> updatefullname(
-      String userId, String fullname) async {
+  Future<Response<dynamic>> updatefullname(String userId, String fullname) async {
     String? tok = accessToken;
 
     final data = {
       "full_name": fullname,
     };
     final response = await dio.put(
-      "http://167.71.92.176:8000/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -55,11 +54,9 @@ print("--------------------------$userId");
     String fileName;
     fileName = path.basename(image.path);
 
-    final data = {
-      "avatar": await MultipartFile.fromFile(image.path, filename: fileName)
-    };
+    final data = {"avatar": await MultipartFile.fromFile(image.path, filename: fileName)};
     final response = await dio.put(
-      "http://167.71.92.176:8000/profile/${userId}/",
+      "${ApiEndpoints.baseUrl}/profile/${userId}/",
       data: FormData.fromMap(data),
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
@@ -71,7 +68,7 @@ print("--------------------------$userId");
   Future<Response<dynamic>> delete() async {
     String? tok = accessToken;
     final response = await dio.delete(
-      "http://167.71.92.176:8000/auth/account/delete/",
+      "${ApiEndpoints.baseUrl}/auth/account/delete/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -83,7 +80,7 @@ print("--------------------------$userId");
   Future<List<ProfileModel>> getBlockedUser() async {
     String? tok = accessToken;
     final response = await dio.get(
-      "http://167.71.92.176:8000/profile/blocked/",
+      "${ApiEndpoints.baseUrl}/profile/blocked/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),
@@ -100,7 +97,7 @@ print("--------------------------$userId");
   Future<List<PostModel>> getPostForUserMethod(int id) async {
     String? tok = accessToken;
     final response = await dio.get(
-      "http://167.71.92.176:8000/posts/${id}/posts/",
+      "${ApiEndpoints.baseUrl}/posts/${id}/posts/",
       options: Options(
         headers: {'Authorization': 'Bearer $tok'},
       ),

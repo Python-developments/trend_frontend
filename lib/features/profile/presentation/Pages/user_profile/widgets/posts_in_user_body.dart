@@ -22,8 +22,7 @@ class _PostsInUserBodyState extends State<PostsInUserBody> {
     // إضافة الحدث في initState
     WidgetsBinding.instance.addPostFrameCallback((_) {
       profileBloc = BlocProvider.of<ProfileBloc>(context);
-      BlocProvider.of<ProfileBloc>(context)
-          .add(getPostForUserevent(id: widget.userid));
+      BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: widget.userid));
     });
   }
 
@@ -47,20 +46,17 @@ class _PostsInUserBodyState extends State<PostsInUserBody> {
                 mainAxisSpacing: 1.0, // Space between rows
               ),
               shrinkWrap: true, // Prevents GridView from expanding infinitely
-              physics:
-                  const NeverScrollableScrollPhysics(), // Disable inner scrolling
+              physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
               itemCount: state.posts.length, // Number of items in the grid
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    BlocProvider.of<PostBloc>(context)
-                        .GotoDisplayPost(context, state.posts, index);
+                    BlocProvider.of<PostBloc>(context).GotoDisplayPost(context, state.posts, index);
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(state.posts[index].image ??
-                            "http://167.71.92.176:8000/media/posts/images/image_cropper_1738583991667.jpg"),
+                        image: NetworkImage(state.posts[index].image ?? "${ApiEndpoints.baseUrl}/media/posts/images/image_cropper_1738583991667.jpg"),
                         fit: BoxFit.cover,
                       ),
                     ),

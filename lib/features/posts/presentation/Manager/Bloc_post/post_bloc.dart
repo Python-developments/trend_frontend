@@ -35,8 +35,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<LikeComment>(_onLikeOnComment); // Add a handler for AddPostEvent
     on<AddBlocUserEvent>(_onBlockUser); // Add a handler for AddPostEvent
     on<AddDeletePostEvent>(_deletePost); // Add a handler for AddPostEvent
-    on<AddCommentOnComment>(
-        _onCommentOnCommentToPost); // Add a handler for AddPostEvent
+    on<AddCommentOnComment>(_onCommentOnCommentToPost); // Add a handler for AddPostEvent
     on<getPostForSpecificUser>(_getPostForSpecificUser);
     on<LikeCommentoncomment>(_LikeCommentoncomment);
   }
@@ -57,7 +56,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       String url = ApiEndpoints.Nextpage ?? "";
       if (url.length == 0) {
         allPosts.clear();
-        url = 'http://167.71.92.176:8000/posts/all-posts/';
+        url = '${ApiEndpoints.baseUrl}/posts/all-posts/';
       }
 
       String? tok = accessToken;
@@ -73,8 +72,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         final data = response.data as Map<String, dynamic>;
         final results = data['results'] as List<dynamic>;
 
-        allPosts
-            .addAll(results.map((json) => PostModel.fromJson(json)).toList());
+        allPosts.addAll(results.map((json) => PostModel.fromJson(json)).toList());
 
         emit(PostLoaded(allPosts));
       } else {
@@ -85,14 +83,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     } finally {}
   }
 
-  Future<void> _onAddCommentToPost(
-      AddComment event, Emitter<PostState> emit) async {
-    Comment comment = Comment(
-        author: user.username,
-        authorId: user.id,
-        content: event.content,
-        post: event.postId,
-        replies: []);
+  Future<void> _onAddCommentToPost(AddComment event, Emitter<PostState> emit) async {
+    Comment comment = Comment(author: user.username, authorId: user.id, content: event.content, post: event.postId, replies: []);
     List<PostModel> posts = (state as PostLoaded).posts;
     int index = posts.indexWhere((x) => x.id == event.postId);
 
@@ -134,8 +126,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     });
   }
 
-  Future<void> _onLikeOnComment(
-      LikeComment event, Emitter<PostState> emit) async {
+  Future<void> _onLikeOnComment(LikeComment event, Emitter<PostState> emit) async {
     List<PostModel> posts = (state as PostLoaded).posts;
     // post index
     int index = posts.indexWhere((x) => x.id == event.postId);
@@ -156,56 +147,38 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       return;
     }
     emit(PostLoaded(posts, isLikeLoading: true));
-    final result = await repository.likeComment(
-        event.subCommentId == null ? event.commentId : event.subCommentId!);
+    final result = await repository.likeComment(event.subCommentId == null ? event.commentId : event.subCommentId!);
     result.fold((l) {
-      comments[commentIndex].likesCount =
-          (comments[commentIndex].likesCount ?? 0) - 1;
+      comments[commentIndex].likesCount = (comments[commentIndex].likesCount ?? 0) - 1;
       comments[commentIndex].isLiked = false;
       postModel.comments = comments;
       posts[index] = postModel;
       emit(PostLoaded(posts));
     }, (r) {
       if (replyIndex != null) {
-        if (posts[index].comments?[commentIndex].replies?[replyIndex].isLiked ??
-            false) {
-          posts[index].comments?[commentIndex].replies?[replyIndex].isLiked =
-              false;
+        if (posts[index].comments?[commentIndex].replies?[replyIndex].isLiked ?? false) {
+          posts[index].comments?[commentIndex].replies?[replyIndex].isLiked = false;
           posts[index].comments?[commentIndex].replies?[replyIndex].likesCount =
-              (posts[index]
-                          .comments?[commentIndex]
-                          .replies?[replyIndex]
-                          .likesCount ??
-                      0) -
-                  1;
+              (posts[index].comments?[commentIndex].replies?[replyIndex].likesCount ?? 0) - 1;
         } else {
-          posts[index].comments?[commentIndex].replies?[replyIndex].isLiked =
-              true;
+          posts[index].comments?[commentIndex].replies?[replyIndex].isLiked = true;
           posts[index].comments?[commentIndex].replies?[replyIndex].likesCount =
-              (posts[index]
-                          .comments?[commentIndex]
-                          .replies?[replyIndex]
-                          .likesCount ??
-                      0) +
-                  1;
+              (posts[index].comments?[commentIndex].replies?[replyIndex].likesCount ?? 0) + 1;
         }
       } else {
         if (posts[index].comments?[commentIndex].isLiked ?? false) {
           posts[index].comments?[commentIndex].isLiked = false;
-          posts[index].comments?[commentIndex].likesCount =
-              (posts[index].comments?[commentIndex].likesCount ?? 0) - 1;
+          posts[index].comments?[commentIndex].likesCount = (posts[index].comments?[commentIndex].likesCount ?? 0) - 1;
         } else {
           posts[index].comments?[commentIndex].isLiked = true;
-          posts[index].comments?[commentIndex].likesCount =
-              (posts[index].comments?[commentIndex].likesCount ?? 0) + 1;
+          posts[index].comments?[commentIndex].likesCount = (posts[index].comments?[commentIndex].likesCount ?? 0) + 1;
         }
       }
       emit(PostLoaded(posts));
     });
   }
 
-  Future<void> _onCommentOnCommentToPost(
-      AddCommentOnComment event, Emitter<PostState> emit) async {
+  Future<void> _onCommentOnCommentToPost(AddCommentOnComment event, Emitter<PostState> emit) async {
     // Comment comment = Comment(
     //     author: user.username,
     //     authorId: user.id,
@@ -223,10 +196,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     // postModel.comments = comments;
     // posts[index] = postModel;
     emit(PostLoaded(posts, createCommentLoading: true));
-    final result = await repository.commentComment(
-        postId: event.postId,
-        comment: event.content,
-        commentId: event.commentId);
+    final result = await repository.commentComment(postId: event.postId, comment: event.content, commentId: event.commentId);
     result.fold((l) {
       // comments[commentIndex].replies?.removeLast();
       // postModel.comments = comments;
@@ -244,8 +214,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   void _onAddPost(AddPostEvent event, Emitter<PostState> emit) {
     if (state is PostLoaded) {
       final currentPosts = (state as PostLoaded).posts;
-      final updatedPosts = List<PostModel>.from(currentPosts)
-        ..insert(0, event.post);
+      final updatedPosts = List<PostModel>.from(currentPosts)..insert(0, event.post);
       emit(PostLoaded(updatedPosts));
     }
   }
@@ -272,8 +241,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     }, (r) {});
   }
 
-  Future<void> _getPostForSpecificUser(
-      getPostForSpecificUser event, Emitter<PostState> state) async {
+  Future<void> _getPostForSpecificUser(getPostForSpecificUser event, Emitter<PostState> state) async {
     try {
       emit(getPostForSpecificUserLoading());
       List<PostModel> posts = await repository.getPostForspecificUser(event.id);
@@ -284,13 +252,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   GotoDisplayPost(BuildContext context, List<PostModel> posts, int x) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => DisplayUserPosts(x: x)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => DisplayUserPosts(x: x)));
     emit(PostLoaded(posts));
   }
 
-  Future<void> _LikeCommentoncomment(
-      LikeCommentoncomment event, Emitter<PostState> state) async {
+  Future<void> _LikeCommentoncomment(LikeCommentoncomment event, Emitter<PostState> state) async {
     final result = await repository.likeComment(event.subCommentId);
   }
 }

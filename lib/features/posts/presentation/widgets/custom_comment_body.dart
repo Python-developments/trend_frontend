@@ -14,8 +14,7 @@ import 'package:trend/shared/utiles/profile_helper.dart';
 import 'package:trend/shared/utiles/routes.dart';
 
 class CustomCommentBody extends StatefulWidget {
-  const CustomCommentBody(
-      {super.key, required this.comment, required this.replyFunction});
+  const CustomCommentBody({super.key, required this.comment, required this.replyFunction});
   final Comment comment;
   final Function replyFunction;
 
@@ -28,7 +27,7 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
 
   // String avatar = "/media/profile_images/default_image.jpg";
   // String replayavatar =
-  //     "http://167.71.92.176:8000/media/profile_images/default_image.jpg";
+  //     "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg";
   @override
   void initState() {
     // TODO: implement initState
@@ -58,18 +57,15 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
           onTap: () async {
             int id = await SharedPreferencesDemo.getID();
             if (id != widget.comment.authorId) {
-              BlocProvider.of<UserBloc>(context)
-                  .add(FetchUserEvent2(widget.comment.authorId ?? 0));
+              BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(widget.comment.authorId ?? 0));
               Navigator.pushNamed(context, AppRoutes.userProfile);
             } else {
-              BlocProvider.of<BottomNavBloc>(context)
-                  .add(BottomNavItemSelected(4));
+              BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
             }
           },
           child: Networkimages(
             size: 20,
-            imageUrl: widget.comment.avatar ??
-                "http://167.71.92.176:8000/media/profile_images/default_image.jpg",
+            imageUrl: widget.comment.avatar ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg",
           ),
         ),
         SizedBox(width: 10.w),
@@ -81,19 +77,13 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
                 widget.comment.author ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff1F2232)),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff1F2232)),
               ),
               Commentcontent(content: widget.comment.content ?? ''),
               Row(
                 children: [
                   Text(
-                    "${ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())) == "-1" 
-                    ? "0" : ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())).replaceAll("-", "")
-                    
-                    }  ",
+                    "${ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())) == "-1" ? "0" : ProfileHelper.getTimeAgoShort(DateTime.parse(widget.comment.createdAt ?? DateTime.now().toString())).replaceAll("-", "")}  ",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 10.sp,
@@ -103,9 +93,7 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
                   Container(
                     height: 4,
                     width: 4,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Color(0xffE7ECF0)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Color(0xffE7ECF0)),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -124,8 +112,7 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
                     width: 2,
                   ),
                   Visibility(
-                    visible:
-                        ((widget.comment.replies?.length != 0) && !showMore),
+                    visible: ((widget.comment.replies?.length != 0) && !showMore),
                     child: Row(
                       children: [
                         GestureDetector(
@@ -138,9 +125,7 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
                               Container(
                                 height: 4,
                                 width: 4,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: Color(0xffE7ECF0)),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Color(0xffE7ECF0)),
                               ),
                               Text(
                                 '  View ${widget.comment.replies?.length}',
@@ -188,8 +173,7 @@ class _CustomCommentBodyState extends State<CustomCommentBody> {
                   itemBuilder: (context, commentsIndex) {
                     Comment? reply = widget.comment.replies?[commentsIndex];
                     return Replaycomment(
-                      comment: widget
-                          .comment, // استخدام الـ reply بدلاً من widget.comment
+                      comment: widget.comment, // استخدام الـ reply بدلاً من widget.comment
                       reply: reply!,
                     );
                   },

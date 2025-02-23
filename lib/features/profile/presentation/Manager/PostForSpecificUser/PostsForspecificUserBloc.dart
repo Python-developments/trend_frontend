@@ -14,20 +14,18 @@ class PostsForuserBloc extends Bloc<PostEvent, PostforuserState> {
     on<GetUserPostsEvent>(_getUserPosts);
   }
 
-  Future<void> _getUserPosts(
-      GetUserPostsEvent event, Emitter<PostforuserState> emit) async {
+  Future<void> _getUserPosts(GetUserPostsEvent event, Emitter<PostforuserState> emit) async {
     try {
       emit(LoadingUserPostsState());
 
       String? tok = accessToken;
       final response = await dio.get(
-        "http://167.71.92.176:8000/posts/${event.userId}/posts/",
+        "${ApiEndpoints.baseUrl}/posts/${event.userId}/posts/",
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
       );
 
       var data = response.data["results"];
-      List<PostModel> posts =
-          data.map<PostModel>((json) => PostModel.fromJson(json)).toList();
+      List<PostModel> posts = data.map<PostModel>((json) => PostModel.fromJson(json)).toList();
 
       emit(LoadedUserPostsState(posts: posts));
     } catch (e) {

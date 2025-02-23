@@ -16,8 +16,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UpdateProfileRepository updateProfileRepository;
   final dio = Dio();
 
-  ProfileBloc(this.repository, this.updateProfileRepository)
-      : super(ProfileInitial()) {
+  ProfileBloc(this.repository, this.updateProfileRepository) : super(ProfileInitial()) {
     on<FetchProfileEvent>(_onFetchProfile);
     on<getPostForUserevent>(_getPostForUserMethod);
     on<getBlockedUser>(_getBlockedUser);
@@ -59,7 +58,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(getPostForspecificUserLoading());
       String? tok = accessToken;
       final response = await dio.get(
-        "http://167.71.92.176:8000/posts/${event.id}/posts/",
+        "${ApiEndpoints.baseUrl}/posts/${event.id}/posts/",
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
         ),
@@ -131,8 +130,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     try {
       emit(UpdateLoading());
-      final response =
-          await updateProfileRepository.updateBio("${event.id}", event.bio!);
+      final response = await updateProfileRepository.updateBio("${event.id}", event.bio!);
       if (response.statusCode == 200) {
         emit(Updatesuccess(
           response.data["avatar"],
@@ -154,8 +152,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     try {
       emit(UpdateLoading());
-      final response = await updateProfileRepository.updatefullname(
-          "${event.id}", event.full_name);
+      final response = await updateProfileRepository.updatefullname("${event.id}", event.full_name);
       if (response.statusCode == 200) {
         emit(Updatesuccess(
           response.data["avatar"],
@@ -177,9 +174,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     try {
       emit(UpdateLoading());
- 
-      final response = await updateProfileRepository.updateAvatar(
-          "${event.id}", event.image);
+
+      final response = await updateProfileRepository.updateAvatar("${event.id}", event.image);
 
       if (response.statusCode == 200) {
         emit(Updatesuccess(
@@ -207,7 +203,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         "is_private": event.private,
       };
       final response = await dio.put(
-        "http://167.71.92.176:8000/profile/${event.id}/",
+        "${ApiEndpoints.baseUrl}/profile/${event.id}/",
         data: FormData.fromMap(data),
         options: Options(
           headers: {'Authorization': 'Bearer $tok'},
