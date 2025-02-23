@@ -6,6 +6,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 // ignore: must_be_immutable
 class Replaycomment extends StatefulWidget {

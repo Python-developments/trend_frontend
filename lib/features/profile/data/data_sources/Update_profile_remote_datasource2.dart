@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:path/path.dart' as path;
 import 'package:trend/features/explore/data/models/remote/get_all_post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 import '../../../../main.dart';
 

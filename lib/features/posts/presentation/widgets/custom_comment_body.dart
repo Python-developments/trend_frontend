@@ -9,6 +9,7 @@ import 'package:trend/features/posts/presentation/widgets/commentContent.dart';
 import 'package:trend/features/posts/presentation/widgets/replayComment.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/bloc_get.dart';
 import 'package:trend/features/profile/presentation/Manager/Bloc_get_User/event_getU.dart';
+import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/core/local/SharedPreferencesDemo.dart';
 import 'package:trend/shared/utiles/profile_helper.dart';
 import 'package:trend/shared/utiles/routes.dart';

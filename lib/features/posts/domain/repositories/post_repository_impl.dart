@@ -4,6 +4,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class PostRepositoryImpl implements PostRepository {
   final DataRemoteSource dataRemoteSource;

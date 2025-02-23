@@ -5,6 +5,7 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.da
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_bloc.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_event.dart';
 import 'package:trend/features/profile/presentation/Manager/bloc/profile_state.dart';
+import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/const/colors.dart';
 
 class PostsInUserBody extends StatefulWidget {

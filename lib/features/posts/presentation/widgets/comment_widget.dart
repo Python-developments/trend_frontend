@@ -6,6 +6,7 @@ import 'package:trend/features/posts/data/models/CommentModel.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/custom_comment_body.dart';
+import 'package:trend/shared/const/app_links.dart';
 
 class CommentWidget extends StatefulWidget {
   Comment comment;

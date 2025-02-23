@@ -4,6 +4,7 @@ import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/profile/data/models/profile_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/features/profile/domain/repositories/updateProfile.dart';
+import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
 
 import '../../../../../main.dart';
