@@ -26,14 +26,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  bool isFirstDependency=true;
+  bool isFirstDependency = true;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if(!isFirstDependency)
-      return;
-    isFirstDependency=false;
+    if (!isFirstDependency) return;
+    isFirstDependency = false;
     getIt<IDeepLinkingModule>().init(context: context);
   }
 
@@ -112,22 +111,15 @@ class _MainScreenState extends State<MainScreen> {
   }) {
     return GestureDetector(
       onTap: () async {
-        BlocProvider.of<BottomNavBloc>(context)
-            .add(BottomNavItemSelected(index));
+        BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(index));
         if (index == 3) {
-          BlocProvider.of<NotificationBloc>(context)
-              .add(FetchNotificationsEvent());
+          BlocProvider.of<NotificationBloc>(context).add(FetchNotificationsEvent());
         }
-        SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        int c = await int.parse(sharedPreferences.getString('id')!);
       },
       child: SvgPicture.asset(
         iconPath,
         height: 25.5,
-        color: currentIndex == index
-            ? Color(AppColors.black)
-            : Color(AppColors.greyDark),
+        color: currentIndex == index ? Color(AppColors.black) : Color(AppColors.greyDark),
       ),
     );
   }

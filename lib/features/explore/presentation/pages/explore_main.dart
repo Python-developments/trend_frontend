@@ -30,12 +30,10 @@ class ExploreMainPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 14.0, left: 12.0, right: 12.0, bottom: 10.0),
+                padding: const EdgeInsets.only(top: 14.0, left: 12.0, right: 12.0, bottom: 10.0),
                 child: Text(
                   explorePost,
-                  style: AppStyles.styleNormal16(context)
-                      .copyWith(color: Color(AppColors.black)),
+                  style: AppStyles.styleNormal16(context).copyWith(color: Color(AppColors.black)),
                 ),
               ),
               // explore post grid
