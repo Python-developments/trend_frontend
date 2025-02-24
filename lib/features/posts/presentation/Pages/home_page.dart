@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final PagingController<int, PostModel> _pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 20);
+  late StreamSubscription<PostState> _postStateSubscription;
 
   int pageSize = 100;
   int page = 1;
@@ -26,11 +29,24 @@ class _HomePageState extends State<HomePage> {
     _pagingController.addPageRequestListener((pageKey) {
       BlocProvider.of<PostBloc>(context).add(FetchPosts(page: page, pageSize: pageSize));
     });
+    _postStateSubscription = BlocProvider.of<PostBloc>(context).stream.listen((state) {
+      if (state is PostLoaded) {
+        final isLastPage = state.posts.length < pageSize;
+        if (isLastPage) {
+          _pagingController.appendLastPage(state.posts);
+        } else {
+          final nextPageKey = page * pageSize;
+          _pagingController.appendPage(state.posts, nextPageKey);
+        }
+        page++;
+      }
+    });
   }
 
   @override
   void dispose() {
     _pagingController.dispose();
+    _postStateSubscription.cancel();
     super.dispose();
   }
 
@@ -54,48 +70,31 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        body: BlocListener<PostBloc, PostState>(
-          listener: (context, state) {
-            if (state is PostError) {
-              _pagingController.error = state.message;
-            }
-            if (state is PostLoaded) {
-              final isLastPage = state.posts.length < pageSize;
-              if (isLastPage) {
-                _pagingController.appendLastPage(state.posts);
-              } else {
-                final nextPageKey = page * pageSize;
-                _pagingController.appendPage(state.posts, nextPageKey);
-              }
-              page++;
-            }
-          },
-          child: RefreshIndicator(
-            color: Colors.white,
-            backgroundColor: Colors.grey,
-            onRefresh: () => Future.sync(() {
-              page = 1;
-              _pagingController.refresh();
-            }),
-            child: PagedListView<int, PostModel>(
-              pagingController: _pagingController,
-              builderDelegate: PagedChildBuilderDelegate<PostModel>(
-                itemBuilder: (context, item, index) {
-                  return MainPost(
-                    post: item,
-                    index: index,
-                  );
-                },
-                firstPageProgressIndicatorBuilder: (context) => Center(
-                  child: CircularProgressIndicator(),
-                ),
-                newPageProgressIndicatorBuilder: (context) => Center(
-                  child: CircularProgressIndicator(),
-                ),
-                noMoreItemsIndicatorBuilder: (context) {
-                  return Center(child: Text('No more items'));
-                },
+        body: RefreshIndicator(
+          color: Colors.white,
+          backgroundColor: Colors.grey,
+          onRefresh: () => Future.sync(() {
+            page = 1;
+            _pagingController.refresh();
+          }),
+          child: PagedListView<int, PostModel>(
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<PostModel>(
+              itemBuilder: (context, item, index) {
+                return MainPost(
+                  post: item,
+                  index: index,
+                );
+              },
+              firstPageProgressIndicatorBuilder: (context) => Center(
+                child: CircularProgressIndicator(),
               ),
+              newPageProgressIndicatorBuilder: (context) => Center(
+                child: CircularProgressIndicator(),
+              ),
+              noMoreItemsIndicatorBuilder: (context) {
+                return Center(child: Text('No more items'));
+              },
             ),
           ),
         ));
