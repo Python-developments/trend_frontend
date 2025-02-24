@@ -25,17 +25,13 @@ class NotificationRepository {
       if (response.statusCode == 200) {
         final data = response.data as Map<String, dynamic>;
 
-        final notificationsJson = data['notifications'] as List<dynamic>;
+        final notificationsJson = data['results'] as List<dynamic>;
 
-        List<NotificationModel> notifications = notificationsJson
-            .map((json) =>
-                NotificationModel.fromJson(json as Map<String, dynamic>))
-            .toList();
+        List<NotificationModel> notifications = notificationsJson.map((json) => NotificationModel.fromJson(json as Map<String, dynamic>)).toList();
 
         return notifications;
       } else {
-        throw Exception(
-            'Failed to fetch notifications. Status code: ${response.statusCode}');
+        throw Exception('Failed to fetch notifications. Status code: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Error fetching notifications: $e');
