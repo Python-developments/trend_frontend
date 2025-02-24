@@ -12,16 +12,16 @@ class PostRepositoryImpl implements PostRepository {
   PostRepositoryImpl(this.dataRemoteSource);
 
   @override
-  Future<Either<Failure, List<PostModel>>> fetchPosts() async {
+  Future<Either<Failure, List<PostModel>>> fetchPosts(int page, int pageSize) async {
     try {
       // Call the remote data source with the provided URL
-      List<PostModel> posts = await dataRemoteSource.fetchPosts();
+      List<PostModel> posts = await dataRemoteSource.fetchPosts(page: page, pageSize: pageSize);
 
       // Return the posts in the `Right` part of the Either
       return Right(posts);
     } catch (e) {
       // Handle errors and return them in the `Left` part of the Either
-      return Left(Failure(message: e.toString()));
+      return Right([]);
     }
   }
 
