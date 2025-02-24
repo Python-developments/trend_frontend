@@ -31,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
 
     void _validateAndSignup(BuildContext context) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
       if (_formKey.currentState!.validate()) {
         context.read<AuthBloc>().add(RegisterEvent(
             registerModel: RegisterModelLocal(
@@ -56,14 +56,12 @@ class RegisterScreen extends StatelessWidget {
             print("Register Success");
             print(state.registerModel.data);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content:
-                      Text("Welcome ${state.registerModel.data?.username}")),
+              SnackBar(content: Text("Please Login To Continue!")),
             );
             Navigator.pushReplacementNamed(
-                  context,
-                  AppRoutes.otpConfirm,
-                );
+              context,
+              AppRoutes.login,
+            );
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('${state.message}')),
@@ -85,16 +83,10 @@ class RegisterScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             SizedBox(height: 100.h),
-                            Text('Create Account',
-                                textAlign: TextAlign.center,
-                                style: AppStyles.styleSemiBold25(context)),
+                            Text('Create Account', textAlign: TextAlign.center, style: AppStyles.styleSemiBold25(context)),
                             SizedBox(height: 30),
-                            Text(
-                                'Pick a username for your account. You can always change it later.',
-                                textAlign: TextAlign.center,
-                                style: AppStyles.styleNormal13(context)
-                                    .copyWith(
-                                        color: Color(AppColors.greyDark))),
+                            Text('Pick a username for your account. You can always change it later.',
+                                textAlign: TextAlign.center, style: AppStyles.styleNormal13(context).copyWith(color: Color(AppColors.greyDark))),
                             SizedBox(height: 30),
                             CustomerTextForm(
                                 name: 'Username',
@@ -116,8 +108,7 @@ class RegisterScreen extends StatelessWidget {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your email';
                                   }
-                                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
-                                      .hasMatch(value)) {
+                                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                                     return 'Please enter a valid email';
                                   }
                                   return null;
@@ -152,8 +143,7 @@ class RegisterScreen extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                onFieldSubmitted: () =>
-                                    _validateAndSignup(context)),
+                                onFieldSubmitted: () => _validateAndSignup(context)),
                             SizedBox(height: 30.h),
                             Visibility(
                               visible: state is! AuthLoading,
@@ -175,8 +165,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (!isKeyboardOpen)
-                      BackToLogin(),
+                    if (!isKeyboardOpen) BackToLogin(),
                     if (!isKeyboardOpen) SizedBox(height: 20.h),
                   ],
                 ),
