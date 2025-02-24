@@ -24,15 +24,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late ScrollController _scrollController;
 
-  
   void _getUserData() async {
     int c = await SharedPreferencesDemo.loadUserData().id;
-    BlocProvider.of<CurrentUserBloc>(context)
-        .add(GetPostForCurrentUserEvent(id: c));
-    BlocProvider.of<NotificationBloc>(context)
-        .add(FetchNotificationsEvent());
+    BlocProvider.of<CurrentUserBloc>(context).add(GetPostForCurrentUserEvent(id: c));
+    BlocProvider.of<NotificationBloc>(context).add(FetchNotificationsEvent());
   }
-  
+
   @override
   void initState() {
     super.initState();
@@ -46,8 +43,7 @@ class _HomePageState extends State<HomePage> {
 
     // تحقق إذا كانت نسبة التمرير وصلت إلى 80%
     if (!isloading) {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent * 0.8) {
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.8) {
         if (ApiEndpoints.Nextpage?.isNotEmpty ?? false) {
           BlocProvider.of<PostBloc>(context).add(FetchPosts());
         }
@@ -61,8 +57,7 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,9 +104,9 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.zero,
               itemCount: posts.length + 1, // إضافة عنصر مؤشر التحميل
               itemBuilder: (context, index) {
-                if (index == posts.length) {
+                if (index >= posts.length) {
                   // إذا كان العنصر هو عنصر التحميل
-                  return ShimmerPost();
+                  return Container();
                 }
 
                 return MainPost(
