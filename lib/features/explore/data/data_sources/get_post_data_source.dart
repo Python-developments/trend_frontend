@@ -22,8 +22,7 @@ abstract class BasePostDataSource {
 class PostDataSource extends BasePostDataSource {
   final tok = accessToken;
   @override
-  Future<AllPostModel> getPostWithPageNumber(
-      String pageNumber) async {
+  Future<AllPostModel> getPostWithPageNumber(String pageNumber) async {
     Response response = await Dio().get(
       pageNumber,
       options: Options(
@@ -33,8 +32,7 @@ class PostDataSource extends BasePostDataSource {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return AllPostModel.fromJson(response.data);
     } else {
-      throw ServerException(
-          errorServerModel: ErrorServerModel.fromJson(response.data));
+      throw ServerException(errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
 
@@ -49,13 +47,10 @@ class PostDataSource extends BasePostDataSource {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return AllPostModel.fromJson(response.data);
     } else {
-      throw ServerException(
-          errorServerModel: ErrorServerModel.fromJson(response.data));
+      throw ServerException(errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
 
-  
-  
   @override
   Future<PostSearchModel> forYouSearch(String query) async {
     Response response = await Dio().get(
@@ -67,13 +62,10 @@ class PostDataSource extends BasePostDataSource {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return PostSearchModel.fromJson(response.data);
     } else {
-      throw ServerException(
-          errorServerModel: ErrorServerModel.fromJson(response.data));
+      throw ServerException(errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
 
-  
-  
   @override
   Future<UserSearchModel> UserSearch(String query) async {
     Response response = await Dio().get(
@@ -86,8 +78,7 @@ class PostDataSource extends BasePostDataSource {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return UserSearchModel.fromJson(response.data);
     } else {
-      throw ServerException(
-          errorServerModel: ErrorServerModel.fromJson(response.data));
+      throw ServerException(errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
 
@@ -102,8 +93,7 @@ class PostDataSource extends BasePostDataSource {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return SearchHashtagsModel.fromJson(response.data);
     } else {
-      throw ServerException(
-          errorServerModel: ErrorServerModel.fromJson(response.data));
+      throw ServerException(errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
 
@@ -118,8 +108,7 @@ class PostDataSource extends BasePostDataSource {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return LocationsSearchModel.fromJson(response.data);
     } else {
-      throw ServerException(
-          errorServerModel: ErrorServerModel.fromJson(response.data));
+      throw ServerException(errorServerModel: ErrorServerModel.fromJson(response.data));
     }
   }
 }

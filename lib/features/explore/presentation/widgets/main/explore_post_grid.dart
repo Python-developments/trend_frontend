@@ -7,7 +7,6 @@ import 'package:trend/features/explore/presentation/widgets/for_you/explore_expl
 import '../../../../../shared/const/colors.dart';
 import '../../../../../shared/core/enum.dart';
 import '../../manager/explore/explore_bloc.dart';
-import '../../manager/explore/explore_event.dart';
 
 class ExplorePostGrid extends StatefulWidget {
   const ExplorePostGrid({Key? key}) : super(key: key);
@@ -18,39 +17,16 @@ class ExplorePostGrid extends StatefulWidget {
 
 class _ExplorePostGridState extends State<ExplorePostGrid> {
   final ScrollController _scrollController = ScrollController();
-  bool _isLoadingMore = false; // To prevent multiple API calls
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent && !_isLoadingMore) {
-      // User has reached the bottom of the list
-      setState(() {
-        _isLoadingMore = true; // Prevent multiple API calls
-      });
-
-      print('Loading more posts'); // Debugging
-      // Trigger the event to load more posts
-      context.read<ExploreBloc>().add(GetPostWithPageNumberEvent());
-
-      // Reset the loading flag after a delay (optional)
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() {
-          _isLoadingMore = false;
-        });
-      });
-    }
   }
 
   @override
@@ -78,27 +54,32 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
               },
             );
           case RequestStates.loaded:
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 2,
-                crossAxisSpacing: 2,
-              ),
-              itemCount: state.allPost.results.length,
-              itemBuilder: (context, index) {
-                final post = state.allPost.results[index];
-                final model = ExplorExplorePostContainerModel(
-                  imgUrl: post.image != null
-                      ? post.image
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9nJ_3Dmrsxec-D2q43IRnN7ntGIRa4qO8qXONXdxzdX053t3OUSivYJoBr-uSTpOVEcY&usqp=CAU",
-                );
+            return RefreshIndicator(
+              color: Colors.white,
+              backgroundColor: Colors.grey,
+              onRefresh: () => Future.sync(() {}),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 2,
+                  crossAxisSpacing: 2,
+                ),
+                itemCount: state.allPost.results.length,
+                itemBuilder: (context, index) {
+                  final post = state.allPost.results[index];
+                  final model = ExplorExplorePostContainerModel(
+                    imgUrl: post.image != null
+                        ? post.image
+                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9nJ_3Dmrsxec-D2q43IRnN7ntGIRa4qO8qXONXdxzdX053t3OUSivYJoBr-uSTpOVEcY&usqp=CAU",
+                  );
 
-                return SizedBox(
-                  width: double.infinity,
-                  height: 200,
-                  child: ExploreExplorePostContainer(model: model),
-                );
-              },
+                  return SizedBox(
+                    width: double.infinity,
+                    height: 200,
+                    child: ExploreExplorePostContainer(model: model),
+                  );
+                },
+              ),
             );
           case RequestStates.error:
           // return Center(
