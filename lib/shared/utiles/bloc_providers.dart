@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trend/features/add_post/bloc/Add_Post_cubit.dart';
 import 'package:trend/features/add_post/domain/repositories/AddNewPost_Function.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
+import 'package:trend/features/explore_page/bloc/explore_bloc.dart';
 import 'package:trend/features/notifications/data/repositories/notification_repository.dart';
 import 'package:trend/features/notifications/domain/usecases/fetch_notifications.dart';
 import 'package:trend/features/notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
@@ -75,10 +76,9 @@ class AppBlocProviders {
           create: (context) => BottomNavBloc(),
         ),
 
-        // BlocProvider<ExploreBloc>(
-        //   create: (context) =>
-        //       ExploreBloc(exploreApi: ExploreApi(dio: dio), getPostsUseCase: null),
-        // ),
+        BlocProvider<ExploreBloc>(
+          create: (context) => ExploreBloc(),
+        ),
 
         BlocProvider<AddPostBloc>(
           create: (context) => AddPostBloc(addnewpostrepo),
