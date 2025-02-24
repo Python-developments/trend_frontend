@@ -34,9 +34,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent &&
-        !_isLoadingMore) {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent && !_isLoadingMore) {
       // User has reached the bottom of the list
       setState(() {
         _isLoadingMore = true; // Prevent multiple API calls
@@ -64,8 +62,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
             return GridView.builder(
               shrinkWrap: true,
               itemCount: 15, // Instagram-style skeleton placeholders
-              gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 2,
                 crossAxisSpacing: 2,
                 crossAxisCount: 3,
@@ -75,45 +72,20 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                   baseColor: Color(AppColors.greyLight),
                   highlightColor: Colors.grey[100]!,
                   child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(AppColors.greyLighter)
-                    ),
+                    decoration: BoxDecoration(color: Color(AppColors.greyLighter)),
                   ),
                 );
               },
             );
           case RequestStates.loaded:
             return GridView.builder(
-              shrinkWrap: true,
-              controller: _scrollController, // Attach the ScrollController
-              physics: const BouncingScrollPhysics(),
-              itemCount: state.allPost.results.length + 1, // +1 for the loading indicator
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 2,
+                crossAxisSpacing: 2,
+              ),
+              itemCount: state.allPost.results.length,
               itemBuilder: (context, index) {
-                if (index >= state.allPost.results.length) {
-                  // Show a loading indicator at the bottom
-                  if (state.allPost.results.length  % 2 == 0){
-                    return Shimmer.fromColors(
-                      baseColor: Color(AppColors.greyLight),
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(AppColors.greyLighter)
-                        ),
-                      ),
-                    );
-                  }else{
-                    return Shimmer.fromColors(
-                      baseColor: Color(AppColors.greyLight),
-                      highlightColor: Color(AppColors.greyDark),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(AppColors.greyLighter)
-                        ),
-                      ),
-                    ); 
-                  }
-                }
-
                 final post = state.allPost.results[index];
                 final model = ExplorExplorePostContainerModel(
                   imgUrl: post.image != null
@@ -122,21 +94,16 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
                 );
 
                 return SizedBox(
-                  height: (index % 5 == 0) ? 200 : 120, // Randomized height
-                  width: (index % 3 == 0) ? double.infinity : null, // Full-width items
+                  width: double.infinity,
+                  height: 200,
                   child: ExploreExplorePostContainer(model: model),
                 );
               },
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 2,
-                crossAxisSpacing: 2,
-              ),
             );
           case RequestStates.error:
-            return Center(
-              child: Text(state.getExploreAllPostMessage),
-            );
+          // return Center(
+          //   child: Text(state.getExploreAllPostMessage),
+          // );
           case RequestStates.empty:
             return const Center(
               child: Text('No posts available'),

@@ -6,15 +6,7 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.da
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/posts/presentation/Pages/main_post.dart';
-import 'package:trend/features/posts/presentation/widgets/Post_Shimmer.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
-
-import '../../../../shared/const/app_links.dart';
 import '../../../../shared/const/colors.dart';
-import '../../../../shared/core/local/SharedPreferencesDemo.dart';
-import '../../../notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
-import '../Manager/Bloc_Current_user/Current _user_Bloc.dart';
-import '../Manager/Bloc_Current_user/Current _user_event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,9 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final PagingController<int, PostModel> _pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 2);
+  final PagingController<int, PostModel> _pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 20);
 
-  int pageSize = 10;
+  int pageSize = 100;
   int page = 1;
   @override
   void initState() {
@@ -78,24 +70,32 @@ class _HomePageState extends State<HomePage> {
               page++;
             }
           },
-          child: PagedListView<int, PostModel>(
-            pagingController: _pagingController,
-            builderDelegate: PagedChildBuilderDelegate<PostModel>(
-              itemBuilder: (context, item, index) {
-                return MainPost(
-                  post: item,
-                  index: index,
-                );
-              },
-              firstPageProgressIndicatorBuilder: (context) => Center(
-                child: CircularProgressIndicator(),
+          child: RefreshIndicator(
+            color: Colors.white,
+            backgroundColor: Colors.grey,
+            onRefresh: () => Future.sync(() {
+              page = 1;
+              _pagingController.refresh();
+            }),
+            child: PagedListView<int, PostModel>(
+              pagingController: _pagingController,
+              builderDelegate: PagedChildBuilderDelegate<PostModel>(
+                itemBuilder: (context, item, index) {
+                  return MainPost(
+                    post: item,
+                    index: index,
+                  );
+                },
+                firstPageProgressIndicatorBuilder: (context) => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                newPageProgressIndicatorBuilder: (context) => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                noMoreItemsIndicatorBuilder: (context) {
+                  return Center(child: Text('No more items'));
+                },
               ),
-              newPageProgressIndicatorBuilder: (context) => Center(
-                child: CircularProgressIndicator(),
-              ),
-              noMoreItemsIndicatorBuilder: (context) {
-                return Center(child: Text('No more items'));
-              },
             ),
           ),
         ));
