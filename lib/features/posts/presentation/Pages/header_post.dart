@@ -19,7 +19,8 @@ import '../../../../shared/utiles/routes.dart';
 
 class HeaderPost extends StatelessWidget {
   final PostModel post;
-  HeaderPost({super.key, required this.post});
+  final bool showArrowBack;
+  HeaderPost({super.key, required this.post,required this.showArrowBack});
   String getTimeAgoShort(DateTime createdAt) {
     final currentTime = DateTime.now();
     final difference = currentTime.difference(createdAt);
@@ -39,7 +40,7 @@ class HeaderPost extends StatelessWidget {
   bool is_vervied = false;
   @override
   Widget build(BuildContext context) {
-    String timeAgo = getTimeAgoShort(post.createdAt);
+    String timeAgo =post.createdAt!=null? getTimeAgoShort(post.createdAt!):'';
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
@@ -53,86 +54,93 @@ class HeaderPost extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            int id = await SharedPreferencesDemo.getID();
+                    if(showArrowBack)
+                      ...[GestureDetector(
+                        onTap: ()=>Navigator.pop(context),
+                        child: Icon(Icons.arrow_back_ios_new_outlined,size: 16.r,),
+                      ),
+                    SizedBox(width: 16,)],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              int id = await SharedPreferencesDemo.getID();
 
-                            if (id != post.authorId) {
-                              BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(
-                                post.authorId ?? 80,
-                              ));
-                              Navigator.pushNamed(context, AppRoutes.userProfile);
-                            } else {
-                              int c = await SharedPreferencesDemo.getID();
+                              if (id != post.authorId) {
+                                BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(
+                                  post.authorId ?? 80,
+                                ));
+                                Navigator.pushNamed(context, AppRoutes.userProfile);
+                              } else {
+                                int c = await SharedPreferencesDemo.getID();
 
-                              BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
+                                BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
 
-                              BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
-                            }
-                          },
-                          child: CircleAvatar(
-                            radius: 16,
-                            backgroundColor: Colors.white,
-                            child: CachedNetworkImage(
-                              imageUrl: post.avatar!, // رابط الصورة
-                              imageBuilder: (context, imageProvider) => CircleAvatar(
-                                radius: 16,
-                                backgroundColor: Colors.white,
-                                backgroundImage: imageProvider, // الصورة المحمّلة
-                              ),
-                              placeholder: (context, url) => CircleAvatar(
-                                radius: 16,
-                                backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة أثناء التحميل
-                              ),
-                              errorWidget: (context, url, error) => CircleAvatar(
-                                radius: 16,
-                                backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة في حال الخطأ
+                                BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
+                              }
+                            },
+                            child: CircleAvatar(
+                              radius: 16,
+                              backgroundColor: Colors.white,
+                              child: CachedNetworkImage(
+                                imageUrl: post.avatar!, // رابط الصورة
+                                imageBuilder: (context, imageProvider) => CircleAvatar(
+                                  radius: 16,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: imageProvider, // الصورة المحمّلة
+                                ),
+                                placeholder: (context, url) => CircleAvatar(
+                                  radius: 16,
+                                  backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة أثناء التحميل
+                                ),
+                                errorWidget: (context, url, error) => CircleAvatar(
+                                  radius: 16,
+                                  backgroundImage: AssetImage('assets/images/avatar.jpg'), // صورة في حال الخطأ
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () async {
-                            int id = await SharedPreferencesDemo.getID();
-                            if (id != post.authorId) {
-                              BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(post.authorId ?? 0));
-                              Navigator.pushNamed(context, AppRoutes.userProfile);
-                            } else {
-                              SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                              int c = await int.parse(sharedPreferences.getString('id')!);
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () async {
+                              int id = await SharedPreferencesDemo.getID();
+                              if (id != post.authorId) {
+                                BlocProvider.of<UserBloc>(context).add(FetchUserEvent2(post.authorId ?? 0));
+                                Navigator.pushNamed(context, AppRoutes.userProfile);
+                              } else {
+                                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                                int c = await int.parse(sharedPreferences.getString('id')!);
 
-                              BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
+                                BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: c));
 
-                              BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
-                            }
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                post.author ?? 'Unknown Author', // Fallback if author is null
-                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
-                              ),
-                            ],
+                                BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(4));
+                              }
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  post.author ?? 'Unknown Author', // Fallback if author is null
+                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Visibility(
-                          visible: is_vervied,
-                          child: Icon(
-                            Icons.verified,
-                            size: 12.h,
-                            color: Colors.blue,
+                          SizedBox(
+                            width: 4,
                           ),
-                        ),
-                      ],
+                          Visibility(
+                            visible: is_vervied,
+                            child: Icon(
+                              Icons.verified,
+                              size: 12.h,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [

@@ -15,8 +15,7 @@ import 'package:trend/shared/utiles/services_local.dart';
 import 'package:trend/third_parties_module/abstract/i_sharing_module.dart';
 
 class ActivitiesPost extends StatefulWidget {
-  ActivitiesPost({super.key, required this.postIndex, required this.post});
-  final int postIndex;
+  ActivitiesPost({super.key,required this.post});
   final PostModel post;
   @override
   _ActivitiesPostState createState() => _ActivitiesPostState();
@@ -253,8 +252,7 @@ class _ActivitiesPostState extends State<ActivitiesPost> {
                                                   .height)
                                           : 0.7,
                                   child: CommentSheet(
-                                    postindex: widget.postIndex,
-                                    post: state.posts[widget.postIndex],
+                                    post: widget.post,
                                   ),
                                 );
                               } else {

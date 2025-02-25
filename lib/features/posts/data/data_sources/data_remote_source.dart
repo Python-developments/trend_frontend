@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:trend/features/posts/data/models/CommentModel.dart';
+import 'package:trend/features/posts/data/models/post_details_model.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/shared/core/shared_preferences.dart';
@@ -170,6 +171,20 @@ class DataRemoteSource {
       if ((response.statusCode ?? 400) < 300) {
         print(response.data["avatar"]);
         return response.data["avatar"];
+      } else {
+        throw Failure(message: response.data.toString());
+      }
+    } on Exception catch (e) {
+      throw Failure(message: e.toString());
+    }
+  }
+
+  Future<PostDetailsModel> getPostDetailsById({required int postId})async{
+    try {
+      String? tok = accessToken;
+      Response response = await dio.get("${ApiEndpoints.baseUrl}/posts/$postId/", options: Options(headers: {'Authorization': 'Bearer $tok'}));
+      if ((response.statusCode ?? 400) < 300) {
+        return PostDetailsModel.fromJson(response.data);
       } else {
         throw Failure(message: response.data.toString());
       }

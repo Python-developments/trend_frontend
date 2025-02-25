@@ -90,28 +90,7 @@ class _ExplorePostGridState extends State<ExplorePostGrid> {
               itemCount: state.allPost.results.length + 1, // +1 for the loading indicator
               itemBuilder: (context, index) {
                 if (index >= state.allPost.results.length) {
-                  // Show a loading indicator at the bottom
-                  if (state.allPost.results.length  % 2 == 0){
-                    return Shimmer.fromColors(
-                      baseColor: Color(AppColors.greyLight),
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(AppColors.greyLighter)
-                        ),
-                      ),
-                    );
-                  }else{
-                    return Shimmer.fromColors(
-                      baseColor: Color(AppColors.greyLight),
-                      highlightColor: Color(AppColors.greyDark),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(AppColors.greyLighter)
-                        ),
-                      ),
-                    ); 
-                  }
+                  return Container();
                 }
 
                 final post = state.allPost.results[index];

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:trend/features/posts/presentation/Pages/post_details_page.dart';
 import 'package:trend/shared/utiles/routes.dart';
 import 'package:trend/third_parties_module/abstract/i_deep_linking_module.dart';
 import 'package:uni_links2/uni_links.dart';
@@ -30,12 +31,19 @@ class DeepLinkingModule extends IDeepLinkingModule {
 
   @override
   Future<void> handleLink(final String link,BuildContext context) async {
-    print('Wiso deep link $link');
     final List<String> splitedLink = link.split('/');
-    if(splitedLink.length>=1 && splitedLink.first=='posts'){
-      Navigator.pushReplacementNamed(
+    print('Wiso deep link $splitedLink');
+    if(splitedLink.first.isEmpty)
+      splitedLink.removeAt(0);
+    print('Wiso splitedLink.length >= 2 ${splitedLink.length >= 2}');
+    print('Wiso splitedLink.first==posts ${splitedLink.first=='posts'}');
+    print('Wiso int.tryParse(splitedLink[1])!=null ${int.tryParse(splitedLink[1])!=null}');
+    if(splitedLink.length>=2 && splitedLink.first=='posts'&& int.tryParse(splitedLink[1])!=null){
+        Navigator.push(
         context,
-        AppRoutes.home,
+        MaterialPageRoute(
+          builder: (context) => PostDetailsPage(postId:int.parse(splitedLink[1])),
+        ),
       );
     }
   }

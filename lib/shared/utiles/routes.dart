@@ -4,6 +4,7 @@ import 'package:trend/features/auth/presentation/pages/register_screen.dart';
 import 'package:trend/features/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/presentation/Pages/home_page.dart';
+import 'package:trend/features/posts/presentation/Pages/post_details_page.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/user_profile.dart';
 import '../../features/auth/presentation/pages/otp_confirm_screen.dart';
 import '../../features/auth/presentation/pages/reset_password_send_email_screen.dart';
@@ -24,6 +25,8 @@ class AppRoutes {
   static const String splashScreen = '/splash-screen';
   static const String resetPassword = '/reset-password';
   static const String signup = '/sign-up';
+  static const String postDetails = '/post';
+
 }
 
 Map<String, WidgetBuilder> routes = {
@@ -39,7 +42,6 @@ Map<String, WidgetBuilder> routes = {
 };
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-  print('Wiso hehe ${settings.name}');
   switch (settings.name) {
     case AppRoutes.resetPasswordSendEmail:
       return MaterialPageRoute(builder: (_) => ResetPasswordConfirmEmilScreen());
@@ -60,6 +62,9 @@ Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     case AppRoutes.userProfile:
       final model = settings.arguments as PostModel;
       return MaterialPageRoute(builder: (_) => UserProfile());
+    case AppRoutes.postDetails:
+      final int postId = settings.arguments as int;
+      return MaterialPageRoute(builder: (_) => PostDetailsPage(postId: postId,));
     default:
       return null;
   }

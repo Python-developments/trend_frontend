@@ -110,8 +110,7 @@ class _HomePageState extends State<HomePage> {
               itemCount: posts.length + 1, // إضافة عنصر مؤشر التحميل
               itemBuilder: (context, index) {
                 if (index == posts.length) {
-                  // إذا كان العنصر هو عنصر التحميل
-                  return ShimmerPost();
+                  return Container();
                 }
 
                 return MainPost(

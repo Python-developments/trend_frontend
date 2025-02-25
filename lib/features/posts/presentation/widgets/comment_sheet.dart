@@ -16,9 +16,8 @@ import 'package:trend/shared/const/app_links.dart';
 import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 
 class CommentSheet extends StatefulWidget {
-  const CommentSheet({super.key, required this.post, required this.postindex});
+  const CommentSheet({super.key, required this.post});
   final PostModel post;
-  final int postindex;
   @override
   _CommentSheetState createState() => _CommentSheetState();
 }
