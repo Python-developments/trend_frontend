@@ -38,7 +38,14 @@ class AppBlocProviders {
   late currentUser user;
 
   static MultiBlocProvider getBlocProviders({required Widget child}) {
-    final dio = Dio();
+    final dio = Dio()..interceptors.add(
+        LogInterceptor(
+          requestBody: true,
+          request: true,
+          responseBody: true,
+          requestHeader: true,
+          responseHeader: false,
+        ));
 
     // Repositories
     final postRepository =

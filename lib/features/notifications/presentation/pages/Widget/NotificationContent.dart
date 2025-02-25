@@ -38,8 +38,8 @@ class _NotificationcontentState extends State<Notificationcontent> {
                 child: GestureDetector(
                   onTap: () {
                     BlocProvider.of<FollowingbackBloc>(context).add(
-                      FollowbackUserEvent(widget.notification.id_actor,
-                          widget.notification.id_actor),
+                      FollowbackUserEvent(widget.notification.actor.id,
+                          widget.notification.actor.id),
                     );
                   },
                   child: BlocBuilder<FollowingbackBloc, FollowingbackState>(

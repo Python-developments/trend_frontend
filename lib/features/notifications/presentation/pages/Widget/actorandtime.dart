@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:trend/features/notifications/domain/entities/notification.dart';
 
 class Actorandtime extends StatefulWidget {
   const Actorandtime({super.key, required this.Actor, required this.createdAt});
-  final String Actor;
+  final ActorModel Actor;
   final DateTime createdAt;
   @override
   State<Actorandtime> createState() => _ActorandtimeState();
@@ -29,7 +30,7 @@ class _ActorandtimeState extends State<Actorandtime> {
     return Row(
       children: [
         Text(
-          widget.Actor, // Dynamic actor name
+          widget.Actor.username, // Dynamic actor name
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,

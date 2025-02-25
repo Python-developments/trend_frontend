@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,14 +23,16 @@ class NotificationAvatar extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               BlocProvider.of<UserBloc>(context).add(
-                FetchUserEvent2(notification.id_actor),
+                FetchUserEvent2(notification.actor.id),
               );
               Navigator.pushNamed(context, AppRoutes.userProfile);
             },
             child: ClipOval(
-              child: Networkimages(
-                imageUrl: notification.avatar,
-                size: 50.r,
+              child:CachedNetworkImage(
+                imageUrl:  '',
+                errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
+                placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
+                width: 50.r,height: 50.r,
               ),
             ),
           ),

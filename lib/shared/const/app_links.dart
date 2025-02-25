@@ -40,7 +40,7 @@ class ApiEndpoints {
   static String allPostsUser(int id) => '$baseUrl/posts/$id/posts/';
 
   // Notifications Endoipoints URL
-  static String allNotifications(int id) => '$baseUrl/notifications/all/';
+  static String allNotifications(int id) => '$baseUrl/notifications/';
 
   // static const String allPosts = '$baseUrl/posts/all-posts/';
   static String? Nextpage = allPosts;
