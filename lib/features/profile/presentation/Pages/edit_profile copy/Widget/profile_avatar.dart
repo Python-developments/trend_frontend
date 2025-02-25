@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,12 +40,12 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               radius: 50,
               child: widget.selectedImage == null
                   ? ClipOval(
-                      child: Image.network(
-                        widget.avatarUrl.startsWith('http') ? widget.avatarUrl : '${ApiEndpoints.baseUrl}${widget.avatarUrl}',
-                        fit: BoxFit.cover, // Ensure the image fits the circle properly
-                        width: 100, // Adjust the width if needed
-                        height: 100, // Adjust the height if needed
-                      ),
+                      child:   CachedNetworkImage(
+                imageUrl:  widget.avatarUrl,
+                errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
+                placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
+                height: 100,width: 100,
+              )
                     )
                   : ClipOval(
                       child: Image.file(

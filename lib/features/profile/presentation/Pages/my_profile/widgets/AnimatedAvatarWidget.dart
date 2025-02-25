@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
 import 'package:trend/shared/const/app_links.dart';
@@ -29,9 +30,11 @@ class AnimatedAvatarWidget extends StatelessWidget {
                   tween: Tween<double>(begin: 0.0, end: 100),
                   duration: Duration(milliseconds: 70),
                   builder: (context, size, child) {
-                    return Networkimages(
-                      imageUrl: avatarUrl.startsWith('http') ? avatarUrl : '${ApiEndpoints.baseUrl}$avatarUrl',
-                      size: size,
+                    return CachedNetworkImage(
+                      imageUrl:  avatarUrl,
+                      errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
+                      placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
+                      height: size,width: size,
                     );
                   },
                 ),

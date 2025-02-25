@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
@@ -14,12 +15,12 @@ class AvatarAndName extends StatelessWidget {
       children: [
         GestureDetector(
           onLongPress: onLongPress,
-          child: Networkimages(
-            imageUrl: user.avatar.startsWith('http')
-                ? user.avatar // If the avatar already has the full URL, use it directly
-                : '${ApiEndpoints.baseUrl}${user.avatar}',
-            size: 50.r,
-          ),
+          child:   CachedNetworkImage(
+      imageUrl:  user.avatar,
+      errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
+      placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
+      height: 50.r,width: 50.r,
+    )
         ),
         SizedBox(height: 12.h),
         Row(
