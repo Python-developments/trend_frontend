@@ -38,7 +38,7 @@ class AuthRepository extends BaseAuthRepository {
   Future<Either<Failure, RegisterModel>> registerUser(
       RegisterModelLocal registerModel) async {
     try {
-      final result = await baseAuthDataSource.register(registerModel);
+      final RegisterModel result = await baseAuthDataSource.register(registerModel);
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorServerModel.statusMessage));

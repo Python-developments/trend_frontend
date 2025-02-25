@@ -42,6 +42,7 @@ Map<String, WidgetBuilder> routes = {
 };
 
 Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  print('Wiso settingsanme ${settings.name}');
   switch (settings.name) {
     case AppRoutes.resetPasswordSendEmail:
       return MaterialPageRoute(builder: (_) => ResetPasswordConfirmEmilScreen());

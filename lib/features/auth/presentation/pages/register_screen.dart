@@ -58,11 +58,11 @@ class RegisterScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                   content:
-                      Text("Welcome ${state.registerModel.data?.username}")),
+                      Text("Welcome ${_usernameController.text.trim()}")),
             );
             Navigator.pushReplacementNamed(
                   context,
-                  AppRoutes.otpConfirm,
+                  AppRoutes.home,
                 );
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(

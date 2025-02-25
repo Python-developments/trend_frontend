@@ -84,6 +84,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RegisterEvent>((event, emit) async {
       emit(AuthLoading());
       final result = await registerUseCase.execute(event.registerModel);
+      print('Wiso result ${result}');
 
       await result.fold(
         (failure) async {
@@ -91,15 +92,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(AuthError(message: failure.message));
           }
         },
-        (response) async {
+        (RegisterModel response) async {
           final user = response.data;
+          print('Wiso register data $user');
 
           await sharedPreferencesDemo.saveUserData(
             id: "${user?.id}",
-            email: "${user?.email}",
-            username: "${user?.username}",
-            fullName: "${user?.fullName}",
-            avatar: "${user?.avatar}",
+            email: "${event.registerModel.email}",
+            username: "${event.registerModel.userName}",
+            fullName: "${event.registerModel.fullName}",
+            avatar: "",
             bio: "",
             mobile: "",
             followers: "",

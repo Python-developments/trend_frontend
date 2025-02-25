@@ -30,7 +30,14 @@ abstract class BaseAuthDataSource {
 }
 
 class AuthDataSourceImpl extends BaseAuthDataSource {
-  final Dio dio = Dio();
+  final dio = Dio()..interceptors.add(
+      LogInterceptor(
+        requestBody: true,
+        request: true,
+        responseBody: true,
+        requestHeader: true,
+        responseHeader: false,
+      ));
 
   AuthDataSourceImpl() {
     dio.options.headers = {

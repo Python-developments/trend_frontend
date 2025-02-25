@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
@@ -65,61 +66,67 @@ class _HomePageState extends State<HomePage> {
       GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color(AppColors.white),
-        scrolledUnderElevation: 0,
-        elevation: 0,
-        title: const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'T  R  E  N  D',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async{
+        SystemNavigator.pop();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Color(AppColors.white),
+          scrolledUnderElevation: 0,
+          elevation: 0,
+          title: const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'T  R  E  N  D',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
-      ),
-      body: RefreshIndicator(
-        key: _refreshIndicatorKey,
-        color: Colors.white,
-        backgroundColor: Colors.black,
-        strokeWidth: 2.0,
-        onRefresh: () async {
-          ApiEndpoints.setnext("");
-          BlocProvider.of<PostBloc>(context).add(FetchPosts());
-        },
-        child: BlocConsumer<PostBloc, PostState>(
-          listener: (context, state) {
-            if (state is PostError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Error: ${state.message}')),
-              );
-            }
+        body: RefreshIndicator(
+          key: _refreshIndicatorKey,
+          color: Colors.white,
+          backgroundColor: Colors.black,
+          strokeWidth: 2.0,
+          onRefresh: () async {
+            ApiEndpoints.setnext("");
+            BlocProvider.of<PostBloc>(context).add(FetchPosts());
           },
-          builder: (context, state) {
-            final posts = BlocProvider.of<PostBloc>(context).allPosts;
-            print(posts);
-            return ListView.builder(
-              physics: BouncingScrollPhysics(),
-              controller: _scrollController,
-              padding: EdgeInsets.zero,
-              itemCount: posts.length + 1, // إضافة عنصر مؤشر التحميل
-              itemBuilder: (context, index) {
-                if (index == posts.length) {
-                  return Container();
-                }
-
-                return MainPost(
-                  post: posts[index],
-                  index: index,
+          child: BlocConsumer<PostBloc, PostState>(
+            listener: (context, state) {
+              if (state is PostError) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error: ${state.message}')),
                 );
-              },
-            );
-          },
+              }
+            },
+            builder: (context, state) {
+              final posts = BlocProvider.of<PostBloc>(context).allPosts;
+              print(posts);
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                controller: _scrollController,
+                padding: EdgeInsets.zero,
+                itemCount: posts.length + 1, // إضافة عنصر مؤشر التحميل
+                itemBuilder: (context, index) {
+                  if (index == posts.length) {
+                    return Container();
+                  }
+
+                  return MainPost(
+                    post: posts[index],
+                    index: index,
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

@@ -25,7 +25,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
   bool isFirstDependency=true;
 
   @override
@@ -118,9 +117,6 @@ class _MainScreenState extends State<MainScreen> {
           BlocProvider.of<NotificationBloc>(context)
               .add(FetchNotificationsEvent());
         }
-        SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        int c = await int.parse(sharedPreferences.getString('id')!);
       },
       child: SvgPicture.asset(
         iconPath,

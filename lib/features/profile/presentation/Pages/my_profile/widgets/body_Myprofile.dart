@@ -49,12 +49,13 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     _loadUserData();
+    super.initState();
   }
 
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
+    print('Wiso user ${user.username }${user.fullName}');
     print(user.profileid);
     print("=================================");
     setState(() {

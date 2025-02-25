@@ -11,7 +11,7 @@ class CustomUserFeatureWighet extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '${number}',
+          '${number.trim().isEmpty?0:number}',
           style: TextStyle(
             fontSize: 13.sp,
             fontWeight: FontWeight.bold,

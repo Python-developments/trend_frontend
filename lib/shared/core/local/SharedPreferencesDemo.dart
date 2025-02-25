@@ -20,6 +20,19 @@ class SharedPreferencesDemo {
       required bool is_private // Add totalLikes
       }) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('Wiso saving id $id');
+        print('Wiso saving username $username');
+        print('Wiso saving email $email');
+        print('Wiso saving fullName $fullName');
+        print('Wiso saving avatar $avatar');
+        print('Wiso saving bio $bio');
+        print('Wiso saving mobile $mobile');
+        print('Wiso saving followers $followers');
+        print('Wiso saving following $following');
+        print('Wiso saving totalPosts $totalPosts'); // Add totalPosts
+        print('Wiso saving totalLikes $totalLikes');
+        print('Wiso saving is_private $is_private');//
+
     await prefs.setString('id', id);
     await prefs.setString('username', username);
     await prefs.setString('email', email);

@@ -97,12 +97,13 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<AuthenticationRegisterEvent>((event, emit) async {
       emit(RegistrationLoading());
       try {
-        final user = await authApi.register(
+        final User user = await authApi.register(
           username: event.username,
           email: event.email,
           password: event.password,
           passwordConfirm: event.passwordConfirm,
         );
+        print('Wiso register ${user.toJson()}');
 
         await sharedPreferencesDemo.saveUserData(
           // Profileid: "0",
