@@ -17,7 +17,7 @@ class UpdateProfileRepository {
 
   Future<Response<dynamic>> updatefullname(String userId,
       String fullname) async {
-    return await remoteDataSource.updatefullname(userId, fullname);
+   return  await remoteDataSource.updatefullname(userId, fullname);
   }
 
   Future<Response<dynamic>> updateAvatar(String userId,

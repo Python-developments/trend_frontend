@@ -29,7 +29,7 @@ class NotificationAvatar extends StatelessWidget {
             },
             child: ClipOval(
               child:CachedNetworkImage(
-                imageUrl:  '',
+                imageUrl:  notification.actor.avatar??'',
                 errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
                 placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
                 width: 50.r,height: 50.r,

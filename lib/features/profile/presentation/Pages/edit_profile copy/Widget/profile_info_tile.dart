@@ -79,6 +79,7 @@ class _ProfileInfoTileState extends State<ProfileInfoTile> {
           ),
         ),
         onTap: () async {
+          print('Wiso widget.userId ${widget.userid}');
           Navigator.push(
               context,
               MaterialPageRoute(

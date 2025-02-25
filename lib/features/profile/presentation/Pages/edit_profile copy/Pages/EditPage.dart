@@ -124,7 +124,7 @@ class _EditpageState extends State<Editpage> {
                         fullname = '';
                       });
                     },
-                    userid: int.parse(widget.user.profileid),
+                    userid: int.parse(widget.user.id.toString()),
                   ),
                   CustomBioTile(
                     userid: int.parse(widget.user.id.toString()),

@@ -96,14 +96,16 @@ class NotificationModel {
 class ActorModel {
   final int id;
   final String username;
+  final String? avatar;
 
-  ActorModel({required this.id, required this.username});
+  ActorModel({required this.id, required this.username,required this.avatar});
 
   // Factory constructor for creating a new ActorModel instance from JSON
   factory ActorModel.fromJson(Map<String, dynamic> json) {
     return ActorModel(
       id: json['id'],
       username: json['username'],
+      avatar: json['avatar'],
     );
   }
 
