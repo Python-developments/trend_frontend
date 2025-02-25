@@ -23,4 +23,3 @@ windows/flutter/generated_plugins.cmake
 ios/.symlinks/*
 ios/Flutter/Flutter.podspec
 .env
-ios/Pods/
