@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trend/features/profile/data/models/currentUser.dart';
@@ -18,11 +19,11 @@ class Mynameandavatar extends StatelessWidget {
           child: CircleAvatar(
             radius: 50.r, // تحديد الحجم
             backgroundColor: Colors.white, // لون الخلفية (اختياري)
-            backgroundImage: NetworkImage(
-              user.avatar.startsWith('http')
-                  ? user.avatar // إذا كانت الصورة تحتوي بالفعل على URL كامل
-                  : '${ApiEndpoints.baseUrl}/${user.avatar ?? "${ApiEndpoints.baseUrl}/media/profile_images/default_image.jpg"}',
-            ),
+            child:    CachedNetworkImage(
+            imageUrl:  user.avatar,
+            errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
+            placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
+          ),
           ),
         ),
         SizedBox(height: 12.h),
