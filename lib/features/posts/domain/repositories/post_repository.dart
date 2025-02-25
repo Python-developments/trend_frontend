@@ -1,7 +1,9 @@
 // domain/repositories/post_repository.dart
 import 'package:dartz/dartz.dart';
 import 'package:trend/features/posts/data/models/CommentModel.dart';
+import 'package:trend/features/posts/data/models/post_details_model.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
+import 'package:trend/features/posts/presentation/widgets/post_details.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 
 abstract class PostRepository {
@@ -21,4 +23,6 @@ abstract class PostRepository {
   Future<String> getUserAvatar(int id);
 
   Future<List<PostModel>> getPostForspecificUser(int id);
+
+  Future<Either<Failure, PostDetailsModel>>getPostDetails({required int postId});
 }

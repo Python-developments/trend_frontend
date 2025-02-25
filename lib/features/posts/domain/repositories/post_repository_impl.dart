@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:trend/features/posts/data/data_sources/data_remote_source.dart';
 import 'package:trend/features/posts/data/models/CommentModel.dart';
+import 'package:trend/features/posts/data/models/post_details_model.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository.dart';
+import 'package:trend/features/posts/presentation/widgets/post_details.dart';
 import 'package:trend/features/profile/domain/repositories/profile_repository.dart';
 import 'package:trend/shared/const/app_links.dart';
 
@@ -113,5 +115,15 @@ class PostRepositoryImpl implements PostRepository {
   Future<List<PostModel>> getPostForspecificUser(int id) async {
     List<PostModel> posts = await dataRemoteSource.getPostForspecificUserMethod(id);
     return posts;
+  }
+
+  @override
+  Future<Either<Failure,PostDetailsModel>> getPostDetails({required int postId})async {
+    try {
+      PostDetailsModel result = await dataRemoteSource.getPostDetailsById(postId: postId);
+      return Right(result);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
   }
 }

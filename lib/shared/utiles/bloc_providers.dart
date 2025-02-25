@@ -11,6 +11,8 @@ import 'package:trend/features/notifications/presentation/Manager/NotificationBl
 import 'package:trend/features/posts/data/data_sources/data_remote_source.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository_impl.dart';
 import 'package:trend/features/posts/domain/use_cases/get_posts.dart';
+import 'package:trend/features/posts/presentation/Manager/post_details_bloc/post_details_bloc.dart';
+import 'package:trend/features/posts/presentation/Manager/post_details_bloc/post_details_bloc.dart';
 import 'package:trend/features/profile/data/data_sources/Update_profile_remote_datasource2.dart';
 import 'package:trend/features/profile/domain/repositories/updateProfile.dart';
 import 'package:trend/features/profile/presentation/Manager/PostForSpecificUser/PostsForspecificUserBloc.dart';
@@ -127,6 +129,9 @@ class AppBlocProviders {
         ),
         BlocProvider<PostBloc>(
           create: (context) => PostBloc(postRepository),
+        ),
+        BlocProvider<PostDetailsBloc>(
+          create: (context) => PostDetailsBloc(postRepository),
         ),
       ],
       child: child,

@@ -6,6 +6,9 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.da
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/widgets/ZoomingImage.dart';
 import 'package:trend/shared/const/app_links.dart';
+import 'package:trend/shared/utiles/routes.dart';
+
+import 'post_details_page.dart';
 
 class BodyPost extends StatefulWidget {
   final PostModel post;
@@ -75,9 +78,17 @@ class _BodyPostState extends State<BodyPost> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: () {
-        _likeOrUnLikePost(context);
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PostDetailsPage(postId: widget.post.id),
+          ),
+        );
       },
+    onDoubleTap: () {
+      _likeOrUnLikePost(context);
+    },
       child: Stack(
         children: [
           Container(
