@@ -49,7 +49,7 @@ class AppBlocProviders {
 
     // Repositories
     final postRepository =
-        PostRepositoryImpl(DataRemoteSource(getIt.get()));
+        PostRepositoryImpl(DataRemoteSource(dio));
     final profileDataSource = ProfileRemoteDatasource(dio);
     final profileRepository = ProfileRepository(profileDataSource);
     final notificationRepository = NotificationRepository(dio: dio);

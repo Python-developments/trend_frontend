@@ -1,6 +1,6 @@
 class ProfileModel {
   final int id;
-  final String user;
+  final String username;
   final String fullName;
   final String bio;
   final int? location;
@@ -20,7 +20,7 @@ class ProfileModel {
 
   ProfileModel({
     required this.id,
-    required this.user,
+    required this.username,
     required this.fullName,
     required this.bio,
     required this.location,
@@ -42,8 +42,8 @@ class ProfileModel {
   /// Creates a new `ProfileModel` instance from a JSON object.
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
-      id: json['id'] ?? 0,
-      user: json['user'] ?? 'Unknown User',
+      id: json['pk'] ?? 0,
+      username: json['username'] ?? 'Unknown User',
       fullName: json['full_name'] ?? 'No Name Provided',
       bio: json['bio'] ?? 'No bio available',
       location: json['location'] ?? 0, // Optional, already nullable
@@ -67,7 +67,7 @@ class ProfileModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'user': user,
+      'user': username,
       'full_name': fullName,
       'bio': bio,
       'location': location,
@@ -110,7 +110,7 @@ class ProfileModel {
   }) {
     return ProfileModel(
       id: id ?? this.id,
-      user: user ?? this.user,
+      username: user ?? this.username,
       fullName: fullName ?? this.fullName,
       bio: bio ?? this.bio,
       location: location ?? this.location,
@@ -132,7 +132,7 @@ class ProfileModel {
 
   @override
   String toString() {
-    return 'ProfileModel(id: $id, user: $user, fullName: $fullName, bio: $bio, '
+    return 'ProfileModel(id: $id, user: $username, fullName: $fullName, bio: $bio, '
         'location: $location, birthDate: $birthDate, verified: $verified, '
         'isPrivate: $isPrivate, totalLikes: $totalLikes, followers: $followers, '
         'following: $following, totalPosts: $totalPosts, createdAt: $createdAt, '

@@ -36,7 +36,6 @@ class HeaderPost extends StatelessWidget {
     }
   }
 
-  bool isMe = false;
   bool is_vervied = false;
   @override
   Widget build(BuildContext context) {
@@ -44,9 +43,7 @@ class HeaderPost extends StatelessWidget {
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        if (state is AuthAuthenticated) {
-          isMe = state.loginModel.userInfo!.id == post.authorId;
-        }
+
         return Container(
           color: Colors.white,
           child: Padding(
@@ -156,7 +153,6 @@ class HeaderPost extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return PostDetails(
                                   post: post,
-                                  isMe: isMe,
                                 );
                               },
                             );

@@ -5,7 +5,7 @@ import 'package:trend/features/auth/data/models/remote/verify_otp_model.dart';
 
 
 
-abstract class AuthState extends Equatable {
+abstract class  AuthState extends Equatable {
   @override
   List<Object?> get props => [];
 }

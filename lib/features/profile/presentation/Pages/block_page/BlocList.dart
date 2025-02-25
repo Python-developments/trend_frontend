@@ -35,7 +35,7 @@ class Bloclist extends StatelessWidget {
                 ),
               ),
               title: Text(
-                posts[index].user,
+                posts[index].username,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,

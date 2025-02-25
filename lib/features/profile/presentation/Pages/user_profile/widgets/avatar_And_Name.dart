@@ -27,7 +27,7 @@ class AvatarAndName extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center, // Center the text horizontally
           children: [
             Text(
-              user.user,
+              user.username,
               style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 13.5.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(width: 3.w),

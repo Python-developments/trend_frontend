@@ -8,16 +8,17 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Curr
 import 'package:trend/features/posts/presentation/Manager/Bloc_Current_user/Current%20_user_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
+import 'package:trend/shared/utiles/dependancy_injection.dart';
 
 import '../../../../shared/core/local/SharedPreferencesDemo.dart';
 
 class PostDetails extends StatelessWidget {
   final PostModel post;
-  final bool isMe;
-  const PostDetails({super.key, required this.post, this.isMe = false});
+  const PostDetails({super.key, required this.post, });
 
   @override
   Widget build(BuildContext context) {
+    bool isMe= int.tryParse(getIt.get<SharedPreferences>().getString('id')??'') ==post.authorId;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
