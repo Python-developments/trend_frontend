@@ -55,8 +55,8 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
 
   Future<void> _loadUserData() async {
     user = await SharedPreferencesDemo.loadUserData();
-    print('Wiso user ${user.username }${user.fullName}');
-    print(user.profileid);
+    print('Wiso user ${user.username } ${user.fullName}');
+    print(user.id);
     print("=================================");
     setState(() {
       // تحديث الواجهة عند تحميل البيانات إذا لزم الأمر
@@ -105,7 +105,7 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                         }
                       },
                       builder: (context, state) {
-                        return GestureDetector(
+                        return /*GestureDetector(
                           onTap: () {
                             BlocProvider.of<FollowersBloc>(context).ListFollower.clear();
                             BlocProvider.of<FollowersBloc>(context).add(LoadFollowers(id: user.id));
@@ -121,8 +121,7 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                               ),
                             );
                           },
-                          child: CustomUserFeatureWighet(number: user.followers, name: "Followers"),
-                        );
+                          child: */CustomUserFeatureWighet(number: user.followers, name: "Followers");
                       },
                     ),
                     BlocConsumer<FollowingBloc, FollowingState>(
@@ -134,10 +133,10 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                         }
                       },
                       builder: (context, state) {
-                        return GestureDetector(
+                        return /*GestureDetector(
                           onTap: () {
-                            BlocProvider.of<FollowersBloc>(context).add(LoadFollowers(id: int.parse(user.profileid)));
-                            BlocProvider.of<DisplayFollowingBloc>(context).add(LoadFollowing1(id: int.parse(user.profileid)));
+                            BlocProvider.of<FollowersBloc>(context).add(LoadFollowers(id: user.id));
+                            BlocProvider.of<DisplayFollowingBloc>(context).add(LoadFollowing1(id: user.id));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -146,8 +145,7 @@ class _BodyForMyProfileState extends State<BodyForMyProfile> {
                                           index: 1,
                                         )));
                           },
-                          child: CustomUserFeatureWighet(number: user.following, name: "Following"),
-                        );
+                          child:*/ CustomUserFeatureWighet(number: user.following, name: "Following");
                       },
                     ),
                     CustomUserFeatureWighet(number: user.totalLikes, name: "Likes"),

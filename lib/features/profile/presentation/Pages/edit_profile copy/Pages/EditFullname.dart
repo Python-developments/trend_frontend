@@ -34,7 +34,7 @@ class _EditbiopageState extends State<EditFullname> {
       listener: (context, state) async {
         if (state is Updatesuccess) {
           SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-          await sharedPreferences.setString("fullName", state.full_name);
+          await sharedPreferences.setString("fullName", state.full_name??'');
           BlocProvider.of<ProfileBloc>(context).add(getPostForUserevent(id: widget.userid));
           Navigator.pop(context);
         }

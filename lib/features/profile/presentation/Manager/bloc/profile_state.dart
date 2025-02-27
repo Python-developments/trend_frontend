@@ -63,9 +63,9 @@ class DeleteLoading extends ProfileState {}
 class DeleteFailuer extends ProfileState {}
 
 class Updatesuccess extends ProfileState {
-  final String avatar;
-  final String bio;
-  final String full_name;
+  final String? avatar;
+  final String? bio;
+  final String? full_name;
   Updatesuccess(this.avatar, this.bio, this.full_name);
 }
 

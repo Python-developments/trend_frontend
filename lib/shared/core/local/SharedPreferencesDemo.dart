@@ -49,7 +49,7 @@ class SharedPreferencesDemo {
 
   static currentUser loadUserData() {
     SharedPreferences prefs = getIt.get<SharedPreferences>();
-    return currentUser.fromMap({
+    currentUser result= currentUser.fromMap({
       'id': prefs.getString('id') ?? '0', // Ensure `id` is always a String
       'username': prefs.getString('username') ?? 'username',
       'email': prefs.getString('email') ?? 'email',
@@ -63,6 +63,21 @@ class SharedPreferencesDemo {
       'totalLikes': prefs.getString('totalLikes') ?? '0', // Load totalLikes
       'is_private': prefs.getBool('is_private')
     });
+
+    ;
+    print('Wiso loading id ${result.id}');
+    print('Wiso loading username ${result.username}');
+    print('Wiso loading email ${result.email}');
+    print('Wiso loading fullName ${result.fullName}');
+    print('Wiso loading avatar ${result.avatar}');
+    print('Wiso loading bio ${result.bio}');
+    print('Wiso loading mobile ${result.mobile}');
+    print('Wiso loading followers ${result.followers}');
+    print('Wiso loading following ${result.following}');
+    print('Wiso loading totalPosts ${result.totalPosts}'); // Add totalPosts
+    print('Wiso loading totalLikes ${result.totalLikes}');
+    print('Wiso loading is_private ${result.is_private}');//
+    return result;
   }
 
   Future<void> clearUserData() async {

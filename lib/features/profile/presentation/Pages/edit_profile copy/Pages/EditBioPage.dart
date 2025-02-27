@@ -34,7 +34,7 @@ class _EditbiopageState extends State<Editbiopage> {
         if (state is Updatesuccess) {
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
-          await sharedPreferences.setString("bio", state.bio);
+          await sharedPreferences.setString("bio", state.bio??'');
           BlocProvider.of<ProfileBloc>(context)
               .add(getPostForUserevent(id: widget.userid));
           Navigator.pop(context);
