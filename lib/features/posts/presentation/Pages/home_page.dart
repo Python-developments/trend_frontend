@@ -1,19 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:trend/features/posts/data/models/post_model.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/posts/presentation/Pages/main_post.dart';
-import 'package:trend/features/posts/presentation/widgets/Post_Shimmer.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
-
-import '../../../../shared/const/app_links.dart';
 import '../../../../shared/const/colors.dart';
-import '../../../../shared/core/local/SharedPreferencesDemo.dart';
-import '../../../notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
-import '../Manager/Bloc_Current_user/Current _user_Bloc.dart';
-import '../Manager/Bloc_Current_user/Current _user_event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,55 +18,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late ScrollController _scrollController;
+  final PagingController<int, PostModel> _pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 20);
+  late StreamSubscription<PostState> _postStateSubscription;
 
-  
-  void _getUserData() async {
-    int c = await SharedPreferencesDemo.loadUserData().id;
-    BlocProvider.of<CurrentUserBloc>(context)
-        .add(GetPostForCurrentUserEvent(id: c));
-    BlocProvider.of<NotificationBloc>(context)
-        .add(FetchNotificationsEvent());
-  }
-  
+  int pageSize = 100;
+  int page = 1;
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(_onScroll);
-    _getUserData();
-  }
-
-  void _onScroll() {
-    final posts = BlocProvider.of<PostBloc>(context).allPosts;
-
-    // تحقق إذا كانت نسبة التمرير وصلت إلى 80%
-    if (!isloading) {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent * 0.8) {
-        if (ApiEndpoints.Nextpage?.isNotEmpty ?? false) {
-          BlocProvider.of<PostBloc>(context).add(FetchPosts());
+    _pagingController.addPageRequestListener((pageKey) {
+      BlocProvider.of<PostBloc>(context).add(FetchPosts(page: page, pageSize: pageSize));
+    });
+    _postStateSubscription = BlocProvider.of<PostBloc>(context).stream.listen((state) {
+      if (state is PostLoaded) {
+        final isLastPage = state.posts.length < pageSize;
+        if (isLastPage) {
+          _pagingController.appendLastPage(state.posts);
+        } else {
+          final nextPageKey = page * pageSize;
+          _pagingController.appendPage(state.posts, nextPageKey);
         }
+        page++;
       }
-    }
+    });
   }
 
   @override
   void dispose() {
-    _scrollController.dispose(); // تنظيف الـ ScrollController
+    _pagingController.dispose();
+    _postStateSubscription.cancel();
     super.dispose();
   }
 
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async{
-        SystemNavigator.pop();
-        return true;
-      },
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -90,45 +71,32 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: RefreshIndicator(
-          key: _refreshIndicatorKey,
           color: Colors.white,
-          backgroundColor: Colors.black,
-          strokeWidth: 2.0,
-          onRefresh: () async {
-            ApiEndpoints.setnext("");
-            BlocProvider.of<PostBloc>(context).add(FetchPosts());
-          },
-          child: BlocConsumer<PostBloc, PostState>(
-            listener: (context, state) {
-              if (state is PostError) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error: ${state.message}')),
+          backgroundColor: Colors.grey,
+          onRefresh: () => Future.sync(() {
+            page = 1;
+            _pagingController.refresh();
+          }),
+          child: PagedListView<int, PostModel>(
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<PostModel>(
+              itemBuilder: (context, item, index) {
+                return MainPost(
+                  post: item,
+                  index: index,
                 );
-              }
-            },
-            builder: (context, state) {
-              final posts = BlocProvider.of<PostBloc>(context).allPosts;
-              print(posts);
-              return ListView.builder(
-                physics: BouncingScrollPhysics(),
-                controller: _scrollController,
-                padding: EdgeInsets.zero,
-                itemCount: posts.length + 1, // إضافة عنصر مؤشر التحميل
-                itemBuilder: (context, index) {
-                  if (index == posts.length) {
-                    return Container();
-                  }
-
-                  return MainPost(
-                    post: posts[index],
-                    index: index,
-                  );
-                },
-              );
-            },
+              },
+              firstPageProgressIndicatorBuilder: (context) => Center(
+                child: CircularProgressIndicator(),
+              ),
+              newPageProgressIndicatorBuilder: (context) => Center(
+                child: CircularProgressIndicator(),
+              ),
+              noMoreItemsIndicatorBuilder: (context) {
+                return Center(child: Text('No more items'));
+              },
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

@@ -34,17 +34,14 @@ class DataRemoteSource {
     }
   }
 
-  Future<List<PostModel>> fetchPosts() async {
+  Future<List<PostModel>> fetchPosts({int page = 1, int pageSize = 10}) async {
     try {
-      String url = ApiEndpoints.Nextpage ?? "";
-      if (url.length == 0) {
-        url = '${ApiEndpoints.baseUrl}/posts/all-posts/';
-      }
-      String? tok = await token.getToken();
-      print(url);
+      String url = '${ApiEndpoints.baseUrl}/posts/all-posts/';
+      String? tok = accessToken;
       final response = await dio.get(
         url,
         options: Options(headers: {'Authorization': 'Bearer $tok'}),
+        queryParameters: {'page': page, 'page_size': pageSize},
       );
       response.data["results"];
       if (response.statusCode == 200) {

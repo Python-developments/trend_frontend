@@ -7,8 +7,8 @@ import 'package:trend/shared/style/app_styles.dart';
 import '../../../../shared/const/const.dart';
 import '../../../../shared/utiles/routes.dart';
 import '../../../../shared/utiles/services_local.dart';
-import '../widgets/main/explore_main_app_bar.dart';
-import '../widgets/main/explore_post_grid.dart';
+import '../../../explore_page/presentation/widgets/main/explore_main_app_bar.dart';
+import '../../../explore_page/presentation/widgets/main/explore_post_grid.dart';
 
 class ExploreMainPage extends StatelessWidget {
   const ExploreMainPage({Key? key}) : super(key: key);
