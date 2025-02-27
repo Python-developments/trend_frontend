@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:trend/features/add_post/presentation/new_post.dart';
+import 'package:trend/features/auth/presentation/manager/auth_bloc.dart';
+import 'package:trend/features/auth/presentation/manager/auth_state.dart';
+import 'package:trend/features/auth/presentation/pages/login_screen.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_States.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_event.dart';
@@ -111,6 +114,15 @@ class _MainScreenState extends State<MainScreen> {
         BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(index));
         if (index == 3) {
           BlocProvider.of<NotificationBloc>(context).add(FetchNotificationsEvent());
+        }
+        if (index == 4) {
+          AuthState state = context.read<AuthBloc>().state;
+          if (state is! AuthAuthenticated) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen2()),
+            );
+          }
         }
       },
       child: SvgPicture.asset(

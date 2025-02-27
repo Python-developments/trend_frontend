@@ -21,7 +21,6 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
           pagingController.appendPage(posts, event.page * pageSize);
         }
       } catch (e) {
-        print(e);
         pagingController.error = e;
       }
     });
