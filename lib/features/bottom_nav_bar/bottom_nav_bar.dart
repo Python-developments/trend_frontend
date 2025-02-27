@@ -115,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
         if (index == 3) {
           BlocProvider.of<NotificationBloc>(context).add(FetchNotificationsEvent());
         }
-        if (index == 4) {
+        /*if (index == 4) {
           AuthState state = context.read<AuthBloc>().state;
           if (state is! AuthAuthenticated) {
             Navigator.push(
@@ -123,7 +123,7 @@ class _MainScreenState extends State<MainScreen> {
               MaterialPageRoute(builder: (context) => LoginScreen2()),
             );
           }
-        }
+        }*/
       },
       child: SvgPicture.asset(
         iconPath,
