@@ -13,3 +13,5 @@ class FetchPostsByPage extends ExploreEvent {
   @override
   List<Object> get props => [page];
 }
+
+class RefreshPosts extends ExploreEvent {}

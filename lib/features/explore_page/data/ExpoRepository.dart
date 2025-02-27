@@ -4,21 +4,24 @@ import 'package:trend/shared/const/app_links.dart';
 import 'package:trend/shared/utiles/dependancy_injection.dart';
 
 class ExpoRepository {
-  Future<List<PostModel>> getPostsByPageNumber({required int pageNumber}) async {
+  Future<List<PostModel>> getPostsByPageNumber({required int pageNumber, required int pageSize}) async {
     final dio = getIt<Dio>();
     String url = '${ApiEndpoints.baseUrl}/posts/all-posts/';
+    try {
+      final response = await dio.get(
+        url,
+        queryParameters: {'page': pageNumber, 'page_size': pageSize},
+      );
+      if (response.statusCode == 200) {
+        final data = response.data as Map<String, dynamic>;
+        final results = data['results'] as List<dynamic>;
 
-    final response = await dio.get(
-      url,
-      queryParameters: {'page': pageNumber, 'page_size': 10},
-    );
-    if (response.statusCode == 200) {
-      final data = response.data as Map<String, dynamic>;
-      final results = data['results'] as List<dynamic>;
-
-      return results.map((json) => PostModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to fetch posts');
+        return results.map((json) => PostModel.fromJson(json)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
     }
   }
 }
