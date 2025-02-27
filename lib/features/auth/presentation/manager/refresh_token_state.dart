@@ -1,9 +1,6 @@
-
-
 import 'package:equatable/equatable.dart';
 
 import '../../data/models/remote/refresh_token_model.dart';
-
 
 abstract class RefreshTokenState extends Equatable {
   @override
@@ -11,8 +8,8 @@ abstract class RefreshTokenState extends Equatable {
 }
 
 class RefreshTokenInitial extends RefreshTokenState {}
-class RefreshTokenLoading extends RefreshTokenState {}
 
+class RefreshTokenLoading extends RefreshTokenState {}
 
 class RefreshTokenSuccess extends RefreshTokenState {
   final RefreshTokenModel refreshTokenModel;

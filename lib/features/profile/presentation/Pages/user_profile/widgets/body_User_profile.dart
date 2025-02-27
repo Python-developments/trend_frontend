@@ -20,8 +20,7 @@ class BodyuserProfile extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(), // Enables smooth scrolling
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).padding.top),
+          padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.top),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -52,9 +51,9 @@ class BodyuserProfile extends StatelessWidget {
                   ),
                 ),
               ),
-              PrivateOrDiplayPosts(
-                user: user,
-              )
+              // PrivateOrDiplayPosts(
+              //   user: user,
+              // )
             ],
           ),
         ),

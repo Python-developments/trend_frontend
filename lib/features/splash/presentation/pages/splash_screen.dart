@@ -12,37 +12,33 @@ import '../../../auth/presentation/manager/refresh_token_bloc.dart';
 import '../../../auth/presentation/manager/refresh_token_event.dart';
 import '../../../auth/presentation/manager/refresh_token_state.dart';
 
-
-
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
         final bloc = RefreshTokenBloc(refreshTokenUseCase: sl());
-        bloc.add(RefreshTokenEvent(oldToken: refreshToken ??""));
+        bloc.add(RefreshTokenEvent(oldToken: refreshToken ?? ""));
         print("-------------------------$refreshToken------------------------------------");
 
         return bloc;
       },
       child: BlocListener<RefreshTokenBloc, RefreshTokenState>(
-        listener: (context, state){
-          Future.delayed(const Duration(milliseconds: 1200), ()async{
-            if (state is RefreshTokenSuccess) {
-              await saveRefreshToken(state.refreshTokenModel.refresh ?? "");
-              await saveAccessToken(state.refreshTokenModel.access ?? "");
-              Navigator.of(context).pushReplacementNamed(AppRoutes.home);
-            } else if (state is RefreshTokenError) {
-              Navigator.of(context).pushReplacementNamed(AppRoutes.login);
-            }
-          });
-        },
-        child: const SplashScreenUI(),
-      ),
+          listener: (context, state) {
+            Future.delayed(const Duration(milliseconds: 1200), () async {
+              if (state is RefreshTokenSuccess) {
+                await saveRefreshToken(state.refreshTokenModel.refresh ?? "");
+                await saveAccessToken(state.refreshTokenModel.access ?? "");
+                Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+              }
+              if (state is RefreshTokenError) {
+                Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+              }
+            });
+          },
+          child: const SplashScreenUI()),
     );
   }
 }
@@ -67,22 +63,14 @@ class SplashScreenUI extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
 class BouncingAnimationWidget extends StatefulWidget {
   const BouncingAnimationWidget({Key? key}) : super(key: key);
 
   @override
-  State<BouncingAnimationWidget> createState() =>
-      _BouncingAnimationWidgetState();
+  State<BouncingAnimationWidget> createState() => _BouncingAnimationWidgetState();
 }
-class _BouncingAnimationWidgetState
-    extends State<BouncingAnimationWidget>
-    with SingleTickerProviderStateMixin {
+
+class _BouncingAnimationWidgetState extends State<BouncingAnimationWidget> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _boxJumpHeight;
   late final Animation<double> _boxWidth;
@@ -119,8 +107,7 @@ class _BouncingAnimationWidgetState
         ),
       );
 
-  void _initBoxRotationAnimation() =>
-      _boxRotationAngle = Tween<double>(
+  void _initBoxRotationAnimation() => _boxRotationAngle = Tween<double>(
         begin: 0,
         end: 360,
       ).animate(
@@ -148,8 +135,7 @@ class _BouncingAnimationWidgetState
         ),
       );
 
-  void _initBoxShadowWidthAnimation() =>
-      _boxShadowWidth = Tween<double>(
+  void _initBoxShadowWidthAnimation() => _boxShadowWidth = Tween<double>(
         begin: 240,
         end: 60,
       ).animate(
@@ -163,8 +149,7 @@ class _BouncingAnimationWidgetState
         ),
       );
 
-  void _initBoxShadowIntensityAnimation() =>
-      _boxShadowIntensity = Tween<double>(
+  void _initBoxShadowIntensityAnimation() => _boxShadowIntensity = Tween<double>(
         begin: 0.15,
         end: 0.05,
       ).animate(
@@ -207,12 +192,10 @@ class _BouncingAnimationWidgetState
         width: _boxShadowWidth.value,
         height: 15,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-              Radius.elliptical(_boxShadowWidth.value, 15)),
+          borderRadius: BorderRadius.all(Radius.elliptical(_boxShadowWidth.value, 15)),
           boxShadow: [
             BoxShadow(
-              color:
-                  Colors.black.withOpacity(_boxShadowIntensity.value),
+              color: Colors.black.withOpacity(_boxShadowIntensity.value),
               spreadRadius: 5,
               blurRadius: 4,
               offset: const Offset(0, 3),
@@ -237,11 +220,9 @@ class _BouncingAnimationWidgetState
 
   Matrix4 _boxRotation(AnimationStatus animationStatus) {
     if (animationStatus == AnimationStatus.reverse) {
-      return Matrix4.identity()
-        ..rotateZ(-_boxRotationAngle.value * pi / 180);
+      return Matrix4.identity()..rotateZ(-_boxRotationAngle.value * pi / 180);
     } else {
-      return Matrix4.identity()
-        ..rotateZ(_boxRotationAngle.value * pi / 180);
+      return Matrix4.identity()..rotateZ(_boxRotationAngle.value * pi / 180);
     }
   }
 

@@ -19,11 +19,15 @@ class Mynameandavatar extends StatelessWidget {
           child: CircleAvatar(
             radius: 50.r, // تحديد الحجم
             backgroundColor: Colors.white, // لون الخلفية (اختياري)
-            child:    CachedNetworkImage(
-            imageUrl:  user.avatar,
-            errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
-            placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
-          ),
+            child: CachedNetworkImage(
+              imageUrl: user.avatar,
+              errorWidget: (_, __, ___) => Image.asset('assets/images/avatar.jpg'),
+              placeholder: (
+                _,
+                __,
+              ) =>
+                  Image.asset('assets/images/avatar.jpg'),
+            ),
           ),
         ),
         SizedBox(height: 12.h),
@@ -35,11 +39,11 @@ class Mynameandavatar extends StatelessWidget {
               style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 13.5.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(width: 3.w),
-            Icon(
-              Icons.verified,
-              size: 12.h,
-              color: Colors.blue,
-            ),
+            // Icon(
+            //   Icons.verified,
+            //   size: 12.h,
+            //   color: Colors.blue,
+            // ),
           ],
         ),
       ],

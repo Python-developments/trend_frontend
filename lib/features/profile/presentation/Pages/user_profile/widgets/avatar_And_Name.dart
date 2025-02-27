@@ -14,14 +14,21 @@ class AvatarAndName extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          onLongPress: onLongPress,
-          child:   CachedNetworkImage(
-      imageUrl:  user.avatar,
-      errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
-      placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
-      height: 50.r,width: 50.r,
-    )
-        ),
+            onLongPress: onLongPress,
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: user.avatar,
+                fit: BoxFit.cover,
+                errorWidget: (_, __, ___) => Image.asset('assets/images/avatar.jpg'),
+                placeholder: (
+                  _,
+                  __,
+                ) =>
+                    Image.asset('assets/images/avatar.jpg'),
+                height: 100.r,
+                width: 100.r,
+              ),
+            )),
         SizedBox(height: 12.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.center, // Center the text horizontally
@@ -31,11 +38,11 @@ class AvatarAndName extends StatelessWidget {
               style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 13.5.sp, fontWeight: FontWeight.w500),
             ),
             SizedBox(width: 3.w),
-            Icon(
-              Icons.verified,
-              size: 12.h,
-              color: Colors.blue,
-            ),
+            // Icon(
+            //   Icons.verified,
+            //   size: 12.h,
+            //   color: Colors.blue,
+            // ),
           ],
         ),
       ],
