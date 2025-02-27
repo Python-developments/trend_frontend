@@ -12,8 +12,7 @@ class PostLoaded extends PostState {
   bool isLikeLoading;
   final List<PostModel> posts;
 
-  PostLoaded(this.posts,
-      {this.isLikeLoading = false, this.createCommentLoading = false});
+  PostLoaded(this.posts, {this.isLikeLoading = false, this.createCommentLoading = false});
 }
 
 class PostError extends PostState {

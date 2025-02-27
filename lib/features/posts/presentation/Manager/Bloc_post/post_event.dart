@@ -4,7 +4,11 @@ import 'package:trend/features/posts/data/models/post_model.dart';
 @immutable
 sealed class PostEvent {}
 
-class FetchPosts extends PostEvent {}
+class FetchPosts extends PostEvent {
+  final int page;
+  final int pageSize;
+  FetchPosts({this.page = 1, this.pageSize = 1});
+}
 
 class LikePost extends PostEvent {
   final int postId;
@@ -21,8 +25,7 @@ class LikeComment extends PostEvent {
   final int postId;
   final int commentId;
   final int? subCommentId;
-  LikeComment(
-      {required this.commentId, required this.postId, this.subCommentId});
+  LikeComment({required this.commentId, required this.postId, this.subCommentId});
 }
 
 class LikeCommentoncomment extends PostEvent {
@@ -35,8 +38,7 @@ class AddCommentOnComment extends PostEvent {
   final int commentId;
   final String content;
 
-  AddCommentOnComment(
-      {required this.postId, required this.commentId, required this.content});
+  AddCommentOnComment({required this.postId, required this.commentId, required this.content});
 }
 
 // New event for adding a post
@@ -69,6 +71,5 @@ class GotoDisplayPostEvent extends PostEvent {
   final BuildContext context;
   final int x;
 
-  GotoDisplayPostEvent(
-      {required this.posts, required this.context, required this.x});
+  GotoDisplayPostEvent({required this.posts, required this.context, required this.x});
 }

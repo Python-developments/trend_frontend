@@ -8,7 +8,6 @@ import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_event.d
 import 'package:trend/features/posts/presentation/Manager/Bloc_post/post_state.dart';
 import 'package:trend/features/profile/data/models/currentUser.dart';
 import 'package:trend/features/profile/presentation/Pages/user_profile/widgets/display_User_Posts.dart';
-import 'package:trend/shared/core/shared_preferences.dart';
 
 import '../../../../../main.dart';
 import '../../../../../shared/const/app_links.dart';
@@ -41,46 +40,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   Future<void> _onFetchPosts(FetchPosts event, Emitter<PostState> emit) async {
-    // emit(PostLoading());
-
-    // final posts = await repository.fetchPosts();
-    // posts.fold((l) {
-    //   emit(PostError(l.message));
-    // }, (r) {
-    //   allPosts.addAll(r);
-    //   emit(PostLoaded(allPosts));
-    // });
     emit(PostLoading());
-    isloading = true;
-    try {
-      String url = ApiEndpoints.Nextpage ?? "";
-      if (url.length == 0) {
-        allPosts.clear();
-        url = '${ApiEndpoints.baseUrl}/posts/all-posts/';
-      }
 
-      String? tok = accessToken;
-
-      final response = await dio.get(
-        url,
-        options: Options(headers: {'Authorization': 'Bearer $tok'}),
-      );
-      print(response.data);
-      isloading = false;
-      if (response.statusCode == 200) {
-        ApiEndpoints.setnext(response.data["next"] ?? "");
-        final data = response.data as Map<String, dynamic>;
-        final results = data['results'] as List<dynamic>;
-
-        allPosts.addAll(results.map((json) => PostModel.fromJson(json)).toList());
-
-        emit(PostLoaded(allPosts));
-      } else {
-        throw Exception('Failed to fetch posts');
-      }
-    } catch (e) {
-      throw Exception('Error fetching posts: $e');
-    } finally {}
+    final posts = await repository.fetchPosts(event.page, event.pageSize);
+    posts.fold((l) {
+      emit(PostError(l.message));
+    }, (r) {
+      allPosts.addAll(r);
+      emit(PostLoaded(r));
+    });
   }
 
   Future<void> _onAddCommentToPost(AddComment event, Emitter<PostState> emit) async {
