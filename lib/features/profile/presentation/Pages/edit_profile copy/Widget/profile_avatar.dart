@@ -35,27 +35,28 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
       children: [
         GestureDetector(
             onLongPress: widget.onTap,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 50,
-              child: widget.selectedImage == null
-                  ? ClipOval(
-                      child:   CachedNetworkImage(
-                imageUrl:  widget.avatarUrl,
-                errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
-                placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
-                height: 100,width: 100,
-              )
-                    )
-                  : ClipOval(
-                      child: Image.file(
-                        widget.selectedImage!,
-                        fit: BoxFit.cover,
-                        width: 100, // Adjust the width if needed
-                        height: 100, // Adjust the height if needed
-                      ),
+            child: widget.selectedImage == null
+                ? ClipOval(
+                    child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: widget.avatarUrl,
+                    errorWidget: (_, __, ___) => Image.asset('assets/images/avatar.jpg'),
+                    placeholder: (
+                      _,
+                      __,
+                    ) =>
+                        Image.asset('assets/images/avatar.jpg'),
+                    height: 100.r,
+                    width: 100.r,
+                  ))
+                : ClipOval(
+                    child: Image.file(
+                      widget.selectedImage!,
+                      fit: BoxFit.cover,
+                      width: 100.r, // Adjust the width if needed
+                      height: 100.r, // Adjust the height if needed
                     ),
-            )),
+                  )),
         Positioned(
           bottom: 3.sp,
           left: 0.sp,

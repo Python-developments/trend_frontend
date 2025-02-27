@@ -87,27 +87,6 @@ class _ProfileInfoTileState extends State<ProfileInfoTile> {
                         Fullname: widget.userpro,
                         userid: widget.userid,
                       )));
-          // showModalBottomSheet(
-          //   context: context,
-          //   builder: (BuildContext context) {
-          //     return EditBottomSheet(
-          //       heightfactor: 0.35,
-          //       line: 1,
-          //       Lenght: 30,
-          //       x: widget.userpro,
-          //       onChanged: (newFullName) {
-          //         setState(() {
-          //           widget.onChanged(newFullName);
-          //         });
-          //       },
-          //       onCancel: () {
-          //         setState(() {
-          //           widget.onCancel();
-          //         });
-          //       },
-          //     );
-          //   },
-          // );
         },
       ),
     );

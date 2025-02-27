@@ -156,7 +156,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final response = await updateProfileRepository.updatefullname("${event.id}", event.full_name);
       if (response.statusCode == 200) {
         emit(Updatesuccess(
-          response.data["avatar"],
+          response.data["avatar"] ?? "",
           response.data["bio"] ?? "",
           response.data["full_name"] ?? "",
         ));
