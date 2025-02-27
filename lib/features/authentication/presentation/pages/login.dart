@@ -136,7 +136,7 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 5.h),
-                            Row(
+                            /*     Row(
                               children: [
                                 const Expanded(
                                   child: Divider(
@@ -201,7 +201,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20.h),
+                            SizedBox(height: 20.h),*/
                           ],
                         ),
                       ),

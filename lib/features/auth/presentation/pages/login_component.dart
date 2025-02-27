@@ -158,7 +158,7 @@ class LoginComponent extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 5),
+                          /*SizedBox(height: 5),
                           Row(
                             children: [
                               const Expanded(
@@ -213,7 +213,7 @@ class LoginComponent extends StatelessWidget {
                                   .toList(),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20),*/
                         ],
                       ),
                     ),
