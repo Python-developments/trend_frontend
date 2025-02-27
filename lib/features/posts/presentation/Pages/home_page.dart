@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:trend/features/posts/data/models/post_model.dart';
@@ -20,12 +21,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PagingController<int, PostModel> _pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 20);
   late StreamSubscription<PostState> _postStateSubscription;
-
+  bool isFirstDependencies=true;
   int pageSize = 100;
   int page = 1;
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if(!isFirstDependencies)
+      return;
+    isFirstDependencies=false;
     _pagingController.addPageRequestListener((pageKey) {
       BlocProvider.of<PostBloc>(context).add(FetchPosts(page: page, pageSize: pageSize));
     });
@@ -52,7 +56,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  WillPopScope(
+        onWillPop: () async{
+      SystemNavigator.pop();
+      return true;
+    },
+    child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -97,6 +106,6 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-        ));
+        )));
   }
 }
