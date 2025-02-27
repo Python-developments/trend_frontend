@@ -8,17 +8,17 @@ part 'explore_event.dart';
 part 'explore_state.dart';
 
 class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
-  final PagingController<int, PostModel> pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 20);
+  final PagingController<int, PostModel> pagingController = PagingController(firstPageKey: 0, invisibleItemsThreshold: 18);
   int page = 1;
-  int pageSize = 1;
+  int pageSize = 18;
   ExploreBloc() : super(ExploreLoading()) {
     on<FetchPostsByPage>((event, emit) async {
       try {
-        List<PostModel> posts = await ExpoRepository().getPostsByPageNumber(pageNumber: event.page, pageSize: pageSize);
+        List<PostModel> posts = await ExpoRepository().getPostsByPageNumber(pageNumber: page, pageSize: pageSize);
         if (posts.length < pageSize) {
           pagingController.appendLastPage(posts);
         } else {
-          pagingController.appendPage(posts, event.page * pageSize);
+          pagingController.appendPage(posts, (++page) * pageSize);
         }
       } catch (e) {
         pagingController.error = e;
