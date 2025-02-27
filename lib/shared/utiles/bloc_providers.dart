@@ -38,28 +38,23 @@ class AppBlocProviders {
   late currentUser user;
 
   static MultiBlocProvider getBlocProviders({required Widget child}) {
-    final dio = Dio()..interceptors.add(
-        LogInterceptor(
-          requestBody: true,
-          request: true,
-          responseBody: true,
-          requestHeader: true,
-          responseHeader: false,
-        ));
+    final dio = Dio()
+      ..interceptors.add(LogInterceptor(
+        requestBody: true,
+        request: true,
+        responseBody: true,
+        requestHeader: true,
+        responseHeader: false,
+      ));
 
     // Repositories
-    final postRepository =
-        PostRepositoryImpl(DataRemoteSource(dio));
+    final postRepository = PostRepositoryImpl(DataRemoteSource(dio));
     final profileDataSource = ProfileRemoteDatasource(dio);
     final profileRepository = ProfileRepository(profileDataSource);
     final notificationRepository = NotificationRepository(dio: dio);
 
-    final UpdateProfileRepository updateProfileRepository =
-        UpdateProfileRepository(
-            remoteDataSource:
-                updateProfileRemoteDataSource(dio: dio));
-    final fetchNotificationsUseCase =
-        FetchNotificationsUseCase(repository: notificationRepository);
+    final UpdateProfileRepository updateProfileRepository = UpdateProfileRepository(remoteDataSource: updateProfileRemoteDataSource(dio: dio));
+    final fetchNotificationsUseCase = FetchNotificationsUseCase(repository: notificationRepository);
 
     // Use Cases
 
@@ -75,17 +70,13 @@ class AppBlocProviders {
                 registerUseCase: sl(),
                 resendOtpUseCase: sl(),
                 otpConfirmUseCase: sl(),
-                
                 restPasswordEmailValidationUseCase: sl(),
-                restPasswordVerifyOtpUseCase: sl(), 
-                restPasswordFinishUseCase: sl()
-            )
-        ),
+                restPasswordVerifyOtpUseCase: sl(),
+                restPasswordFinishUseCase: sl())),
 
         // Post Bloc: Manages posts, including fetching posts and interacting with them.
         BlocProvider<PostBloc>(
-          create: (context) => PostBloc(postRepository)
-            ..add(FetchPosts()), // Automatically fetch posts
+          create: (context) => PostBloc(postRepository), // Automatically fetch posts
         ),
 
         BlocProvider<AddPostBloc>(
@@ -110,8 +101,7 @@ class AppBlocProviders {
         ),
         // Profile Bloc: Handles fetching and managing user profile data.
         BlocProvider<ProfileBloc>(
-          create: (context) =>
-              ProfileBloc(profileRepository, updateProfileRepository),
+          create: (context) => ProfileBloc(profileRepository, updateProfileRepository),
         ),
         //User
         BlocProvider<UserBloc>(
@@ -125,8 +115,7 @@ class AppBlocProviders {
           create: (context) => Blockbloc(profileDataSource),
         ),
         BlocProvider<NotificationBloc>(
-          create: (context) => NotificationBloc(
-              fetchNotificationsUseCase: fetchNotificationsUseCase),
+          create: (context) => NotificationBloc(fetchNotificationsUseCase: fetchNotificationsUseCase),
         ),
         BlocProvider<CurrentUserBloc>(
           create: (context) => CurrentUserBloc(postRepository),
@@ -135,12 +124,10 @@ class AppBlocProviders {
           create: (context) => FollowersBloc(profileRepository),
         ),
         BlocProvider<DisplayFollowingBloc>(
-          create: (context) =>
-              DisplayFollowingBloc(profileRepository),
+          create: (context) => DisplayFollowingBloc(profileRepository),
         ),
         BlocProvider<FollowingbackBloc>(
-          create: (context) =>
-              FollowingbackBloc(dio, profileRepository),
+          create: (context) => FollowingbackBloc(dio, profileRepository),
         ),
 
         BlocProvider<TabBloc>(
@@ -150,10 +137,7 @@ class AppBlocProviders {
         BlocProvider<PostsForuserBloc>(
           create: (context) => PostsForuserBloc(dio: dio),
         ),
-        BlocProvider<PostBloc>(
-          create: (context) =>
-              PostBloc(postRepository)..add(FetchPosts()),
-        ),
+
         BlocProvider<PostDetailsBloc>(
           create: (context) => PostDetailsBloc(postRepository),
         ),
