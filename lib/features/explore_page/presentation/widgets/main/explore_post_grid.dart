@@ -17,9 +17,13 @@ class ExplorePostGrid extends StatefulWidget {
 class _ExplorePostGridState extends State<ExplorePostGrid> {
   final ScrollController _scrollController = ScrollController();
   late StreamSubscription<ExploreState> _exploreStateSubscription;
+  bool isFirstDependencies=true;
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if(!isFirstDependencies)
+      return ;
+    isFirstDependencies=false;
     BlocProvider.of<ExploreBloc>(context).pagingController.addPageRequestListener((pageKey) {
       BlocProvider.of<ExploreBloc>(context).add(FetchPostsByPage(page: (pageKey ~/ BlocProvider.of<ExploreBloc>(context).pageSize) + 1));
     });

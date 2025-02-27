@@ -47,11 +47,11 @@ class LoginComponent extends StatelessWidget {
       listener: (context, state) async {
         ScaffoldMessenger.of(context).hideCurrentSnackBar(); 
         if (state is AuthAuthenticated) {
-          ScaffoldMessenger.of(context).showSnackBar(
+          /*ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
                 content:
                     Text('Welcome, ${state.loginModel.userInfo?.username}')),
-          );
+          );*/
 
           refreshToken = await getRefreshToken() ?? "";
           accessToken = await getAccessToken() ?? "";
