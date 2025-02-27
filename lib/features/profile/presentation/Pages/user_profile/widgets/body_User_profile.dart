@@ -37,17 +37,20 @@ class BodyuserProfile extends StatelessWidget {
                 user: user,
               ),
               SizedBox(height: 7.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                width: 300,
                 child: Text(
-                  // '${user.bio}.\n📍 Location: ${user.location}\n📞 Phone: +234 901 234 5678',
-                  'Live my own life as i want\n📍 sws 🇨🇭 \n📞 Cell +234 901 234 5678',
+                  '${user.bio}',
+                  // 'Live my own life as i want\n📍 sws 🇨🇭 \n📞 Cell +234 901 234 5678',
                   textAlign: TextAlign.center,
+                  maxLines: 3,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 12.sp,
                     height: 1.5,
                     color: Colors.black,
+                    // fontStyle: FontStyle.italic,
                   ),
                 ),
               ),
