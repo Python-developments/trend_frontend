@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:trend/features/posts/presentation/widgets/Networkimage.dart';
-import 'package:trend/shared/const/app_links.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedAvatarWidget extends StatelessWidget {
   final bool isVisible;
@@ -30,11 +29,19 @@ class AnimatedAvatarWidget extends StatelessWidget {
                   tween: Tween<double>(begin: 0.0, end: 100),
                   duration: Duration(milliseconds: 70),
                   builder: (context, size, child) {
-                    return CachedNetworkImage(
-                      imageUrl:  avatarUrl,
-                      errorWidget:(_,__,___)=> Image.asset('assets/images/avatar.jpg'),
-                      placeholder:(_,__,)=> Image.asset('assets/images/avatar.jpg'),
-                      height: size,width: size,
+                    return ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: avatarUrl,
+                        errorWidget: (_, __, ___) => Image.asset('assets/images/avatar.jpg'),
+                        placeholder: (
+                          _,
+                          __,
+                        ) =>
+                            Image.asset('assets/images/avatar.jpg'),
+                        fit: BoxFit.cover,
+                        height: 200.r,
+                        width: 200.r,
+                      ),
                     );
                   },
                 ),

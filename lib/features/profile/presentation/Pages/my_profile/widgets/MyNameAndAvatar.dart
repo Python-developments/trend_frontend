@@ -20,11 +20,7 @@ class Mynameandavatar extends StatelessWidget {
                 imageUrl: user.avatar,
                 fit: BoxFit.cover,
                 errorWidget: (_, __, ___) => Image.asset('assets/images/avatar.jpg'),
-                placeholder: (
-                  _,
-                  __,
-                ) =>
-                    Image.asset('assets/images/avatar.jpg'),
+                placeholder: (context, url) => CircularProgressIndicator(),
                 height: 100.r,
                 width: 100.r,
               ),
