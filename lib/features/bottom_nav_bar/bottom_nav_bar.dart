@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trend/features/add_post/presentation/new_post.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_States.dart';
@@ -12,10 +11,9 @@ import 'package:trend/features/posts/presentation/Pages/home_page.dart';
 import 'package:trend/features/profile/presentation/Pages/my_profile/my_profile.dart';
 import 'package:trend/shared/utiles/dependancy_injection.dart';
 import 'package:trend/third_parties_module/abstract/i_deep_linking_module.dart';
-import 'package:trend/third_parties_module/abstract/i_sharing_module.dart';
 
 import '../../shared/const/colors.dart';
-import '../explore/presentation/pages/explore_main.dart';
+import '../explore_page/presentation/pages/explore_main.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -25,14 +23,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  bool isFirstDependency=true;
+  bool isFirstDependency = true;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if(!isFirstDependency)
-      return;
-    isFirstDependency=false;
+    if (!isFirstDependency) return;
+    isFirstDependency = false;
     getIt<IDeepLinkingModule>().init(context: context);
   }
 
@@ -111,19 +108,15 @@ class _MainScreenState extends State<MainScreen> {
   }) {
     return GestureDetector(
       onTap: () async {
-        BlocProvider.of<BottomNavBloc>(context)
-            .add(BottomNavItemSelected(index));
+        BlocProvider.of<BottomNavBloc>(context).add(BottomNavItemSelected(index));
         if (index == 3) {
-          BlocProvider.of<NotificationBloc>(context)
-              .add(FetchNotificationsEvent());
+          BlocProvider.of<NotificationBloc>(context).add(FetchNotificationsEvent());
         }
       },
       child: SvgPicture.asset(
         iconPath,
         height: 25.5,
-        color: currentIndex == index
-            ? Color(AppColors.black)
-            : Color(AppColors.greyDark),
+        color: currentIndex == index ? Color(AppColors.black) : Color(AppColors.greyDark),
       ),
     );
   }

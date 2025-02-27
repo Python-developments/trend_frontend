@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trend/features/add_post/bloc/Add_Post_cubit.dart';
 import 'package:trend/features/add_post/domain/repositories/AddNewPost_Function.dart';
 import 'package:trend/features/bottom_nav_bar/Bloc/Bottom_Nav_Bloc.dart';
+import 'package:trend/features/explore_page/bloc/explore_bloc.dart';
 import 'package:trend/features/notifications/data/repositories/notification_repository.dart';
 import 'package:trend/features/notifications/domain/usecases/fetch_notifications.dart';
 import 'package:trend/features/notifications/presentation/Manager/NotificationBloc/notification_bloc.dart';
@@ -11,11 +12,9 @@ import 'package:trend/features/posts/data/data_sources/data_remote_source.dart';
 import 'package:trend/features/posts/domain/repositories/post_repository_impl.dart';
 import 'package:trend/features/posts/domain/use_cases/get_posts.dart';
 import 'package:trend/features/posts/presentation/Manager/post_details_bloc/post_details_bloc.dart';
-import 'package:trend/features/posts/presentation/Manager/post_details_bloc/post_details_bloc.dart';
 import 'package:trend/features/profile/data/data_sources/Update_profile_remote_datasource2.dart';
 import 'package:trend/features/profile/domain/repositories/updateProfile.dart';
 import 'package:trend/features/profile/presentation/Manager/PostForSpecificUser/PostsForspecificUserBloc.dart';
-import 'package:trend/shared/utiles/dependancy_injection.dart';
 import 'package:trend/shared/utiles/services_local.dart';
 
 import '../../features/auth/presentation/manager/auth_bloc.dart';
@@ -23,7 +22,6 @@ import '../../features/explore/presentation/manager/tap_bar/explore_search_tap_b
 import '../../features/notifications/presentation/Manager/FollowBack/FollowBackBloc.dart';
 import '../../features/posts/presentation/Manager/Bloc_Current_user/Current _user_Bloc.dart';
 import '../../features/posts/presentation/Manager/Bloc_post/post_bloc.dart';
-import '../../features/posts/presentation/Manager/Bloc_post/post_event.dart';
 import '../../features/profile/data/data_sources/profile_remote_datasource.dart';
 import '../../features/profile/data/models/currentUser.dart';
 import '../../features/profile/domain/repositories/profile_repository.dart';
@@ -140,6 +138,9 @@ class AppBlocProviders {
 
         BlocProvider<PostDetailsBloc>(
           create: (context) => PostDetailsBloc(postRepository),
+        ),
+        BlocProvider<ExploreBloc>(
+          create: (context) => ExploreBloc(),
         ),
       ],
       child: child,
